@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="708.0" prefWidth="869.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="243.0" layoutY="4.0" prefHeight="20.0" prefWidth="114.0" text="NAO dashboard" textAlignment="CENTER" textFill="#3b90aa">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Separator layoutX="10.0" layoutY="26.0" prefHeight="3.0" prefWidth="847.0" />
+      <Label layoutX="27.0" layoutY="44.0" text="Motions">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Separator layoutX="14.0" layoutY="63.0" prefHeight="3.0" prefWidth="813.0" />
+      <Label layoutX="74.0" layoutY="90.0" text="move head">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Button layoutX="43.0" layoutY="148.0" mnemonicParsing="false" text="left" />
+      <Button layoutX="77.0" layoutY="182.0" mnemonicParsing="false" text="down" />
+      <Button layoutX="85.0" layoutY="122.0" mnemonicParsing="false" text="up" />
+      <Button layoutX="392.0" layoutY="148.0" mnemonicParsing="false" text="right" />
+      <Label layoutX="338.0" layoutY="90.0" text="walk">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Button layoutX="322.0" layoutY="122.0" mnemonicParsing="false" text="forwards" />
+      <Button layoutX="283.0" layoutY="148.0" mnemonicParsing="false" text="left" />
+      <Slider layoutX="296.0" layoutY="229.0" prefHeight="14.0" prefWidth="122.0" />
+      <Label layoutX="256.0" layoutY="226.0" text="slow">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="434.0" layoutY="226.0" text="fast">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Button layoutX="319.0" layoutY="175.0" mnemonicParsing="false" text="backwards" />
+      <Label layoutX="27.0" layoutY="285.0" text="Voice">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Separator layoutX="14.0" layoutY="303.0" prefHeight="3.0" prefWidth="813.0" />
+      <Label layoutX="28.0" layoutY="327.0" text="say:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextArea layoutX="69.0" layoutY="327.0" prefHeight="89.0" prefWidth="200.0" />
+   </children>
+</AnchorPane>
