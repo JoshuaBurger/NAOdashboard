@@ -20,7 +20,16 @@ public class ConnectController {
     }
 
     public void executeConnect() {
-        System.out.println("connecting to " + txtIP.getText() + ":" + txtPort.getText() + " ...");
+        System.out.println("try connecting to " + txtIP.getText() + ":" + txtPort.getText() + " ...");
+        // TODO: Verbindung aufbauen
+        // Wenn erfolgreich verbunden
+        if ( app != null ) {
+            // Hauptmenue starten
+            try {
+                app.startMainMenu();
+            }
+            catch(Exception e){}
+        }
     }
 
 }
