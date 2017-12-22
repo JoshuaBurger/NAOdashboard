@@ -2,7 +2,6 @@ package Main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -21,15 +20,17 @@ public class Main extends Application {
 
         // Controller aus fxml laden
         ConnectController connController = (ConnectController)loader.getController();
-        // Main Objekt an Controller geben, damit dieser Zugriff hat
-        connController.setApplication(this);
+        if ( connController != null ) {
+            // Main Objekt an Controller geben, damit dieser Zugriff hat
+            connController.setApplication(this);
+        }
 
         stage = primaryStage;
     }
 
     public void startMainMenu() throws Exception{
-        FXMLLoader loader = new FXMLLoader();
-        Parent root = loader.load(getClass().getResource("MainMenu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
+        Parent root = loader.load();
         stage.setTitle("NAO Dashboard");
         stage.setScene(new Scene(root, 900, 700));
         stage.show();
