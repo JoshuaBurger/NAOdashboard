@@ -6,38 +6,46 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Main extends Application {
 
+public class Main extends Application {
     private Stage stage;
+    private String sceneName;
+    private String sceneTitle;
+
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ConnectView.fxml"));
-        Parent root = loader.load();
-        primaryStage.setTitle("NAO Verbindung einrichten"); // zeigt "NAO Verbindung einrichten" an!
-        primaryStage.setScene(new Scene(root, 900, 700));
-        primaryStage.show();
-
-        // Controller aus fxml laden
-        ConnectController connController = (ConnectController)loader.getController();
-        if ( connController != null ) {
-            // Main Objekt an Controller geben, damit dieser Zugriff hat
-            connController.setApplication(this);
-        }
-
+    public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
-    }
-
-    public void startMainMenu() throws Exception{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
-        Parent root = loader.load();
-        stage.setTitle("NAO Dashboard");
-        stage.setScene(new Scene(root, 900, 700));
+        startLogin();
         stage.show();
-
-        //MainMenuController mainMenuController = loader.getController();
-        //mainMenuController.setApplication(this);
     }
+
+    public void startLogin() throws Exception {
+        sceneName = "ConnectView.fxml";
+        sceneTitle = ("NAO login");
+
+        FXMLLoader loader = setSceneContent(sceneName);
+        ConnectController connController = (ConnectController)loader.getController();
+        connController.setApplication(this);
+    }
+
+    public void startMainMenu() throws Exception {
+        sceneName = "MainMenu.fxml";
+        sceneTitle = ("NAO dashboard");
+
+        FXMLLoader loader = setSceneContent(sceneName);
+        MainMenuController mainMenuController = loader.getController();
+        mainMenuController.setApplication(this);
+    }
+
+    private FXMLLoader setSceneContent(String sceneName) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneName));
+        Parent root = loader.load();
+        stage.setTitle(sceneTitle);
+        stage.setScene(new Scene(root, 900, 700));
+        return loader;
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
