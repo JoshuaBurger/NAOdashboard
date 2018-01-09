@@ -8,7 +8,7 @@
 
 <AnchorPane prefHeight="601.0" prefWidth="867.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.ConnectController">
  <children>
-    <TextField fx:id="txtIP" alignment="CENTER" layoutX="310.0" layoutY="326.0" prefHeight="41.0" prefWidth="291.0" />
+    <TextField fx:id="txtIP" alignment="CENTER" layoutX="310.0" layoutY="326.0" prefHeight="41.0" prefWidth="291.0" text="127.0.0.1" />
     <Label layoutX="270.0" layoutY="336.0" text="IP:" />
     <TextField fx:id="txtPort" alignment="CENTER" layoutX="310.0" layoutY="393.0" prefHeight="41.0" prefWidth="291.0" text="9559" />
     <Label layoutX="266.0" layoutY="403.0" text="Port:" />
