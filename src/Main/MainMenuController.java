@@ -31,6 +31,10 @@ public class MainMenuController {
     @FXML
     private Button buttonSay;
 
+    @FXML
+    private Slider walkSpeed;
+
+
     private String howToMoveHead;
     private String walkDirection;
     private String talkingText;
@@ -93,5 +97,9 @@ public class MainMenuController {
         talkingText = sayText.getText();
         System.out.println(talkingText + " " + "in "+language);
         // TODO: Verbindung zum NAO
+    }
+
+    public void walkSpeed() {
+        System.out.println(walkSpeed.getValue());
     }
 }
