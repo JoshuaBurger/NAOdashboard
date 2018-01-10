@@ -26,7 +26,7 @@ public class Main extends Application {
 
         FXMLLoader loader = setSceneContent(sceneName);
         ConnectController connController = (ConnectController)loader.getController();
-        connController.setApplication(this);
+        connController.setMainClass(this);
     }
 
     public void startMainMenu() throws Exception {
