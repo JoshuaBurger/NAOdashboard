@@ -56,6 +56,7 @@ public class ConnectController {
         if( bConnected == true){
             // erfolgreich verbunden
             System.out.println("Verbunden.");
+            mainClass.setSession(app.session());
             try {
                 mainClass.startMainMenu();
             }

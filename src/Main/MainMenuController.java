@@ -1,5 +1,6 @@
 package Main;
 
+import com.aldebaran.qi.Session;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -34,52 +35,55 @@ public class MainMenuController {
     @FXML
     private Slider walkSpeed;
 
-
-    private String howToMoveHead;
-    private String walkDirection;
     private String talkingText;
     private String language = "english";
     private RadioMenuItem setLanguageToEnglish;
     private RadioMenuItem setLanguageToGerman;
 
-    // Das Applikations-Objekt
-    private Main app;
+    // Die Main-Klasse
+    private Main mainClass;
+    private Session session;
 
-    public void setApplication(Main app)
+    public void setMainClass(Main main)
     {
-        this.app = app;
+        this.mainClass = main;
+    }
+
+    public void setSession(Session session)
+    {
+        this.session = session;
     }
 
     //Head
     public void headUp() {
-        moveHead(howToMoveHead = "up");
+        moveHead("up");
     }
     public void headLeft() {
-        moveHead(howToMoveHead = "left");
+        moveHead("left");
     }
     public void headDown() {
-        moveHead(howToMoveHead = "down");
+        moveHead("down");
     }
     public void headRight() {
-        moveHead(howToMoveHead = "right");
+        moveHead( "right");
     }
-    public void moveHead(String howToMoveHead) {
-        System.out.println("move head " + howToMoveHead);
+    public void moveHead(String direction) {
+        System.out.println("move head " + direction);
         // TODO: Verbindung zum NAO
     }
 
     //Walk
     public void walkForwards() {
-        walkTowards(walkDirection = "forwards");
+        walkTowards("forwards");
     }
     public void walkLeft() {
-        walkTowards(walkDirection = "left");
+        walkTowards("left");
     }
     public void walkBackwards() {
-        walkTowards(walkDirection = "backwards");
+        walkTowards("backwards");
     }
     public void walkRight() {
-        walkTowards(walkDirection = "right");
+        walkTowards("right");
     }
     public void walkTowards(String walkDirection) {
         System.out.println("walk " + walkDirection);
