@@ -19,7 +19,11 @@ public class ConnectController {
     @FXML
     private Label lblInfo;
     @FXML
+    private Label lblConnectionState;
+    @FXML
     private Button btnConnect;
+    @FXML
+    private Button btnDisconnect;
 
     private Main mainClass;
     private Session session;
@@ -30,7 +34,7 @@ public class ConnectController {
         this.mainClass = main;
     }
 
-    public void executeConnect() {
+    public void connect() {
         boolean bConnected = false;
         String naoUrl = "tcp://" + txtIP.getText() + ":" + txtPort.getText();
 
@@ -47,8 +51,7 @@ public class ConnectController {
 
         // Verbindung aufbauen
         session = new Session();
-        lblInfo.setText("Verbinde zu " + naoUrl + " ...");
-        System.out.println("Verbinde zu " + naoUrl + " ...");
+        setInfoText("connecting to " + naoUrl + " ...");
         try{
             session.connect(naoUrl);
             if ( session.isConnected() ) {
@@ -60,20 +63,22 @@ public class ConnectController {
 
         if( bConnected == true){
             // erfolgreich verbunden
-            System.out.println("Verbunden.");
+            lblInfo.setTextFill(Color.GREEN);
+            setInfoText("Connection established.");
+            lblConnectionState.setTextFill(Color.GREEN);
+            lblConnectionState.setText("Connected to " + naoUrl);
+            btnDisconnect.setDisable(false);
             try {
                 mainClass.startMainMenu();
             }
             catch(Exception e) {
                 lblInfo.setTextFill(Color.RED);
-                lblInfo.setText("Hauptmenü kann nicht geoeffnet werden");
-                System.out.println("Hauptmenue kann nicht geoeffnet werden");
+                setInfoText("Main menu cannot be opened.");
             }
         }
         else{
             lblInfo.setTextFill(Color.RED);
-            lblInfo.setText("Verbindung konnte nicht hergestellt werden.");
-            System.out.println("Verbindung konnte nicht hergestellt werden.");
+            setInfoText("Couldn't connect to NAO.");
 
             // Connect-Button wieder aktivieren und session zurücksetzen
             btnConnect.setDisable(false);
@@ -82,6 +87,24 @@ public class ConnectController {
         }
 
         mainClass.setSession(session);
+    }
+
+    public void disconnect(){
+        if ( session != null ){
+            session.close();
+            session = null;
+        }
+        btnDisconnect.setDisable(true);
+        btnConnect.setDisable(false);
+        lblInfo.setTextFill(Color.BLACK);
+        setInfoText("Connection closed.");
+        lblConnectionState.setTextFill(Color.RED);
+        lblConnectionState.setText("Disconnected.");
+    }
+
+    private void setInfoText(String text){
+        lblInfo.setText(text);
+        System.out.println(text);
     }
 
 }
