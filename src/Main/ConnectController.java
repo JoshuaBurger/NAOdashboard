@@ -1,6 +1,8 @@
 package Main;
 
+import com.aldebaran.qi.Session;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -16,10 +18,11 @@ public class ConnectController {
     private TextField txtPort;
     @FXML
     private Label lblInfo;
+    @FXML
+    private Button btnConnect;
 
     private Main mainClass;
-    private Application app;
-    private String naoUrl;
+    private Session session;
 
     public void setMainClass(Main main)
     {
@@ -29,41 +32,56 @@ public class ConnectController {
 
     public void executeConnect() {
         boolean bConnected = false;
+        String naoUrl = "tcp://" + txtIP.getText() + ":" + txtPort.getText();
 
         lblInfo.setTextFill(Color.BLACK);
         lblInfo.setText("");
 
-        if( this.app == null ){
-            naoUrl = "tcp://" + txtIP.getText() + ":" + txtPort.getText();
-            // Application erstellen
-            app = new Application(new String[]{}, naoUrl);
+        if( session != null ){
+            // Aktuelle Verbindung schließen
+            session.close();
+            session = null;
         }
+        // Button disablen, um mehrfachen Connect zu unterbinden
+        btnConnect.setDisable(true);
 
         // Verbindung aufbauen
+        session = new Session();
+        lblInfo.setText("Verbinde zu " + naoUrl + " ...");
+        System.out.println("Verbinde zu " + naoUrl + " ...");
         try{
-            lblInfo.setText("Verbinde zu " + naoUrl + " ...");
-            System.out.println("Verbinde zu " + naoUrl + " ...");
-            app.start();
-            bConnected = true;
+            session.connect(naoUrl);
+            if ( session.isConnected() ) {
+                bConnected = true;
+            }
         }
         catch(Exception e){
-            System.out.println("Verbindung konnte nicht hergestellt werden.");
-            lblInfo.setTextFill(Color.RED);
-            lblInfo.setText("Verbindung konnte nicht hergestellt werden.");
-            app.stop();
         }
 
         if( bConnected == true){
             // erfolgreich verbunden
             System.out.println("Verbunden.");
-            mainClass.setSession(app.session());
             try {
                 mainClass.startMainMenu();
             }
             catch(Exception e) {
+                lblInfo.setTextFill(Color.RED);
+                lblInfo.setText("Hauptmenü kann nicht geoeffnet werden");
                 System.out.println("Hauptmenue kann nicht geoeffnet werden");
             }
         }
+        else{
+            lblInfo.setTextFill(Color.RED);
+            lblInfo.setText("Verbindung konnte nicht hergestellt werden.");
+            System.out.println("Verbindung konnte nicht hergestellt werden.");
+
+            // Connect-Button wieder aktivieren und session zurücksetzen
+            btnConnect.setDisable(false);
+            session.close();
+            session = null;
+        }
+
+        mainClass.setSession(session);
     }
 
 }
