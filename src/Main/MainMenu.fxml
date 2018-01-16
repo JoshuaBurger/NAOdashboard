@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane accessibleRole="COMBO_BOX" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="708.0" prefWidth="869.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.MainMenuController">
+<AnchorPane accessibleRole="COMBO_BOX" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="708.0" prefWidth="869.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.MainMenuController">
    <children>
       <Label layoutX="243.0" layoutY="4.0" prefHeight="20.0" prefWidth="114.0" text="NAO dashboard" textAlignment="CENTER" textFill="#3b90aa">
          <font>
@@ -71,15 +71,16 @@
          <bottom>
             <MenuButton fx:id="menuLanguage" accessibleRole="COMBO_BOX" mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" text="select language" BorderPane.alignment="CENTER">
               <items>
-                  <RadioMenuItem mnemonicParsing="false" onAction="#setLanguageToEnglish" selected="true" text="english">
+                  <RadioMenuItem mnemonicParsing="false"  selected="true" text="english">
                      <toggleGroup>
                         <ToggleGroup fx:id="test" />
                      </toggleGroup></RadioMenuItem>
-                  <RadioMenuItem mnemonicParsing="false" onAction="#setLanguageToGerman" text="deutsch" toggleGroup="$test" />
+                  <RadioMenuItem mnemonicParsing="false"  text="deutsch" toggleGroup="$test" />
               </items>
             </MenuButton>
          </bottom>
       </BorderPane>
-      <Button fx:id="buttonSay" layoutX="26.0" layoutY="323.0" mnemonicParsing="false" onAction="#saySomething" text="say" />
+      <Button fx:id="buttonSay" layoutX="26.0" layoutY="323.0" mnemonicParsing="false" onAction="#saySomething"  text="say" />
+      <Button fx:id="buttonStop" layoutX="15.0" layoutY="379.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="52.0" text="Stop" />
    </children>
 </AnchorPane>

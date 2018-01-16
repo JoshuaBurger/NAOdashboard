@@ -1,9 +1,11 @@
 package Main;
 
+import com.aldebaran.qi.CallError;
 import com.aldebaran.qi.Session;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import com.aldebaran.qi.helper.proxies.*;
 
 public class MainMenuController {
 
@@ -91,15 +93,16 @@ public class MainMenuController {
     }
 
     //Speak
-    public void setLanguageToEnglish() {
-        language = "english";
-    }
-    public void setLanguageToGerman() {
-        language = "german";
-    }
-    public void saySomething() {
+    public void saySomething() throws Exception {
+        //language = menuLanguage.getText();
         talkingText = sayText.getText();
-        System.out.println(talkingText + " " + "in "+language);
+        if ((session == null)|| (session.isConnected() == false)){
+            System.out.println("No connection");
+            return;
+        }
+        ALTextToSpeech tts = new ALTextToSpeech(session);
+        tts.say(talkingText);
+        System.out.println(talkingText + " " + "in Sprache");
         // TODO: Verbindung zum NAO
     }
 
