@@ -10,6 +10,8 @@ import com.aldebaran.qi.Application;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
+import java.util.concurrent.TimeUnit;
+
 import static java.lang.Thread.*;
 
 public class ConnectController {
@@ -60,7 +62,7 @@ public class ConnectController {
         session = new Session();
         setInfoText("connecting to " + naoUrl + " ...");
         try{
-            session.connect(naoUrl).get();
+            session.connect(naoUrl).get(5, TimeUnit.SECONDS);
             if ( session.isConnected() ) {
                 bConnected = true;
             }
