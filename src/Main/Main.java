@@ -17,31 +17,48 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
-        startLogin();
+        startConnectMenu();
         stage.show();
     }
 
-    public void startLogin() throws Exception {
-        String sceneName = "ConnectView.fxml";
-        String sceneTitle = ("NAO login");
+    public void startConnectMenu() throws Exception {
+        // JavaFX Windows aus Datei laden
+        FXMLLoader loader = setSceneContent("ConnectView.fxml", "NAO connection management");
 
-        FXMLLoader loader = setSceneContent(sceneName, sceneTitle);
-        connController = (ConnectController)loader.getController();
-        connController.setMainClass(this);
+        if ( connController == null ) {
+            // Beim ersten Mal Controller aus FXML laden
+            connController = loader.getController();
+            connController.setMainClass(this);
+        }
+        else {
+            // Wenn schonmal geoeffnet, alten Controller behalten, um Daten zu behalten.
+            loader.setController(connController);
+            connController.setDataToView();
+        }
     }
 
     public void startMainMenu() throws Exception {
+        // JavaFX Windows aus Datei laden
+        FXMLLoader loader = setSceneContent("MainMenu.fxml", "NAO dashboard");
+
+        if ( mainMenuController == null ) {
+            // Beim ersten Mal Controller aus FXML laden
+            mainMenuController = loader.getController();
+            mainMenuController.setMainClass(this);
+        }
+        else {
+            // Wenn schonmal geoeffnet, alten Controller behalten, um Daten zu behalten.
+            loader.setController(mainMenuController);
+        }
+
         String sceneName = "MainMenu.fxml";
         String sceneTitle = ("NAO dashboard");
-
-        FXMLLoader loader = setSceneContent(sceneName, sceneTitle);
-        mainMenuController = loader.getController();
-        mainMenuController.setMainClass(this);
     }
 
     private FXMLLoader setSceneContent(String sceneName, String sceneTitle) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneName));
         Parent root = loader.load();
+
         stage.setTitle(sceneTitle);
         stage.setScene(new Scene(root, 900, 700));
         return loader;

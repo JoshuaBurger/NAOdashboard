@@ -28,6 +28,9 @@ public class ConnectController {
     private Main mainClass;
     private Session session;
 
+    private String naoIP;
+    private String naoPort;
+
     public void setMainClass(Main main)
     {
         // main-Klasse merken, um ueber diese das Hauptmenue zu oeffnen.
@@ -36,7 +39,9 @@ public class ConnectController {
 
     public void connect() {
         boolean bConnected = false;
-        String naoUrl = "tcp://" + txtIP.getText() + ":" + txtPort.getText();
+        naoIP = txtIP.getText();
+        naoPort = txtPort.getText();
+        String naoUrl = "tcp://" + naoIP + ":" + naoPort;
 
         lblInfo.setTextFill(Color.BLACK);
         lblInfo.setText("");
@@ -65,8 +70,7 @@ public class ConnectController {
             // erfolgreich verbunden
             lblInfo.setTextFill(Color.GREEN);
             setInfoText("Connection established.");
-            lblConnectionState.setTextFill(Color.GREEN);
-            lblConnectionState.setText("Connected to " + naoUrl);
+            setConnectionState();
             btnDisconnect.setDisable(false);
             try {
                 mainClass.startMainMenu();
@@ -98,13 +102,32 @@ public class ConnectController {
         btnConnect.setDisable(false);
         lblInfo.setTextFill(Color.BLACK);
         setInfoText("Connection closed.");
-        lblConnectionState.setTextFill(Color.RED);
-        lblConnectionState.setText("Disconnected.");
+        setConnectionState();
+    }
+
+    public void setDataToView(){
+        // View wurde neu geladen, daher muessen alle Daten gesetzt werden
+        if ( (naoIP != null) && (naoPort != null) ){
+            txtIP.setText(naoIP);
+            txtPort.setText(naoPort);
+        }
+        setConnectionState();
     }
 
     private void setInfoText(String text){
         lblInfo.setText(text);
         System.out.println(text);
+    }
+
+    private void setConnectionState(){
+        if( (session == null) || (session.isConnected() == false) ){
+            lblConnectionState.setTextFill(Color.RED);
+            lblConnectionState.setText("Disconnected.");
+        }
+        else{
+            lblConnectionState.setTextFill(Color.GREEN);
+            lblConnectionState.setText("Connected to " + naoIP + ":" + naoPort);
+        }
     }
 
 }
