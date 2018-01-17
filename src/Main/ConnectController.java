@@ -60,8 +60,7 @@ public class ConnectController {
         session = new Session();
         setInfoText("connecting to " + naoUrl + " ...");
         try{
-            session.connect(naoUrl);
-            Thread.sleep(500);
+            session.connect(naoUrl).get();
             if ( session.isConnected() ) {
                 bConnected = true;
             }
