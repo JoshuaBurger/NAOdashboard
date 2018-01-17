@@ -10,6 +10,8 @@ import com.aldebaran.qi.Application;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
+import static java.lang.Thread.*;
+
 public class ConnectController {
 
     @FXML
@@ -59,6 +61,7 @@ public class ConnectController {
         setInfoText("connecting to " + naoUrl + " ...");
         try{
             session.connect(naoUrl);
+            Thread.sleep(500);
             if ( session.isConnected() ) {
                 bConnected = true;
             }
