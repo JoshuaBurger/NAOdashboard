@@ -1,112 +1,146 @@
 package Main;
 
-import com.aldebaran.qi.CallError;
 import com.aldebaran.qi.Session;
-import javafx.application.Application;
+import com.aldebaran.qi.helper.proxies.ALLeds;
+import com.aldebaran.qi.helper.proxies.ALMotion;
+import com.aldebaran.qi.helper.proxies.ALTextToSpeech;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import com.aldebaran.qi.helper.proxies.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class MainMenuController {
 
     @FXML
-    private Button headUp;
-    @FXML
-    private Button headLeft;
-    @FXML
-    private Button headDown;
-    @FXML
-    private Button headRight;
-
-    @FXML
-    private Button walkForwards;
-    @FXML
-    private Button walkLeft;
-    @FXML
-    private Button walkBackwards;
-    @FXML
-    private Button walkRight;
-
-    @FXML
     private TextArea sayText;
-    @FXML
-    private MenuButton menuLanguage;
-    @FXML
-    private Button buttonSay;
 
     @FXML
-    private Slider walkSpeed;
-
     private String talkingText;
-    private String language = "english";
-    private RadioMenuItem setLanguageToEnglish;
-    private RadioMenuItem setLanguageToGerman;
 
     // Die Main-Klasse
     private Main mainClass;
     private Session session;
+    private float walkSpeed;
+    private String language = "English";
 
-    public void setMainClass(Main main)
-    {
+    public void setMainClass(Main main) {
         this.mainClass = main;
     }
-
-    public void setSession(Session session)
-    {
+    public void setSession(Session session) {
         this.session = session;
     }
+
+
+    //Speak
+    public void radioButtonEnglish() {
+        language = "English";
+    }
+    public void radioButtonDeutsch() {
+        language = "German";
+    }
+    public void saySomething() throws Exception {
+        talkingText = sayText.getText();
+        if ((session == null) || (session.isConnected() == false)) {
+            System.out.println("No connection");
+            return;
+        }
+        ALTextToSpeech tts = new ALTextToSpeech(session);
+        tts.say(talkingText, language);
+        System.out.println(language);
+    }
+
+
+    //LEDs
+    public void ledsOff() throws Exception {
+        if (session == null || session.isConnected() == false) {
+            System.out.println("No connection.");
+            return;
+        }
+        ALLeds leds = new ALLeds(session);
+        String name = "FaceLeds";
+        leds.off(name);
+    }
+    public void ledsOn() throws Exception {
+        buttonFaceLedsWhite();
+    }
+
+    public void buttonFaceLedsRed() throws Exception {
+        colorFaceLeds("FaceLeds", "red", 1F);
+    }
+    public void buttonFaceLedsBlue() throws Exception {
+        colorFaceLeds("FaceLeds", "blue", 1F);
+    }
+    public void buttonFaceLedsGreen() throws Exception {
+        colorFaceLeds("FaceLeds", "green", 1F);
+    }
+    public void buttonFaceLedsYellow() throws Exception {
+        colorFaceLeds("FaceLeds", "yellow", 1F);
+    }
+    public void buttonFaceLedsCyan() throws Exception {
+        colorFaceLeds("FaceLeds", "cyan", 1F);
+    }
+    public void buttonFaceLedsMagenta() throws Exception {
+        colorFaceLeds("FaceLeds", "magenta", 1F);
+    }
+    public void buttonFaceLedsWhite() throws Exception {
+        colorFaceLeds("FaceLeds", "white", 1F);
+    }
+    public void colorFaceLeds(String ledsName, String color, float duration) throws Exception {
+        if (session == null || session.isConnected() == false) {
+            System.out.println("keine Verbindung mehr.");
+            return;
+        }
+        ALLeds leds = new ALLeds(session);
+        leds.fadeRGB(ledsName, color, duration);
+    }
+
+
 
     //Head
     public void headUp() {
         moveHead("up");
     }
+
     public void headLeft() {
         moveHead("left");
     }
+
     public void headDown() {
         moveHead("down");
     }
+
     public void headRight() {
-        moveHead( "right");
+        moveHead("right");
     }
+
     public void moveHead(String direction) {
-        System.out.println("move head " + direction);
         // TODO: Verbindung zum NAO
     }
 
     //Walk
-    public void walkForwards() {
+    public void walkForwards() throws Exception {
         walkTowards("forwards");
     }
-    public void walkLeft() {
+
+    public void walkLeft() throws Exception {
         walkTowards("left");
     }
-    public void walkBackwards() {
+
+    public void walkBackwards() throws Exception {
         walkTowards("backwards");
     }
-    public void walkRight() {
+
+    public void walkRight() throws Exception {
         walkTowards("right");
     }
-    public void walkTowards(String walkDirection) {
-        System.out.println("walk " + walkDirection);
+
+    public void walkTowards(String walkDirection) throws Exception {
+        ALMotion walk = new ALMotion(session);
+        walk.moveTo(0F, 1F);
+        // TODO: Verbindung zum NAO prüfen
+    }
+    public void stopWalking() {
         // TODO: Verbindung zum NAO
     }
 
-    //Speak
-    public void saySomething() throws Exception {
-        //language = menuLanguage.getText();
-        talkingText = sayText.getText();
-        if ((session == null)|| (session.isConnected() == false)){
-            System.out.println("No connection");
-            return;
-        }
-        ALTextToSpeech tts = new ALTextToSpeech(session);
-        tts.say(talkingText);
-        System.out.println(talkingText + " " + "in Sprache");
-        // TODO: Verbindung zum NAO
-    }
-
-    public void walkSpeed() {
-        System.out.println(walkSpeed.getValue());
-    }
 }
