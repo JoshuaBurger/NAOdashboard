@@ -11,61 +11,44 @@ import javafx.stage.Stage;
 public class Main extends Application {
     private Stage stage;
     private MainMenuController mainMenuController;
-    private ConnectController connController;
+    private ConnectionMenuController connController;
 
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
+        // Controller programmatisch erstellen, um Daten zu behalten bei View-wechsel.
+        connController = new ConnectionMenuController(this);
+        mainMenuController = new MainMenuController(this);
         startConnectMenu();
         stage.show();
     }
 
     public void startConnectMenu() throws Exception {
-        // JavaFX Windows aus Datei laden
-        FXMLLoader loader = setSceneContent("ConnectView.fxml", "NAO connection management");
-
-        if ( connController == null ) {
-            // Beim ersten Mal Controller aus FXML laden
-            connController = loader.getController();
-            connController.setMainClass(this);
-        }
-        else {
-            // Wenn schonmal geoeffnet, alten Controller behalten, um Daten zu behalten.
-            loader.setController(connController);
-            connController.setDataToView();
-        }
+        // ConnectMenu View oeffnen
+        setSceneContent("ConnectionMenu.fxml", "NAO Dashboard - Connection menu", connController);
+        // Daten aus Controller in die View setzen.
+        connController.setDataToView();
     }
 
     public void startMainMenu() throws Exception {
-        // JavaFX Windows aus Datei laden
-        FXMLLoader loader = setSceneContent("MainMenu.fxml", "NAO dashboard");
-
-        if ( mainMenuController == null ) {
-            // Beim ersten Mal Controller aus FXML laden
-            mainMenuController = loader.getController();
-            mainMenuController.setMainClass(this);
-        }
-        else {
-            // Wenn schonmal geoeffnet, alten Controller behalten, um Daten zu behalten.
-            loader.setController(mainMenuController);
-        }
-
-        String sceneName = "MainMenu.fxml";
-        String sceneTitle = ("NAO dashboard");
+        // MaiMenu View oeffnen
+        setSceneContent("MainMenu.fxml", "NAO Dashboard", mainMenuController);
     }
 
-    private FXMLLoader setSceneContent(String sceneName, String sceneTitle) throws Exception {
+    private void setSceneContent(String sceneName, String sceneTitle, Object controller) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneName));
+        // Gegebenen Controller fuer die View verwenden.
+        loader.setController(controller);
         Parent root = loader.load();
-
+        // Aktive View austauschen.
         stage.setTitle(sceneTitle);
         stage.setScene(new Scene(root, 900, 700));
-        return loader;
     }
 
     public void setSession(Session session) {
         if( mainMenuController != null ) {
+            // NAO session an MainMenuController weiterreichen
             mainMenuController.setSession(session);
         }
     }

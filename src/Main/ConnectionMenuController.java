@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 import static java.lang.Thread.*;
 
-public class ConnectController {
+public class ConnectionMenuController {
 
     @FXML
     private TextField txtIP;
@@ -35,7 +35,7 @@ public class ConnectController {
     private String naoIP;
     private String naoPort;
 
-    public void setMainClass(Main main)
+    public ConnectionMenuController(Main main)
     {
         // main-Klasse merken, um ueber diese das Hauptmenue zu oeffnen.
         this.mainClass = main;
@@ -47,9 +47,6 @@ public class ConnectController {
         naoPort = txtPort.getText();
         String naoUrl = "tcp://" + naoIP + ":" + naoPort;
 
-        lblInfo.setTextFill(Color.BLACK);
-        lblInfo.setText("");
-
         if( session != null ){
             // Aktuelle Verbindung schließen
             session.close();
@@ -58,38 +55,29 @@ public class ConnectController {
         // Button disablen, um mehrfachen Connect zu unterbinden
         btnConnect.setDisable(true);
 
-        // Verbindung aufbauen
         session = new Session();
-        setInfoText("connecting to " + naoUrl + " ...");
+        setInfoText("Connecting to " + naoUrl + " ...", Color.BLACK);
         try{
+            // Verbindungsversuch (blockierend mit 5 Sek Timeout, da das default Timeout sehr lang ist.)
             session.connect(naoUrl).get(5, TimeUnit.SECONDS);
             if ( session.isConnected() ) {
                 bConnected = true;
             }
         }
         catch(Exception e){
+            // Fehler wird unten mitbehandelt
         }
 
         if( bConnected == true){
-            // erfolgreich verbunden
-            lblInfo.setTextFill(Color.GREEN);
-            setInfoText("Connection established.");
+            // Erfolgreich verbunden
+            setInfoText("Connection established.", Color.GREEN);
             setConnectionState();
-            btnDisconnect.setDisable(false);
-            try {
-                mainClass.startMainMenu();
-            }
-            catch(Exception e) {
-                lblInfo.setTextFill(Color.RED);
-                setInfoText("Main menu cannot be opened.");
-            }
+            startMainMenu();
         }
         else{
-            lblInfo.setTextFill(Color.RED);
-            setInfoText("Couldn't connect to NAO.");
-
-            // Connect-Button wieder aktivieren und session zurücksetzen
-            btnConnect.setDisable(false);
+            setInfoText("Couldn't connect to NAO.", Color.RED);
+            setConnectionState();
+            // session zurücksetzen
             session.close();
             session = null;
         }
@@ -102,11 +90,18 @@ public class ConnectController {
             session.close();
             session = null;
         }
-        btnDisconnect.setDisable(true);
-        btnConnect.setDisable(false);
-        lblInfo.setTextFill(Color.BLACK);
-        setInfoText("Connection closed.");
+        setInfoText("Connection closed.", Color.BLACK);
         setConnectionState();
+        mainClass.setSession(session);
+    }
+
+    public void startMainMenu() {
+        try {
+            mainClass.startMainMenu();
+        }
+        catch(Exception e) {
+            setInfoText("Main menu cannot be opened.", Color.RED);
+        }
     }
 
     public void setDataToView(){
@@ -118,7 +113,9 @@ public class ConnectController {
         setConnectionState();
     }
 
-    private void setInfoText(String text){
+
+    private void setInfoText(String text, Color color){
+        lblInfo.setTextFill(color);
         lblInfo.setText(text);
         System.out.println(text);
     }
@@ -127,10 +124,14 @@ public class ConnectController {
         if( (session == null) || (session.isConnected() == false) ){
             lblConnectionState.setTextFill(Color.RED);
             lblConnectionState.setText("Disconnected.");
+            btnConnect.setDisable(false);
+            btnDisconnect.setDisable(true);
         }
         else{
             lblConnectionState.setTextFill(Color.GREEN);
             lblConnectionState.setText("Connected to " + naoIP + ":" + naoPort);
+            btnConnect.setDisable(true);
+            btnDisconnect.setDisable(false);
         }
     }
 

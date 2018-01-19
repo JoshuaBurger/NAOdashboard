@@ -17,15 +17,16 @@ public class MainMenuController {
     @FXML
     private String talkingText;
 
-    // Die Main-Klasse
     private Main mainClass;
     private Session session;
     private float walkSpeed;
     private String language = "English";
 
-    public void setMainClass(Main main) {
+    public MainMenuController(Main main) {
+        // Main-Klasse merken, um ueber diese andere Views zu oeffnen
         this.mainClass = main;
     }
+
     public void setSession(Session session) {
         this.session = session;
     }
@@ -143,4 +144,12 @@ public class MainMenuController {
         // TODO: Verbindung zum NAO
     }
 
+    public void startConnectionView() {
+        try {
+            mainClass.startConnectMenu();
+        }
+        catch(Exception e) {
+            System.out.println("Could not open ConnectView.");
+        }
+    }
 }
