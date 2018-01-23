@@ -47,7 +47,11 @@ public class MainMenuController {
         }
         ALTextToSpeech tts = new ALTextToSpeech(session);
         tts.say(talkingText, language);
-        System.out.println(language);
+        System.out.println("Nao says: " + "<" + talkingText + "> in " + language);
+    }
+
+    public void changeVoice(){
+
     }
 
 
