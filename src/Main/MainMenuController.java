@@ -14,6 +14,12 @@ public class MainMenuController {
     @FXML
     private TextArea sayText;
 
+    @FXML
+    private Label VolumeLabel;
+
+    @FXML
+    private Slider sliderVolume;
+
     private Main mainClass;
     private Session session;
 
@@ -55,6 +61,13 @@ public class MainMenuController {
         }
     }
 
+    public void changeVolume() throws Exception {
+        ALTextToSpeech volume = new ALTextToSpeech(session);
+        float v = ((float) sliderVolume.getValue() / 100);
+        volume.setVolume(v);
+        VolumeLabel.setText((int)(v * 100) + "%");
+        System.out.println(v * 100 + "%");
+    }
 
     //LEDs
     public void ledsOff() throws Exception {

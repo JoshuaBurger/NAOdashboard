@@ -103,7 +103,7 @@
       <Label layoutX="274.0" layoutY="552.0" text="Max" />
       <Label layoutX="274.0" layoutY="502.0" text="Max" />
       <Label layoutX="47.0" layoutY="552.0" text="Min" />
-      <Label fx:id="volumeLabel" layoutX="313.0" layoutY="502.0" text="100%">
+      <Label fx:id="VolumeLabel" layoutX="313.0" layoutY="502.0" text="100%">
          <font>
             <Font size="13.0" />
          </font>
