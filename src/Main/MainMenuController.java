@@ -17,6 +17,12 @@ public class MainMenuController {
     @FXML
     private String talkingText;
 
+    @FXML
+    private  Slider sliderVolume;
+
+    @FXML
+    private  Label volumeLabel;
+
     private Main mainClass;
     private Session session;
 
@@ -54,7 +60,12 @@ public class MainMenuController {
         System.out.println("Nao says: " + "<" + talkingText + "> in " + language);
     }
 
-    public void changeVoice(){
+    public void changeVolume()throws Exception{
+        ALTextToSpeech volume = new ALTextToSpeech(session);
+        float v = ((float)sliderVolume.getValue() / 100);
+        volume.setVolume(v);
+        volumeLabel.setText(((int)(v*100)) + "%");
+        System.out.println(v);
 
     }
 
