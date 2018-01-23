@@ -19,16 +19,20 @@ public class MainMenuController {
 
     private Main mainClass;
     private Session session;
+
+    private MovementModel movement;
     private float walkSpeed;
     private String language = "English";
 
     public MainMenuController(Main main) {
         // Main-Klasse merken, um ueber diese andere Views zu oeffnen
         this.mainClass = main;
+        movement = new MovementModel(main);
     }
 
     public void setSession(Session session) {
         this.session = session;
+        this.movement.setSession(session);
     }
 
 
@@ -99,23 +103,19 @@ public class MainMenuController {
 
     //Head
     public void headUp() {
-        moveHead("up");
+        movement.moveHead("up");
     }
 
     public void headLeft() {
-        moveHead("left");
+        movement.moveHead("left");
     }
 
     public void headDown() {
-        moveHead("down");
+        movement.moveHead("down");
     }
 
     public void headRight() {
-        moveHead("right");
-    }
-
-    public void moveHead(String direction) {
-        // TODO: Verbindung zum NAO
+        movement.moveHead("right");
     }
 
     //Walk
