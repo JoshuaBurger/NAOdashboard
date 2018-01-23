@@ -14,9 +14,6 @@ public class MainMenuController {
     @FXML
     private TextArea sayText;
 
-    @FXML
-    private String talkingText;
-
     private Main mainClass;
     private Session session;
 
@@ -43,15 +40,19 @@ public class MainMenuController {
     public void radioButtonDeutsch() {
         language = "German";
     }
-    public void saySomething() throws Exception {
-        talkingText = sayText.getText();
-        if ((session == null) || (session.isConnected() == false)) {
-            System.out.println("No connection");
-            return;
+
+    public void saySomething() {
+        saySomething(sayText.getText());
+    }
+
+    public void saySomething(String text) {
+        try {
+            ALTextToSpeech tts = new ALTextToSpeech(session);
+            tts.say(text, language);
+            System.out.println(language);
+        } catch(Exception e) {
+            System.out.println("No connection.");
         }
-        ALTextToSpeech tts = new ALTextToSpeech(session);
-        tts.say(talkingText, language);
-        System.out.println(language);
     }
 
 
