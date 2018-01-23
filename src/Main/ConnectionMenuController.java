@@ -30,15 +30,17 @@ public class ConnectionMenuController {
     private Button btnDisconnect;
 
     private Main mainClass;
+    private MainMenuController mainMenuController;
     private Session session;
 
     private String naoIP;
     private String naoPort;
 
-    public ConnectionMenuController(Main main)
+    public ConnectionMenuController(Main main, MainMenuController mainMenuController)
     {
         // main-Klasse merken, um ueber diese das Hauptmenue zu oeffnen.
         this.mainClass = main;
+        this.mainMenuController = mainMenuController;
     }
 
     public void connect() {
@@ -73,6 +75,8 @@ public class ConnectionMenuController {
             setInfoText("Connection established.", Color.GREEN);
             setConnectionState();
             startMainMenu();
+            mainClass.setSession(session);
+            mainMenuController.saySomething("Connected.");
         }
         else{
             setInfoText("Couldn't connect to NAO.", Color.RED);
@@ -80,13 +84,13 @@ public class ConnectionMenuController {
             // session zurücksetzen
             session.close();
             session = null;
+            mainClass.setSession(null);
         }
-
-        mainClass.setSession(session);
     }
 
     public void disconnect(){
         if ( session != null ){
+            mainMenuController.saySomething("Disconnected.");
             session.close();
             session = null;
         }

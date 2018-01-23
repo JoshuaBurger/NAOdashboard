@@ -14,15 +14,6 @@ public class MainMenuController {
     @FXML
     private TextArea sayText;
 
-    @FXML
-    private String talkingText;
-
-    @FXML
-    private  Slider sliderVolume;
-
-    @FXML
-    private  Label volumeLabel;
-
     private Main mainClass;
     private Session session;
 
@@ -49,24 +40,19 @@ public class MainMenuController {
     public void radioButtonDeutsch() {
         language = "German";
     }
-    public void saySomething() throws Exception {
-        talkingText = sayText.getText();
-        if ((session == null) || (session.isConnected() == false)) {
-            System.out.println("No connection");
-            return;
-        }
-        ALTextToSpeech tts = new ALTextToSpeech(session);
-        tts.say(talkingText, language);
-        System.out.println("Nao says: " + "<" + talkingText + "> in " + language);
+
+    public void saySomething() {
+        saySomething(sayText.getText());
     }
 
-    public void changeVolume()throws Exception{
-        ALTextToSpeech volume = new ALTextToSpeech(session);
-        float v = ((float)sliderVolume.getValue() / 100);
-        volume.setVolume(v);
-        volumeLabel.setText(((int)(v*100)) + "%");
-        System.out.println(v);
-
+    public void saySomething(String text) {
+        try {
+            ALTextToSpeech tts = new ALTextToSpeech(session);
+            tts.say(text, language);
+            System.out.println(language);
+        } catch(Exception e) {
+            System.out.println("No connection.");
+        }
     }
 
 

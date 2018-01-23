@@ -18,8 +18,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
         // Controller programmatisch erstellen, um Daten zu behalten bei View-wechsel.
-        connController = new ConnectionMenuController(this);
         mainMenuController = new MainMenuController(this);
+        connController = new ConnectionMenuController(this, mainMenuController);
         startConnectMenu();
         stage.show();
     }
