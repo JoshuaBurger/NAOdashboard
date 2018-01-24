@@ -100,9 +100,10 @@ public class MainMenuController {
         System.out.println(speedValue +"%");
     }
 
-
-
-
+    public void playAudio() throws Exception {
+        ALAudioPlayer audioPlayer = new ALAudioPlayer(session);
+        System.out.println(audioPlayer.getSoundSetFileNames("Aldebaran"));
+    }
 
     //LEDs
     public void ledsOff() throws Exception {
