@@ -108,5 +108,6 @@
             <Font size="13.0" />
          </font>
       </Label>
+      <Button fx:id="btnConnection" layoutX="670.0" layoutY="21.0" mnemonicParsing="false" onAction="#startConnectionView" prefHeight="39.0" prefWidth="146.0" text="Change Connection" textFill="#0d0d0d" />
    </children>
 </AnchorPane>
