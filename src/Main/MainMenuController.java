@@ -1,6 +1,9 @@
 package Main;
 
 import com.aldebaran.qi.Session;
+import com.aldebaran.qi.helper.proxies.ALAudioPlayer;
+import com.aldebaran.qi.helper.proxies.ALLeds;
+import com.aldebaran.qi.helper.proxies.ALMotion;
 import com.aldebaran.qi.helper.proxies.ALTextToSpeech;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -113,7 +116,7 @@ public class MainMenuController {
     public void changePitch() {
         try {
         ALTextToSpeech pitch = new ALTextToSpeech(session);
-        pitchValue = ((int)(sliderPitch.getValue() * 1.5f +50f));
+        pitchValue = ((int)(sliderPitch.getValue()));
         PitchLabel.setText(pitchValue +"%");
         System.out.println(pitchValue +"%");
         } catch(Exception e) {
@@ -131,6 +134,10 @@ public class MainMenuController {
         }
     }
 
+    public void playAudio() throws Exception {
+        ALAudioPlayer audioPlayer = new ALAudioPlayer(session);
+        System.out.println(audioPlayer.getSoundSetFileNames("Aldebaran"));
+    }
 
     //LEDs
     public void ledsOff() {
