@@ -1,6 +1,7 @@
 package Main;
 
 import com.aldebaran.qi.Session;
+import com.aldebaran.qi.helper.proxies.ALAudioPlayer;
 import com.aldebaran.qi.helper.proxies.ALLeds;
 import com.aldebaran.qi.helper.proxies.ALMotion;
 import com.aldebaran.qi.helper.proxies.ALTextToSpeech;
@@ -33,6 +34,7 @@ public class MainMenuController {
     private Slider sliderSpeed;
 
     int pitchValue = 100;
+
     int speedValue = 100;
 
     private Main mainClass;
@@ -86,17 +88,19 @@ public class MainMenuController {
 
     public void changePitch() throws Exception {
         ALTextToSpeech pitch = new ALTextToSpeech(session);
-        pitchValue = ((int)(sliderPitch.getValue() * 1.5f +50f));
+        pitchValue = ((int)(sliderPitch.getValue()));
         PitchLabel.setText(pitchValue +"%");
         System.out.println(pitchValue +"%");
     }
 
     public void changeTalkingSpeed() throws Exception {
         ALTextToSpeech speed = new ALTextToSpeech(session);
-        speedValue = ((int)(sliderSpeed.getValue() * 3.5f +50f));
+        speedValue = ((int)(sliderSpeed.getValue()));
         speedLabel.setText(speedValue +"%");
         System.out.println(speedValue +"%");
     }
+
+
 
 
 
