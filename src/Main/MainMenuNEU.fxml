@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="811.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+  <tabs>
+    <Tab closable="false" text="Leds">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                   <Label fx:id="labelEyes" layoutX="71.0" layoutY="14.0" text="Eyes">
+                       <font>
+                           <Font name="System Bold" size="13.0" />
+                       </font>
+                   </Label>
+                  <SplitPane dividerPositions="0.5089974293059126" layoutX="71.0" layoutY="50.0" orientation="VERTICAL" prefHeight="391.0" prefWidth="246.0">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <GridPane alignment="CENTER" layoutX="90.0" layoutY="69.0" prefHeight="212.0" prefWidth="392.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Button fx:id="buttonFaceLedsOn" mnemonicParsing="false" onAction="#ledsOn" style="-fx-background-color: lightgrey;" text="on" />
+                                    <Button fx:id="buttonFaceLedsOff" mnemonicParsing="false" onAction="#ledsOff" style="-fx-background-color: lightgrey;" text="off" GridPane.columnIndex="1" />
+                                    <Button fx:id="buttonFaceLedsRed" mnemonicParsing="false" onAction="#buttonFaceLedsRed" prefHeight="26.0" prefWidth="75.0" style="-fx-background-color: red;" text="red" textFill="WHITE" GridPane.rowIndex="1" />
+                                    <Button fx:id="buttonFaceLedsYellow" mnemonicParsing="false" onAction="#buttonFaceLedsYellow" prefHeight="26.0" prefWidth="76.0" style="-fx-background-color: yellow;" text="yellow" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Button fx:id="buttonFaceLedsBlue" mnemonicParsing="false" onAction="#buttonFaceLedsBlue" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: blue;" text="blue" textFill="WHITE" GridPane.rowIndex="2" />
+                                    <Button fx:id="buttonFaceLedMagenta" mnemonicParsing="false" onAction="#buttonFaceLedsMagenta" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: magenta;" text="magenta" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Button fx:id="buttonFaceLedGreen" mnemonicParsing="false" onAction="#buttonFaceLedsGreen" prefHeight="26.0" prefWidth="73.0" style="-fx-background-color: green;" text="green" textFill="WHITE" GridPane.rowIndex="3" />
+                                    <Button fx:id="buttonFaceLedCyan" mnemonicParsing="false" onAction="#buttonFaceLedsCyan" prefHeight="26.0" prefWidth="75.0" style="-fx-background-color: cyan;" text="cyan" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Button fx:id="buttonFaceLedWhite" mnemonicParsing="false" onAction="#buttonFaceLedsWhite" prefHeight="26.0" prefWidth="72.0" style="-fx-background-color: white;" text="white" GridPane.rowIndex="4" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="227.0" prefWidth="422.0">
+                           <children>
+                              <GridPane layoutX="8.0" layoutY="61.0" prefHeight="234.0" prefWidth="188.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label fx:id="labelRed" text="red" />
+                                          <Label fx:id="labelGreen" text="green" GridPane.rowIndex="1" />
+                                          <Label fx:id="labelBlue" text="blue" GridPane.rowIndex="2" />
+                                          <TextField fx:id="textfieldRed" onKeyTyped="#RGBcolorPreview" text="200" GridPane.columnIndex="1" />
+                                          <TextField fx:id="textfieldGreen" onKeyTyped="#RGBcolorPreview" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <TextField fx:id="textfieldBlue" onKeyTyped="#RGBcolorPreview" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                       </children>
+                                    </GridPane>
+                                    <GridPane alignment="BOTTOM_RIGHT" GridPane.columnIndex="1">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Button mnemonicParsing="false" prefHeight="66.0" prefWidth="94.0" style="-fx-background-color: red;" />
+                                          <Button fx:id="buttonLedsRGB" mnemonicParsing="false" onAction="#setledsRGBcolor" text="use RGB color" GridPane.rowIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </GridPane>
+                           </children></AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+        </AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Postures">
+      <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <SplitPane dividerPositions="0.3708609271523179" layoutX="48.0" layoutY="64.0" orientation="VERTICAL" prefHeight="280.0" prefWidth="116.0" style="-: ;">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <GridPane layoutX="-35.0" layoutY="14.0" prefHeight="95.0" prefWidth="158.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Button fx:id="buttonStandUp" mnemonicParsing="false" onAction="#standUp" prefHeight="26.0" prefWidth="85.0" style="-fx-background-color: lightgrey;" text="stand up" />
+                                    <Button fx:id="buttonSitRelax" mnemonicParsing="false" onAction="#sitRelax" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: lightgrey;" text="relax" GridPane.rowIndex="1" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="119.0" prefWidth="158.0">
+                           <children>
+                              <GridPane layoutX="-56.0" layoutY="14.0" prefHeight="140.0" prefWidth="158.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Button fx:id="buttonLyingBack" mnemonicParsing="false" onAction="#lyingBack" text="lying back" GridPane.rowIndex="1" />
+                                    <Button fx:id="buttonLyingBelly" mnemonicParsing="false" onAction="#lyingBelly" text="lying belly" GridPane.rowIndex="2" />
+                                    <Button fx:id="buttonCrouch" mnemonicParsing="false" onAction="#crouch" prefHeight="26.0" prefWidth="84.0" text="crouch" />
+                                 </children>
+                              </GridPane>
+                           </children></AnchorPane>
+                    </items>
+                  </SplitPane>
+               </children>
+          </AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Speech">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="buttonSay" layoutX="50.0" layoutY="34.0" mnemonicParsing="false" onAction="#sayText" text="Button" />
+                  <TextArea fx:id="sayText" layoutX="148.0" layoutY="34.0" prefHeight="132.0" prefWidth="200.0" />
+                  <RadioButton fx:id="radioButtonEnglish" layoutX="148.0" layoutY="180.0" mnemonicParsing="false" onAction="#radioButtonEnglish" selected="true" text="english">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="toggleGroupLanguage" />
+                     </toggleGroup></RadioButton>
+                  <RadioButton fx:id="radioButtonDeutsch" layoutX="272.0" layoutY="180.0" mnemonicParsing="false" onAction="#radioButtonDeutsch" text="deutsch" toggleGroup="$toggleGroupLanguage" />
+                  <Label fx:id="labelVolume" layoutX="148.0" layoutY="220.0" text="Speed" />
+                  <Slider fx:id="sliderSpeed" layoutX="149.0" layoutY="250.0" onMouseDragged="#changeTalkingSpeed" />
+                  <Slider fx:id="sliderPitch" layoutX="149.0" layoutY="331.0" onMouseDragged="#changePitch" />
+                  <Label fx:id="labelPitch" layoutX="148.0" layoutY="302.0" text="Pitch" />
+                  <Label layoutX="94.0" layoutY="250.0" text="50%" />
+                  <Label layoutX="310.0" layoutY="250.0" text="200%" />
+                  <Label layoutX="94.0" layoutY="331.0" text="50%" />
+                  <Label layoutX="310.0" layoutY="331.0" text="400%" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+  <Tab text="Moves">
+      <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+      </content>
+  </Tab>
+  </tabs>
+</TabPane>

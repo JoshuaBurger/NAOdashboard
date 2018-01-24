@@ -6,36 +6,77 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane accessibleRole="COMBO_BOX" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="822.0" prefWidth="1209.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane accessibleRole="COMBO_BOX" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="972.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="18.0" layoutY="43.0" text="Motions">
+      <Label fx:id="labelPostures" layoutX="637.0" layoutY="90.0" text="postures">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="buttonStandUP" layoutX="560.0" layoutY="122.0" mnemonicParsing="false" onAction="#standUp" prefHeight="26.0" prefWidth="101.0" style="-fx-background-color: lightgrey;" text="stand up" textFill="#e02020">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonSitRelax" layoutX="560.0" layoutY="161.0" mnemonicParsing="false" onAction="#sitRelax" prefHeight="26.0" prefWidth="101.0" style="-fx-background-color: lightgrey;" text="relax" textFill="#e02020">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonCrouch" layoutX="683.0" layoutY="122.0" mnemonicParsing="false" onAction="#crouch" prefHeight="26.0" prefWidth="101.0" text="crouch" textFill="#0a0a0a">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonLyingBack" layoutX="683.0" layoutY="161.0" mnemonicParsing="false" onAction="#lyingBack" prefHeight="26.0" prefWidth="101.0" text="lying back">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="buttonLyingLyingBelly" layoutX="683.0" layoutY="204.0" mnemonicParsing="false" onAction="#lyingBelly" prefHeight="26.0" prefWidth="101.0" text="lyingBelly">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Button>
+      <Label fx:id="labelMotions" layoutX="18.0" layoutY="43.0" text="Motions">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
+
+
       <Separator layoutX="11.0" layoutY="62.0" prefHeight="3.0" prefWidth="1162.0" />
-      <Label layoutX="74.0" layoutY="90.0" text="move head">
+      <Label fx:id="labelMoveHead" layoutX="74.0" layoutY="90.0" text="move head">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
       <Button fx:id="headUp" layoutX="85.0" layoutY="122.0" mnemonicParsing="false" onAction="#headUp" text="up" />
       <Button fx:id="headDown" layoutX="78.0" layoutY="178.0" mnemonicParsing="false" onAction="#headDown" text="down" />
-      <Button fx:id="walkRight" layoutX="393.0" layoutY="147.0" mnemonicParsing="false" onMousePressed="#walkRight" onMouseReleased="#stopWalking" text="right" />
-      <Label layoutX="338.0" layoutY="90.0" text="walk">
+      <Button fx:id="headRight" layoutX="124.0" layoutY="147.0" mnemonicParsing="false" onAction="#headRight" text="right" />
+      <Button fx:id="headLeft" layoutX="43.0" layoutY="148.0" mnemonicParsing="false" onAction="#headLeft" text="left" />
+
+
+      <Label fx:id="labelWalk" layoutX="338.0" layoutY="90.0" text="walk">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
+      <Button fx:id="walkRight" layoutX="393.0" layoutY="147.0" mnemonicParsing="false" onMousePressed="#walkRight" onMouseReleased="#stopWalking" text="right" />
       <Button fx:id="walkForwards" layoutX="326.0" layoutY="122.0" mnemonicParsing="false" onMousePressed="#walkForwards" onMouseReleased="#stopWalking" text="forwards" />
       <Button fx:id="walkLeft" layoutX="288.0" layoutY="148.0" mnemonicParsing="false" onMousePressed="#walkLeft" onMouseReleased="#stopWalking" text="left" />
+      <Button fx:id="walkBackwards" layoutX="321.0" layoutY="178.0" mnemonicParsing="false" onMousePressed="#walkBackwards" onMouseReleased="#stopWalking" text="backwards" />
       <Slider fx:id="sliderWalkSpeed" layoutX="304.0" layoutY="226.0" prefHeight="14.0" prefWidth="122.0" />
+      <Button fx:id="buttonStopWalking" layoutX="313.0" layoutY="254.0" mnemonicParsing="false" onAction="#stopWalking" style="-fx-background-color: lightgrey;" text="stop walking" textFill="#0d0d0d" />
       <Label layoutX="261.0" layoutY="226.0" text="slow">
          <font>
             <Font size="13.0" />
@@ -46,20 +87,19 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <Button fx:id="walkBackwards" layoutX="321.0" layoutY="178.0" mnemonicParsing="false" onMousePressed="#walkBackwards" onMouseReleased="#stopWalking" text="backwards" />
-      <Label layoutX="27.0" layoutY="285.0" text="Voice">
+
+
+      <Label fx:id="labelVoice" layoutX="27.0" layoutY="285.0" text="Voice">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
       <Separator layoutX="14.0" layoutY="303.0" prefHeight="3.0" prefWidth="316.0" />
       <Accordion layoutX="497.0" layoutY="379.0" />
-      <Button fx:id="headRight" layoutX="124.0" layoutY="147.0" mnemonicParsing="false" onAction="#headRight" text="right" />
-      <Button fx:id="headLeft" layoutX="43.0" layoutY="148.0" mnemonicParsing="false" onAction="#headLeft" text="left" />
       <Accordion layoutX="73.0" layoutY="437.0" />
       <BorderPane layoutX="74.0" layoutY="323.0" prefHeight="111.0" prefWidth="200.0">
          <center>
-            <TextArea fx:id="sayText" prefHeight="90.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <TextArea fx:id="textfieldSayText" prefHeight="90.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
       <Button fx:id="buttonSay" layoutX="26.0" layoutY="323.0" mnemonicParsing="false" onAction="#saySomething" text="say" />
@@ -68,52 +108,66 @@
             <ToggleGroup fx:id="radioButtonsLanguage" />
          </toggleGroup></RadioButton>
       <RadioButton fx:id="radioButtonDeutsch" layoutX="183.0" layoutY="446.0" mnemonicParsing="false" onMouseClicked="#radioButtonDeutsch" text="deutsch" toggleGroup="$radioButtonsLanguage" />
-      <Button fx:id="buttonFaceLedsRed" layoutX="485.0" layoutY="399.0" mnemonicParsing="false" onAction="#buttonFaceLedsRed" prefHeight="26.0" prefWidth="75.0" text="red" textFill="#f50505" />
-      <Button fx:id="buttonFaceLedsBlue" layoutX="485.0" layoutY="442.0" mnemonicParsing="false" onAction="#buttonFaceLedsBlue" prefHeight="26.0" prefWidth="75.0" text="blue" textFill="#3f05ff" />
-      <Label layoutX="479.0" layoutY="285.0" text="LEDs">
+       <Slider fx:id="sliderPitch" layoutX="74.0" layoutY="552.0" onMouseDragged="#changePitch" prefHeight="16.0" prefWidth="200.0" />
+       <Label layoutX="149.0" layoutY="488.0" text="Volume:" />
+       <Label layoutX="156.0" layoutY="539.0" text="Pitch:" />
+       <Label layoutX="47.0" layoutY="502.0" text="Min" />
+       <Label layoutX="274.0" layoutY="552.0" text="200%" />
+       <Label layoutX="274.0" layoutY="501.0" text="Max" />
+       <Label layoutX="42.0" layoutY="552.0" prefHeight="17.0" prefWidth="32.0" text="50%" />
+       <Label fx:id="VolumeLabel" layoutX="322.0" layoutY="502.0" text="100%" />
+       <Label fx:id="PitchLabel" layoutX="323.0" layoutY="552.0" text="pitch">
+           <font>
+               <Font size="13.0" />
+           </font>
+       </Label>
+       <Slider fx:id="sliderSpeed" layoutX="74.0" layoutY="602.0" onMouseDragged="#changeTalkingSpeed" prefHeight="16.0" prefWidth="200.0" />
+       <Label layoutX="41.0" layoutY="602.0" text="50%" />
+       <Label layoutX="275.0" layoutY="602.0" text="400%" />
+       <Label fx:id="speedLabel" layoutX="322.0" layoutY="602.0" text="speed" />
+
+
+      <Label fx:id="labelLeds" layoutX="479.0" layoutY="285.0" text="LEDs">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
       <Separator layoutX="466.0" layoutY="302.0" prefHeight="3.0" prefWidth="316.0" />
-      <Label layoutX="482.0" layoutY="323.0" text="face">
+      <Label fx:id="labelLedsFace" layoutX="482.0" layoutY="323.0" text="face">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="726.0" layoutY="323.0" text="head">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Button fx:id="buttonFaceLedsOff" layoutX="486.0" layoutY="351.0" mnemonicParsing="false" onAction="#ledsOff" text="off" textFill="#8a8686" />
-      <Button fx:id="buttonFaceLedsOn" layoutX="567.0" layoutY="351.0" mnemonicParsing="false" onAction="#ledsOn" text="on" textFill="#8a8686" />
-      <Button fx:id="buttonFaceLedsWhite" layoutX="485.0" layoutY="483.0" mnemonicParsing="false" onAction="#buttonFaceLedsWhite" prefHeight="26.0" prefWidth="75.0" text="white" textFill="#050114" />
-      <Button fx:id="buttonFaceLedsGreen" layoutX="485.0" layoutY="525.0" mnemonicParsing="false" onAction="#buttonFaceLedsGreen" prefHeight="26.0" prefWidth="75.0" text="green" textFill="#19c92b" />
-      <Button fx:id="buttonFaceLedsCyan" layoutX="585.0" layoutY="483.0" mnemonicParsing="false" onAction="#buttonFaceLedsCyan" prefHeight="26.0" prefWidth="87.0" text="cyan" textFill="#11ced9" />
-      <Button fx:id="buttonFaceLedsMagenta" layoutX="585.0" layoutY="442.0" mnemonicParsing="false" onAction="#buttonFaceLedsMagenta" prefHeight="26.0" prefWidth="87.0" text="magenta" textFill="#ff0587" />
-      <Button fx:id="buttonFaceLedsYellow" layoutX="585.0" layoutY="399.0" mnemonicParsing="false" onAction="#buttonFaceLedsYellow" prefHeight="26.0" prefWidth="87.0" text="yellow" textFill="#cce415" />
-      <Separator layoutX="482.0" layoutY="387.0" prefHeight="3.0" prefWidth="191.0" />
-      <Button fx:id="buttonStopWalking" layoutX="313.0" layoutY="254.0" mnemonicParsing="false" onAction="#stopWalking" text="stop walking" textFill="#7c7575" />
-      <Slider fx:id="sliderVolume" layoutX="74.0" layoutY="502.0" onMouseDragged="#changeVolume" prefHeight="16.0" prefWidth="200.0" />
-      <Slider fx:id="sliderPitch" layoutX="74.0" layoutY="552.0" onMouseDragged="#changePitch" prefHeight="16.0" prefWidth="200.0" />
-      <Label layoutX="149.0" layoutY="488.0" text="Volume:" />
-      <Label layoutX="156.0" layoutY="539.0" text="Pitch:" />
-      <Label layoutX="47.0" layoutY="502.0" text="Min" />
-      <Label layoutX="274.0" layoutY="552.0" text="200%" />
-      <Label layoutX="274.0" layoutY="501.0" text="Max" />
-      <Label layoutX="42.0" layoutY="552.0" prefHeight="17.0" prefWidth="32.0" text="50%" />
-      <Label fx:id="VolumeLabel" layoutX="322.0" layoutY="502.0" text="100%" />
-      <Label fx:id="PitchLabel" layoutX="323.0" layoutY="552.0" text="pitch">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Slider fx:id="sliderSpeed" layoutX="74.0" layoutY="602.0" onMouseDragged="#changeTalkingSpeed" prefHeight="16.0" prefWidth="200.0" />
-      <Label layoutX="152.0" layoutY="589.0" text="Speed:" />
-      <Label layoutX="41.0" layoutY="602.0" text="50%" />
-      <Label layoutX="275.0" layoutY="602.0" text="400%" />
-      <Label fx:id="speedLabel" layoutX="322.0" layoutY="602.0" text="speed" />
+
        <Button fx:id="btnConnection" layoutX="670.0" layoutY="21.0" mnemonicParsing="false" onAction="#startConnectionView" prefHeight="39.0" prefWidth="146.0" text="Change Connection" textFill="#0d0d0d" />
+
+       
+        <Button fx:id="buttonFaceLedsOff" layoutX="573.0" layoutY="336.0" mnemonicParsing="false" onAction="#ledsOff" style="-fx-background-color: lightgrey;" text="off" textFill="#0a0a0a" />
+        <Button fx:id="buttonFaceLedsOn" layoutX="644.0" layoutY="336.0" mnemonicParsing="false" onAction="#ledsOn" style="-fx-background-color: lightgrey;" text="on" textFill="#1e1c1c" />
+        <Button fx:id="buttonFaceLedsRed" layoutX="580.0" layoutY="392.0" mnemonicParsing="false" onAction="#buttonFaceLedsRed" prefHeight="26.0" prefWidth="75.0" style="-fx-background-color: red;" text="red" textFill="WHITE" />
+        <Button fx:id="buttonFaceLedsYellow" layoutX="554.0" layoutY="442.0" mnemonicParsing="false" onAction="#buttonFaceLedsYellow" prefHeight="26.0" prefWidth="87.0" style="-fx-background-color: yellow;" text="yellow" />
+        <Button fx:id="buttonFaceLedsBlue" layoutX="683.0" layoutY="468.0" mnemonicParsing="false" onAction="#buttonFaceLedsBlue" prefHeight="26.0" prefWidth="75.0" style="-fx-background-color: blue;" text="blue" textFill="WHITE" />
+        <Button fx:id="buttonFaceLedsMagenta" layoutX="547.0" layoutY="489.0" mnemonicParsing="false" onAction="#buttonFaceLedsMagenta" prefHeight="26.0" prefWidth="87.0" style="-fx-background-color: pink;" text="magenta" />
+        <Button fx:id="buttonFaceLedsWhite" layoutX="696.0" layoutY="429.0" mnemonicParsing="false" onAction="#buttonFaceLedsWhite" prefHeight="26.0" prefWidth="75.0" style="-fx-background-color: white;" text="white" textFill="#050114" />
+        <Button fx:id="buttonFaceLedsCyan" layoutX="690.0" layoutY="392.0" mnemonicParsing="false" onAction="#buttonFaceLedsCyan" prefHeight="26.0" prefWidth="87.0" style="-fx-background-color: cyan;" text="cyan" />
+        <Button fx:id="buttonFaceLedsGreen" layoutX="683.0" layoutY="515.0" mnemonicParsing="false" onAction="#buttonFaceLedsGreen" prefHeight="26.0" prefWidth="75.0" style="-fx-background-color: green;" text="green" textFill="WHITE" />
+       <Button fx:id="RGBcolorPane" layoutX="580.0" layoutY="624.0" mnemonicParsing="false" onAction="#RGBcolorPreview" prefHeight="52.0" prefWidth="62.0" style="-fx-background-color: red;" textFill="RED" />
+       <Button fx:id="buttonLedsRGB" layoutX="663.0" layoutY="661.0" mnemonicParsing="false" onAction="#ledsRGBcolor" prefHeight="26.0" prefWidth="115.0" style="-fx-background-color: lightgrey;" text="use RGB color" textFill="#050114" />
+       <Label layoutX="486.0" layoutY="605.0" text="red" />
+       <Label layoutX="484.0" layoutY="642.0" text="green" />
+       <Label layoutX="488.0" layoutY="679.0" text="blue" />
+       <TextField fx:id="textfieldRed" layoutX="529.0" layoutY="600.0" onKeyTyped="#changeColorPane" prefHeight="26.0" prefWidth="49.0" text="100" />
+       <TextField fx:id="textfieldGreen" layoutX="529.0" layoutY="637.0" onKeyTyped="#changeColorPane" prefHeight="26.0" prefWidth="49.0" text="0" />
+       <TextField fx:id="textfieldBlue" layoutX="529.0" layoutY="674.0" onKeyTyped="#changeColorPane" prefHeight="26.0" prefWidth="49.0" text="0" />
+      <TabPane layoutX="-107.0" layoutY="-347.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Untitled Tab 1" />
+          <Tab text="Untitled Tab 2">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
    </children>
 </AnchorPane>

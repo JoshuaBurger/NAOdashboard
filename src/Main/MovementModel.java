@@ -2,6 +2,8 @@ package Main;
 
 import com.aldebaran.qi.Session;
 import com.aldebaran.qi.helper.proxies.ALMotion;
+import com.aldebaran.qi.helper.proxies.ALRobotPosture;
+
 import java.util.List;
 
 public class MovementModel {
@@ -94,6 +96,35 @@ public class MovementModel {
         } catch (Exception e) {
             System.out.println("Problem while moving head:");
             e.printStackTrace();
+        }
+    }
+
+    public void goToPosture(String postureName) {
+        try {
+            ALRobotPosture posture = new ALRobotPosture(session);
+            posture.goToPosture(postureName, 4F);
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void walkTowards(String walkDirection) {
+        try {
+        ALMotion walk = new ALMotion(session);
+        walk.moveTo(1F, 0F, 0F);
+        // TODO: Verbindung zum NAO prüfen
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void stopWalking() {
+        try {
+            ALMotion stopWalking = new ALMotion(session);
+            stopWalking.stopMove();
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }

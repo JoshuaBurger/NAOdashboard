@@ -33,7 +33,7 @@ public class Main extends Application {
 
     public void startMainMenu() throws Exception {
         // MaiMenu View oeffnen
-        setSceneContent("MainMenu.fxml", "NAO Dashboard", mainMenuController);
+        setSceneContent("MainMenuNEU.fxml", "NAO Dashboard", mainMenuController);
     }
 
     private void setSceneContent(String sceneName, String sceneTitle, Object controller) throws Exception {
