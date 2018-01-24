@@ -96,18 +96,24 @@
       <Separator layoutX="482.0" layoutY="387.0" prefHeight="3.0" prefWidth="191.0" />
       <Button fx:id="buttonStopWalking" layoutX="313.0" layoutY="254.0" mnemonicParsing="false" onAction="#stopWalking" text="stop walking" textFill="#7c7575" />
       <Slider fx:id="sliderVolume" layoutX="74.0" layoutY="502.0" onMouseDragged="#changeVolume" prefHeight="16.0" prefWidth="200.0" />
-      <Slider fx:id="sliderPitch" layoutX="74.0" layoutY="552.0" prefHeight="16.0" prefWidth="200.0" />
+      <Slider fx:id="sliderPitch" layoutX="74.0" layoutY="552.0" onMouseDragged="#changePitch" prefHeight="16.0" prefWidth="200.0" />
       <Label layoutX="149.0" layoutY="488.0" text="Volume:" />
       <Label layoutX="156.0" layoutY="539.0" text="Pitch:" />
       <Label layoutX="47.0" layoutY="502.0" text="Min" />
-      <Label layoutX="274.0" layoutY="552.0" text="Max" />
-      <Label layoutX="274.0" layoutY="502.0" text="Max" />
-      <Label layoutX="47.0" layoutY="552.0" text="Min" />
-      <Label fx:id="VolumeLabel" layoutX="313.0" layoutY="502.0" text="100%">
+      <Label layoutX="274.0" layoutY="552.0" text="200%" />
+      <Label layoutX="274.0" layoutY="501.0" text="Max" />
+      <Label layoutX="42.0" layoutY="552.0" prefHeight="17.0" prefWidth="32.0" text="50%" />
+      <Label fx:id="VolumeLabel" layoutX="322.0" layoutY="502.0" text="100%" />
+      <Label fx:id="PitchLabel" layoutX="323.0" layoutY="552.0" text="pitch">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Button fx:id="btnConnection" layoutX="670.0" layoutY="21.0" mnemonicParsing="false" onAction="#startConnectionView" prefHeight="39.0" prefWidth="146.0" text="Change Connection" textFill="#0d0d0d" />
+      <Slider fx:id="sliderSpeed" layoutX="74.0" layoutY="602.0" onMouseDragged="#changeTalkingSpeed" prefHeight="16.0" prefWidth="200.0" />
+      <Label layoutX="152.0" layoutY="589.0" text="Speed:" />
+      <Label layoutX="41.0" layoutY="602.0" text="50%" />
+      <Label layoutX="275.0" layoutY="602.0" text="400%" />
+      <Label fx:id="speedLabel" layoutX="322.0" layoutY="602.0" text="speed" />
+       <Button fx:id="btnConnection" layoutX="670.0" layoutY="21.0" mnemonicParsing="false" onAction="#startConnectionView" prefHeight="39.0" prefWidth="146.0" text="Change Connection" textFill="#0d0d0d" />
    </children>
 </AnchorPane>

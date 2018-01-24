@@ -18,7 +18,22 @@ public class MainMenuController {
     private Label VolumeLabel;
 
     @FXML
+    private Label PitchLabel;
+
+    @FXML
+    private Label speedLabel;
+
+    @FXML
     private Slider sliderVolume;
+
+    @FXML
+    private Slider sliderPitch;
+
+    @FXML
+    private Slider sliderSpeed;
+
+    int pitchValue = 100;
+    int speedValue = 100;
 
     private Main mainClass;
     private Session session;
@@ -54,7 +69,7 @@ public class MainMenuController {
     public void saySomething(String text) {
         try {
             ALTextToSpeech tts = new ALTextToSpeech(session);
-            tts.say(text, language);
+            tts.say("\\vct=" + pitchValue+ "\\" + "\\rspd=" + speedValue+ "\\" + text, language);
             System.out.println(language);
         } catch(Exception e) {
             System.out.println("No connection.");
@@ -68,6 +83,22 @@ public class MainMenuController {
         VolumeLabel.setText((int)(v * 100) + "%");
         System.out.println(v * 100 + "%");
     }
+
+    public void changePitch() throws Exception {
+        ALTextToSpeech pitch = new ALTextToSpeech(session);
+        pitchValue = ((int)(sliderPitch.getValue() * 1.5f +50f));
+        PitchLabel.setText(pitchValue +"%");
+        System.out.println(pitchValue +"%");
+    }
+
+    public void changeTalkingSpeed() throws Exception {
+        ALTextToSpeech speed = new ALTextToSpeech(session);
+        speedValue = ((int)(sliderSpeed.getValue() * 3.5f +50f));
+        speedLabel.setText(speedValue +"%");
+        System.out.println(speedValue +"%");
+    }
+
+
 
     //LEDs
     public void ledsOff() throws Exception {
