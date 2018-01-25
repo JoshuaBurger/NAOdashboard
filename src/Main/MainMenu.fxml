@@ -102,7 +102,7 @@
             <TextArea fx:id="textfieldSayText" prefHeight="90.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
-      <Button fx:id="buttonSay" layoutX="26.0" layoutY="323.0" mnemonicParsing="false" onAction="#saySomething" text="say" />
+      <Button fx:id="buttonSay" layoutX="26.0" layoutY="323.0" mnemonicParsing="false" onAction="#sayText" text="say" />
       <RadioButton fx:id="radioButtonEnglish" layoutX="80.0" layoutY="446.0" mnemonicParsing="false" onMouseClicked="#radioButtonEnglish" selected="true" text="english">
          <toggleGroup>
             <ToggleGroup fx:id="radioButtonsLanguage" />
@@ -152,13 +152,13 @@
         <Button fx:id="buttonFaceLedsCyan" layoutX="690.0" layoutY="392.0" mnemonicParsing="false" onAction="#buttonFaceLedsCyan" prefHeight="26.0" prefWidth="87.0" style="-fx-background-color: cyan;" text="cyan" />
         <Button fx:id="buttonFaceLedsGreen" layoutX="683.0" layoutY="515.0" mnemonicParsing="false" onAction="#buttonFaceLedsGreen" prefHeight="26.0" prefWidth="75.0" style="-fx-background-color: green;" text="green" textFill="WHITE" />
        <Button fx:id="RGBcolorPane" layoutX="580.0" layoutY="624.0" mnemonicParsing="false" onAction="#RGBcolorPreview" prefHeight="52.0" prefWidth="62.0" style="-fx-background-color: red;" textFill="RED" />
-       <Button fx:id="buttonLedsRGB" layoutX="663.0" layoutY="661.0" mnemonicParsing="false" onAction="#ledsRGBcolor" prefHeight="26.0" prefWidth="115.0" style="-fx-background-color: lightgrey;" text="use RGB color" textFill="#050114" />
+       <Button fx:id="buttonLedsRGB" layoutX="663.0" layoutY="661.0" mnemonicParsing="false" onAction="#setledsRGBcolor" prefHeight="26.0" prefWidth="115.0" style="-fx-background-color: lightgrey;" text="use RGB color" textFill="#050114" />
        <Label layoutX="486.0" layoutY="605.0" text="red" />
        <Label layoutX="484.0" layoutY="642.0" text="green" />
        <Label layoutX="488.0" layoutY="679.0" text="blue" />
-       <TextField fx:id="textfieldRed" layoutX="529.0" layoutY="600.0" onKeyTyped="#changeColorPane" prefHeight="26.0" prefWidth="49.0" text="100" />
-       <TextField fx:id="textfieldGreen" layoutX="529.0" layoutY="637.0" onKeyTyped="#changeColorPane" prefHeight="26.0" prefWidth="49.0" text="0" />
-       <TextField fx:id="textfieldBlue" layoutX="529.0" layoutY="674.0" onKeyTyped="#changeColorPane" prefHeight="26.0" prefWidth="49.0" text="0" />
+       <TextField fx:id="textfieldRed" layoutX="529.0" layoutY="600.0" onKeyTyped="#RGBcolorPreview" prefHeight="26.0" prefWidth="49.0" text="100" />
+       <TextField fx:id="textfieldGreen" layoutX="529.0" layoutY="637.0" onKeyTyped="#RGBcolorPreview" prefHeight="26.0" prefWidth="49.0" text="0" />
+       <TextField fx:id="textfieldBlue" layoutX="529.0" layoutY="674.0" onKeyTyped="#RGBcolorPreview" prefHeight="26.0" prefWidth="49.0" text="0" />
       <TabPane layoutX="-107.0" layoutY="-347.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Untitled Tab 1" />
