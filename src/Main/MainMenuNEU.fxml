@@ -10,13 +10,14 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="811.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="811.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
   <tabs>
     <Tab closable="false" text="Leds">
       <content>
@@ -27,6 +28,8 @@
                            <Font name="System Bold" size="13.0" />
                        </font>
                    </Label>
+                   <ImageView fx:id="imgBattery1" fitHeight="36.0" fitWidth="93.0" layoutX="704.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" />
+                   <Label fx:id="lblBattery1" layoutX="736.0" layoutY="50.0" prefHeight="27.0" prefWidth="44.0" text="100%" textAlignment="CENTER" />
                   <SplitPane dividerPositions="0.5089974293059126" layoutX="71.0" layoutY="50.0" orientation="VERTICAL" prefHeight="391.0" prefWidth="246.0">
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -113,6 +116,8 @@
       <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
+                   <ImageView fx:id="imgBattery2" fitHeight="36.0" fitWidth="93.0" layoutX="704.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" />
+                   <Label fx:id="lblBattery2" layoutX="736.0" layoutY="50.0" prefHeight="27.0" prefWidth="44.0" text="100%" textAlignment="CENTER" />
                   <SplitPane dividerPositions="0.3708609271523179" layoutX="48.0" layoutY="64.0" orientation="VERTICAL" prefHeight="280.0" prefWidth="116.0" style="-: ;">
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -160,6 +165,8 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
+                   <ImageView fx:id="imgBattery3" fitHeight="36.0" fitWidth="93.0" layoutX="704.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" />
+                   <Label fx:id="lblBattery3" layoutX="736.0" layoutY="50.0" prefHeight="27.0" prefWidth="44.0" text="100%" textAlignment="CENTER" />
                   <Button fx:id="buttonSay" layoutX="50.0" layoutY="34.0" mnemonicParsing="false" onAction="#sayText" text="Button" />
                   <TextArea fx:id="sayText" layoutX="148.0" layoutY="34.0" prefHeight="132.0" prefWidth="200.0" />
                   <RadioButton fx:id="radioButtonEnglish" layoutX="148.0" layoutY="180.0" mnemonicParsing="false" onAction="#radioButtonEnglish" selected="true" text="english">
@@ -180,7 +187,12 @@
     </Tab>
   <Tab text="Moves">
       <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <children>
+                  <ImageView fx:id="imgBattery4" fitHeight="36.0" fitWidth="93.0" layoutX="704.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="lblBattery4" layoutX="736.0" layoutY="50.0" prefHeight="27.0" prefWidth="44.0" text="100%" textAlignment="CENTER" />
+              </children>
+          </AnchorPane>
       </content>
   </Tab>
   </tabs>

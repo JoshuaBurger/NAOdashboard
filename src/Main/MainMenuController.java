@@ -1,12 +1,11 @@
 package Main;
 
 import com.aldebaran.qi.Session;
-import com.aldebaran.qi.helper.proxies.ALAudioPlayer;
-import com.aldebaran.qi.helper.proxies.ALLeds;
-import com.aldebaran.qi.helper.proxies.ALMotion;
-import com.aldebaran.qi.helper.proxies.ALTextToSpeech;
+import com.aldebaran.qi.helper.proxies.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import java.util.ArrayList;
 
 public class MainMenuController {
 
@@ -19,8 +18,6 @@ public class MainMenuController {
     @FXML
     private TextField textfieldBlue;
     @FXML
-    private String talkingText;
-    @FXML
     private Button RGBcolorPane;
     @FXML
     private Label VolumeLabel;
@@ -29,11 +26,27 @@ public class MainMenuController {
     @FXML
     private Label speedLabel;
     @FXML
+    private Label lblBattery1;
+    @FXML
+    private Label lblBattery2;
+    @FXML
+    private Label lblBattery3;
+    @FXML
+    private Label lblBattery4;
+    @FXML
     private Slider sliderVolume;
     @FXML
     private Slider sliderPitch;
     @FXML
     private Slider sliderSpeed;
+    @FXML
+    private ImageView imgBattery1;
+    @FXML
+    private ImageView imgBattery2;
+    @FXML
+    private ImageView imgBattery3;
+    @FXML
+    private ImageView imgBattery4;
 
     int pitchValue = 100;
     int speedValue = 100;
@@ -42,22 +55,44 @@ public class MainMenuController {
 
     private Main mainClass;
     private Session session;
+    private ALMemory memory;
     private MovementModel movement;
     private LedModel ledModel;
+    private BatteryModel battery;
 
     public MainMenuController(Main main) {
         // Main-Klasse merken, um ueber diese andere Views zu oeffnen
         this.mainClass = main;
         movement = new MovementModel(main);
         ledModel = new LedModel(main);
+        battery = new BatteryModel();
     }
 
     public void setSession(Session session) {
         this.session = session;
-        this.movement.setSession(session);
-        this.ledModel.setSession(session);
+        movement.setSession(session);
+        ledModel.setSession(session);
+        battery.setSession(session);
+
+        // Methoden auf verschiedene Events registrieren
+        registerEvents();
     }
 
+    private void registerEvents() {
+        try {
+            if (memory != null) {
+                memory.unsubscribeAllEvents();
+                memory = null;
+            }
+            // Allgemeinen Eventhandler auf die Session erstellen.
+            memory = new ALMemory(session);
+
+            // Batteriespezifische Events registrieren.
+            battery.registerBatteryEvents(memory);
+        } catch(Exception e) {
+            System.out.println("Events not available");
+        }
+    }
 
     //Postures
     public void standUp() {
@@ -226,5 +261,26 @@ public class MainMenuController {
         catch(Exception e) {
             System.out.println("Could not open ConnectView.");
         }
+    }
+
+    public void setDataToView(){
+        ArrayList<ImageView> imageList = new ArrayList<ImageView>();
+        ArrayList<Label> labelList = new ArrayList<Label>();
+
+        // View wurde neu geladen, daher muessen alle Daten gesetzt werden
+
+        // Liste der Batterie Label/Bilder aller Tabs erstellen
+        // Um aktuellen Batteriezustand anzuzeigen
+        imageList.add(imgBattery1);
+        imageList.add(imgBattery2);
+        imageList.add(imgBattery3);
+        imageList.add(imgBattery4);
+        labelList.add(lblBattery1);
+        labelList.add(lblBattery2);
+        labelList.add(lblBattery3);
+        labelList.add(lblBattery4);
+
+        battery.setGUIcomponents(imageList, labelList);
+        battery.displayCurrentBatteryState();
     }
 }

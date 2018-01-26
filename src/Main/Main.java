@@ -34,6 +34,8 @@ public class Main extends Application {
     public void startMainMenu() throws Exception {
         // MaiMenu View oeffnen
         setSceneContent("MainMenuNEU.fxml", "NAO Dashboard", mainMenuController);
+        // Daten aus Controller in die View setzen
+        mainMenuController.setDataToView();
     }
 
     private void setSceneContent(String sceneName, String sceneTitle, Object controller) throws Exception {
@@ -43,7 +45,7 @@ public class Main extends Application {
         Parent root = loader.load();
         // Aktive View austauschen.
         stage.setTitle(sceneTitle);
-        stage.setScene(new Scene(root, 900, 700));
+        stage.setScene(new Scene(root));
     }
 
     public void setSession(Session session) {
