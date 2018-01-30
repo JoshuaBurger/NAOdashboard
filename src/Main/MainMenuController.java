@@ -61,6 +61,7 @@ public class MainMenuController {
     private MovementModel movement;
     private LedModel ledModel;
     private BatteryModel battery;
+    private HeadSensorModel headSensors;
 
     public MainMenuController(Main main) {
         // Main-Klasse merken, um ueber diese andere Views zu oeffnen
@@ -68,6 +69,7 @@ public class MainMenuController {
         movement = new MovementModel(main);
         ledModel = new LedModel(main);
         battery = new BatteryModel();
+        headSensors = new HeadSensorModel(this);
     }
 
     public void setSession(Session session) {
@@ -75,6 +77,7 @@ public class MainMenuController {
         movement.setSession(session);
         ledModel.setSession(session);
         battery.setSession(session);
+        headSensors.setSession(session);
 
         // Methoden auf verschiedene Events registrieren
         registerEvents();
@@ -91,6 +94,8 @@ public class MainMenuController {
 
             // Batteriespezifische Events registrieren.
             battery.registerBatteryEvents(memory);
+            // Kopfsensor (Sprache) Events registrieren.
+            headSensors.registerTactilEvents(memory);
         } catch(Exception e) {
             System.out.println("Events not available");
         }
@@ -123,19 +128,25 @@ public class MainMenuController {
     }
 
     public void sayText() {
-        if (sayText.getText() == null) {
-            System.out.println("No text to say.");
-        } else {
-            saySomething(sayText.getText());
-        }
+        saySomething(sayText.getText());
     }
+
     public void saySomething(String text) {
-        try {
-            ALTextToSpeech tts = new ALTextToSpeech(session);
-            tts.say("\\vct=" + pitchValue+ "\\" + "\\rspd=" + speedValue+ "\\" + text, language);
-            System.out.println(language);
-        } catch(Exception e) {
-            System.out.println("No connection.");
+        saySomething(text, speedValue, pitchValue, language);
+    }
+
+    public void saySomething(String text, int speed, int pitch, String lang) {
+        if (text == null) {
+            System.out.println("No text to say.");
+        }
+        else {
+            try {
+                ALTextToSpeech tts = new ALTextToSpeech(session);
+                tts.say("\\vct=" + pitch+ "\\" + "\\rspd=" + speed+ "\\" + text, lang);
+                System.out.println(lang);
+            } catch(Exception e) {
+                System.out.println("No connection.");
+            }
         }
     }
 
@@ -169,6 +180,16 @@ public class MainMenuController {
         } catch(Exception e) {
             System.out.println("No connection.");
         }
+    }
+
+    public void setHeadFrontSensor() {
+        headSensors.setHeadSensorSpeechTask("Front", sayText.getText(), (int)(sliderSpeed.getValue() * 3.5f +50f), (int)sliderPitch.getValue(), language);
+    }
+    public void setHeadMiddleSensor() {
+        headSensors.setHeadSensorSpeechTask("Middle", sayText.getText(), (int)(sliderSpeed.getValue() * 3.5f +50f), (int)sliderPitch.getValue(), language);
+    }
+    public void setHeadRearSensor() {
+        headSensors.setHeadSensorSpeechTask("Rear", sayText.getText(), (int)(sliderSpeed.getValue() * 3.5f +50f), (int)sliderPitch.getValue(), language);
     }
 
     public void playAudio() throws Exception {
