@@ -36,24 +36,30 @@ public class HeadSensorModel {
         // NAO-Events der Kopfsensoren auf Methoden registrieren.
         try {
             memory.subscribeToEvent("FrontTactilTouched",
-                    new EventCallback<String>() {
+                    new EventCallback<Float>() {
                         @Override
-                        public void onEvent(String value) {
-                            onTactilTouched("Front");
+                        public void onEvent(Float state) {
+                            if ( state == 1 ) {
+                                onTactilTouched("Front");
+                            }
                         }
                     });
             memory.subscribeToEvent("MiddleTactilTouched",
-                    new EventCallback<String>() {
+                    new EventCallback<Float>() {
                         @Override
-                        public void onEvent(String value) {
-                            onTactilTouched("Middle");
+                        public void onEvent(Float state) {
+                            if ( state == 1 ) {
+                                onTactilTouched("Middle");
+                            }
                         }
                     });
             memory.subscribeToEvent("RearTactilTouched",
-                    new EventCallback<String>() {
+                    new EventCallback<Float>() {
                         @Override
-                        public void onEvent(String value) {
-                            onTactilTouched("Rear");
+                        public void onEvent(Float state) {
+                            if ( state == 1 ) {
+                                onTactilTouched("Rear");
+                            }
                         }
                     });
         } catch(Exception e) {

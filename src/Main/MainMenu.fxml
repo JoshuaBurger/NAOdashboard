@@ -175,6 +175,10 @@
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font></Button>
+                  <Button layoutX="398.0" layoutY="104.0" mnemonicParsing="false" onAction="#setHeadFrontSensor" prefHeight="26.0" prefWidth="115.0" text="Head - Front" />
+                  <Button layoutX="398.0" layoutY="140.0" mnemonicParsing="false" onAction="#setHeadMiddleSensor" prefHeight="26.0" prefWidth="115.0" text="Head - Middle" />
+                  <Button layoutX="398.0" layoutY="176.0" mnemonicParsing="false" onAction="#setHeadRearSensor" prefHeight="26.0" prefWidth="115.0" text="Head - Rear" />
+                  <Label alignment="CENTER" layoutX="380.0" layoutY="57.0" prefHeight="41.0" prefWidth="152.0" text="Apply Speech Settings to a Sensor:" textAlignment="CENTER" wrapText="true" />
               </children>
           </AnchorPane>
       </content>
