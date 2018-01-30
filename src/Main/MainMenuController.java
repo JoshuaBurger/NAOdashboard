@@ -175,13 +175,13 @@ public class MainMenuController {
         }
 
     public void setHeadFrontSensor() {
-        headSensors.setHeadSensorSpeechTask("Front", sayText.getText(), (int)(sliderSpeechSpeed.getValue() * 3.5f +50f), (int)sliderSpeechPitch.getValue(), language);
+        headSensors.setHeadSensorSpeechTask("Front", sayText.getText(), (int)(sliderSpeechSpeed.getValue()), (int)sliderSpeechPitch.getValue(), language);
     }
     public void setHeadMiddleSensor() {
-        headSensors.setHeadSensorSpeechTask("Middle", sayText.getText(), (int)(sliderSpeechSpeed.getValue() * 3.5f +50f), (int)sliderSpeechPitch.getValue(), language);
+        headSensors.setHeadSensorSpeechTask("Middle", sayText.getText(), (int)(sliderSpeechSpeed.getValue()), (int)sliderSpeechPitch.getValue(), language);
     }
     public void setHeadRearSensor() {
-        headSensors.setHeadSensorSpeechTask("Rear", sayText.getText(), (int)(sliderSpeechSpeed.getValue() * 3.5f +50f), (int)sliderSpeechPitch.getValue(), language);
+        headSensors.setHeadSensorSpeechTask("Rear", sayText.getText(), (int)(sliderSpeechSpeed.getValue()), (int)sliderSpeechPitch.getValue(), language);
     }
 
     public void playAudio() throws Exception {
