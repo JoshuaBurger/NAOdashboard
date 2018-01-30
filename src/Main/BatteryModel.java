@@ -4,6 +4,7 @@ import com.aldebaran.qi.Session;
 import com.aldebaran.qi.helper.EventCallback;
 import com.aldebaran.qi.helper.proxies.ALBattery;
 import com.aldebaran.qi.helper.proxies.ALMemory;
+import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,14 +13,13 @@ import java.util.ArrayList;
 
 public class BatteryModel {
 
-    private ArrayList<ImageView> imgBatteryList;
-    private ArrayList<Label> lblChargeList;
+    BatteryGUIrefresher batteryGUIrefresher;
     private int charge = -1;
     private boolean isCharging = false;
 
-    public void setGUIcomponents(ArrayList<ImageView> imgBatteryList, ArrayList<Label> lblChargeList) {
-        this.imgBatteryList = imgBatteryList;
-        this.lblChargeList = lblChargeList;
+    public void setGUIcomponents(ArrayList<ImageView> batteryIcons, ArrayList<Label> chargeLabels) {
+        // batteryGUIrefresher is needed to update the GUI from other thread than JavaFX...
+        batteryGUIrefresher = new BatteryGUIrefresher(chargeLabels, batteryIcons);
     }
 
     public void setSession(Session session) {
@@ -67,6 +67,7 @@ public class BatteryModel {
         String lblChargeText = "";
         String batteryState = "unknown";
         String chargingState = "";
+        String iconPath = "";
 
         if ( charge != -1 ) {
             lblChargeText = (charge + "%");
@@ -86,13 +87,45 @@ public class BatteryModel {
             }
         }
 
-        // Ladezustand in alle Label setzen
-        for ( Label lbl : lblChargeList ) {
-            lbl.setText(lblChargeText);
+        // Pfad des richtigen Icons holen
+        iconPath = getClass().getResource("images/battery_icons/battery_" + batteryState + chargingState + ".bmp").toString();
+
+        // Da diese Methode aus dem naoqi-messaging Thread aufgerufen wird, aktualisieren wir die GUI (Akku-Icon und Ladezustand)
+        // ueber eine kleine Wrapper-Methode, die die Aktualisierung im JavaFX-Thread vornimmt.
+        // Andernfalls gibt es eine Exception.
+        batteryGUIrefresher.setValues(lblChargeText, iconPath);
+        Platform.runLater(batteryGUIrefresher);
+    }
+
+    class BatteryGUIrefresher implements Runnable {
+        private ArrayList<Label> chargeLabels;
+        private ArrayList<ImageView> batteryIcons;
+        private String charge;
+        private String iconPath;
+
+        public BatteryGUIrefresher(ArrayList<Label> chargeLabels, ArrayList<ImageView> batteryIcons ) {
+            this.chargeLabels = chargeLabels;
+            this.batteryIcons = batteryIcons;
         }
-        // Zutreffendes Bild in alle Container setzen
-        for ( ImageView img : imgBatteryList ) {
-            img.setImage(new Image(getClass().getResource("images/battery_icons/battery_" + batteryState + chargingState + ".bmp").toString()));
+
+        @Override public void run() {
+            // Ladezustand in alle Label setzen
+            if ( chargeLabels != null ) {
+                for (Label lbl : chargeLabels) {
+                    lbl.setText(charge);
+                }
+            }
+            // Zutreffendes Bild in alle Container setzen
+            if ( batteryIcons != null ) {
+                for (ImageView img : batteryIcons) {
+                    img.setImage(new Image(iconPath));
+                }
+            }
+        }
+
+        public void setValues(String charge, String iconPath) {
+            this.charge = charge;
+            this.iconPath = iconPath;
         }
     }
 }
