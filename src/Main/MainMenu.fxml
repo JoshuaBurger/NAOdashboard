@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="669.0" prefWidth="811.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="669.0" prefWidth="811.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1">
   <tabs>
     <Tab fx:id="tabLeds" closable="false" style="-fx-background-color: white;" text="Leds">
       <content>
@@ -160,21 +160,19 @@
                           <ToggleGroup fx:id="toggleGroupLanguage" />
                       </toggleGroup></RadioButton>
                   <RadioButton fx:id="radioButtonDeutsch" layoutX="272.0" layoutY="180.0" mnemonicParsing="false" onAction="#radioButtonDeutsch" text="deutsch" toggleGroup="$toggleGroupLanguage" />
-                  <Label fx:id="labelSpeechSpeed" layoutX="140.0" layoutY="352.0" text="Speed" />
-                  <Slider fx:id="sliderSpeechSpeed" layoutX="144.0" layoutY="421.0" onMouseDragged="#changeTalkingSpeed" />
-                  <Slider fx:id="sliderSpeechPitch" layoutX="144.0" layoutY="509.0" onMouseDragged="#changePitch" />
-                  <Label fx:id="labelSpeechPitch" layoutX="144.0" layoutY="471.0" text="Pitch" />
-                  <Label fx:id="labelSpeech50Prozent" layoutX="94.0" layoutY="413.0" text="50%" />
-                  <Label fx:id="labelSpeech200Prozent" layoutX="310.0" layoutY="405.0" text="200%" />
-                  <Label fx:id="labelSpeech50Prozent2" layoutX="94.0" layoutY="509.0" text="50%" />
-                  <Label fx:id="labelSpeech400Prozent" layoutX="310.0" layoutY="509.0" text="400%" />
-                  <Label fx:id="labelSpeechVolume" layoutX="133.0" layoutY="253.0" text="Volume" />
-                  <Label fx:id="labelSpeechMin" layoutX="74.0" layoutY="312.0" text="min" />
-                  <Label fx:id="labelSpeechMax" layoutX="315.0" layoutY="312.0" text="max" />
+                  <Label fx:id="labelSpeechSpeed" layoutX="194.0" layoutY="341.0" text="Speed" />
+                  <Slider fx:id="sliderSpeechSpeed" layoutX="144.0" layoutY="365.0" max="400.0" min="50.0" onMouseDragged="#changeTalkingSpeed" value="100.0" />
+                  <Slider fx:id="sliderSpeechPitch" layoutX="144.0" layoutY="422.0" max="200.0" min="50.0" onMouseDragged="#changePitch" value="100.0" />
+                  <Label fx:id="labelSpeechPitch" layoutX="198.0" layoutY="405.0" text="Pitch" />
+                  <Label fx:id="labelSpeechVolume" layoutX="192.0" layoutY="279.0" text="Volume" />
                   <Button fx:id="btnConnectionSpeechTab" layoutX="636.0" layoutY="77.0" mnemonicParsing="false" onAction="#startConnectionView" prefHeight="41.0" prefWidth="161.0" style="-fx-border-color: black;" text="Change conneciton">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font></Button>
+                  <Slider fx:id="sliderVolume" layoutX="144.0" layoutY="296.0" onMouseDragged="#changeVolume" value="50.0" />
+                  <Label fx:id="lblSpeechSpeedValue" layoutX="292.0" layoutY="364.0" text="100%" />
+                  <Label fx:id="lblPitchValue" layoutX="292.0" layoutY="421.0" text="100%" />
+                  <Label fx:id="lblVolumeValue" layoutX="295.0" layoutY="295.0" text="50%" />
               </children>
           </AnchorPane>
       </content>

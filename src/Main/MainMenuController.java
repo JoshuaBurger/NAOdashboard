@@ -20,11 +20,11 @@ public class MainMenuController {
     @FXML
     private Button buttonRGBpreview;
     @FXML
-    private Label labelSpeechSpeed;
+    private Label lblSpeechSpeedValue;
     @FXML
-    private Label labelSpeechPitch;
+    private Label lblPitchValue;
     @FXML
-    private Label labelSpeechVolume;
+    private Label lblVolumeValue;
     @FXML
     private Label lblBattery1;
     @FXML
@@ -36,9 +36,9 @@ public class MainMenuController {
     @FXML
     private Slider sliderVolume;
     @FXML
-    private Slider sliderPitch;
+    private Slider sliderSpeechPitch;
     @FXML
-    private Slider sliderSpeed;
+    private Slider sliderSpeechSpeed;
     @FXML
     private ImageView imgBattery1;
     @FXML
@@ -155,41 +155,33 @@ public class MainMenuController {
         ALTextToSpeech volume = new ALTextToSpeech(session);
         float v = ((float) sliderVolume.getValue() / 100);
         volume.setVolume(v);
-            labelSpeechVolume.setText((int)(v * 100) + "%");
+            lblVolumeValue.setText((int)(v * 100) + "%");
         System.out.println(v * 100 + "%");
         } catch(Exception e) {
             System.out.println("No connection.");
         }
     }
     public void changePitch() {
-        try {
-        ALTextToSpeech pitch = new ALTextToSpeech(session);
-        pitchValue = ((int)(sliderPitch.getValue()));
-        labelSpeechPitch.setText(pitchValue +"%");
+        pitchValue = ((int)(sliderSpeechPitch.getValue()));
+        lblPitchValue.setText(pitchValue +"%");
         System.out.println(pitchValue +"%");
-        } catch(Exception e) {
-            System.out.println("No connection.");
         }
-    }
+
+
     public void changeTalkingSpeed() {
-        try {
-            ALTextToSpeech speed = new ALTextToSpeech(session);
-            speedValue = ((int)(sliderSpeed.getValue() * 3.5f +50f));
-            labelSpeechSpeed.setText(speedValue +"%");
+            speedValue = ((int)(sliderSpeechSpeed.getValue()));
+            lblSpeechSpeedValue.setText(speedValue +"%");
             System.out.println(speedValue +"%");
-        } catch(Exception e) {
-            System.out.println("No connection.");
         }
-    }
 
     public void setHeadFrontSensor() {
-        headSensors.setHeadSensorSpeechTask("Front", sayText.getText(), (int)(sliderSpeed.getValue() * 3.5f +50f), (int)sliderPitch.getValue(), language);
+        headSensors.setHeadSensorSpeechTask("Front", sayText.getText(), (int)(sliderSpeechSpeed.getValue() * 3.5f +50f), (int)sliderSpeechPitch.getValue(), language);
     }
     public void setHeadMiddleSensor() {
-        headSensors.setHeadSensorSpeechTask("Middle", sayText.getText(), (int)(sliderSpeed.getValue() * 3.5f +50f), (int)sliderPitch.getValue(), language);
+        headSensors.setHeadSensorSpeechTask("Middle", sayText.getText(), (int)(sliderSpeechSpeed.getValue() * 3.5f +50f), (int)sliderSpeechPitch.getValue(), language);
     }
     public void setHeadRearSensor() {
-        headSensors.setHeadSensorSpeechTask("Rear", sayText.getText(), (int)(sliderSpeed.getValue() * 3.5f +50f), (int)sliderPitch.getValue(), language);
+        headSensors.setHeadSensorSpeechTask("Rear", sayText.getText(), (int)(sliderSpeechSpeed.getValue() * 3.5f +50f), (int)sliderSpeechPitch.getValue(), language);
     }
 
     public void playAudio() throws Exception {
