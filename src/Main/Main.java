@@ -31,11 +31,15 @@ public class Main extends Application {
         connController.setDataToView();
     }
 
-    public void startMainMenu() throws Exception {
-        // MaiMenu View oeffnen
-        setSceneContent("MainMenuNEU.fxml", "NAO Dashboard", mainMenuController);
-        // Daten aus Controller in die View setzen
-        mainMenuController.setDataToView();
+    public void startMainMenu() {
+        try {
+            // MaiMenu View oeffnen
+            setSceneContent("MainMenu.fxml", "NAO Dashboard", mainMenuController);
+            // Daten aus Controller in die View setzen
+            mainMenuController.setDataToView();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private void setSceneContent(String sceneName, String sceneTitle, Object controller) throws Exception {

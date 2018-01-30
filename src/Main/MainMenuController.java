@@ -18,13 +18,13 @@ public class MainMenuController {
     @FXML
     private TextField textfieldBlue;
     @FXML
-    private Button RGBcolorPane;
+    private Button buttonRGBpreview;
     @FXML
-    private Label VolumeLabel;
+    private Label labelSpeechSpeed;
     @FXML
-    private Label PitchLabel;
+    private Label labelSpeechPitch;
     @FXML
-    private Label speedLabel;
+    private Label labelSpeechVolume;
     @FXML
     private Label lblBattery1;
     @FXML
@@ -47,6 +47,8 @@ public class MainMenuController {
     private ImageView imgBattery3;
     @FXML
     private ImageView imgBattery4;
+    @FXML
+    private Label labelAllowedValue;
 
     int pitchValue = 100;
     int speedValue = 100;
@@ -142,7 +144,7 @@ public class MainMenuController {
         ALTextToSpeech volume = new ALTextToSpeech(session);
         float v = ((float) sliderVolume.getValue() / 100);
         volume.setVolume(v);
-        VolumeLabel.setText((int)(v * 100) + "%");
+            labelSpeechVolume.setText((int)(v * 100) + "%");
         System.out.println(v * 100 + "%");
         } catch(Exception e) {
             System.out.println("No connection.");
@@ -152,7 +154,7 @@ public class MainMenuController {
         try {
         ALTextToSpeech pitch = new ALTextToSpeech(session);
         pitchValue = ((int)(sliderPitch.getValue()));
-        PitchLabel.setText(pitchValue +"%");
+        labelSpeechPitch.setText(pitchValue +"%");
         System.out.println(pitchValue +"%");
         } catch(Exception e) {
             System.out.println("No connection.");
@@ -162,7 +164,7 @@ public class MainMenuController {
         try {
             ALTextToSpeech speed = new ALTextToSpeech(session);
             speedValue = ((int)(sliderSpeed.getValue() * 3.5f +50f));
-            speedLabel.setText(speedValue +"%");
+            labelSpeechSpeed.setText(speedValue +"%");
             System.out.println(speedValue +"%");
         } catch(Exception e) {
             System.out.println("No connection.");
@@ -205,14 +207,42 @@ public class MainMenuController {
 
     public void RGBcolorPreview() {
         try {
-            int red = Integer.parseInt(textfieldRed.getText());
-            int green = Integer.parseInt(textfieldGreen.getText());
-            int blue = Integer.parseInt(textfieldBlue.getText());
-            String hex = String.format("#%02X%02X%02X", red, green, blue);
-            RGBcolorPane.setStyle("-fx-background-color: "+ hex + ";");
+            labelAllowedValue.setVisible(false);
+            textfieldRed.setStyle("-fx-border-color: lightgrey; -fx-border-width: 0; -fx-border-radius: 0;");
+            textfieldGreen.setStyle("-fx-border-color: lightgrey; -fx-border-width: 0; -fx-border-radius: 0;");
+            textfieldBlue.setStyle("-fx-border-color: lightgrey; -fx-border-width: 0; -fx-border-radius: 0;");
+            int valueRed = Integer.parseInt(textfieldRed.getText());
+            int valueGreen = Integer.parseInt(textfieldGreen.getText());
+            int valueBlue = Integer.parseInt(textfieldBlue.getText());
+
+            if (setVisibleAllowedValueLabel(valueRed) == true) {
+                valueRed = 200;
+                textfieldRed.setStyle("-fx-border-color: red; -fx-border-width: 3; -fx-border-radius: 5;");
+            }
+            if (setVisibleAllowedValueLabel(valueGreen) == true){
+                valueGreen = 200;
+                textfieldGreen.setStyle("-fx-border-color: red; -fx-border-width: 3; -fx-border-radius: 5;");
+            }
+            if (setVisibleAllowedValueLabel(valueBlue) == true){
+                valueBlue = 200;
+                textfieldBlue.setStyle("-fx-border-color: red; -fx-border-width: 3; -fx-border-radius: 5;");
+            }
+
+            String hexRGBColor = String.format("#%02X%02X%02X", valueRed, valueGreen, valueBlue);
+            buttonRGBpreview.setStyle("-fx-background-color: " + hexRGBColor + ";");
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
+            System.out.println("Connection lost.");
+        }
+    }
+    public boolean setVisibleAllowedValueLabel(int value) {
+        if (value > 200) {
+            labelAllowedValue.setVisible(true);
+            value = 200;
+            return true;
+        } else {
+            return false;
         }
     }
     public void setledsRGBcolor() {

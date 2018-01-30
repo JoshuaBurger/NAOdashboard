@@ -1,173 +1,277 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Accordion?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane accessibleRole="COMBO_BOX" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="725.0" prefWidth="972.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label fx:id="labelPostures" layoutX="637.0" layoutY="90.0" text="postures">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Button fx:id="buttonStandUP" layoutX="560.0" layoutY="122.0" mnemonicParsing="false" onAction="#standUp" prefHeight="26.0" prefWidth="101.0" style="-fx-background-color: lightgrey;" text="stand up" textFill="#e02020">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Button>
-      <Button fx:id="buttonSitRelax" layoutX="560.0" layoutY="161.0" mnemonicParsing="false" onAction="#sitRelax" prefHeight="26.0" prefWidth="101.0" style="-fx-background-color: lightgrey;" text="relax" textFill="#e02020">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Button>
-      <Button fx:id="buttonCrouch" layoutX="683.0" layoutY="122.0" mnemonicParsing="false" onAction="#crouch" prefHeight="26.0" prefWidth="101.0" text="crouch" textFill="#0a0a0a">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Button>
-      <Button fx:id="buttonLyingBack" layoutX="683.0" layoutY="161.0" mnemonicParsing="false" onAction="#lyingBack" prefHeight="26.0" prefWidth="101.0" text="lying back">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Button>
-      <Button fx:id="buttonLyingLyingBelly" layoutX="683.0" layoutY="204.0" mnemonicParsing="false" onAction="#lyingBelly" prefHeight="26.0" prefWidth="101.0" text="lyingBelly">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Button>
-      <Label fx:id="labelMotions" layoutX="18.0" layoutY="43.0" text="Motions">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-
-
-      <Separator layoutX="11.0" layoutY="62.0" prefHeight="3.0" prefWidth="1162.0" />
-      <Label fx:id="labelMoveHead" layoutX="74.0" layoutY="90.0" text="move head">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Button fx:id="headUp" layoutX="85.0" layoutY="122.0" mnemonicParsing="false" onAction="#headUp" text="up" />
-      <Button fx:id="headDown" layoutX="78.0" layoutY="178.0" mnemonicParsing="false" onAction="#headDown" text="down" />
-      <Button fx:id="headRight" layoutX="124.0" layoutY="147.0" mnemonicParsing="false" onAction="#headRight" text="right" />
-      <Button fx:id="headLeft" layoutX="43.0" layoutY="148.0" mnemonicParsing="false" onAction="#headLeft" text="left" />
-
-
-      <Label fx:id="labelWalk" layoutX="338.0" layoutY="90.0" text="walk">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Button fx:id="walkRight" layoutX="393.0" layoutY="147.0" mnemonicParsing="false" onMousePressed="#walkRight" onMouseReleased="#stopWalking" text="right" />
-      <Button fx:id="walkForwards" layoutX="326.0" layoutY="122.0" mnemonicParsing="false" onMousePressed="#walkForwards" onMouseReleased="#stopWalking" text="forwards" />
-      <Button fx:id="walkLeft" layoutX="288.0" layoutY="148.0" mnemonicParsing="false" onMousePressed="#walkLeft" onMouseReleased="#stopWalking" text="left" />
-      <Button fx:id="walkBackwards" layoutX="321.0" layoutY="178.0" mnemonicParsing="false" onMousePressed="#walkBackwards" onMouseReleased="#stopWalking" text="backwards" />
-      <Slider fx:id="sliderWalkSpeed" layoutX="304.0" layoutY="226.0" prefHeight="14.0" prefWidth="122.0" />
-      <Button fx:id="buttonStopWalking" layoutX="313.0" layoutY="254.0" mnemonicParsing="false" onAction="#stopWalking" style="-fx-background-color: lightgrey;" text="stop walking" textFill="#0d0d0d" />
-      <Label layoutX="261.0" layoutY="226.0" text="slow">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Label layoutX="431.0" layoutY="226.0" text="fast">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-
-
-      <Label fx:id="labelVoice" layoutX="27.0" layoutY="285.0" text="Voice">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Separator layoutX="14.0" layoutY="303.0" prefHeight="3.0" prefWidth="316.0" />
-      <Accordion layoutX="497.0" layoutY="379.0" />
-      <Accordion layoutX="73.0" layoutY="437.0" />
-      <BorderPane layoutX="74.0" layoutY="323.0" prefHeight="111.0" prefWidth="200.0">
-         <center>
-            <TextArea fx:id="textfieldSayText" prefHeight="90.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-         </center>
-      </BorderPane>
-      <Button fx:id="buttonSay" layoutX="26.0" layoutY="323.0" mnemonicParsing="false" onAction="#sayText" text="say" />
-      <RadioButton fx:id="radioButtonEnglish" layoutX="80.0" layoutY="446.0" mnemonicParsing="false" onMouseClicked="#radioButtonEnglish" selected="true" text="english">
-         <toggleGroup>
-            <ToggleGroup fx:id="radioButtonsLanguage" />
-         </toggleGroup></RadioButton>
-      <RadioButton fx:id="radioButtonDeutsch" layoutX="183.0" layoutY="446.0" mnemonicParsing="false" onMouseClicked="#radioButtonDeutsch" text="deutsch" toggleGroup="$radioButtonsLanguage" />
-       <Slider fx:id="sliderPitch" layoutX="74.0" layoutY="552.0" onMouseDragged="#changePitch" prefHeight="16.0" prefWidth="200.0" />
-       <Label layoutX="149.0" layoutY="488.0" text="Volume:" />
-       <Label layoutX="156.0" layoutY="539.0" text="Pitch:" />
-       <Label layoutX="47.0" layoutY="502.0" text="Min" />
-       <Label layoutX="274.0" layoutY="552.0" text="200%" />
-       <Label layoutX="274.0" layoutY="501.0" text="Max" />
-       <Label layoutX="42.0" layoutY="552.0" prefHeight="17.0" prefWidth="32.0" text="50%" />
-       <Label fx:id="VolumeLabel" layoutX="322.0" layoutY="502.0" text="100%" />
-       <Label fx:id="PitchLabel" layoutX="323.0" layoutY="552.0" text="pitch">
-           <font>
-               <Font size="13.0" />
-           </font>
-       </Label>
-       <Slider fx:id="sliderSpeed" layoutX="74.0" layoutY="602.0" onMouseDragged="#changeTalkingSpeed" prefHeight="16.0" prefWidth="200.0" />
-       <Label layoutX="41.0" layoutY="602.0" text="50%" />
-       <Label layoutX="275.0" layoutY="602.0" text="400%" />
-       <Label fx:id="speedLabel" layoutX="322.0" layoutY="602.0" text="speed" />
-
-
-      <Label fx:id="labelLeds" layoutX="479.0" layoutY="285.0" text="LEDs">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
-      <Separator layoutX="466.0" layoutY="302.0" prefHeight="3.0" prefWidth="316.0" />
-      <Label fx:id="labelLedsFace" layoutX="482.0" layoutY="323.0" text="face">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-
-       <Button fx:id="btnConnection" layoutX="670.0" layoutY="21.0" mnemonicParsing="false" onAction="#startConnectionView" prefHeight="39.0" prefWidth="146.0" text="Change Connection" textFill="#0d0d0d" />
-
-       
-        <Button fx:id="buttonFaceLedsOff" layoutX="573.0" layoutY="336.0" mnemonicParsing="false" onAction="#ledsOff" style="-fx-background-color: lightgrey;" text="off" textFill="#0a0a0a" />
-        <Button fx:id="buttonFaceLedsOn" layoutX="644.0" layoutY="336.0" mnemonicParsing="false" onAction="#ledsOn" style="-fx-background-color: lightgrey;" text="on" textFill="#1e1c1c" />
-        <Button fx:id="buttonFaceLedsRed" layoutX="580.0" layoutY="392.0" mnemonicParsing="false" onAction="#buttonFaceLedsRed" prefHeight="26.0" prefWidth="75.0" style="-fx-background-color: red;" text="red" textFill="WHITE" />
-        <Button fx:id="buttonFaceLedsYellow" layoutX="554.0" layoutY="442.0" mnemonicParsing="false" onAction="#buttonFaceLedsYellow" prefHeight="26.0" prefWidth="87.0" style="-fx-background-color: yellow;" text="yellow" />
-        <Button fx:id="buttonFaceLedsBlue" layoutX="683.0" layoutY="468.0" mnemonicParsing="false" onAction="#buttonFaceLedsBlue" prefHeight="26.0" prefWidth="75.0" style="-fx-background-color: blue;" text="blue" textFill="WHITE" />
-        <Button fx:id="buttonFaceLedsMagenta" layoutX="547.0" layoutY="489.0" mnemonicParsing="false" onAction="#buttonFaceLedsMagenta" prefHeight="26.0" prefWidth="87.0" style="-fx-background-color: pink;" text="magenta" />
-        <Button fx:id="buttonFaceLedsWhite" layoutX="696.0" layoutY="429.0" mnemonicParsing="false" onAction="#buttonFaceLedsWhite" prefHeight="26.0" prefWidth="75.0" style="-fx-background-color: white;" text="white" textFill="#050114" />
-        <Button fx:id="buttonFaceLedsCyan" layoutX="690.0" layoutY="392.0" mnemonicParsing="false" onAction="#buttonFaceLedsCyan" prefHeight="26.0" prefWidth="87.0" style="-fx-background-color: cyan;" text="cyan" />
-        <Button fx:id="buttonFaceLedsGreen" layoutX="683.0" layoutY="515.0" mnemonicParsing="false" onAction="#buttonFaceLedsGreen" prefHeight="26.0" prefWidth="75.0" style="-fx-background-color: green;" text="green" textFill="WHITE" />
-       <Button fx:id="RGBcolorPane" layoutX="580.0" layoutY="624.0" mnemonicParsing="false" onAction="#RGBcolorPreview" prefHeight="52.0" prefWidth="62.0" style="-fx-background-color: red;" textFill="RED" />
-       <Button fx:id="buttonLedsRGB" layoutX="663.0" layoutY="661.0" mnemonicParsing="false" onAction="#setledsRGBcolor" prefHeight="26.0" prefWidth="115.0" style="-fx-background-color: lightgrey;" text="use RGB color" textFill="#050114" />
-       <Label layoutX="486.0" layoutY="605.0" text="red" />
-       <Label layoutX="484.0" layoutY="642.0" text="green" />
-       <Label layoutX="488.0" layoutY="679.0" text="blue" />
-       <TextField fx:id="textfieldRed" layoutX="529.0" layoutY="600.0" onKeyTyped="#RGBcolorPreview" prefHeight="26.0" prefWidth="49.0" text="100" />
-       <TextField fx:id="textfieldGreen" layoutX="529.0" layoutY="637.0" onKeyTyped="#RGBcolorPreview" prefHeight="26.0" prefWidth="49.0" text="0" />
-       <TextField fx:id="textfieldBlue" layoutX="529.0" layoutY="674.0" onKeyTyped="#RGBcolorPreview" prefHeight="26.0" prefWidth="49.0" text="0" />
-      <TabPane layoutX="-107.0" layoutY="-347.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Untitled Tab 1" />
-          <Tab text="Untitled Tab 2">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
-   </children>
-</AnchorPane>
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="669.0" prefWidth="811.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+  <tabs>
+    <Tab fx:id="tabLeds" closable="false" style="-fx-background-color: white;" text="Leds">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
+               <children>
+                   <Label fx:id="labelEyes" layoutX="71.0" layoutY="14.0" text="Eyes">
+                       <font>
+                           <Font name="System Bold" size="18.0" />
+                       </font>
+                   </Label>
+                   <ImageView fx:id="imgBattery1" fitHeight="36.0" fitWidth="93.0" layoutX="704.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" />
+                   <Label fx:id="lblBattery1" layoutX="736.0" layoutY="50.0" prefHeight="27.0" prefWidth="44.0" text="100%" textAlignment="CENTER" />
+                  <SplitPane dividerPositions="0.5805168986083499" layoutX="71.0" layoutY="50.0" orientation="VERTICAL" prefHeight="505.0" prefWidth="322.0" style="-fx-background-color: white;">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <GridPane alignment="CENTER" layoutX="90.0" layoutY="69.0" prefHeight="194.0" prefWidth="320.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Button fx:id="buttonFaceLedsOff" mnemonicParsing="false" onAction="#ledsOff" style="-fx-background-color: lightgrey;" text="off" GridPane.columnIndex="1">
+                                       <GridPane.margin>
+                                          <Insets bottom="20.0" />
+                                       </GridPane.margin></Button>
+                                    <Button fx:id="buttonFaceLedsRed" mnemonicParsing="false" onAction="#buttonFaceLedsRed" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: red;" text="red" textFill="WHITE" GridPane.rowIndex="1" />
+                                    <Button fx:id="buttonFaceLedsYellow" mnemonicParsing="false" onAction="#buttonFaceLedsYellow" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: yellow;" text="yellow" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Button fx:id="buttonFaceLedsBlue" mnemonicParsing="false" onAction="#buttonFaceLedsBlue" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: blue;" text="blue" textFill="WHITE" GridPane.rowIndex="2" />
+                                    <Button fx:id="buttonFaceLedMagenta" mnemonicParsing="false" onAction="#buttonFaceLedsMagenta" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: magenta;" text="magenta" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Button fx:id="buttonFaceLedGreen" mnemonicParsing="false" onAction="#buttonFaceLedsGreen" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: green;" text="green" textFill="WHITE" GridPane.rowIndex="3" />
+                                    <Button fx:id="buttonFaceLedCyan" mnemonicParsing="false" onAction="#buttonFaceLedsCyan" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: cyan;" text="cyan" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Button fx:id="buttonFaceLedWhite" mnemonicParsing="false" onAction="#buttonFaceLedsWhite" prefHeight="26.0" prefWidth="86.0" style="-fx-background-color: lightgrey;" text="white" textFill="WHITE" GridPane.rowIndex="4" />
+                                    <Button fx:id="buttonFaceLedsOn" mnemonicParsing="false" onAction="#ledsOn" style="-fx-background-color: lightgrey;" text="on">
+                                       <GridPane.margin>
+                                          <Insets bottom="20.0" />
+                                       </GridPane.margin>
+                                    </Button>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="227.0" prefWidth="422.0">
+                           <children>
+                              <GridPane layoutX="8.0" layoutY="61.0" prefHeight="234.0" prefWidth="188.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="160.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="101.0" minWidth="10.0" prefWidth="18.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="160.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="76.0" minWidth="10.0" prefWidth="60.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="72.0" minWidth="13.0" prefWidth="59.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="74.0" minWidth="10.0" prefWidth="36.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label fx:id="labelRed" text="red:" />
+                                          <Label fx:id="labelGreen" text="green:" GridPane.rowIndex="1" />
+                                          <Label fx:id="labelBlue" text="blue:" GridPane.rowIndex="2" />
+                                          <TextField fx:id="textfieldRed" onKeyTyped="#RGBcolorPreview" style="-fx-background-color: white; -fx-border-color: lightgrey; -fx-border-radius: 5;" text="200" GridPane.columnIndex="1" />
+                                          <TextField fx:id="textfieldGreen" onKeyTyped="#RGBcolorPreview" style="-fx-background-color: white; -fx-border-color: lightgrey; -fx-border-radius: 5;" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <TextField fx:id="textfieldBlue" onKeyTyped="#RGBcolorPreview" style="-fx-background-color: white; -fx-border-color: lightgrey; -fx-border-radius: 5;" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                       </children>
+                                       <padding>
+                                          <Insets top="30.0" />
+                                       </padding>
+                                    </GridPane>
+                                    <GridPane alignment="BOTTOM_RIGHT" GridPane.columnIndex="2">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Button fx:id="buttonRGBpreview" mnemonicParsing="false" prefHeight="70.0" prefWidth="80.0" style="-fx-background-color: red;">
+                                             <GridPane.margin>
+                                                <Insets left="50.0" />
+                                             </GridPane.margin></Button>
+                                          <Button fx:id="buttonLedsRGB" mnemonicParsing="false" onAction="#setledsRGBcolor" text="use RGB color" GridPane.rowIndex="1">
+                                             <GridPane.margin>
+                                                <Insets left="35.0" />
+                                             </GridPane.margin></Button>
+                                       </children>
+                                       <padding>
+                                          <Insets top="30.0" />
+                                       </padding>
+                                    </GridPane>
+                                    <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="1">
+                                       <GridPane.margin>
+                                          <Insets top="10.0" />
+                                       </GridPane.margin></Separator>
+                                 </children>
+                              </GridPane>
+                           </children></AnchorPane>
+                    </items>
+                  </SplitPane>
+                  <Button fx:id="btnConnectionLedsTab" layoutX="636.0" layoutY="77.0" mnemonicParsing="false" onAction="#startConnectionView" prefHeight="41.0" prefWidth="161.0" style="-fx-border-color: black;" text="Change conneciton">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Button>
+                  <Label fx:id="labelAllowedValue" layoutX="71.0" layoutY="582.0" text="No value higher than 200 allowed." textFill="#e80d0d" visible="false">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Label>
+               </children>
+        </AnchorPane>
+      </content>
+    </Tab>
+    <Tab fx:id="tabSpeech" style="-fx-background-color: white;" text="Speech">
+      <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
+              <children>
+                  <ImageView fx:id="imgBattery3" fitHeight="36.0" fitWidth="93.0" layoutX="704.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="lblBattery3" layoutX="736.0" layoutY="50.0" prefHeight="27.0" prefWidth="44.0" text="100%" textAlignment="CENTER" />
+                  <Button fx:id="buttonSay" layoutX="53.0" layoutY="37.0" mnemonicParsing="false" onAction="#sayText" text="say" />
+                  <TextArea fx:id="sayText" layoutX="148.0" layoutY="34.0" prefHeight="132.0" prefWidth="200.0" />
+                  <RadioButton fx:id="radioButtonEnglish" layoutX="148.0" layoutY="180.0" mnemonicParsing="false" onAction="#radioButtonEnglish" selected="true" text="english">
+                      <toggleGroup>
+                          <ToggleGroup fx:id="toggleGroupLanguage" />
+                      </toggleGroup></RadioButton>
+                  <RadioButton fx:id="radioButtonDeutsch" layoutX="272.0" layoutY="180.0" mnemonicParsing="false" onAction="#radioButtonDeutsch" text="deutsch" toggleGroup="$toggleGroupLanguage" />
+                  <Label fx:id="labelSpeechSpeed" layoutX="140.0" layoutY="352.0" text="Speed" />
+                  <Slider fx:id="sliderSpeechSpeed" layoutX="144.0" layoutY="421.0" onMouseDragged="#changeTalkingSpeed" />
+                  <Slider fx:id="sliderSpeechPitch" layoutX="144.0" layoutY="509.0" onMouseDragged="#changePitch" />
+                  <Label fx:id="labelSpeechPitch" layoutX="144.0" layoutY="471.0" text="Pitch" />
+                  <Label fx:id="labelSpeech50Prozent" layoutX="94.0" layoutY="413.0" text="50%" />
+                  <Label fx:id="labelSpeech200Prozent" layoutX="310.0" layoutY="405.0" text="200%" />
+                  <Label fx:id="labelSpeech50Prozent2" layoutX="94.0" layoutY="509.0" text="50%" />
+                  <Label fx:id="labelSpeech400Prozent" layoutX="310.0" layoutY="509.0" text="400%" />
+                  <Label fx:id="labelSpeechVolume" layoutX="133.0" layoutY="253.0" text="Volume" />
+                  <Label fx:id="labelSpeechMin" layoutX="74.0" layoutY="312.0" text="min" />
+                  <Label fx:id="labelSpeechMax" layoutX="315.0" layoutY="312.0" text="max" />
+                  <Button fx:id="btnConnectionSpeechTab" layoutX="636.0" layoutY="77.0" mnemonicParsing="false" onAction="#startConnectionView" prefHeight="41.0" prefWidth="161.0" style="-fx-border-color: black;" text="Change conneciton">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Button>
+              </children>
+          </AnchorPane>
+      </content>
+    </Tab>
+    <Tab fx:id="tabPostures" style="-fx-background-color: white;" text="Postures">
+      <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
+               <children>
+                   <ImageView fx:id="imgBattery2" fitHeight="36.0" fitWidth="93.0" layoutX="704.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" />
+                   <Label fx:id="lblBattery2" layoutX="736.0" layoutY="50.0" prefHeight="27.0" prefWidth="44.0" text="100%" textAlignment="CENTER" />
+                  <SplitPane dividerPositions="0.3708609271523179" layoutX="48.0" layoutY="64.0" orientation="VERTICAL" prefHeight="280.0" prefWidth="90.0" style="-fx-background-color: white;">
+                    <items>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <GridPane layoutX="-35.0" layoutY="14.0" prefHeight="95.0" prefWidth="158.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Button fx:id="buttonStandUp" mnemonicParsing="false" onAction="#standUp" prefHeight="26.0" prefWidth="85.0" style="-fx-background-color: lightgrey;" text="stand up" />
+                                    <Button fx:id="buttonSitRelax" mnemonicParsing="false" onAction="#sitRelax" prefHeight="26.0" prefWidth="85.0" style="-fx-background-color: lightgrey;" text="relax" GridPane.rowIndex="1" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="119.0" prefWidth="158.0">
+                           <children>
+                              <GridPane layoutX="-56.0" layoutY="14.0" prefHeight="140.0" prefWidth="158.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Button fx:id="buttonLyingBack" mnemonicParsing="false" onAction="#lyingBack" text="lying back" GridPane.rowIndex="1" />
+                                    <Button fx:id="buttonLyingBelly" mnemonicParsing="false" onAction="#lyingBelly" text="lying belly" GridPane.rowIndex="2" />
+                                    <Button fx:id="buttonCrouch" mnemonicParsing="false" onAction="#crouch" prefHeight="26.0" prefWidth="85.0" text="crouch" />
+                                 </children>
+                              </GridPane>
+                           </children></AnchorPane>
+                    </items>
+                  </SplitPane>
+                   <Button fx:id="btnConnectionPosturesTab" layoutX="636.0" layoutY="77.0" mnemonicParsing="false" onAction="#startConnectionView" prefHeight="41.0" prefWidth="161.0" style="-fx-border-color: black;" text="Change conneciton">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Button>
+               </children>
+          </AnchorPane>
+      </content>
+    </Tab>
+  <Tab fx:id="tabMoves" style="-fx-background-color: white;" text="Moves">
+      <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
+              <children>
+                  <ImageView fx:id="imgBattery4" fitHeight="36.0" fitWidth="93.0" layoutX="704.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="lblBattery4" layoutX="736.0" layoutY="50.0" prefHeight="27.0" prefWidth="44.0" text="100%" textAlignment="CENTER" />
+                  <Label fx:id="labelWalk" layoutX="103.5" layoutY="25.0" text="walk">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="labelMoveHead" layoutX="421.0" layoutY="25.0" text="move head">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="buttonWalkForwards" layoutX="83.0" layoutY="70.0" mnemonicParsing="false" onMousePressed="#walkForwards" prefHeight="26.0" prefWidth="88.0" text="forwards" />
+                  <Button fx:id="buttonWalkLeft" layoutX="20.0" layoutY="120.0" mnemonicParsing="false" onMousePressed="#walkLeft" prefHeight="26.0" prefWidth="88.0" text="left" />
+                  <Button fx:id="buttonWalkBackwards" layoutX="83.0" layoutY="170.0" mnemonicParsing="false" onMousePressed="#walkBackwards" prefHeight="26.0" prefWidth="88.0" text="backwards" />
+                  <Button fx:id="buttonWalkRight" layoutX="150.0" layoutY="120.0" mnemonicParsing="false" onMousePressed="#walkRight" prefHeight="26.0" prefWidth="88.0" text="right" />
+                  <Button fx:id="buttonHeadUp" layoutX="433.0" layoutY="70.0" mnemonicParsing="false" onAction="#headUp" prefHeight="26.0" prefWidth="88.0" text="up" />
+                  <Button fx:id="buttonHeadRight" layoutX="500.0" layoutY="120.0" mnemonicParsing="false" onAction="#headRight" prefHeight="26.0" prefWidth="88.0" text="right" />
+                  <Button fx:id="buttonHeadDown" layoutX="433.0" layoutY="170.0" mnemonicParsing="false" onAction="#headDown" prefHeight="26.0" prefWidth="88.0" text="down" />
+                  <Button fx:id="buttonHeadLeft" layoutX="370.0" layoutY="120.0" mnemonicParsing="false" onAction="#headLeft" prefHeight="26.0" prefWidth="88.0" text="left" />
+                  <Button fx:id="buttonStopWalking" layoutX="71.0" layoutY="226.0" mnemonicParsing="false" onAction="#stopWalking" style="-fx-background-color: #C80000;" text="stop walking" textFill="#fcfcfc">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="labelWalkSpeed" layoutX="65.0" layoutY="299.0" text="Speed" />
+                  <Slider fx:id="sliderWalkSpeed" layoutX="65.0" layoutY="334.0" />
+                  <Label fx:id="labelWalkSlow" layoutX="20.0" layoutY="334.0" text="slow" />
+                  <Label fx:id="labelWalkFast" layoutX="213.0" layoutY="334.0" text="fast" />
+                  <Button fx:id="btnConnectionMovesTab" layoutX="636.0" layoutY="77.0" mnemonicParsing="false" onAction="#startConnectionView" prefHeight="41.0" prefWidth="161.0" style="-fx-border-color: black;" text="Change conneciton">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Button>
+              </children>
+          </AnchorPane>
+      </content>
+  </Tab>
+  </tabs>
+</TabPane>
