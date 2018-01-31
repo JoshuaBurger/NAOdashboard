@@ -92,26 +92,26 @@ public class MovementModel {
     public void goToPosture(String postureName) {
         try {
             ALRobotPosture posture = new ALRobotPosture(session);
-            posture.goToPosture(postureName, 4F);
+            posture.goToPosture(postureName, 6F);
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void walkTowards(String walkDirection) {
+    public void move(float xAxis, float yAxis, float zAxis) {
         try {
-        ALMotion walk = new ALMotion(session);
-        walk.moveTo(1F, 0F, 0F);
-        // TODO: Verbindung zum NAO prüfen
+            ALMotion walk = new ALMotion(session);
+            walk.move(xAxis, yAxis, zAxis);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage() + "Connection lost.");
         }
     }
     public void stopWalking() {
         try {
             ALMotion stopWalking = new ALMotion(session);
             stopWalking.stopMove();
+            goToPosture("Stand");
         }
         catch (Exception e) {
             System.out.println(e.getMessage());

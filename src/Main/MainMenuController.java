@@ -5,10 +5,11 @@ import com.aldebaran.qi.helper.proxies.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import java.util.ArrayList;
 
 public class MainMenuController {
-
     @FXML
     private TextArea sayText;
     @FXML
@@ -118,93 +119,6 @@ public class MainMenuController {
         connection.disconnect();
     }
 
-    //Postures
-    public void standUp() {
-        movement.goToPosture("StandUp");
-    }
-    public void sitRelax() {
-        movement.goToPosture("SitRelax");
-    }
-    public void crouch() {
-        movement.goToPosture("Crouch");
-    }
-    public void lyingBack() {
-        movement.goToPosture("LyingBack");
-    }
-    public void lyingBelly() {
-        movement.goToPosture("LyingBelly");
-    }
-
-
-    //Speak
-    public void radioButtonEnglish() {
-        language = "English";
-    }
-    public void radioButtonDeutsch() {
-        language = "German";
-    }
-
-    public void sayText() {
-        saySomething(sayText.getText());
-    }
-
-    public void saySomething(String text) {
-        saySomething(text, speedValue, pitchValue, language);
-    }
-
-    public void saySomething(String text, int speed, int pitch, String lang) {
-        if (text == null) {
-            System.out.println("No text to say.");
-        }
-        else {
-            try {
-                ALTextToSpeech tts = new ALTextToSpeech(session);
-                tts.say("\\vct=" + pitch+ "\\" + "\\rspd=" + speed+ "\\" + text, lang);
-                System.out.println(lang);
-            } catch(Exception e) {
-                System.out.println("No connection.");
-            }
-        }
-    }
-
-    public void changeVolume() {
-        try {
-        ALTextToSpeech volume = new ALTextToSpeech(session);
-        float v = ((float) sliderVolume.getValue() / 100);
-        volume.setVolume(v);
-            lblVolumeValue.setText((int)(v * 100) + "%");
-        System.out.println(v * 100 + "%");
-        } catch(Exception e) {
-            System.out.println("No connection.");
-        }
-    }
-    public void changePitch() {
-        pitchValue = ((int)(sliderSpeechPitch.getValue()));
-        lblPitchValue.setText(pitchValue +"%");
-        System.out.println(pitchValue +"%");
-        }
-
-
-    public void changeTalkingSpeed() {
-            speedValue = ((int)(sliderSpeechSpeed.getValue()));
-            lblSpeechSpeedValue.setText(speedValue +"%");
-            System.out.println(speedValue +"%");
-        }
-
-    public void setHeadFrontSensor() {
-        headSensors.setHeadSensorSpeechTask("Front", sayText.getText(), (int)(sliderSpeechSpeed.getValue()), (int)sliderSpeechPitch.getValue(), language);
-    }
-    public void setHeadMiddleSensor() {
-        headSensors.setHeadSensorSpeechTask("Middle", sayText.getText(), (int)(sliderSpeechSpeed.getValue()), (int)sliderSpeechPitch.getValue(), language);
-    }
-    public void setHeadRearSensor() {
-        headSensors.setHeadSensorSpeechTask("Rear", sayText.getText(), (int)(sliderSpeechSpeed.getValue()), (int)sliderSpeechPitch.getValue(), language);
-    }
-
-    public void playAudio() throws Exception {
-        ALAudioPlayer audioPlayer = new ALAudioPlayer(session);
-        System.out.println(audioPlayer.getSoundSetFileNames("Aldebaran"));
-    }
 
     //LEDs
     public void ledsOff() {
@@ -282,6 +196,111 @@ public class MainMenuController {
         ledModel.setledsRGBcolor(red, green, blue);
     }
 
+    //Speak
+    public void radioButtonEnglish() {
+        language = "English";
+    }
+    public void radioButtonDeutsch() {
+        language = "German";
+    }
+
+    public void sayText() {
+        saySomething(sayText.getText());
+    }
+
+    public void saySomething(String text) {
+        saySomething(text, speedValue, pitchValue, language);
+    }
+
+    public void saySomething(String text, int speed, int pitch, String lang) {
+        if (text == null) {
+            System.out.println("No text to say.");
+        }
+        else {
+            try {
+                ALTextToSpeech tts = new ALTextToSpeech(session);
+                tts.say("\\vct=" + pitch+ "\\" + "\\rspd=" + speed+ "\\" + text, lang);
+                System.out.println(lang);
+            } catch(Exception e) {
+                System.out.println("No connection.");
+            }
+        }
+    }
+
+    public void changeVolume() {
+        try {
+            ALTextToSpeech volume = new ALTextToSpeech(session);
+            float v = ((float) sliderVolume.getValue() / 100);
+            volume.setVolume(v);
+            lblVolumeValue.setText((int)(v * 100) + "%");
+            System.out.println(v * 100 + "%");
+        } catch(Exception e) {
+            System.out.println("No connection.");
+        }
+    }
+    public void changePitch() {
+        pitchValue = ((int)(sliderSpeechPitch.getValue()));
+        lblPitchValue.setText(pitchValue +"%");
+        System.out.println(pitchValue +"%");
+    }
+
+
+    public void changeTalkingSpeed() {
+        speedValue = ((int)(sliderSpeechSpeed.getValue()));
+        lblSpeechSpeedValue.setText(speedValue +"%");
+        System.out.println(speedValue +"%");
+    }
+
+    public void setHeadFrontSensor() {
+        headSensors.setHeadSensorSpeechTask("Front", sayText.getText(), (int)(sliderSpeechSpeed.getValue()), (int)sliderSpeechPitch.getValue(), language);
+    }
+    public void setHeadMiddleSensor() {
+        headSensors.setHeadSensorSpeechTask("Middle", sayText.getText(), (int)(sliderSpeechSpeed.getValue()), (int)sliderSpeechPitch.getValue(), language);
+    }
+    public void setHeadRearSensor() {
+        headSensors.setHeadSensorSpeechTask("Rear", sayText.getText(), (int)(sliderSpeechSpeed.getValue()), (int)sliderSpeechPitch.getValue(), language);
+    }
+
+    public void playAudio() throws Exception {
+        ALAudioPlayer audioPlayer = new ALAudioPlayer(session);
+        System.out.println(audioPlayer.getSoundSetFileNames("Aldebaran"));
+    }
+
+
+    //Postures
+    public void wakeUp() throws Exception{
+        try {
+            ALMotion wakeUp = new ALMotion(session);
+            wakeUp.wakeUp();
+        }
+        catch(Exception e) {
+            System.out.println(e.getMessage() + "Connection lost.");
+        }
+    }
+    public void rest()throws Exception {
+        ALMotion rest = new ALMotion(session);
+        rest.rest();
+    }
+    public void standUp() {
+        movement.goToPosture("Stand");
+    }
+    public void sitRelax() {
+        movement.goToPosture("SitRelax");
+    }
+    public void crouch() {
+        movement.goToPosture("Crouch");
+    }
+    public void lyingBack() {
+        movement.goToPosture("LyingBack");
+    }
+    public void lyingBelly() {
+        movement.goToPosture("LyingBelly");
+    }
+    public void standZero() {
+        movement.goToPosture("StandZero");
+    }
+
+
 
     //Head
     public void headUp() {
@@ -299,18 +318,39 @@ public class MainMenuController {
 
     //Walk
     public void walkForwards() {
-        movement.walkTowards("forwards");
+        movement.move(0.3F, 0F, 0F);
     }
     public void walkLeft() {
-        movement.walkTowards("left");
+        movement.move(0F, 0.4F, 0F);
     }
     public void walkBackwards() {
-        movement.walkTowards("backwards");
+        movement.move(-0.4F, 0F, 0F);
     }
     public void walkRight() {
-        movement.walkTowards("right");
+        movement.move(0F, -0.4F, 0F);
     }
     public void stopWalking() {
         movement.stopWalking();
+    }
+
+    public void walkKey(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.W) {
+            walkForwards();
+        } else if (keyEvent.getCode() == KeyCode.A) {
+            walkLeft();
+        } else if (keyEvent.getCode() == KeyCode.S) {
+            walkBackwards();
+        } else if (keyEvent.getCode() == KeyCode.D) {
+            walkRight();
+        }
+    }
+
+
+    //TurnAround
+    public void turnLeft() {
+        movement.move(0F, 0F, 0.4F);
+    }
+    public void turnRight() {
+        movement.move(0F, 0F, -0.4F);
     }
 }
