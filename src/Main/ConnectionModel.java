@@ -14,37 +14,49 @@ import java.util.concurrent.TimeUnit;
 
 import static java.lang.Thread.*;
 
-public class ConnectionMenuController {
-
+public class ConnectionModel {
     @FXML
-    private TextField txtIP;
-    @FXML
-    private TextField txtPort;
-    @FXML
-    private Label lblInfo;
+    private Label lblConnectionInfo;
     @FXML
     private Label lblConnectionState;
     @FXML
     private Button btnConnect;
     @FXML
     private Button btnDisconnect;
+    @FXML
+    private TextField txtIP;
+    @FXML
+    private TextField txtPort;
 
-    private Main mainClass;
     private MainMenuController mainMenuController;
     private Session session;
-
     private String naoIP;
     private String naoPort;
+    private boolean initialized;
 
-    public ConnectionMenuController(Main main, MainMenuController mainMenuController)
+    public ConnectionModel(MainMenuController controller)
     {
-        // main-Klasse merken, um ueber diese das Hauptmenue zu oeffnen.
-        this.mainClass = main;
-        this.mainMenuController = mainMenuController;
+        this.mainMenuController = controller;
+        initialized = false;
+    }
+
+    private void init() {
+        initialized = true;
+        lblConnectionInfo   = mainMenuController.lblConnectionInfo;
+        lblConnectionState  = mainMenuController.lblConnectionState;
+        btnConnect          = mainMenuController.btnConnect;
+        btnDisconnect       = mainMenuController.btnDisconnect;
+        txtIP               = mainMenuController.txtConnectionIP;
+        txtPort             = mainMenuController.txtConnectionPort;
     }
 
     public void connect() {
         boolean bConnected = false;
+
+        if ( initialized == false ) {
+            init();
+        }
+
         naoIP = txtIP.getText();
         naoPort = txtPort.getText();
         String naoUrl = "tcp://" + naoIP + ":" + naoPort;
@@ -74,8 +86,7 @@ public class ConnectionMenuController {
             // Erfolgreich verbunden
             setInfoText("Connection established.", Color.GREEN);
             setConnectionState();
-            startMainMenu();
-            mainClass.setSession(session);
+            mainMenuController.setSession(session);
             mainMenuController.saySomething("Connected.");
         }
         else{
@@ -84,7 +95,7 @@ public class ConnectionMenuController {
             // session zurücksetzen
             session.close();
             session = null;
-            mainClass.setSession(null);
+            mainMenuController.setSession(null);
         }
     }
 
@@ -96,31 +107,12 @@ public class ConnectionMenuController {
         }
         setInfoText("Connection closed.", Color.BLACK);
         setConnectionState();
-        mainClass.setSession(session);
+        mainMenuController.setSession(session);
     }
-
-    public void startMainMenu() {
-        try {
-            mainClass.startMainMenu();
-        }
-        catch(Exception e) {
-            setInfoText("Main menu cannot be opened.", Color.RED);
-        }
-    }
-
-    public void setDataToView(){
-        // View wurde neu geladen, daher muessen alle Daten gesetzt werden
-        if ( (naoIP != null) && (naoPort != null) ){
-            txtIP.setText(naoIP);
-            txtPort.setText(naoPort);
-        }
-        setConnectionState();
-    }
-
 
     private void setInfoText(String text, Color color){
-        lblInfo.setTextFill(color);
-        lblInfo.setText(text);
+        lblConnectionInfo.setTextFill(color);
+        lblConnectionInfo.setText(text);
         System.out.println(text);
     }
 

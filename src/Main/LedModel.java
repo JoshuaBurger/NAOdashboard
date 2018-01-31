@@ -4,12 +4,8 @@ import com.aldebaran.qi.Session;
 import com.aldebaran.qi.helper.proxies.ALLeds;
 
 public class LedModel {
-    private Main mainClass;
     private Session session;
 
-    public LedModel(Main mainClass) {
-        this.mainClass = mainClass;
-    }
     public void setSession(Session session) {
         this.session = session;
     }

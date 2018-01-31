@@ -26,13 +26,13 @@ public class MainMenuController {
     @FXML
     private Label lblVolumeValue;
     @FXML
-    private Label lblBattery1;
+    protected Label lblBattery1;
     @FXML
-    private Label lblBattery2;
+    protected Label lblBattery2;
     @FXML
-    private Label lblBattery3;
+    protected Label lblBattery3;
     @FXML
-    private Label lblBattery4;
+    protected Label lblBattery4;
     @FXML
     private Slider sliderVolume;
     @FXML
@@ -40,35 +40,47 @@ public class MainMenuController {
     @FXML
     private Slider sliderSpeechSpeed;
     @FXML
-    private ImageView imgBattery1;
+    protected ImageView imgBattery1;
     @FXML
-    private ImageView imgBattery2;
+    protected ImageView imgBattery2;
     @FXML
-    private ImageView imgBattery3;
+    protected ImageView imgBattery3;
     @FXML
-    private ImageView imgBattery4;
+    protected ImageView imgBattery4;
     @FXML
     private Label labelAllowedValue;
+    @FXML
+    protected TextField txtConnectionIP;
+    @FXML
+    protected TextField txtConnectionPort;
+    @FXML
+    protected Label lblConnectionInfo;
+    @FXML
+    protected Label lblConnectionState;
+    @FXML
+    protected Button btnConnect;
+    @FXML
+    protected Button btnDisconnect;
 
     int pitchValue = 100;
     int speedValue = 100;
     private float walkSpeed;
     private String language = "English";
 
-    private Main mainClass;
     private Session session;
     private ALMemory memory;
+
+    private ConnectionModel connection;
     private MovementModel movement;
     private LedModel ledModel;
     private BatteryModel battery;
     private HeadSensorModel headSensors;
 
-    public MainMenuController(Main main) {
-        // Main-Klasse merken, um ueber diese andere Views zu oeffnen
-        this.mainClass = main;
-        movement = new MovementModel(main);
-        ledModel = new LedModel(main);
-        battery = new BatteryModel();
+    public MainMenuController() {
+        connection = new ConnectionModel(this);
+        movement = new MovementModel();
+        ledModel = new LedModel();
+        battery = new BatteryModel(this);
         headSensors = new HeadSensorModel(this);
     }
 
@@ -85,10 +97,6 @@ public class MainMenuController {
 
     private void registerEvents() {
         try {
-            if (memory != null) {
-                memory.unsubscribeAllEvents();
-                memory = null;
-            }
             // Allgemeinen Eventhandler auf die Session erstellen.
             memory = new ALMemory(session);
 
@@ -98,7 +106,16 @@ public class MainMenuController {
             headSensors.registerTactilEvents(memory);
         } catch(Exception e) {
             System.out.println("Events not available");
+            memory = null;
         }
+    }
+
+    public void connect() {
+        connection.connect();
+    }
+
+    public void disconnect() {
+        connection.disconnect();
     }
 
     //Postures
@@ -295,35 +312,5 @@ public class MainMenuController {
     }
     public void stopWalking() {
         movement.stopWalking();
-    }
-
-    public void startConnectionView() {
-        try {
-            mainClass.startConnectMenu();
-        }
-        catch(Exception e) {
-            System.out.println("Could not open ConnectView.");
-        }
-    }
-
-    public void setDataToView(){
-        ArrayList<ImageView> imageList = new ArrayList<ImageView>();
-        ArrayList<Label> labelList = new ArrayList<Label>();
-
-        // View wurde neu geladen, daher muessen alle Daten gesetzt werden
-
-        // Liste der Batterie Label/Bilder aller Tabs erstellen
-        // Um aktuellen Batteriezustand anzuzeigen
-        imageList.add(imgBattery1);
-        imageList.add(imgBattery2);
-        imageList.add(imgBattery3);
-        imageList.add(imgBattery4);
-        labelList.add(lblBattery1);
-        labelList.add(lblBattery2);
-        labelList.add(lblBattery3);
-        labelList.add(lblBattery4);
-
-        battery.setGUIcomponents(imageList, labelList);
-        battery.displayCurrentBatteryState();
     }
 }

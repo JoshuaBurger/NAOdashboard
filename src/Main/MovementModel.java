@@ -8,12 +8,7 @@ import java.util.List;
 
 public class MovementModel {
 
-    private Main mainClass;
     private Session session;
-
-    public MovementModel(Main mainClass) {
-        this.mainClass = mainClass;
-    }
 
     public void setSession(Session session) {
         this.session = session;
@@ -33,11 +28,6 @@ public class MovementModel {
             motion = new ALMotion(session);
         } catch (Exception e){
             System.out.println("Connection lost.");
-            try {
-                mainClass.startConnectMenu();
-            } catch(Exception e1) {
-                System.out.println("Connection menu cannot be opened.");
-            }
             return;
         }
 

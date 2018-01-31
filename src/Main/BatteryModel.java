@@ -13,13 +13,36 @@ import java.util.ArrayList;
 
 public class BatteryModel {
 
-    BatteryGUIrefresher batteryGUIrefresher;
+    private MainMenuController mainController;
+    private BatteryGUIrefresher batteryGUIrefresher;
     private int charge = -1;
     private boolean isCharging = false;
+    private boolean initialized;
 
-    public void setGUIcomponents(ArrayList<ImageView> batteryIcons, ArrayList<Label> chargeLabels) {
+
+    public BatteryModel(MainMenuController mainController ) {
+        this.mainController = mainController;
+        initialized = false;
+    }
+
+    public void init() {
+        // Liste der Batterie Label/Bilder aller Tabs erstellen
+        // Um aktuellen Batteriezustand anzuzeigen
+        ArrayList<ImageView> imageList = new ArrayList<ImageView>();
+        ArrayList<Label> labelList = new ArrayList<Label>();
+
+        imageList.add(mainController.imgBattery1);
+        imageList.add(mainController.imgBattery2);
+        imageList.add(mainController.imgBattery3);
+        imageList.add(mainController.imgBattery4);
+        labelList.add(mainController.lblBattery1);
+        labelList.add(mainController.lblBattery2);
+        labelList.add(mainController.lblBattery3);
+        labelList.add(mainController.lblBattery4);
+
         // batteryGUIrefresher is needed to update the GUI from other thread than JavaFX...
-        batteryGUIrefresher = new BatteryGUIrefresher(chargeLabels, batteryIcons);
+        batteryGUIrefresher = new BatteryGUIrefresher(labelList, imageList);
+        initialized = true;
     }
 
     public void setSession(Session session) {
@@ -68,6 +91,10 @@ public class BatteryModel {
         String batteryState = "unknown";
         String chargingState = "";
         String iconPath = "";
+
+        if ( initialized == false ) {
+            init();
+        }
 
         if ( charge != -1 ) {
             lblChargeText = (charge + "%");

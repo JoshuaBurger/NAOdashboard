@@ -9,54 +9,16 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application {
-    private Stage stage;
-    private MainMenuController mainMenuController;
-    private ConnectionMenuController connController;
-
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        stage = primaryStage;
-        // Controller programmatisch erstellen, um Daten zu behalten bei View-wechsel.
-        mainMenuController = new MainMenuController(this);
-        connController = new ConnectionMenuController(this, mainMenuController);
-        startConnectMenu();
-        stage.show();
-    }
-
-    public void startConnectMenu() throws Exception {
-        // ConnectMenu View oeffnen
-        setSceneContent("ConnectionMenu.fxml", "NAO Dashboard - Connection menu", connController);
-        // Daten aus Controller in die View setzen.
-        connController.setDataToView();
-    }
-
-    public void startMainMenu() {
-        try {
-            // MaiMenu View oeffnen
-            setSceneContent("MainMenu.fxml", "NAO Dashboard", mainMenuController);
-            // Daten aus Controller in die View setzen
-            mainMenuController.setDataToView();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    private void setSceneContent(String sceneName, String sceneTitle, Object controller) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(sceneName));
-        // Gegebenen Controller fuer die View verwenden.
-        loader.setController(controller);
+    public void start(Stage stage) throws Exception {
+        // View laden
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
         Parent root = loader.load();
-        // Aktive View austauschen.
-        stage.setTitle(sceneTitle);
+        // View in Stage setzen
+        stage.setTitle("NAO Dashboard");
         stage.setScene(new Scene(root));
-    }
-
-    public void setSession(Session session) {
-        if( mainMenuController != null ) {
-            // NAO session an MainMenuController weiterreichen
-            mainMenuController.setSession(session);
-        }
+        stage.show();
     }
 
     public static void main(String[] args) {

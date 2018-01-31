@@ -12,6 +12,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -19,8 +20,49 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="669.0" prefWidth="811.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="669.0" prefWidth="811.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.MainMenuController">
   <tabs>
+      <Tab fx:id="tabConnection" style="-fx-background-color: white;" text="Connection">
+          <content>
+              <AnchorPane>
+                  <children>
+                      <TextField fx:id="txtConnectionIP" alignment="CENTER" layoutX="277.0" layoutY="122.0" prefHeight="41.0" prefWidth="291.0" text="127.0.0.1" />
+                      <Label layoutX="243.0" layoutY="135.0" text="IP:" />
+                      <TextField fx:id="txtConnectionPort" alignment="CENTER" layoutX="277.0" layoutY="184.0" prefHeight="41.0" prefWidth="291.0" text="9559" />
+                      <Label layoutX="236.0" layoutY="197.0" text="Port:" />
+                      <Label layoutX="233.0" layoutY="69.0" prefHeight="26.0" prefWidth="378.0" text="Please enter the connection data:">
+                          <font>
+                              <Font name="Arial" size="22.0" />
+                          </font>
+                      </Label>
+                      <Button fx:id="btnConnect" layoutX="440.0" layoutY="257.0" mnemonicParsing="false" onAction="#connect" prefHeight="72.0" prefWidth="236.0" text="Connect" textFill="#0de82a">
+                          <font>
+                              <Font size="33.0" />
+                          </font>
+                      </Button>
+                      <Label fx:id="lblConnectionInfo" alignment="CENTER" contentDisplay="CENTER" layoutX="248.0" layoutY="358.0" prefHeight="31.0" prefWidth="350.0" textAlignment="JUSTIFY" wrapText="true">
+                          <font>
+                              <Font size="14.0" />
+                          </font></Label>
+                      <Button fx:id="btnDisconnect" disable="true" layoutX="159.0" layoutY="257.0" mnemonicParsing="false" onAction="#disconnect" prefHeight="72.0" prefWidth="236.0" text="Disconnect" textAlignment="CENTER" textFill="RED">
+                          <font>
+                              <Font size="33.0" />
+                          </font>
+                      </Button>
+                      <Label fx:id="lblConnectionState" layoutX="362.0" layoutY="408.0" text="Disconnected" textFill="RED">
+                          <font>
+                              <Font size="18.0" />
+                          </font>
+                      </Label>
+                      <Label layoutX="277.0" layoutY="408.0" text="Status:">
+                          <font>
+                              <Font size="18.0" />
+                          </font>
+                      </Label>
+                  </children>
+              </AnchorPane>
+          </content>
+      </Tab>
     <Tab fx:id="tabLeds" closable="false" style="-fx-background-color: white;" text="Leds">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
@@ -30,7 +72,10 @@
                            <Font name="System Bold" size="18.0" />
                        </font>
                    </Label>
-                   <ImageView fx:id="imgBattery1" fitHeight="36.0" fitWidth="93.0" layoutX="704.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" />
+                   <ImageView fx:id="imgBattery1" fitHeight="36.0" fitWidth="93.0" layoutX="704.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/battery_icons/battery_unknown.bmp" />
+                     </image></ImageView>
                    <Label fx:id="lblBattery1" layoutX="736.0" layoutY="50.0" prefHeight="27.0" prefWidth="44.0" text="100%" textAlignment="CENTER" />
                   <SplitPane dividerPositions="0.5805168986083499" layoutX="71.0" layoutY="50.0" orientation="VERTICAL" prefHeight="505.0" prefWidth="322.0" style="-fx-background-color: white;">
                     <items>
@@ -135,10 +180,6 @@
                            </children></AnchorPane>
                     </items>
                   </SplitPane>
-                  <Button fx:id="btnConnectionLedsTab" layoutX="636.0" layoutY="77.0" mnemonicParsing="false" onAction="#startConnectionView" prefHeight="41.0" prefWidth="161.0" style="-fx-border-color: black;" text="Change conneciton">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font></Button>
                   <Label fx:id="labelAllowedValue" layoutX="71.0" layoutY="582.0" text="No value higher than 200 allowed." textFill="#e80d0d" visible="false">
                      <font>
                         <Font name="System Bold" size="13.0" />
@@ -149,9 +190,12 @@
     </Tab>
     <Tab fx:id="tabSpeech" style="-fx-background-color: white;" text="Speech">
       <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
+          <AnchorPane disable="true" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
               <children>
-                  <ImageView fx:id="imgBattery3" fitHeight="36.0" fitWidth="93.0" layoutX="704.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imgBattery3" fitHeight="36.0" fitWidth="93.0" layoutX="704.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/battery_icons/battery_unknown.bmp" />
+                     </image></ImageView>
                   <Label fx:id="lblBattery3" layoutX="736.0" layoutY="50.0" prefHeight="27.0" prefWidth="44.0" text="100%" textAlignment="CENTER" />
                   <Button fx:id="buttonSay" layoutX="53.0" layoutY="37.0" mnemonicParsing="false" onAction="#sayText" text="say" />
                   <TextArea fx:id="sayText" layoutX="148.0" layoutY="34.0" prefHeight="132.0" prefWidth="200.0" />
@@ -165,10 +209,6 @@
                   <Slider fx:id="sliderSpeechPitch" layoutX="144.0" layoutY="422.0" max="200.0" min="50.0" onMouseDragged="#changePitch" value="100.0" />
                   <Label fx:id="labelSpeechPitch" layoutX="198.0" layoutY="405.0" text="Pitch" />
                   <Label fx:id="labelSpeechVolume" layoutX="192.0" layoutY="279.0" text="Volume" />
-                  <Button fx:id="btnConnectionSpeechTab" layoutX="636.0" layoutY="77.0" mnemonicParsing="false" onAction="#startConnectionView" prefHeight="41.0" prefWidth="161.0" style="-fx-border-color: black;" text="Change conneciton">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font></Button>
                   <Slider fx:id="sliderVolume" layoutX="144.0" layoutY="296.0" onMouseDragged="#changeVolume" value="50.0" />
                   <Label fx:id="lblSpeechSpeedValue" layoutX="292.0" layoutY="364.0" text="100%" />
                   <Label fx:id="lblPitchValue" layoutX="292.0" layoutY="421.0" text="100%" />
@@ -185,7 +225,10 @@
       <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
                <children>
-                   <ImageView fx:id="imgBattery2" fitHeight="36.0" fitWidth="93.0" layoutX="704.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" />
+                   <ImageView fx:id="imgBattery2" fitHeight="36.0" fitWidth="93.0" layoutX="704.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                       <image>
+                           <Image url="@images/battery_icons/battery_unknown.bmp" />
+                       </image></ImageView>
                    <Label fx:id="lblBattery2" layoutX="736.0" layoutY="50.0" prefHeight="27.0" prefWidth="44.0" text="100%" textAlignment="CENTER" />
                   <SplitPane dividerPositions="0.3708609271523179" layoutX="48.0" layoutY="64.0" orientation="VERTICAL" prefHeight="280.0" prefWidth="90.0" style="-fx-background-color: white;">
                     <items>
@@ -226,10 +269,6 @@
                            </children></AnchorPane>
                     </items>
                   </SplitPane>
-                   <Button fx:id="btnConnectionPosturesTab" layoutX="636.0" layoutY="77.0" mnemonicParsing="false" onAction="#startConnectionView" prefHeight="41.0" prefWidth="161.0" style="-fx-border-color: black;" text="Change conneciton">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font></Button>
                </children>
           </AnchorPane>
       </content>
@@ -238,7 +277,10 @@
       <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
               <children>
-                  <ImageView fx:id="imgBattery4" fitHeight="36.0" fitWidth="93.0" layoutX="704.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imgBattery4" fitHeight="36.0" fitWidth="93.0" layoutX="704.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                      <image>
+                          <Image url="@images/battery_icons/battery_unknown.bmp" />
+                      </image></ImageView>
                   <Label fx:id="lblBattery4" layoutX="736.0" layoutY="50.0" prefHeight="27.0" prefWidth="44.0" text="100%" textAlignment="CENTER" />
                   <Label fx:id="labelWalk" layoutX="103.5" layoutY="25.0" text="walk">
                      <font>
@@ -267,10 +309,6 @@
                   <Slider fx:id="sliderWalkSpeed" layoutX="65.0" layoutY="334.0" />
                   <Label fx:id="labelWalkSlow" layoutX="20.0" layoutY="334.0" text="slow" />
                   <Label fx:id="labelWalkFast" layoutX="213.0" layoutY="334.0" text="fast" />
-                  <Button fx:id="btnConnectionMovesTab" layoutX="636.0" layoutY="77.0" mnemonicParsing="false" onAction="#startConnectionView" prefHeight="41.0" prefWidth="161.0" style="-fx-border-color: black;" text="Change conneciton">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font></Button>
               </children>
           </AnchorPane>
       </content>
