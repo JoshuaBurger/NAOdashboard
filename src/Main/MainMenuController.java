@@ -7,9 +7,30 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import java.util.ArrayList;
 
 public class MainMenuController {
+    @FXML
+    private Button buttonFaceLedsRed;
+    @FXML
+    private Button buttonFaceLedsYellow;
+    @FXML
+    private Button buttonFaceLedsBlue;
+    @FXML
+    private Button buttonFaceLedMagenta;
+    @FXML
+    private Button buttonFaceLedGreen;
+    @FXML
+    private Button buttonFaceLedCyan;
+    @FXML
+    private Button buttonFaceLedOrange;
+    @FXML
+    private Button buttonFaceLedWhite;
+    @FXML
+    private Button buttonRGBpreview;
+    @FXML
+    protected Button btnConnect;
+    @FXML
+    protected Button btnDisconnect;
     @FXML
     private TextArea sayText;
     @FXML
@@ -19,13 +40,13 @@ public class MainMenuController {
     @FXML
     private TextField textfieldBlue;
     @FXML
-    private Button buttonRGBpreview;
-    @FXML
     private Label lblSpeechSpeedValue;
     @FXML
     private Label lblPitchValue;
     @FXML
     private Label lblVolumeValue;
+    @FXML
+    private Label labelAllowedValue;
     @FXML
     protected Label lblBattery1;
     @FXML
@@ -35,11 +56,17 @@ public class MainMenuController {
     @FXML
     protected Label lblBattery4;
     @FXML
+    protected Label lblConnectionInfo;
+    @FXML
+    protected Label lblConnectionState;
+    @FXML
     private Slider sliderVolume;
     @FXML
     private Slider sliderSpeechPitch;
     @FXML
     private Slider sliderSpeechSpeed;
+    @FXML
+    private Slider walkSpeedSlider;
     @FXML
     protected ImageView imgBattery1;
     @FXML
@@ -49,152 +76,173 @@ public class MainMenuController {
     @FXML
     protected ImageView imgBattery4;
     @FXML
-    private Label labelAllowedValue;
-    @FXML
     protected TextField txtConnectionIP;
     @FXML
     protected TextField txtConnectionPort;
-    @FXML
-    protected Label lblConnectionInfo;
-    @FXML
-    protected Label lblConnectionState;
-    @FXML
-    protected Button btnConnect;
-    @FXML
-    protected Button btnDisconnect;
 
     int pitchValue = 100;
     int speedValue = 100;
-    private float walkSpeed;
+    private float walkSpeedValue = 0.5F;
     private String language = "English";
-
+    private String selectedLedItem;
+    private String hexRGBColor = "#FF0000";
     private Session session;
     private ALMemory memory;
-
     private ConnectionModel connection;
     private MovementModel movement;
     private LedModel ledModel;
     private BatteryModel battery;
     private HeadSensorModel headSensors;
 
-    public MainMenuController() {
-        connection = new ConnectionModel(this);
-        movement = new MovementModel();
-        ledModel = new LedModel();
-        battery = new BatteryModel(this);
-        headSensors = new HeadSensorModel(this);
+    //LEDs
+    public void allLEDsOff() {
+        ledModel.turnledsOff("FaceLeds");
+    }public void rightEyeLEDsOff() {
+        ledModel.turnledsOff("LeftFaceLeds");
+    }public void leftEyeLEDsOff() {
+        ledModel.turnledsOff("RightFaceLeds");
+    }
+    public void unselectAllLEDitems() {
+        buttonFaceLedsRed.setStyle("-fx-border-width: 0; -fx-background-color: red;");
+        buttonFaceLedsBlue.setStyle("-fx-border-width: 0; -fx-background-color: blue;");
+        buttonFaceLedGreen.setStyle("-fx-border-width: 0; -fx-background-color: green;");
+        buttonFaceLedsYellow.setStyle("-fx-border-width: 0; -fx-background-color: yellow;");
+        buttonFaceLedCyan.setStyle("-fx-border-width: 0; -fx-background-color: cyan;");
+        buttonFaceLedMagenta.setStyle("-fx-border-width: 0; -fx-background-color: magenta;");
+        buttonFaceLedWhite.setStyle("-fx-border-width: 0; -fx-background-color: #e4dcdc;");
+        buttonFaceLedOrange.setStyle("-fx-border-width: 0; -fx-background-color: #fe7200;");
+        textfieldRed.setStyle("-fx-border-color: lightgrey; -fx-border-width: 0; -fx-border-radius: 0;");
+        textfieldGreen.setStyle("-fx-border-color: lightgrey; -fx-border-width: 0; -fx-border-radius: 0;");
+        textfieldBlue.setStyle("-fx-border-color: lightgrey; -fx-border-width: 0; -fx-border-radius: 0;");
+        buttonRGBpreview.setStyle("-fx-border-width: 0; -fx-background-color: " + hexRGBColor + ";");
     }
 
-    public void setSession(Session session) {
-        this.session = session;
-        movement.setSession(session);
-        ledModel.setSession(session);
-        battery.setSession(session);
-        headSensors.setSession(session);
-
-        // Methoden auf verschiedene Events registrieren
-        registerEvents();
+    public void changeFaceLEDs() {
+        getLEDsColor("FaceLeds");
+    }
+    public void changeRightEyeLEDs() {
+        getLEDsColor("LeftFaceLeds");
+    }
+    public void changeLeftEyeLEDs() {
+        getLEDsColor("RightFaceLeds");
     }
 
-    private void registerEvents() {
-        try {
-            // Allgemeinen Eventhandler auf die Session erstellen.
-            memory = new ALMemory(session);
-
-            // Batteriespezifische Events registrieren.
-            battery.registerBatteryEvents(memory);
-            // Kopfsensor (Sprache) Events registrieren.
-            headSensors.registerTactilEvents(memory);
-        } catch(Exception e) {
-            System.out.println("Events not available");
-            memory = null;
+    public void getLEDsColor(String ledsName) {
+        if (selectedLedItem == "rgbColor") {
+        Float red = (Float.parseFloat(textfieldRed.getText())/100);
+        Float green = (Float.parseFloat(textfieldGreen.getText())/100);
+        Float blue = (Float.parseFloat(textfieldBlue.getText())/100);
+        ledModel.setledsRGBcolor(ledsName, red, green, blue);
+        } else if (selectedLedItem == "orange") {
+            System.out.println("detected: orange was clicked, ledModel wird aufgerufen");
+            ledModel.setledsRGBcolor(ledsName, 2.55F, 0.4F, 0F);
+        } else {
+            ledModel.colorFaceLeds(ledsName, selectedLedItem);
         }
     }
 
-    public void connect() {
-        connection.connect();
-    }
 
-    public void disconnect() {
-        connection.disconnect();
-    }
-
-
-    //LEDs
-    public void ledsOff() {
-        ledModel.ledsOff();
-    }
-    public void ledsOn() {
-        ledModel.colorFaceLeds("FaceLeds", "white", 1F);
-    }
+    //change style of selected button
     public void buttonFaceLedsRed() {
-        ledModel.colorFaceLeds("FaceLeds", "red", 1F);
+        unselectAllLEDitems();
+        buttonFaceLedsRed.setStyle("-fx-border-color: darkgrey; -fx-border-width: 3; -fx-background-color: red;");
+        selectedLedItem = "red";
     }
     public void buttonFaceLedsBlue() {
-        ledModel.colorFaceLeds("FaceLeds", "blue", 1F);
+        unselectAllLEDitems();
+        buttonFaceLedsBlue.setStyle("-fx-border-color: darkgrey; -fx-border-width: 3; -fx-background-color: blue;");
+        selectedLedItem = "blue";
     }
     public void buttonFaceLedsGreen() {
-        ledModel.colorFaceLeds("FaceLeds", "green", 1F);
+        unselectAllLEDitems();
+        buttonFaceLedGreen.setStyle("-fx-border-color: darkgrey; -fx-border-width: 3; -fx-background-color: green;");
+        selectedLedItem = "green";
     }
     public void buttonFaceLedsYellow() {
-        ledModel.colorFaceLeds("FaceLeds", "yellow", 1F);
+        unselectAllLEDitems();
+        buttonFaceLedsYellow.setStyle("-fx-border-color: darkgrey; -fx-border-width: 3; -fx-background-color: yellow;");
+        selectedLedItem = "yellow";
     }
     public void buttonFaceLedsCyan() {
-        ledModel.colorFaceLeds("FaceLeds", "cyan", 1F);
+        unselectAllLEDitems();
+        buttonFaceLedCyan.setStyle("-fx-border-color: darkgrey; -fx-border-width: 3; -fx-background-color: cyan;");
+        selectedLedItem = "cyan";
     }
     public void buttonFaceLedsMagenta() {
-        ledModel.colorFaceLeds("FaceLeds", "magenta", 1F);
+        unselectAllLEDitems();
+        buttonFaceLedMagenta.setStyle("-fx-border-color: darkgrey; -fx-border-width: 3; -fx-background-color: magenta;");
+        selectedLedItem = "magenta";
     }
     public void buttonFaceLedsWhite() {
-        ledModel.colorFaceLeds("FaceLeds", "white", 1F);
+        unselectAllLEDitems();
+        buttonFaceLedWhite.setStyle("-fx-border-color: darkgrey; -fx-border-width: 3; -fx-background-color: #e4dcdc;");
+        selectedLedItem = "white";
+    }
+    public void buttonFaceLedsOrange() {
+        unselectAllLEDitems();
+        buttonFaceLedOrange.setStyle("-fx-border-color: darkgrey; -fx-border-width: 3; -fx-background-color: #fe7200;");
+        selectedLedItem = "orange";
+    }
+    public void rgbColorPreviewSelected() {
+        unselectAllLEDitems();
+        buttonRGBpreview.setStyle("-fx-border-color: darkgrey; -fx-border-width: 5; -fx-background-color: " + hexRGBColor + ";");
+        selectedLedItem = "rgbColor";
     }
 
-    public void RGBcolorPreview() {
+    //show preview of RGB color
+    public void RGBcolorPreview(KeyEvent keyEvent) {
         try {
             labelAllowedValue.setVisible(false);
-            textfieldRed.setStyle("-fx-border-color: lightgrey; -fx-border-width: 0; -fx-border-radius: 0;");
-            textfieldGreen.setStyle("-fx-border-color: lightgrey; -fx-border-width: 0; -fx-border-radius: 0;");
-            textfieldBlue.setStyle("-fx-border-color: lightgrey; -fx-border-width: 0; -fx-border-radius: 0;");
+            unselectAllLEDitems();
+            selectedLedItem = "rgbColor";
+            try {
+                Integer.parseInt(textfieldRed.getText());
+            } catch (Exception e) {
+                textfieldRed.setText("0");
+            }
+            try {
+                Integer.parseInt(textfieldGreen.getText());
+            } catch (Exception e) {
+                textfieldGreen.setText("0");
+            }
+            try {
+                Integer.parseInt(textfieldBlue.getText());
+            } catch (Exception e) {
+                textfieldBlue.setText("0");
+            }
             int valueRed = Integer.parseInt(textfieldRed.getText());
             int valueGreen = Integer.parseInt(textfieldGreen.getText());
             int valueBlue = Integer.parseInt(textfieldBlue.getText());
 
+            //show error label if value is higher than 255
             if (setVisibleAllowedValueLabel(valueRed) == true) {
-                valueRed = 200;
-                textfieldRed.setStyle("-fx-border-color: red; -fx-border-width: 3; -fx-border-radius: 5;");
+                valueRed = 255;
+                textfieldRed.setStyle("-fx-border-color: red; -fx-border-width: 5; -fx-border-radius: 5;");
+            } if (setVisibleAllowedValueLabel(valueGreen) == true){
+                valueGreen = 255;
+                textfieldGreen.setStyle("-fx-border-color: red; -fx-border-width: 5; -fx-border-radius: 5;");
+            } if (setVisibleAllowedValueLabel(valueBlue) == true){
+                valueBlue = 255;
+                textfieldBlue.setStyle("-fx-border-color: red; -fx-border-width: 5; -fx-border-radius: 5;");
             }
-            if (setVisibleAllowedValueLabel(valueGreen) == true){
-                valueGreen = 200;
-                textfieldGreen.setStyle("-fx-border-color: red; -fx-border-width: 3; -fx-border-radius: 5;");
-            }
-            if (setVisibleAllowedValueLabel(valueBlue) == true){
-                valueBlue = 200;
-                textfieldBlue.setStyle("-fx-border-color: red; -fx-border-width: 3; -fx-border-radius: 5;");
-            }
-
-            String hexRGBColor = String.format("#%02X%02X%02X", valueRed, valueGreen, valueBlue);
-            buttonRGBpreview.setStyle("-fx-background-color: " + hexRGBColor + ";");
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Connection lost.");
+            //calculate rgb color code
+            hexRGBColor = String.format("#%02X%02X%02X", valueRed, valueGreen, valueBlue);
+            buttonRGBpreview.setStyle("-fx-border-color: darkgrey; -fx-border-width: 5; -fx-background-color: " + hexRGBColor + ";");
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + " // An Error occurred while converting RGB colors. Maybe the value of a textfield is null or the input contains illegal Arguments.");
         }
     }
+
+    //check if a textfields value is higher than 255
     public boolean setVisibleAllowedValueLabel(int value) {
-        if (value > 200) {
+        if (value > 255) {
             labelAllowedValue.setVisible(true);
-            value = 200;
             return true;
         } else {
             return false;
         }
     }
-    public void setledsRGBcolor() {
-        Float red = (Float.parseFloat(textfieldRed.getText())/100);
-        Float green = (Float.parseFloat(textfieldGreen.getText())/100);
-        Float blue = (Float.parseFloat(textfieldBlue.getText())/100);
-        ledModel.setledsRGBcolor(red, green, blue);
-    }
+
 
     //Speak
     public void radioButtonEnglish() {
@@ -318,16 +366,16 @@ public class MainMenuController {
 
     //Walk
     public void walkForwards() {
-        movement.move(0.3F, 0F, 0F);
+        movement.move(walkSpeedValue, 0F, 0F);
     }
     public void walkLeft() {
-        movement.move(0F, 0.4F, 0F);
+        movement.move(0F, walkSpeedValue, 0F);
     }
     public void walkBackwards() {
-        movement.move(-0.4F, 0F, 0F);
+        movement.move(-walkSpeedValue, 0F, 0F);
     }
     public void walkRight() {
-        movement.move(0F, -0.4F, 0F);
+        movement.move(0F, -walkSpeedValue, 0F);
     }
     public void stopWalking() {
         movement.stopWalking();
@@ -345,6 +393,11 @@ public class MainMenuController {
         }
     }
 
+    public void getWalkSpeedSliderValue() {
+        double currentValue = walkSpeedSlider.getValue();
+        walkSpeedValue = (float)(currentValue/100);         //set walking speed
+        System.out.println(walkSpeedValue);
+    }
 
     //TurnAround
     public void turnLeft() {
@@ -352,5 +405,49 @@ public class MainMenuController {
     }
     public void turnRight() {
         movement.move(0F, 0F, -0.4F);
+    }
+
+
+    //Connection
+    public MainMenuController() {
+        connection = new ConnectionModel(this);
+        movement = new MovementModel();
+        ledModel = new LedModel();
+        battery = new BatteryModel(this);
+        headSensors = new HeadSensorModel(this);
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+        movement.setSession(session);
+        ledModel.setSession(session);
+        battery.setSession(session);
+        headSensors.setSession(session);
+
+        // Methoden auf verschiedene Events registrieren
+        registerEvents();
+    }
+
+    private void registerEvents() {
+        try {
+            // Allgemeinen Eventhandler auf die Session erstellen.
+            memory = new ALMemory(session);
+
+            // Batteriespezifische Events registrieren.
+            battery.registerBatteryEvents(memory);
+            // Kopfsensor (Sprache) Events registrieren.
+            headSensors.registerTactilEvents(memory);
+        } catch(Exception e) {
+            System.out.println("Events not available");
+            memory = null;
+        }
+    }
+
+    public void connect() {
+        connection.connect();
+    }
+
+    public void disconnect() {
+        connection.disconnect();
     }
 }

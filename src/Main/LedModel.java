@@ -10,10 +10,9 @@ public class LedModel {
         this.session = session;
     }
 
-    public void ledsOff() {
+    public void turnledsOff(String name) {
         try {
             ALLeds leds = new ALLeds(session);
-            String name = "FaceLeds";
             leds.off(name);
         }
         catch (Exception e) {
@@ -21,21 +20,21 @@ public class LedModel {
         }
     }
 
-    public void colorFaceLeds(String ledsName, String color, float duration) {
+    public void colorFaceLeds(String ledsName, String color) {
         try {
             ALLeds leds = new ALLeds(session);
-            leds.fadeRGB(ledsName, color, duration);
+            leds.fadeRGB(ledsName, color, 1F);
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void setledsRGBcolor(float red, float green, float blue) {
-        //String name = "FaceLeds";
+    public void setledsRGBcolor(String ledsName, float red, float green, float blue) {
         try {
+            System.out.println("connection to nao, value red is: "+red+", value green is: "+green+", value blue is: "+blue);
             ALLeds ledsRGB = new ALLeds(session);
-            ledsRGB.fadeRGB("FaceLeds", red, green, blue, 1F);
+            ledsRGB.fadeRGB(ledsName, red, green, blue, 1F);
         }
         catch (Exception e) {
             System.out.println(e.getMessage());

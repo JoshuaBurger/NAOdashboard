@@ -101,6 +101,7 @@ public class MovementModel {
 
     public void move(float xAxis, float yAxis, float zAxis) {
         try {
+            goToPosture("Stand");
             ALMotion walk = new ALMotion(session);
             walk.move(xAxis, yAxis, zAxis);
         } catch (Exception e) {
