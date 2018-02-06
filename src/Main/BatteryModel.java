@@ -93,6 +93,7 @@ public class BatteryModel {
         String iconPath = "";
 
         if ( initialized == false ) {
+            // Beim ersten Mal initialisieren (JavaFX-Komponenten von MainMenuController holen)
             init();
         }
 
@@ -103,10 +104,10 @@ public class BatteryModel {
             if ( charge > 80 ) {
                 batteryState = "full";
             }
-            if ( charge > 60 ) {
+            else if ( charge > 60 ) {
                 batteryState = "good";
             }
-            if ( charge > 30 ) {
+            else if ( charge > 30 ) {
                 batteryState = "middle";
             }
             else {
