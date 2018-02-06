@@ -105,11 +105,11 @@
                                  <cursor>
                                     <Cursor fx:constant="OPEN_HAND" />
                                  </cursor></Button>
-                              <Button fx:id="buttonFaceLedsYellow" mnemonicParsing="false" onAction="#buttonFaceLedsYellow"  prefHeight="50.0" prefWidth="86.0" style="-fx-background-color: yellow;" text="yellow" GridPane.columnIndex="1">
+                              <Button fx:id="buttonFaceLedsYellow" mnemonicParsing="false" onAction="#buttonFaceLedsYellow" prefHeight="50.0" prefWidth="86.0" style="-fx-background-color: yellow;" text="yellow" GridPane.columnIndex="1">
                                  <cursor>
                                     <Cursor fx:constant="OPEN_HAND" />
                                  </cursor></Button>
-                              <Button fx:id="buttonFaceLedsBlue" mnemonicParsing="false" onAction="#buttonFaceLedsBlue"  prefHeight="50.0" prefWidth="86.0" style="-fx-background-color: blue;" text="blue" textFill="WHITE" GridPane.rowIndex="1">
+                              <Button fx:id="buttonFaceLedsBlue" mnemonicParsing="false" onAction="#buttonFaceLedsBlue" prefHeight="50.0" prefWidth="86.0" style="-fx-background-color: blue;" text="blue" textFill="WHITE" GridPane.rowIndex="1">
                                  <cursor>
                                     <Cursor fx:constant="OPEN_HAND" />
                                  </cursor></Button>
@@ -117,7 +117,7 @@
                                  <cursor>
                                     <Cursor fx:constant="OPEN_HAND" />
                                  </cursor></Button>
-                              <Button fx:id="buttonFaceLedGreen" mnemonicParsing="false" onAction="#buttonFaceLedsGreen"  prefHeight="50.0" prefWidth="86.0" style="-fx-background-color: green;" text="green" textFill="WHITE" GridPane.rowIndex="2">
+                              <Button fx:id="buttonFaceLedGreen" mnemonicParsing="false" onAction="#buttonFaceLedsGreen" prefHeight="50.0" prefWidth="86.0" style="-fx-background-color: green;" text="green" textFill="WHITE" GridPane.rowIndex="2">
                                  <cursor>
                                     <Cursor fx:constant="OPEN_HAND" />
                                  </cursor></Button>
@@ -189,6 +189,9 @@
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin>
+                                       <cursor>
+                                          <Cursor fx:constant="OPEN_HAND" />
+                                       </cursor>
                                     </Button>
                                     <Label fx:id="lblRGBcolorPreview" text="RGB color preview:">
                                        <GridPane.margin>
@@ -318,25 +321,55 @@
                         <Image url="@images/battery_icons/battery_unknown.bmp" />
                      </image></ImageView>
                   <Label fx:id="lblBattery3" layoutX="736.0" layoutY="50.0" prefHeight="27.0" prefWidth="44.0" text="100%" textAlignment="CENTER" />
-                  <Button fx:id="buttonSay" layoutX="53.0" layoutY="37.0" mnemonicParsing="false" onAction="#sayText" text="say" />
-                  <TextArea fx:id="sayText" layoutX="148.0" layoutY="34.0" prefHeight="132.0" prefWidth="200.0" />
+                  <Button fx:id="buttonSay" layoutX="53.0" layoutY="37.0" mnemonicParsing="false" onAction="#sayText" text="say">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></Button>
+                  <TextArea fx:id="sayText" layoutX="148.0" layoutY="34.0" prefHeight="132.0" prefWidth="200.0">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></TextArea>
                   <RadioButton fx:id="radioButtonEnglish" layoutX="148.0" layoutY="180.0" mnemonicParsing="false" onAction="#radioButtonEnglish" selected="true" text="english">
                       <toggleGroup>
                           <ToggleGroup fx:id="toggleGroupLanguage" />
-                      </toggleGroup></RadioButton>
-                  <RadioButton fx:id="radioButtonDeutsch" layoutX="272.0" layoutY="180.0" mnemonicParsing="false" onAction="#radioButtonDeutsch"  text="deutsch" toggleGroup="$toggleGroupLanguage" />
+                      </toggleGroup>
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></RadioButton>
+                  <RadioButton fx:id="radioButtonDeutsch" layoutX="272.0" layoutY="180.0" mnemonicParsing="false" onAction="#radioButtonDeutsch" text="deutsch" toggleGroup="$toggleGroupLanguage">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></RadioButton>
                   <Label fx:id="labelSpeechSpeed" layoutX="194.0" layoutY="341.0" text="Speed" />
-                  <Slider fx:id="sliderSpeechSpeed" layoutX="144.0" layoutY="365.0" max="400.0" min="50.0" onMouseDragged="#changeTalkingSpeed" value="100.0" />
-                  <Slider fx:id="sliderSpeechPitch" layoutX="144.0" layoutY="422.0" max="200.0" min="50.0" onMouseDragged="#changePitch" value="100.0" />
+                  <Slider fx:id="sliderSpeechSpeed" layoutX="144.0" layoutY="365.0" max="400.0" min="50.0" onMouseDragged="#changeTalkingSpeed" value="100.0">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></Slider>
+                  <Slider fx:id="sliderSpeechPitch" layoutX="144.0" layoutY="422.0" max="200.0" min="50.0" onMouseDragged="#changePitch" value="100.0">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></Slider>
                   <Label fx:id="labelSpeechPitch" layoutX="198.0" layoutY="405.0" text="Pitch" />
                   <Label fx:id="labelSpeechVolume" layoutX="194.0" layoutY="269.0" text="Volume" />
-                  <Slider fx:id="sliderVolume" layoutX="144.0" layoutY="296.0" onMouseDragged="#changeVolume" value="50.0" />
+                  <Slider fx:id="sliderVolume" layoutX="144.0" layoutY="296.0" onMouseDragged="#changeVolume" value="50.0">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></Slider>
                   <Label fx:id="lblSpeechSpeedValue" layoutX="292.0" layoutY="364.0" text="100%" />
                   <Label fx:id="lblPitchValue" layoutX="292.0" layoutY="421.0" text="100%" />
                   <Label fx:id="lblVolumeValue" layoutX="295.0" layoutY="295.0" text="50%" />
-                  <Button fx:id="headFrontSensor" layoutX="398.0" layoutY="104.0" mnemonicParsing="false" onAction="#setHeadFrontSensor" prefHeight="26.0" prefWidth="115.0" text="Head - Front" />
-                  <Button fx:id="headMiddleSensor" layoutX="398.0" layoutY="140.0" mnemonicParsing="false" onAction="#setHeadMiddleSensor" prefHeight="26.0" prefWidth="115.0" text="Head - Middle" />
-                  <Button fx:id="headRearSensor" layoutX="398.0" layoutY="176.0" mnemonicParsing="false" onAction="#setHeadRearSensor" prefHeight="26.0" prefWidth="115.0" text="Head - Rear" />
+                  <Button fx:id="headFrontSensor" layoutX="398.0" layoutY="104.0" mnemonicParsing="false" onAction="#setHeadFrontSensor" prefHeight="26.0" prefWidth="115.0" text="Head - Front">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></Button>
+                  <Button fx:id="headMiddleSensor" layoutX="398.0" layoutY="140.0" mnemonicParsing="false" onAction="#setHeadMiddleSensor" prefHeight="26.0" prefWidth="115.0" text="Head - Middle">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></Button>
+                  <Button fx:id="headRearSensor" layoutX="398.0" layoutY="176.0" mnemonicParsing="false" onAction="#setHeadRearSensor" prefHeight="26.0" prefWidth="115.0" text="Head - Rear">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></Button>
                   <Label alignment="CENTER" layoutX="380.0" layoutY="57.0" prefHeight="41.0" prefWidth="152.0" text="Apply Speech Settings to a Sensor:" textAlignment="CENTER" wrapText="true" />
                   <ImageView fitHeight="193.0" fitWidth="148.0" layoutX="691.0" layoutY="521.0" pickOnBounds="true" preserveRatio="true">
                       <image>
@@ -393,12 +426,30 @@
                               <RowConstraints maxHeight="50.0" minHeight="0.0" prefHeight="50.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button fx:id="buttonStandUp" mnemonicParsing="false" onAction="#standUp" prefHeight="26.0" prefWidth="85.0" style="-fx-background-color: lightgrey;" text="stand up" GridPane.rowIndex="1" />
-                              <Button fx:id="buttonStandZero" mnemonicParsing="false" onAction="#standZero" text="stand zero" GridPane.rowIndex="2" />
-                              <Button fx:id="buttonSitRelax" mnemonicParsing="false" onAction="#sitRelax" prefHeight="26.0" prefWidth="85.0" style="-fx-background-color: lightgrey;" text="sit relax" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Button fx:id="buttonLyingBack" mnemonicParsing="false" onAction="#lyingBack" text="lying back" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <Button fx:id="buttonCrouch" mnemonicParsing="false" onAction="#crouch" prefHeight="26.0" prefWidth="85.0" text="crouch" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                              <Button fx:id="buttonLyingBelly" mnemonicParsing="false" onAction="#lyingBelly"  text="lying belly" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <Button fx:id="buttonStandUp" mnemonicParsing="false" onAction="#standUp" prefHeight="26.0" prefWidth="85.0" text="stand up" GridPane.rowIndex="1">
+                                 <cursor>
+                                    <Cursor fx:constant="OPEN_HAND" />
+                                 </cursor></Button>
+                              <Button fx:id="buttonStandZero" mnemonicParsing="false" onAction="#standZero" text="stand zero" GridPane.rowIndex="2">
+                                 <cursor>
+                                    <Cursor fx:constant="OPEN_HAND" />
+                                 </cursor></Button>
+                              <Button fx:id="buttonSitRelax" mnemonicParsing="false" onAction="#sitRelax" prefHeight="26.0" prefWidth="85.0" text="sit relax" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <cursor>
+                                    <Cursor fx:constant="OPEN_HAND" />
+                                 </cursor></Button>
+                              <Button fx:id="buttonLyingBack" mnemonicParsing="false" onAction="#lyingBack" text="lying back" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <cursor>
+                                    <Cursor fx:constant="OPEN_HAND" />
+                                 </cursor></Button>
+                              <Button fx:id="buttonCrouch" mnemonicParsing="false" onAction="#crouch" prefHeight="26.0" prefWidth="85.0" text="crouch" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <cursor>
+                                    <Cursor fx:constant="OPEN_HAND" />
+                                 </cursor></Button>
+                              <Button fx:id="buttonLyingBelly" mnemonicParsing="false" onAction="#lyingBelly" text="lying belly" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                 <cursor>
+                                    <Cursor fx:constant="OPEN_HAND" />
+                                 </cursor></Button>
                            </children>
                         </GridPane>
                         <GridPane prefHeight="40.0" prefWidth="417.0">
@@ -412,8 +463,14 @@
                             <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button fx:id="buttonWakeUp" mnemonicParsing="false" onAction="#wakeUp" prefHeight="26.0" prefWidth="74.0" text="wake up" />
-                              <Button fx:id="buttonRest" mnemonicParsing="false" onAction="#rest" prefHeight="26.0" prefWidth="82.0" text="rest" GridPane.columnIndex="2" />
+                              <Button fx:id="buttonWakeUp" mnemonicParsing="false" onAction="#wakeUp" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: lightgrey;" text="wake up">
+                                 <cursor>
+                                    <Cursor fx:constant="OPEN_HAND" />
+                                 </cursor></Button>
+                              <Button fx:id="buttonRest" mnemonicParsing="false" onAction="#rest" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: lightgrey;" text="rest" GridPane.columnIndex="2">
+                                 <cursor>
+                                    <Cursor fx:constant="OPEN_HAND" />
+                                 </cursor></Button>
                            </children>
                         </GridPane>
                         <Separator prefWidth="200.0" GridPane.rowIndex="1" />
@@ -457,16 +514,43 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Button fx:id="buttonWalkForwards" layoutX="83.0" layoutY="70.0" mnemonicParsing="false" onKeyPressed="#walkKey" onKeyReleased="#stopWalking"  onMousePressed="#walkForwards" onMouseReleased="#stopWalking" prefHeight="26.0" prefWidth="88.0" text="forwards" />
-                  <Button fx:id="buttonWalkLeft" layoutX="20.0" layoutY="120.0" mnemonicParsing="false" onKeyPressed="#walkKey" onKeyReleased="#stopWalking" onMousePressed="#walkLeft" onMouseReleased="#stopWalking" prefHeight="26.0" prefWidth="88.0" text="left" />
-                  <Button fx:id="buttonWalkBackwards" layoutX="83.0" layoutY="170.0" mnemonicParsing="false" onKeyPressed="#walkKey" onKeyReleased="#stopWalking"  onMousePressed="#walkBackwards" onMouseReleased="#stopWalking" prefHeight="26.0" prefWidth="88.0" text="backwards" />
-                  <Button fx:id="buttonWalkRight" layoutX="150.0" layoutY="120.0" mnemonicParsing="false" onKeyPressed="#walkKey" onKeyReleased="#stopWalking"  onMousePressed="#walkRight" onMouseReleased="#stopWalking" prefHeight="26.0" prefWidth="88.0" text="right" />
-                  <Button fx:id="buttonHeadUp" layoutX="433.0" layoutY="70.0" mnemonicParsing="false" onAction="#headUp" prefHeight="26.0" prefWidth="88.0" text="up" />
-                  <Button fx:id="buttonHeadRight" layoutX="500.0" layoutY="120.0" mnemonicParsing="false" onAction="#headRight" prefHeight="26.0" prefWidth="88.0" text="right" />
-                  <Button fx:id="buttonHeadDown" layoutX="433.0" layoutY="170.0" mnemonicParsing="false" onAction="#headDown" prefHeight="26.0" prefWidth="88.0" text="down" />
-                  <Button fx:id="buttonHeadLeft" layoutX="370.0" layoutY="120.0" mnemonicParsing="false" onAction="#headLeft" prefHeight="26.0" prefWidth="88.0" text="left" />
+                  <Button fx:id="buttonWalkForwards" layoutX="83.0" layoutY="70.0" mnemonicParsing="false" onKeyPressed="#walkKey" onKeyReleased="#stopWalking" onMousePressed="#walkForwards" onMouseReleased="#stopWalking" prefHeight="26.0" prefWidth="88.0" text="forwards">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></Button>
+                  <Button fx:id="buttonWalkLeft" layoutX="20.0" layoutY="120.0" mnemonicParsing="false" onKeyPressed="#walkKey" onKeyReleased="#stopWalking" onMousePressed="#walkLeft" onMouseReleased="#stopWalking" prefHeight="26.0" prefWidth="88.0" text="left">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></Button>
+                  <Button fx:id="buttonWalkBackwards" layoutX="83.0" layoutY="170.0" mnemonicParsing="false" onKeyPressed="#walkKey" onKeyReleased="#stopWalking" onMousePressed="#walkBackwards" onMouseReleased="#stopWalking" prefHeight="26.0" prefWidth="88.0" text="backwards">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></Button>
+                  <Button fx:id="buttonWalkRight" layoutX="150.0" layoutY="120.0" mnemonicParsing="false" onKeyPressed="#walkKey" onKeyReleased="#stopWalking" onMousePressed="#walkRight" onMouseReleased="#stopWalking" prefHeight="26.0" prefWidth="88.0" text="right">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></Button>
+                  <Button fx:id="buttonHeadUp" layoutX="433.0" layoutY="70.0" mnemonicParsing="false" onAction="#headUp" prefHeight="26.0" prefWidth="88.0" text="up">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></Button>
+                  <Button fx:id="buttonHeadRight" layoutX="500.0" layoutY="120.0" mnemonicParsing="false" onAction="#headRight" prefHeight="26.0" prefWidth="88.0" text="right">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></Button>
+                  <Button fx:id="buttonHeadDown" layoutX="433.0" layoutY="170.0" mnemonicParsing="false" onAction="#headDown" prefHeight="26.0" prefWidth="88.0" text="down">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></Button>
+                  <Button fx:id="buttonHeadLeft" layoutX="370.0" layoutY="120.0" mnemonicParsing="false" onAction="#headLeft" prefHeight="26.0" prefWidth="88.0" text="left">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></Button>
                   <Label fx:id="labelWalkSpeed" layoutX="63.0" layoutY="230.0" text="Speed" />
-                  <Slider fx:id="walkSpeedSlider" layoutX="64.0" layoutY="267.0" min="0.01" onMouseReleased="#getWalkSpeedSliderValue" prefHeight="16.0" prefWidth="140.0" value="50.0" />
+                  <Slider fx:id="walkSpeedSlider" layoutX="64.0" layoutY="267.0" min="0.01" onMouseReleased="#getWalkSpeedSliderValue" prefHeight="16.0" prefWidth="140.0" value="50.0">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></Slider>
                   <Label fx:id="labelWalkSlow" layoutX="20.0" layoutY="267.0" text="slow" />
                   <Label fx:id="labelWalkFast" layoutX="213.0" layoutY="267.0" text="fast" />
                   <Label fx:id="labelTurnAround" layoutX="68.0" layoutY="355.0" text="turn around">
@@ -474,8 +558,14 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Button fx:id="buttonTurnLeft" layoutX="20.0" layoutY="400.0" mnemonicParsing="false" onMousePressed="#turnLeft" onMouseReleased="#stopWalking" prefHeight="26.0" prefWidth="93.0" text="to the left" />
-                  <Button fx:id="buttonTurnRight" layoutX="150.0" layoutY="400.0" mnemonicParsing="false"  onMousePressed="#turnRight" onMouseReleased="#stopWalking" prefHeight="26.0" prefWidth="93.0" text="to the right" />
+                  <Button fx:id="buttonTurnLeft" layoutX="20.0" layoutY="400.0" mnemonicParsing="false" onMousePressed="#turnLeft" onMouseReleased="#stopWalking" prefHeight="26.0" prefWidth="93.0" text="to the left">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></Button>
+                  <Button fx:id="buttonTurnRight" layoutX="150.0" layoutY="400.0" mnemonicParsing="false" onMousePressed="#turnRight" onMouseReleased="#stopWalking" prefHeight="26.0" prefWidth="93.0" text="to the right">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></Button>
                   <ImageView fitHeight="193.0" fitWidth="148.0" layoutX="691.0" layoutY="521.0" pickOnBounds="true" preserveRatio="true">
                       <image>
                           <Image url="@images/nao.jpg" />
