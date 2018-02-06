@@ -7,8 +7,11 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 public class MainMenuController {
+    @FXML
+    private TabPane tabPane;
     @FXML
     private Button buttonFaceLedsRed;
     @FXML
@@ -120,8 +123,11 @@ public class MainMenuController {
     @FXML
     protected TextField txtConnectionPort;
 
-    int pitchValue = 100;
-    int speedValue = 100;
+    private int pitchValue = 100;
+    private int speedValue = 100;
+    private int valueRGBred = 255;
+    private int valueRGBgreen = 0;
+    private int valueRGBblue = 0;
     private float walkSpeedValue = 0.5F;
     private String language = "English";
     private String selectedLedItem;
@@ -143,6 +149,23 @@ public class MainMenuController {
         headSensors = new HeadSensorModel(this);
         temperature = new TemperatureModel(this);
     }
+
+
+    //change mousePointer
+    public void changeMouseCursorHand(MouseEvent mouseEvent) {
+        mouseEvent.getSource();
+        tabPane.setStyle("-fx-cursor: hand;");
+    }
+    public void changeMouseCursorText(MouseEvent mouseEvent) {
+        mouseEvent.getSource();
+        tabPane.setStyle("-fx-cursor: text;");
+    }
+    public void setDefaultMouseCursor(MouseEvent mouseEvent) {
+        mouseEvent.getSource();
+        tabPane.setStyle("-fx-cursor: default;");
+    }
+
+
 
     //LEDs
     public void allLEDsOff() {
@@ -245,38 +268,43 @@ public class MainMenuController {
             labelAllowedValue.setVisible(false);
             unselectAllLEDitems();
             selectedLedItem = "rgbColor";
-            try {
-                Integer.parseInt(textfieldRed.getText());
-            } catch (Exception e) {
-                textfieldRed.setText("0");
-            }
-            try {
-                Integer.parseInt(textfieldGreen.getText());
-            } catch (Exception e) {
-                textfieldGreen.setText("0");
-            }
-            try {
-                Integer.parseInt(textfieldBlue.getText());
-            } catch (Exception e) {
-                textfieldBlue.setText("0");
-            }
-            int valueRed = Integer.parseInt(textfieldRed.getText());
-            int valueGreen = Integer.parseInt(textfieldGreen.getText());
-            int valueBlue = Integer.parseInt(textfieldBlue.getText());
 
-            //show error label if value is higher than 255
-            if (setVisibleAllowedValueLabel(valueRed) == true) {
-                valueRed = 255;
+            //check if textfield is null or value is higher than 255
+            if (textfieldRed.getText() == "") {
+                textfieldRed.setText("0");
+                valueRGBred = 0;
+            } else if (setVisibleAllowedValueLabel(valueRGBred) == true) {
+                valueRGBred = 255;
                 textfieldRed.setStyle("-fx-border-color: red; -fx-border-width: 5; -fx-border-radius: 5;");
-            } if (setVisibleAllowedValueLabel(valueGreen) == true){
-                valueGreen = 255;
+            }
+            else {
+                valueRGBred = Integer.parseInt(textfieldRed.getText());
+            }
+
+            if (textfieldGreen.getText() == null) {
+                textfieldGreen.setText("0");
+                valueRGBgreen = 0;
+            } else if (setVisibleAllowedValueLabel(valueRGBgreen) == true){
+                valueRGBgreen = 255;
                 textfieldGreen.setStyle("-fx-border-color: red; -fx-border-width: 5; -fx-border-radius: 5;");
-            } if (setVisibleAllowedValueLabel(valueBlue) == true){
-                valueBlue = 255;
+            }
+            else {
+                valueRGBgreen = Integer.parseInt(textfieldGreen.getText());
+            }
+
+            if (textfieldBlue.getText() == "") {
+                textfieldBlue.setText("0");
+                valueRGBblue = 0;
+            } else if (setVisibleAllowedValueLabel(valueRGBblue) == true){
+                valueRGBblue = 255;
                 textfieldBlue.setStyle("-fx-border-color: red; -fx-border-width: 5; -fx-border-radius: 5;");
             }
+            else {
+                valueRGBblue = Integer.parseInt(textfieldBlue.getText());
+            }
+
             //calculate rgb color code
-            hexRGBColor = String.format("#%02X%02X%02X", valueRed, valueGreen, valueBlue);
+            hexRGBColor = String.format("#%02X%02X%02X", valueRGBred, valueRGBgreen, valueRGBblue);
             buttonRGBpreview.setStyle("-fx-border-color: darkgrey; -fx-border-width: 5; -fx-background-color: " + hexRGBColor + ";");
         } catch (Exception e) {
             System.out.println(e.getMessage() + " // An Error occurred while converting RGB colors. Maybe the value of a textfield is null or the input contains illegal Arguments.");
