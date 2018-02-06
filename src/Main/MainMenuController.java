@@ -150,23 +150,6 @@ public class MainMenuController {
         temperature = new TemperatureModel(this);
     }
 
-
-    //change mousePointer
-    public void changeMouseCursorHand(MouseEvent mouseEvent) {
-        mouseEvent.getSource();
-        tabPane.setStyle("-fx-cursor: hand;");
-    }
-    public void changeMouseCursorText(MouseEvent mouseEvent) {
-        mouseEvent.getSource();
-        tabPane.setStyle("-fx-cursor: text;");
-    }
-    public void setDefaultMouseCursor(MouseEvent mouseEvent) {
-        mouseEvent.getSource();
-        tabPane.setStyle("-fx-cursor: default;");
-    }
-
-
-
     //LEDs
     public void allLEDsOff() {
         ledModel.turnledsOff("FaceLeds");
