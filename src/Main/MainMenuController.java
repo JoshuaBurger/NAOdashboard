@@ -2,11 +2,15 @@ package Main;
 
 import com.aldebaran.qi.Session;
 import com.aldebaran.qi.helper.proxies.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.scene.input.MouseEvent;
 
 public class MainMenuController {
@@ -30,10 +34,6 @@ public class MainMenuController {
     private Button buttonFaceLedWhite;
     @FXML
     private Button buttonRGBpreview;
-    @FXML
-    protected Button btnConnect;
-    @FXML
-    protected Button btnDisconnect;
     @FXML
     private TextArea sayText;
     @FXML
@@ -99,10 +99,6 @@ public class MainMenuController {
     @FXML
     protected Label lblBattery4;
     @FXML
-    protected Label lblConnectionInfo;
-    @FXML
-    protected Label lblConnectionState;
-    @FXML
     private Slider sliderVolume;
     @FXML
     private Slider sliderSpeechPitch;
@@ -122,6 +118,18 @@ public class MainMenuController {
     protected TextField txtConnectionIP;
     @FXML
     protected TextField txtConnectionPort;
+    @FXML
+    protected Label lblConnectionInfo;
+    @FXML
+    protected Label lblConnectionState;
+    @FXML
+    protected Button btnConnect;
+    @FXML
+    protected Button btnDisconnect;
+    @FXML
+    private ComboBox cbxAudio;
+    @FXML
+    private Button btnPlayAudio;
 
     private int pitchValue = 100;
     private int speedValue = 100;
@@ -132,6 +140,7 @@ public class MainMenuController {
     private String language = "English";
     private String selectedLedItem;
     private String hexRGBColor = "#FF0000";
+    private ObservableList sounds;
     private Session session;
     private ALMemory memory;
     private ConnectionModel connection;
@@ -370,9 +379,30 @@ public class MainMenuController {
         headSensors.setHeadSensorSpeechTask("Rear", sayText.getText(), (int)(sliderSpeechSpeed.getValue()), (int)sliderSpeechPitch.getValue(), language);
     }
 
+    public void setUpAudio()  {
+        try {
+            cbxAudio.setDisable(false);
+            btnPlayAudio.setDisable(false);
+            ALAudioPlayer audioPlayer = new ALAudioPlayer(session);
+            List soundsList = audioPlayer.getSoundSetFileNames("Aldebaran");
+            sounds = FXCollections.observableArrayList();
+            sounds.setAll(soundsList);
+            cbxAudio.setItems(sounds);
+            System.out.println(sounds);
+        }
+        catch (Exception e){
+            System.out.println(e.toString());
+            cbxAudio.setDisable(true);
+            btnPlayAudio.setDisable(true);
+
+
+        }
+    }
+
     public void playAudio() throws Exception {
         ALAudioPlayer audioPlayer = new ALAudioPlayer(session);
-        System.out.println(audioPlayer.getSoundSetFileNames("Aldebaran"));
+        audioPlayer.playSoundSetFile((cbxAudio.getValue()).toString());
+        System.out.println(cbxAudio.getValue());
     }
 
 
@@ -475,6 +505,7 @@ public class MainMenuController {
         battery.setSession(session);
         headSensors.setSession(session);
         temperature.setSession(session);
+        setUpAudio();
 
         // Methoden auf verschiedene Events registrieren
         registerEvents();
