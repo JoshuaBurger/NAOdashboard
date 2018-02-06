@@ -48,6 +48,46 @@ public class MainMenuController {
     @FXML
     private Label labelAllowedValue;
     @FXML
+    protected Label lblHead1;
+    @FXML
+    protected Label lblHead2;
+    @FXML
+    protected Label lblHead3;
+    @FXML
+    protected Label lblHead4;
+    @FXML
+    protected Label lblLArm1;
+    @FXML
+    protected Label lblLArm2;
+    @FXML
+    protected Label lblLArm3;
+    @FXML
+    protected Label lblLArm4;
+    @FXML
+    protected Label lblRArm1;
+    @FXML
+    protected Label lblRArm2;
+    @FXML
+    protected Label lblRArm3;
+    @FXML
+    protected Label lblRArm4;
+    @FXML
+    protected Label lblLLeg1;
+    @FXML
+    protected Label lblLLeg2;
+    @FXML
+    protected Label lblLLeg3;
+    @FXML
+    protected Label lblLLeg4;
+    @FXML
+    protected Label lblRLeg1;
+    @FXML
+    protected Label lblRLeg2;
+    @FXML
+    protected Label lblRLeg3;
+    @FXML
+    protected Label lblRLeg4;
+    @FXML
     protected Label lblBattery1;
     @FXML
     protected Label lblBattery2;
@@ -93,6 +133,16 @@ public class MainMenuController {
     private LedModel ledModel;
     private BatteryModel battery;
     private HeadSensorModel headSensors;
+    private TemperatureModel temperature;
+
+    public MainMenuController() {
+        connection = new ConnectionModel(this);
+        movement = new MovementModel();
+        ledModel = new LedModel();
+        battery = new BatteryModel(this);
+        headSensors = new HeadSensorModel(this);
+        temperature = new TemperatureModel(this);
+    }
 
     //LEDs
     public void allLEDsOff() {
@@ -407,22 +457,13 @@ public class MainMenuController {
         movement.move(0F, 0F, -0.4F);
     }
 
-
-    //Connection
-    public MainMenuController() {
-        connection = new ConnectionModel(this);
-        movement = new MovementModel();
-        ledModel = new LedModel();
-        battery = new BatteryModel(this);
-        headSensors = new HeadSensorModel(this);
-    }
-
     public void setSession(Session session) {
         this.session = session;
         movement.setSession(session);
         ledModel.setSession(session);
         battery.setSession(session);
         headSensors.setSession(session);
+        temperature.setSession(session);
 
         // Methoden auf verschiedene Events registrieren
         registerEvents();
@@ -437,6 +478,8 @@ public class MainMenuController {
             battery.registerBatteryEvents(memory);
             // Kopfsensor (Sprache) Events registrieren.
             headSensors.registerTactilEvents(memory);
+            // Temperatur Events registrieren
+            temperature.registerTemperatureEvents(memory);
         } catch(Exception e) {
             System.out.println("Events not available");
             memory = null;
