@@ -28,39 +28,46 @@
           <content>
               <AnchorPane>
                   <children>
-                      <TextField fx:id="txtConnectionIP" alignment="CENTER" layoutX="277.0" layoutY="122.0" prefHeight="41.0" prefWidth="291.0" text="127.0.0.1" />
-                      <Label layoutX="243.0" layoutY="135.0" text="IP:" />
-                      <TextField fx:id="txtConnectionPort" alignment="CENTER" layoutX="277.0" layoutY="184.0" prefHeight="41.0" prefWidth="291.0" text="9559" />
-                      <Label layoutX="236.0" layoutY="197.0" text="Port:" />
-                      <Label layoutX="233.0" layoutY="69.0" prefHeight="26.0" prefWidth="378.0" text="Please enter the connection data:">
+                      <TextField fx:id="txtConnectionIP" alignment="CENTER" layoutX="299.0" layoutY="205.0" prefHeight="41.0" prefWidth="291.0" text="127.0.0.1" />
+                      <Label layoutX="261.0" layoutY="216.0" text="IP:">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                      <TextField fx:id="txtConnectionPort" alignment="CENTER" layoutX="299.0" layoutY="272.0" prefHeight="41.0" prefWidth="291.0" text="9559" />
+                      <Label layoutX="242.0" layoutY="283.0" text="Port:">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                      <Label alignment="CENTER" layoutX="3.0" layoutY="107.0" prefHeight="26.0" prefWidth="882.0" text="Please enter NAO's connection data:">
                           <font>
                               <Font name="Arial" size="22.0" />
                           </font>
                       </Label>
-                      <Button fx:id="btnConnect" layoutX="440.0" layoutY="257.0" mnemonicParsing="false" onAction="#connect" prefHeight="72.0" prefWidth="236.0" text="Connect" textFill="#0de82a">
+                      <Button fx:id="btnConnect" layoutX="474.0" layoutY="364.0" mnemonicParsing="false" onAction="#connect" prefHeight="72.0" prefWidth="236.0" text="Connect" textFill="#0de82a">
                           <font>
                               <Font size="33.0" />
                           </font>
                       </Button>
-                      <Label fx:id="lblConnectionInfo" alignment="CENTER" contentDisplay="CENTER" layoutX="248.0" layoutY="358.0" prefHeight="31.0" prefWidth="350.0" textAlignment="JUSTIFY" wrapText="true">
+                      <Label fx:id="lblConnectionInfo" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="460.0" prefHeight="31.0" prefWidth="879.0" textAlignment="CENTER" wrapText="true">
                           <font>
                               <Font size="14.0" />
                           </font></Label>
-                      <Button fx:id="btnDisconnect" disable="true" layoutX="159.0" layoutY="257.0" mnemonicParsing="false" onAction="#disconnect" prefHeight="72.0" prefWidth="236.0" text="Disconnect" textAlignment="CENTER" textFill="RED">
+                      <Button fx:id="btnDisconnect" disable="true" layoutX="186.0" layoutY="364.0" mnemonicParsing="false" onAction="#disconnect" prefHeight="72.0" prefWidth="236.0" text="Disconnect" textAlignment="CENTER" textFill="RED">
                           <font>
                               <Font size="33.0" />
                           </font>
                       </Button>
-                      <Label fx:id="lblConnectionState" layoutX="362.0" layoutY="408.0" text="Disconnected" textFill="RED">
+                      <Label fx:id="lblConnectionState" alignment="CENTER" layoutX="3.0" layoutY="516.0" prefHeight="21.0" prefWidth="882.0" text="Disconnected" textAlignment="CENTER" textFill="RED">
                           <font>
                               <Font size="18.0" />
                           </font>
                       </Label>
-                      <Label layoutX="277.0" layoutY="408.0" text="Status:">
-                          <font>
-                              <Font size="18.0" />
-                          </font>
-                      </Label>
+                  <ComboBox fx:id="cbxConnectionFavorites" layoutX="633.0" layoutY="239.0" onAction="#applyConnectionFavorite" prefHeight="40.0" prefWidth="205.0" promptText="Latest connections..." />
+                  <Label layoutX="625.0" layoutY="206.0" text="Select previous connection:">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
                   </children>
               </AnchorPane>
           </content>

@@ -7,18 +7,41 @@ import com.aldebaran.qi.helper.proxies.ALMemory;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
-
 import java.util.ArrayList;
 
 public class TemperatureModel {
     private MainMenuController mainController;
     private TemperatureGUIrefresher tempGUIrefresher;
-    private boolean initialized;
-
 
     public TemperatureModel(MainMenuController mainController ) {
         this.mainController = mainController;
-        initialized = false;
+        // Alle Label holen...
+        ArrayList<Label> headLabels = new ArrayList<>();
+        ArrayList<Label> lArmLabels = new ArrayList<>();
+        ArrayList<Label> rArmLabels = new ArrayList<>();
+        ArrayList<Label> lLegLabels = new ArrayList<>();
+        ArrayList<Label> rLegLabels = new ArrayList<>();
+        headLabels.add(mainController.lblHead1);
+        headLabels.add(mainController.lblHead2);
+        headLabels.add(mainController.lblHead3);
+        headLabels.add(mainController.lblHead4);
+        lArmLabels.add(mainController.lblLArm1);
+        lArmLabels.add(mainController.lblLArm2);
+        lArmLabels.add(mainController.lblLArm3);
+        lArmLabels.add(mainController.lblLArm4);
+        rArmLabels.add(mainController.lblRArm1);
+        rArmLabels.add(mainController.lblRArm2);
+        rArmLabels.add(mainController.lblRArm3);
+        rArmLabels.add(mainController.lblRArm4);
+        lLegLabels.add(mainController.lblLLeg1);
+        lLegLabels.add(mainController.lblLLeg2);
+        lLegLabels.add(mainController.lblLLeg3);
+        lLegLabels.add(mainController.lblLLeg4);
+        rLegLabels.add(mainController.lblRLeg1);
+        rLegLabels.add(mainController.lblRLeg2);
+        rLegLabels.add(mainController.lblRLeg3);
+        rLegLabels.add(mainController.lblRLeg4);
+        tempGUIrefresher = new TemperatureGUIrefresher(headLabels, lArmLabels, rArmLabels, lLegLabels, rLegLabels);
     }
 
     public void setSession(Session session) {
@@ -30,14 +53,13 @@ public class TemperatureModel {
             // Momentanen Temperaturdiagnose abholen
             Object obj = temperature.getTemperatureDiagnosis();
             // Initial erstmal alles auf "gut" setzen und dann ggf. Fehler
-            evaluateTemperatureDiagnosis(null);
+            //evaluateTemperatureDiagnosis(null);
             if ( obj != null ) {
                 evaluateTemperatureDiagnosis(obj);
             }
         } catch(Exception e) {
             System.out.println("No connection.");
         }
-
     }
 
     public void registerTemperatureEvents(ALMemory memory) {
@@ -68,27 +90,22 @@ public class TemperatureModel {
         int state = -1;
         ArrayList<String> chains = null;
 
-        if ( initialized == false ) {
-            // Beim ersten Mal initialisieren (JavaFX-Komponenten von MainMenuController holen)
-            init();
-        }
-
-        if ( obj != null ) {
-            if ( obj instanceof ArrayList ) {
-                ArrayList<Object> tempDiag = (ArrayList)obj;
+        if (obj != null) {
+            if (obj instanceof ArrayList) {
+                ArrayList<Object> tempDiag = (ArrayList) obj;
 
                 // Diagnose-Stufe holen (level of failure severity: 0(NEGLIGIBLE), 1(SERIOUS) or 2(CRITICAL) )
-                state = (int)tempDiag.get(0);
+                state = (int) tempDiag.get(0);
                 // Betroffene Chains (Head,LArm,RArm,LLeg,RLeg)
-                chains = (ArrayList<String>)tempDiag.get(1);
+                chains = (ArrayList<String>) tempDiag.get(1);
                 System.out.println("Temperatur-Status:" + state);
                 System.out.println("Betroffene Chains: ");
-                for(String s : chains) {
-                    System.out.print(s+" ");
+                for (String s : chains) {
+                    System.out.print(s + " ");
                 }
             }
         }
-        if ( chains == null ) {
+        if (chains == null) {
             // Dann war das TemperaturDiagnose-Objekt null, da die Temperatur ok ist.
             state = 0;
             chains = new ArrayList<String>();
@@ -105,38 +122,6 @@ public class TemperatureModel {
         tempGUIrefresher.setValues(state, chains);
         Platform.runLater(tempGUIrefresher);
     }
-
-    private void init() {
-        // Alle Label holen...
-        ArrayList<Label> headLabels = new ArrayList<>();
-        ArrayList<Label> lArmLabels = new ArrayList<>();
-        ArrayList<Label> rArmLabels = new ArrayList<>();
-        ArrayList<Label> lLegLabels = new ArrayList<>();
-        ArrayList<Label> rLegLabels = new ArrayList<>();
-        headLabels.add(mainController.lblHead1);
-        headLabels.add(mainController.lblHead2);
-        headLabels.add(mainController.lblHead3);
-        headLabels.add(mainController.lblHead4);
-        lArmLabels.add(mainController.lblLArm1);
-        lArmLabels.add(mainController.lblLArm2);
-        lArmLabels.add(mainController.lblLArm3);
-        lArmLabels.add(mainController.lblLArm4);
-        rArmLabels.add(mainController.lblRArm1);
-        rArmLabels.add(mainController.lblRArm2);
-        rArmLabels.add(mainController.lblRArm3);
-        rArmLabels.add(mainController.lblRArm4);
-        lLegLabels.add(mainController.lblLLeg1);
-        lLegLabels.add(mainController.lblLLeg2);
-        lLegLabels.add(mainController.lblLLeg3);
-        lLegLabels.add(mainController.lblLLeg4);
-        rLegLabels.add(mainController.lblRLeg1);
-        rLegLabels.add(mainController.lblRLeg2);
-        rLegLabels.add(mainController.lblRLeg3);
-        rLegLabels.add(mainController.lblRLeg4);
-        tempGUIrefresher = new TemperatureGUIrefresher(headLabels, lArmLabels, rArmLabels, lLegLabels, rLegLabels);
-        initialized = true;
-    }
-
 
     class TemperatureGUIrefresher implements Runnable {
         private ArrayList<String> chains;

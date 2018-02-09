@@ -17,15 +17,10 @@ public class BatteryModel {
     private BatteryGUIrefresher batteryGUIrefresher;
     private int charge = -1;
     private boolean isCharging = false;
-    private boolean initialized;
-
 
     public BatteryModel(MainMenuController mainController ) {
         this.mainController = mainController;
-        initialized = false;
-    }
 
-    public void init() {
         // Liste der Batterie Label/Bilder aller Tabs erstellen
         // Um aktuellen Batteriezustand anzuzeigen
         ArrayList<ImageView> imageList = new ArrayList<ImageView>();
@@ -42,7 +37,6 @@ public class BatteryModel {
 
         // batteryGUIrefresher is needed to update the GUI from other thread than JavaFX...
         batteryGUIrefresher = new BatteryGUIrefresher(labelList, imageList);
-        initialized = true;
     }
 
     public void setSession(Session session) {
@@ -91,11 +85,6 @@ public class BatteryModel {
         String batteryState = "unknown";
         String chargingState = "";
         String iconPath = "";
-
-        if ( initialized == false ) {
-            // Beim ersten Mal initialisieren (JavaFX-Komponenten von MainMenuController holen)
-            init();
-        }
 
         if ( charge != -1 ) {
             lblChargeText = (charge + "%");

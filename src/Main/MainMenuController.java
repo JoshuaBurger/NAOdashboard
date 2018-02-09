@@ -35,6 +35,12 @@ public class MainMenuController {
     @FXML
     private Button buttonRGBpreview;
     @FXML
+    private Button btnPlayAudio;
+    @FXML
+    protected Button btnConnect;
+    @FXML
+    protected Button btnDisconnect;
+    @FXML
     private TextArea sayText;
     @FXML
     private TextField textfieldRed;
@@ -99,6 +105,10 @@ public class MainMenuController {
     @FXML
     protected Label lblBattery4;
     @FXML
+    protected Label lblConnectionInfo;
+    @FXML
+    protected Label lblConnectionState;
+    @FXML
     private Slider sliderVolume;
     @FXML
     private Slider sliderSpeechPitch;
@@ -119,17 +129,9 @@ public class MainMenuController {
     @FXML
     protected TextField txtConnectionPort;
     @FXML
-    protected Label lblConnectionInfo;
-    @FXML
-    protected Label lblConnectionState;
-    @FXML
-    protected Button btnConnect;
-    @FXML
-    protected Button btnDisconnect;
-    @FXML
     private ComboBox cbxAudio;
     @FXML
-    private Button btnPlayAudio;
+    protected ComboBox cbxConnectionFavorites;
 
     private int pitchValue = 100;
     private int speedValue = 100;
@@ -150,7 +152,9 @@ public class MainMenuController {
     private HeadSensorModel headSensors;
     private TemperatureModel temperature;
 
-    public MainMenuController() {
+    @FXML
+    public void initialize() {
+        // Methode wird wie Konstruktor aufgerufen (allerdings sind hier die FXML-Komponenten bereits bekannt)
         connection = new ConnectionModel(this);
         movement = new MovementModel();
         ledModel = new LedModel();
@@ -534,5 +538,9 @@ public class MainMenuController {
 
     public void disconnect() {
         connection.disconnect();
+    }
+
+    public void applyConnectionFavorite() {
+        connection.applyFavorite();
     }
 }

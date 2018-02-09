@@ -1,65 +1,49 @@
 package Main;
 
 import com.aldebaran.qi.Session;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
-import com.aldebaran.qi.Application;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-
+import java.io.*;
 import java.util.concurrent.TimeUnit;
 
-import static java.lang.Thread.*;
-
 public class ConnectionModel {
-    @FXML
+
     private Label lblConnectionInfo;
-    @FXML
     private Label lblConnectionState;
-    @FXML
     private Button btnConnect;
-    @FXML
     private Button btnDisconnect;
-    @FXML
     private TextField txtIP;
-    @FXML
     private TextField txtPort;
+    private ComboBox cbxFavorites;
 
     private MainMenuController mainMenuController;
     private Session session;
-    private String naoIP;
-    private String naoPort;
-    private boolean initialized;
+    private ObservableList<String> favorites;
 
     public ConnectionModel(MainMenuController controller)
     {
         this.mainMenuController = controller;
-        initialized = false;
-    }
-
-    private void init() {
-        initialized = true;
+        // JavaFX-Komponenten von MainMenuController holen
         lblConnectionInfo   = mainMenuController.lblConnectionInfo;
         lblConnectionState  = mainMenuController.lblConnectionState;
         btnConnect          = mainMenuController.btnConnect;
         btnDisconnect       = mainMenuController.btnDisconnect;
         txtIP               = mainMenuController.txtConnectionIP;
         txtPort             = mainMenuController.txtConnectionPort;
+        cbxFavorites        = mainMenuController.cbxConnectionFavorites;
+        // Gespeicherte Verbindungen (Favoriten) laden
+        favorites = FXCollections.observableArrayList();
+        loadFavoritesFromFile();
     }
 
     public void connect() {
-        boolean bConnected = false;
-
-        if ( initialized == false ) {
-            init();
-        }
-
-        naoIP = txtIP.getText();
-        naoPort = txtPort.getText();
-        String naoUrl = "tcp://" + naoIP + ":" + naoPort;
+        String naoUrl = txtIP.getText() + ":" + txtPort.getText();
 
         if( session != null ){
             // Aktuelle Verbindung schließen
@@ -73,30 +57,29 @@ public class ConnectionModel {
         setInfoText("Connecting to " + naoUrl + " ...", Color.BLACK);
         try{
             // Verbindungsversuch (blockierend mit 5 Sek Timeout, da das default Timeout sehr lang ist.)
-            session.connect(naoUrl).get(5, TimeUnit.SECONDS);
-            if ( session.isConnected() ) {
-                bConnected = true;
-            }
+            session.connect("tcp://" + naoUrl).get(5, TimeUnit.SECONDS);
         }
         catch(Exception e){
             // Fehler wird unten mitbehandelt
         }
 
-        if( bConnected == true){
+        if( session.isConnected() ){
             // Erfolgreich verbunden
             setInfoText("Connection established.", Color.GREEN);
-            setConnectionState();
-            mainMenuController.setSession(session);
+            setConnectionState(naoUrl);
             mainMenuController.saySomething("Connected.");
+            // Verbindung in Datei merken
+            addConnectionToFavorites(naoUrl);
         }
         else{
             setInfoText("Couldn't connect to NAO.", Color.RED);
-            setConnectionState();
+            setConnectionState(null);
             // session zurücksetzen
             session.close();
             session = null;
-            mainMenuController.setSession(null);
         }
+        // Session an alle Nutzer propagieren (auch wenn session==null)
+        mainMenuController.setSession(session);
     }
 
     public void disconnect(){
@@ -106,7 +89,7 @@ public class ConnectionModel {
             session = null;
         }
         setInfoText("Connection closed.", Color.BLACK);
-        setConnectionState();
+        setConnectionState(null);
         mainMenuController.setSession(session);
     }
 
@@ -116,8 +99,8 @@ public class ConnectionModel {
         System.out.println(text);
     }
 
-    private void setConnectionState(){
-        if( (session == null) || (session.isConnected() == false) ){
+    private void setConnectionState(String url){
+        if( url == null ){
             lblConnectionState.setTextFill(Color.RED);
             lblConnectionState.setText("Disconnected.");
             btnConnect.setDisable(false);
@@ -125,9 +108,78 @@ public class ConnectionModel {
         }
         else{
             lblConnectionState.setTextFill(Color.GREEN);
-            lblConnectionState.setText("Connected to " + naoIP + ":" + naoPort);
+            lblConnectionState.setText("Connected to " + url);
             btnConnect.setDisable(true);
             btnDisconnect.setDisable(false);
+        }
+    }
+
+    private void addConnectionToFavorites(String url) {
+        // Pruefen, ob nicht bereits in Favoriten
+        if ( favorites.contains(url) == false ) {
+            File file = new File("favorites.dat");
+            try {
+                // Datei erstellen falls nicht schon vorhanden
+                file.createNewFile();
+                if ( file.canWrite() == false ) {
+                    System.out.println("Error saving favorites: Can't write to file.");
+                }
+                // Datei zum Schreiben oeffnen (wirft Exception bei Fehler)
+                PrintWriter p = new PrintWriter(file);
+
+                // Dann Verbindung erstmal in Liste und diese ggf. auf 5 Verbindungen reduzieren
+                favorites.add(0,url);
+                for (int i = favorites.size(); i > 5; i--) {
+                    if( cbxFavorites.getSelectionModel().getSelectedIndex() == (i-1) ) {
+                        // Dann loeschen wir den gerade ausgewaehlten
+                        // Gerade hinzugefuegten in Auswahl setzen, um Fehlern vorzubeugen
+                        cbxFavorites.getSelectionModel().selectFirst();
+                    }
+                    favorites.remove(i-1);
+                }
+                // Favoriten in Datei merken
+                for ( String conn : favorites ) {
+                    p.println(conn);
+                }
+                p.flush();
+                p.close();
+            } catch(Exception e) {
+                System.out.println("Error saving favorites: " + e.toString());
+            }
+        }
+    }
+
+    private void loadFavoritesFromFile() {
+        // Gespeicherte Verbindungen laden (1x pro Laufzeit)
+        File file = new File("favorites.dat");
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+
+            // Datei Zeile fuer Zeile einlesen (Schema: "ip:port")
+            while ( reader.ready() ) {
+                String line = reader.readLine();
+                if ( (line != null) && (line != "") ) {
+                    favorites.add(line);
+                }
+            }
+        } catch(Exception e) {
+            System.out.println("Loading connection favorites failed: " + e.toString());
+        }
+        // Liste mit Combobox verknuepfen (Auch wenn sie noch leer sein sollte)
+        cbxFavorites.setItems(favorites);
+    }
+
+    public void applyFavorite() {
+        // Ausgewaehlte URL holen
+        String url = cbxFavorites.getSelectionModel().getSelectedItem().toString();
+        if ( (url != null) && (url.length() > 0) ) {
+            // URL in IP und Port splitten und in Textfelder setzen
+            int index = url.indexOf(':');
+            String ip = url.substring(0,index);
+            String port = url.substring(index + 1);
+
+            txtIP.setText(ip);
+            txtPort.setText(port);
         }
     }
 
