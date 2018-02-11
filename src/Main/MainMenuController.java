@@ -17,6 +17,16 @@ public class MainMenuController {
     @FXML
     private TabPane tabPane;
     @FXML
+    private Tab tabConnection;
+    @FXML
+    private Tab tabLeds;
+    @FXML
+    private Tab tabSpeech;
+    @FXML
+    private Tab tabPostures;
+    @FXML
+    private Tab tabMoves;
+    @FXML
     private Button buttonFaceLedsRed;
     @FXML
     private Button buttonFaceLedsYellow;
@@ -143,6 +153,7 @@ public class MainMenuController {
     private String selectedLedItem;
     private String hexRGBColor = "#FF0000";
     private ObservableList sounds;
+
     private Session session;
     private ALMemory memory;
     private ConnectionModel connection;
@@ -155,9 +166,10 @@ public class MainMenuController {
     @FXML
     public void initialize() {
         // Methode wird wie Konstruktor aufgerufen (allerdings sind hier die FXML-Komponenten bereits bekannt)
+        // Verschiedene Models initializieren
         connection = new ConnectionModel(this);
-        movement = new MovementModel();
-        ledModel = new LedModel();
+        movement = new MovementModel(this);
+        ledModel = new LedModel(this);
         battery = new BatteryModel(this);
         headSensors = new HeadSensorModel(this);
         temperature = new TemperatureModel(this);
@@ -490,7 +502,8 @@ public class MainMenuController {
 
     public void getWalkSpeedSliderValue() {
         double currentValue = walkSpeedSlider.getValue();
-        walkSpeedValue = (float)(currentValue/100);         //set walking speed
+        //set walking speed
+        walkSpeedValue = (float)(currentValue/100);
         System.out.println(walkSpeedValue);
     }
 
@@ -509,8 +522,9 @@ public class MainMenuController {
         battery.setSession(session);
         headSensors.setSession(session);
         temperature.setSession(session);
-        setUpAudio();
 
+        // AudioFiles vom NAO holen
+        setUpAudio();
         // Methoden auf verschiedene Events registrieren
         registerEvents();
     }
@@ -530,6 +544,24 @@ public class MainMenuController {
             System.out.println("Events not available");
             memory = null;
         }
+    }
+
+    public void handleConnectionClosed() {
+        // Verbindung geschlossen
+        // Tabs deaktivieren und zu Connection Tab springen
+        tabLeds.setDisable(true);
+        tabMoves.setDisable(true);
+        tabSpeech.setDisable(true);
+        tabPostures.setDisable(true);
+        tabPane.getSelectionModel().select(tabConnection);
+        connection.setDisconnected();
+    }
+
+    public void activateTabs() {
+        tabLeds.setDisable(false);
+        tabMoves.setDisable(false);
+        tabSpeech.setDisable(false);
+        tabPostures.setDisable(false);
     }
 
     public void connect() {

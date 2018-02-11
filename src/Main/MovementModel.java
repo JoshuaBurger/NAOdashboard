@@ -8,28 +8,35 @@ import java.util.List;
 
 public class MovementModel {
 
-    private Session session;
+    private MainMenuController mainController;
+    private Session session = null;
+    private ALMotion motion = null;
+
+    public MovementModel(MainMenuController main) {
+        this.mainController = main;
+    }
 
     public void setSession(Session session) {
         this.session = session;
+        if ( session == null ) {
+            motion = null;
+        }
+        else {
+            // Motion-Proxy erstellen
+            try {
+                motion = new ALMotion(session);
+            } catch (Exception e){
+                System.out.println("Error creating motion proxy on session");
+            }
+        }
     }
 
-
     public void moveHead(String direction) {
-        ALMotion motion;
         List<Float> radians;
         String jointName = "";
         double currentHeadYawRad = 0.0;
         double currentHeadPitchRad = 0.0;
         double newRadiant = 0.0;
-
-        // Motion-Proxy erstellen (schlaegt fehl bei fehlender Verbindung)
-        try {
-            motion = new ALMotion(session);
-        } catch (Exception e){
-            System.out.println("Connection lost.");
-            return;
-        }
 
         try {
             // Kopf-Stiffness setzen, um zu steuern
@@ -84,8 +91,13 @@ public class MovementModel {
             // Kopf-Stiffness zuruecksetzen
             motion.setStiffnesses("Head", 0.0);
         } catch (Exception e) {
-            System.out.println("Problem while moving head:");
-            e.printStackTrace();
+            if ( (session == null) || (session.isConnected() == false) ) {
+                System.out.println("NAO connection lost.");
+                mainController.handleConnectionClosed();
+            }
+            else {
+                System.out.println("Error while moving head: " + e.getMessage());
+            }
         }
     }
 
@@ -95,27 +107,37 @@ public class MovementModel {
             posture.goToPosture(postureName, 6F);
         }
         catch (Exception e) {
-            System.out.println(e.getMessage());
+            if ( (session == null) || (session.isConnected() == false) ) {
+                System.out.println("NAO connection lost.");
+                mainController.handleConnectionClosed();
+            }
+            else {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
     public void move(float xAxis, float yAxis, float zAxis) {
         try {
             goToPosture("Stand");
-            ALMotion walk = new ALMotion(session);
-            walk.move(xAxis, yAxis, zAxis);
+            motion.move(xAxis, yAxis, zAxis);
         } catch (Exception e) {
-            System.out.println(e.getMessage() + "Connection lost.");
+            if ( (session == null) || (session.isConnected() == false) ) {
+                System.out.println("NAO connection lost.");
+                mainController.handleConnectionClosed();
+            }
+            else {
+                System.out.println("Error while moving: " + e.getMessage());
+            }
         }
     }
     public void stopWalking() {
         try {
-            ALMotion stopWalking = new ALMotion(session);
-            stopWalking.stopMove();
+            motion.stopMove();
             goToPosture("Stand");
         }
         catch (Exception e) {
-            System.out.println(e.getMessage());
+            // Keinen Fehler ausgeben, da direkt nach move ausgefuehrt wird
         }
     }
 }

@@ -13,14 +13,11 @@ import java.util.ArrayList;
 
 public class BatteryModel {
 
-    private MainMenuController mainController;
     private BatteryGUIrefresher batteryGUIrefresher;
     private int charge = -1;
     private boolean isCharging = false;
 
     public BatteryModel(MainMenuController mainController ) {
-        this.mainController = mainController;
-
         // Liste der Batterie Label/Bilder aller Tabs erstellen
         // Um aktuellen Batteriezustand anzuzeigen
         ArrayList<ImageView> imageList = new ArrayList<ImageView>();

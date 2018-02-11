@@ -68,6 +68,7 @@ public class ConnectionModel {
             setInfoText("Connection established.", Color.GREEN);
             setConnectionState(naoUrl);
             mainMenuController.saySomething("Connected.");
+            mainMenuController.activateTabs();
             // Verbindung in Datei merken
             addConnectionToFavorites(naoUrl);
         }
@@ -83,14 +84,20 @@ public class ConnectionModel {
     }
 
     public void disconnect(){
-        if ( session != null ){
+        if ( (session != null) && (session.isConnected()) ){
             mainMenuController.saySomething("Disconnected.");
             session.close();
-            session = null;
         }
+        // Main Controller sperrt alle Tabs und ruft setDisconnected() auf
+        // So ist das aktive Disconnecten stringent zum passiven Verbindungsverlust
+        mainMenuController.handleConnectionClosed();
+    }
+
+    public void setDisconnected() {
+        session = null;
+        mainMenuController.setSession(session);
         setInfoText("Connection closed.", Color.BLACK);
         setConnectionState(null);
-        mainMenuController.setSession(session);
     }
 
     private void setInfoText(String text, Color color){

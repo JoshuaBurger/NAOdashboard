@@ -5,6 +5,11 @@ import com.aldebaran.qi.helper.proxies.ALLeds;
 
 public class LedModel {
     private Session session;
+    private MainMenuController mainController;
+
+    public LedModel(MainMenuController main) {
+        this.mainController = main;
+    }
 
     public void setSession(Session session) {
         this.session = session;
@@ -16,6 +21,10 @@ public class LedModel {
             leds.off(name);
         }
         catch (Exception e) {
+            if ( (session == null) || (session.isConnected() == false) ) {
+                System.out.println("Connection lost");
+                mainController.handleConnectionClosed();
+            }
             System.out.println(e.getMessage());
         }
     }
@@ -26,6 +35,10 @@ public class LedModel {
             leds.fadeRGB(ledsName, color, 1F);
         }
         catch (Exception e) {
+            if ( (session == null) || (session.isConnected() == false) ) {
+                System.out.println("Connection lost");
+                mainController.handleConnectionClosed();
+            }
             System.out.println(e.getMessage());
         }
     }
@@ -37,6 +50,10 @@ public class LedModel {
             ledsRGB.fadeRGB(ledsName, red, green, blue, 1F);
         }
         catch (Exception e) {
+            if ( (session == null) || (session.isConnected() == false) ) {
+                System.out.println("Connection lost");
+                mainController.handleConnectionClosed();
+            }
             System.out.println(e.getMessage());
         }
     }
