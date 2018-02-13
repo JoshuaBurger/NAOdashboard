@@ -1,6 +1,7 @@
 package Main;
 
 import com.aldebaran.qi.Session;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,6 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import java.io.*;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 public class ConnectionModel {
@@ -25,6 +28,7 @@ public class ConnectionModel {
     private MainMenuController mainMenuController;
     private Session session;
     private ObservableList<String> favorites;
+    private ConnectionCheck connCheck;
 
     public ConnectionModel(MainMenuController controller)
     {
@@ -40,6 +44,10 @@ public class ConnectionModel {
         // Gespeicherte Verbindungen (Favoriten) laden
         favorites = FXCollections.observableArrayList();
         loadFavoritesFromFile();
+        // Verbindung alle 10 Sekunden ueberpruefen
+        Timer timer = new Timer();
+        connCheck = new ConnectionCheck(controller);
+        timer.schedule( connCheck, 0, 10000 );
     }
 
     public void connect() {
@@ -68,7 +76,7 @@ public class ConnectionModel {
             setInfoText("Connection established.", Color.GREEN);
             setConnectionState(naoUrl);
             mainMenuController.saySomething("Connected.");
-            mainMenuController.activateTabs();
+            mainMenuController.enableTabs();
             // Verbindung in Datei merken
             addConnectionToFavorites(naoUrl);
         }
@@ -81,22 +89,32 @@ public class ConnectionModel {
         }
         // Session an alle Nutzer propagieren (auch wenn session==null)
         mainMenuController.setSession(session);
+        connCheck.setSession(session);
     }
 
     public void disconnect(){
         if ( (session != null) && (session.isConnected()) ){
             mainMenuController.saySomething("Disconnected.");
+            mainMenuController.unregisterEvents();
             session.close();
         }
         // Main Controller sperrt alle Tabs und ruft setDisconnected() auf
         // So ist das aktive Disconnecten stringent zum passiven Verbindungsverlust
-        mainMenuController.handleConnectionClosed();
+        mainMenuController.handleConnectionClosed(false);
     }
 
-    public void setDisconnected() {
+    public void setDisconnected(boolean lost) {
         session = null;
         mainMenuController.setSession(session);
-        setInfoText("Connection closed.", Color.BLACK);
+        connCheck.setSession(session);
+        if ( lost ) {
+            System.out.println("Connection lost.");
+            setInfoText("Connection closed.", Color.BLACK);
+        }
+        else {
+            System.out.println("Connection closed.");
+            setInfoText("Connection lost.", Color.RED);
+        }
         setConnectionState(null);
     }
 
@@ -177,7 +195,7 @@ public class ConnectionModel {
     }
 
     public void applyFavorite() {
-        // Ausgewaehlte URL holen
+        // Ausgewaehlte URL aus Combobox holen
         String url = cbxFavorites.getSelectionModel().getSelectedItem().toString();
         if ( (url != null) && (url.length() > 0) ) {
             // URL in IP und Port splitten und in Textfelder setzen
@@ -187,6 +205,43 @@ public class ConnectionModel {
 
             txtIP.setText(ip);
             txtPort.setText(port);
+        }
+    }
+
+    class ConnectionCheck extends TimerTask
+    {
+        private MainMenuController mainController;
+        private Session session;
+        private boolean disconnHandled;
+
+        public ConnectionCheck(MainMenuController main) {
+            this.mainController = main;
+            session = null;
+            disconnHandled = false;
+        }
+
+        public void setSession(Session s) {
+            session = s;
+            disconnHandled = false;
+        }
+
+        @Override public void run()
+        {
+            // Erstmal pruefen, ob nicht bereits gehandelt
+            if ( disconnHandled == false) {
+                if ( (session != null) && (session.isConnected() == false) ) {
+                    // Bei Verbindungsverlust MainMenuController informieren
+                    // Via runLater, da GUI nicht im Timer-Thread verändert werden darf
+                    Platform.runLater( new Runnable() {
+                        @Override
+                        public void run() {
+                            mainController.handleConnectionClosed(true);
+                            disconnHandled = true;
+                        }
+                    }
+                    );
+                }
+            }
         }
     }
 

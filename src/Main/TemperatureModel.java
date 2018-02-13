@@ -50,15 +50,17 @@ public class TemperatureModel {
 
             // Temperatur Events aktivieren
             temperature.setEnableNotifications(true);
+            // Initial erstmal alle Temperaturstati auf "gut" setzen
+            evaluateTemperatureDiagnosis(null,true);
             // Momentanen Temperaturdiagnose abholen
             Object obj = temperature.getTemperatureDiagnosis();
-            // Initial erstmal alles auf "gut" setzen und dann ggf. Fehler
-            //evaluateTemperatureDiagnosis(null);
             if ( obj != null ) {
-                evaluateTemperatureDiagnosis(obj);
+                evaluateTemperatureDiagnosis(obj,true);
             }
         } catch(Exception e) {
-            System.out.println("No connection.");
+            if ( session != null ) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
@@ -69,7 +71,7 @@ public class TemperatureModel {
                         @Override
                         public void onEvent(Object obj) {
                             // Momentane Temperaturdiagnose auswerten
-                            evaluateTemperatureDiagnosis(obj);
+                            evaluateTemperatureDiagnosis(obj,false);
                         }
                     });
             memory.subscribeToEvent("TemperatureStatusChanged",
@@ -77,7 +79,7 @@ public class TemperatureModel {
                         @Override
                         public void onEvent(Object obj) {
                             // Momentane Temperaturdiagnose auswerten
-                            evaluateTemperatureDiagnosis(obj);
+                            evaluateTemperatureDiagnosis(obj,false);
                         }
                     });
 
@@ -86,7 +88,7 @@ public class TemperatureModel {
         }
     }
 
-    private void evaluateTemperatureDiagnosis(Object obj) {
+    private void evaluateTemperatureDiagnosis(Object obj, boolean fromMainThread) {
         int state = -1;
         ArrayList<String> chains = null;
 
@@ -120,7 +122,14 @@ public class TemperatureModel {
         // ueber eine kleine Wrapper-Methode, die die Aktualisierung im JavaFX-Thread vornimmt.
         // Andernfalls gibt es eine Exception.
         tempGUIrefresher.setValues(state, chains);
-        Platform.runLater(tempGUIrefresher);
+        if ( fromMainThread == false ) {
+            Platform.runLater(tempGUIrefresher);
+        }
+        else {
+            // In diesem Fall muessen wir nicht warten
+            tempGUIrefresher.run();
+        }
+
     }
 
     class TemperatureGUIrefresher implements Runnable {

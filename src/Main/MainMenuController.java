@@ -178,11 +178,16 @@ public class MainMenuController {
     //LEDs
     public void allLEDsOff() {
         ledModel.turnledsOff("FaceLeds");
-    }public void rightEyeLEDsOff() {
+    }
+
+    public void rightEyeLEDsOff() {
         ledModel.turnledsOff("LeftFaceLeds");
-    }public void leftEyeLEDsOff() {
+    }
+
+    public void leftEyeLEDsOff() {
         ledModel.turnledsOff("RightFaceLeds");
     }
+
     public void unselectAllLEDitems() {
         buttonFaceLedsRed.setStyle("-fx-border-width: 0; -fx-background-color: red;");
         buttonFaceLedsBlue.setStyle("-fx-border-width: 0; -fx-background-color: blue;");
@@ -356,7 +361,12 @@ public class MainMenuController {
                 tts.say("\\vct=" + pitch+ "\\" + "\\rspd=" + speed+ "\\" + text, lang);
                 System.out.println(lang);
             } catch(Exception e) {
-                System.out.println("No connection.");
+                if ( (session == null) || (session.isConnected() == false) ) {
+                    handleConnectionClosed(true);
+                }
+                else {
+                    System.out.println(e.getMessage());
+                }
             }
         }
     }
@@ -407,34 +417,37 @@ public class MainMenuController {
             System.out.println(sounds);
         }
         catch (Exception e){
+            // Moeglicherweise hat NAO z.b. keine Audio-Dateien
+            // Verbindung muss hier nicht geprueft werden, da die Methode
+            // direkt beim Verbindung setzen ausgefuehrt wird
             System.out.println(e.toString());
             cbxAudio.setDisable(true);
             btnPlayAudio.setDisable(true);
-
-
         }
     }
 
     public void playAudio() throws Exception {
-        ALAudioPlayer audioPlayer = new ALAudioPlayer(session);
-        audioPlayer.playSoundSetFile((cbxAudio.getValue()).toString());
-        System.out.println(cbxAudio.getValue());
+        try {
+            ALAudioPlayer audioPlayer = new ALAudioPlayer(session);
+            audioPlayer.playSoundSetFile((cbxAudio.getValue()).toString());
+            System.out.println(cbxAudio.getValue());
+        } catch (Exception e) {
+            if ( (session == null) || (session.isConnected() == false) ) {
+                handleConnectionClosed(true);
+            }
+            else  {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
 
     //Postures
     public void wakeUp() throws Exception{
-        try {
-            ALMotion wakeUp = new ALMotion(session);
-            wakeUp.wakeUp();
-        }
-        catch(Exception e) {
-            System.out.println(e.getMessage() + "Connection lost.");
-        }
+        movement.goToRest(false);
     }
     public void rest()throws Exception {
-        ALMotion rest = new ALMotion(session);
-        rest.rest();
+        movement.goToRest(true);
     }
     public void standUp() {
         movement.goToPosture("Stand");
@@ -454,8 +467,6 @@ public class MainMenuController {
     public void standZero() {
         movement.goToPosture("StandZero");
     }
-
-
 
     //Head
     public void headUp() {
@@ -546,18 +557,29 @@ public class MainMenuController {
         }
     }
 
-    public void handleConnectionClosed() {
-        // Verbindung geschlossen
-        // Tabs deaktivieren und zu Connection Tab springen
-        tabLeds.setDisable(true);
-        tabMoves.setDisable(true);
-        tabSpeech.setDisable(true);
-        tabPostures.setDisable(true);
-        tabPane.getSelectionModel().select(tabConnection);
-        connection.setDisconnected();
+    public void unregisterEvents() {
+        try {
+            memory.unsubscribeAllEvents();
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    public void activateTabs() {
+    public void handleConnectionClosed(boolean lost) {
+        // Verbindung geschlossen
+        // Zuerst pruefen, ob Verbindungsverlust nicht bereits gehandelt wurde
+        if ( tabLeds.isDisabled() == false ) {
+            // Tabs deaktivieren und zu Connection Tab springen
+            tabLeds.setDisable(true);
+            tabMoves.setDisable(true);
+            tabSpeech.setDisable(true);
+            tabPostures.setDisable(true);
+            tabPane.getSelectionModel().select(tabConnection);
+            connection.setDisconnected(lost);
+        }
+    }
+
+    public void enableTabs() {
         tabLeds.setDisable(false);
         tabMoves.setDisable(false);
         tabSpeech.setDisable(false);

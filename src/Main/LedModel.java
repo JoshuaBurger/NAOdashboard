@@ -22,8 +22,7 @@ public class LedModel {
         }
         catch (Exception e) {
             if ( (session == null) || (session.isConnected() == false) ) {
-                System.out.println("Connection lost");
-                mainController.handleConnectionClosed();
+                mainController.handleConnectionClosed(true);
             }
             System.out.println(e.getMessage());
         }
@@ -36,8 +35,7 @@ public class LedModel {
         }
         catch (Exception e) {
             if ( (session == null) || (session.isConnected() == false) ) {
-                System.out.println("Connection lost");
-                mainController.handleConnectionClosed();
+                mainController.handleConnectionClosed(true);
             }
             System.out.println(e.getMessage());
         }
@@ -51,8 +49,7 @@ public class LedModel {
         }
         catch (Exception e) {
             if ( (session == null) || (session.isConnected() == false) ) {
-                System.out.println("Connection lost");
-                mainController.handleConnectionClosed();
+                mainController.handleConnectionClosed(true);
             }
             System.out.println(e.getMessage());
         }

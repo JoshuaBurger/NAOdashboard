@@ -92,8 +92,7 @@ public class MovementModel {
             motion.setStiffnesses("Head", 0.0);
         } catch (Exception e) {
             if ( (session == null) || (session.isConnected() == false) ) {
-                System.out.println("NAO connection lost.");
-                mainController.handleConnectionClosed();
+                mainController.handleConnectionClosed(true);
             }
             else {
                 System.out.println("Error while moving head: " + e.getMessage());
@@ -108,8 +107,26 @@ public class MovementModel {
         }
         catch (Exception e) {
             if ( (session == null) || (session.isConnected() == false) ) {
-                System.out.println("NAO connection lost.");
-                mainController.handleConnectionClosed();
+                mainController.handleConnectionClosed(true);
+            }
+            else {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    public void goToRest(boolean shallRest) {
+        try {
+            if ( shallRest ) {
+                motion.rest();
+            }
+            else {
+                motion.wakeUp();
+            }
+        }
+        catch (Exception e) {
+            if ( (session == null) || (session.isConnected() == false) ) {
+                mainController.handleConnectionClosed(true);
             }
             else {
                 System.out.println(e.getMessage());
@@ -123,8 +140,7 @@ public class MovementModel {
             motion.move(xAxis, yAxis, zAxis);
         } catch (Exception e) {
             if ( (session == null) || (session.isConnected() == false) ) {
-                System.out.println("NAO connection lost.");
-                mainController.handleConnectionClosed();
+                mainController.handleConnectionClosed(true);
             }
             else {
                 System.out.println("Error while moving: " + e.getMessage());
