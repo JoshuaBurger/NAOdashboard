@@ -109,11 +109,11 @@ public class ConnectionModel {
         connCheck.setSession(session);
         if ( lost ) {
             System.out.println("Connection lost.");
-            setInfoText("Connection closed.", Color.BLACK);
+            setInfoText("Connection lost.", Color.RED);
         }
         else {
             System.out.println("Connection closed.");
-            setInfoText("Connection lost.", Color.RED);
+            setInfoText("Connection closed.", Color.BLACK);
         }
         setConnectionState(null);
     }
