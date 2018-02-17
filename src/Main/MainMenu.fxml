@@ -20,6 +20,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="761.0" prefWidth="888.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.MainMenuController">
@@ -505,7 +506,7 @@
           </AnchorPane>
       </content>
     </Tab>
-  <Tab fx:id="tabMoves" disable="true" style="-fx-background-color: white;" text="Moves">
+  <Tab fx:id="tabMoves" style="-fx-background-color: white;" text="Moves">
       <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" onKeyPressed="#walkKey" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
               <children>
@@ -591,6 +592,28 @@
                   <Label fx:id="lblRArm4" alignment="CENTER" layoutX="642.0" layoutY="592.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
                   <Label fx:id="lblRLeg4" alignment="CENTER" layoutX="642.0" layoutY="661.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
                   <Label fx:id="lblHead4" alignment="CENTER" layoutX="738.0" layoutY="505.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
+                  <ImageView fx:id="imgCamera" fitHeight="240.0" fitWidth="320.0" layoutX="284.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/camera_disabled.png" />
+                     </image></ImageView>
+                  <Button fx:id="btnCameraOn" layoutX="315.0" layoutY="492.0" mnemonicParsing="false" onAction="#enableCamera" text="Enable Camera">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></Button>
+                  <Button fx:id="btnCameraOff" disable="true" layoutX="452.0" layoutY="492.0" mnemonicParsing="false" onAction="#disableCamera" text="Disable Camera">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor></Button>
+                  <Button fx:id="btnPhoto" disable="true" layoutX="399.0" layoutY="530.0" mnemonicParsing="false" onAction="#takePhoto" text="Take Photo">
+                     <cursor>
+                        <Cursor fx:constant="OPEN_HAND" />
+                     </cursor>
+                  </Button>
+                  <Label fx:id="lblCameraLoading" layoutX="365.0" layoutY="452.0" text="Waiting for Camera..." textFill="RED" visible="false">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
               </children>
           </AnchorPane>
       </content>

@@ -51,6 +51,12 @@ public class MainMenuController {
     @FXML
     protected Button btnDisconnect;
     @FXML
+    protected Button btnCameraOn;
+    @FXML
+    protected Button btnCameraOff;
+    @FXML
+    protected Button btnPhoto;
+    @FXML
     private TextArea sayText;
     @FXML
     private TextField textfieldRed;
@@ -119,6 +125,8 @@ public class MainMenuController {
     @FXML
     protected Label lblConnectionState;
     @FXML
+    protected Label lblCameraLoading;
+    @FXML
     private Slider sliderVolume;
     @FXML
     private Slider sliderSpeechPitch;
@@ -134,6 +142,8 @@ public class MainMenuController {
     protected ImageView imgBattery3;
     @FXML
     protected ImageView imgBattery4;
+    @FXML
+    protected ImageView imgCamera;
     @FXML
     protected TextField txtConnectionIP;
     @FXML
@@ -162,6 +172,7 @@ public class MainMenuController {
     private BatteryModel battery;
     private HeadSensorModel headSensors;
     private TemperatureModel temperature;
+    private CameraModel camera;
 
     @FXML
     public void initialize() {
@@ -173,6 +184,19 @@ public class MainMenuController {
         battery = new BatteryModel(this);
         headSensors = new HeadSensorModel(this);
         temperature = new TemperatureModel(this);
+        camera = new CameraModel(this);
+    }
+
+    public void enableCamera() {
+        camera.enableCamera();
+    }
+
+    public void disableCamera() {
+        camera.disableCamera();
+    }
+
+    public void takePhoto() {
+        camera.takePhoto();
     }
 
     //LEDs
@@ -533,6 +557,7 @@ public class MainMenuController {
         battery.setSession(session);
         headSensors.setSession(session);
         temperature.setSession(session);
+        camera.setSession(session);
 
         // AudioFiles vom NAO holen
         setUpAudio();
