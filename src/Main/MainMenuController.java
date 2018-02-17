@@ -11,7 +11,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 
 public class MainMenuController {
     @FXML
@@ -44,6 +44,12 @@ public class MainMenuController {
     private Button buttonFaceLedWhite;
     @FXML
     private Button buttonRGBpreview;
+    @FXML
+    private Button btnRGBleftEye;
+    @FXML
+    private Button btnRGBrightEye;
+    @FXML
+    private Button btnRGBbothEyes;
     @FXML
     private Button btnPlayAudio;
     @FXML
@@ -152,16 +158,24 @@ public class MainMenuController {
     private ComboBox cbxAudio;
     @FXML
     protected ComboBox cbxConnectionFavorites;
+    @FXML
+    protected GridPane gridPaneColorButtons;
+    @FXML
+    protected GridPane gridPaneLEDsOff;
+
 
     private int pitchValue = 100;
     private int speedValue = 100;
-    private int valueRGBred = 255;
-    private int valueRGBgreen = 0;
-    private int valueRGBblue = 0;
+    private int valueRedInteger = 255;
+    private int valueGreenInteger = 0;
+    private int valueBlueInteger = 0;
     private float walkSpeedValue = 0.5F;
     private String language = "English";
     private String selectedLedItem;
     private String hexRGBColor = "#FF0000";
+    private String tfRedString = "255";
+    private String tfGreenString = "0";
+    private String tfBlueString = "0";
     private ObservableList sounds;
 
     private Session session;
@@ -228,23 +242,29 @@ public class MainMenuController {
     }
 
     public void changeFaceLEDs() {
-        getLEDsColor("FaceLeds");
+        setTextfieldText();
+        identifySelectedColor("FaceLeds");
     }
     public void changeRightEyeLEDs() {
-        getLEDsColor("LeftFaceLeds");
+        setTextfieldText();
+        identifySelectedColor("LeftFaceLeds");
     }
     public void changeLeftEyeLEDs() {
-        getLEDsColor("RightFaceLeds");
+        setTextfieldText();
+        identifySelectedColor("RightFaceLeds");
     }
-
-    public void getLEDsColor(String ledsName) {
+    public void setTextfieldText() {
+        textfieldRed.setText(tfRedString);
+        textfieldGreen.setText(tfGreenString);
+        textfieldBlue.setText(tfBlueString);
+    }
+    public void identifySelectedColor(String ledsName) {             //identify which color is selected
         if (selectedLedItem == "rgbColor") {
-        Float red = (Float.parseFloat(textfieldRed.getText())/100);
-        Float green = (Float.parseFloat(textfieldGreen.getText())/100);
-        Float blue = (Float.parseFloat(textfieldBlue.getText())/100);
+        Float red = (Float.parseFloat(tfRedString)/100);
+        Float green = (Float.parseFloat(tfGreenString)/100);
+        Float blue = (Float.parseFloat(tfBlueString)/100);
         ledModel.setledsRGBcolor(ledsName, red, green, blue);
         } else if (selectedLedItem == "orange") {
-            System.out.println("detected: orange was clicked, ledModel wird aufgerufen");
             ledModel.setledsRGBcolor(ledsName, 2.55F, 0.4F, 0F);
         } else {
             ledModel.colorFaceLeds(ledsName, selectedLedItem);
@@ -255,107 +275,215 @@ public class MainMenuController {
     //change style of selected button
     public void buttonFaceLedsRed() {
         unselectAllLEDitems();
-        buttonFaceLedsRed.setStyle("-fx-border-color: darkgrey; -fx-border-width: 3; -fx-background-color: red;");
+        buttonFaceLedsRed.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: red;");
         selectedLedItem = "red";
     }
     public void buttonFaceLedsBlue() {
         unselectAllLEDitems();
-        buttonFaceLedsBlue.setStyle("-fx-border-color: darkgrey; -fx-border-width: 3; -fx-background-color: blue;");
+        buttonFaceLedsBlue.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: blue;");
         selectedLedItem = "blue";
     }
     public void buttonFaceLedsGreen() {
         unselectAllLEDitems();
-        buttonFaceLedGreen.setStyle("-fx-border-color: darkgrey; -fx-border-width: 3; -fx-background-color: green;");
+        buttonFaceLedGreen.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: green;");
         selectedLedItem = "green";
     }
     public void buttonFaceLedsYellow() {
         unselectAllLEDitems();
-        buttonFaceLedsYellow.setStyle("-fx-border-color: darkgrey; -fx-border-width: 3; -fx-background-color: yellow;");
+        buttonFaceLedsYellow.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: yellow;");
         selectedLedItem = "yellow";
     }
     public void buttonFaceLedsCyan() {
         unselectAllLEDitems();
-        buttonFaceLedCyan.setStyle("-fx-border-color: darkgrey; -fx-border-width: 3; -fx-background-color: cyan;");
+        buttonFaceLedCyan.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: cyan;");
         selectedLedItem = "cyan";
     }
     public void buttonFaceLedsMagenta() {
         unselectAllLEDitems();
-        buttonFaceLedMagenta.setStyle("-fx-border-color: darkgrey; -fx-border-width: 3; -fx-background-color: magenta;");
+        buttonFaceLedMagenta.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: magenta;");
         selectedLedItem = "magenta";
     }
     public void buttonFaceLedsWhite() {
         unselectAllLEDitems();
-        buttonFaceLedWhite.setStyle("-fx-border-color: darkgrey; -fx-border-width: 3; -fx-background-color: #e4dcdc;");
+        buttonFaceLedWhite.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: #e4dcdc;");
         selectedLedItem = "white";
     }
     public void buttonFaceLedsOrange() {
         unselectAllLEDitems();
-        buttonFaceLedOrange.setStyle("-fx-border-color: darkgrey; -fx-border-width: 3; -fx-background-color: #fe7200;");
+        buttonFaceLedOrange.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: #fe7200;");
         selectedLedItem = "orange";
     }
-    public void rgbColorPreviewSelected() {
-        unselectAllLEDitems();
-        buttonRGBpreview.setStyle("-fx-border-color: darkgrey; -fx-border-width: 5; -fx-background-color: " + hexRGBColor + ";");
-        selectedLedItem = "rgbColor";
+
+    //disables apply buttons
+    public void disableOtherItems(boolean value) {
+        textfieldRed.setDisable(value);
+        textfieldGreen.setDisable(value);
+        textfieldBlue.setDisable(value);
+        buttonRGBpreview.setDisable(value);
+        btnRGBleftEye.setDisable(value);
+        btnRGBrightEye.setDisable(value);
+        btnRGBbothEyes.setDisable(value);
+        gridPaneColorButtons.setDisable(value);
+        gridPaneLEDsOff.setDisable(value);
+    }
+
+    public void textfieldKeyReleased(KeyEvent keyEvent) {
+        tfRedString = textfieldRed.getText();
+        tfGreenString = textfieldGreen.getText();
+        tfBlueString = textfieldBlue.getText();
+
+        //remove whitespaces
+        if (keyEvent.getCode() == KeyCode.SPACE) {
+            removeWhitespaces();
+        }
+
+        if (keyEvent.getCode() == KeyCode.BACK_SPACE) {
+            //prevent that textfield could be empty
+            preventEmptyTextfield();
+
+            //check if textfield values are >255
+            if (compareValueTo255(tfRedString) && compareValueTo255(tfGreenString) && compareValueTo255(tfBlueString)) {
+                RGBcolorPreview();                  //show preview of rgb color
+            } else {
+                labelAllowedValue.setVisible(true);
+                disableOtherItems(true);         //disable everything else
+
+                if (compareValueTo255(tfRedString) == false) {
+                    textfieldRed.setStyle("-fx-border-color: red; -fx-border-width: 5; -fx-border-radius: 5;");
+                    textfieldRed.setDisable(false);
+                }
+                if (compareValueTo255(tfGreenString) == false) {
+                    textfieldGreen.setStyle("-fx-border-color: red; -fx-border-width: 5; -fx-border-radius: 5;");
+                    textfieldGreen.setDisable(false);
+                }
+                if (compareValueTo255(tfBlueString) == false) {
+                    textfieldBlue.setStyle("-fx-border-color: red; -fx-border-width: 5; -fx-border-radius: 5;");
+                    textfieldBlue.setDisable(false);
+                }
+            }
+        }
+    }
+    public void textfieldKeyTyped() {
+        tfRedString = textfieldRed.getText();
+        tfGreenString = textfieldGreen.getText();
+        tfBlueString = textfieldBlue.getText();
+
+        //remove letters and punctuation
+        removeforbiddenCharacters();
+
+        //remove 0 to prevent errors while converting
+        removeNull();
+
+        //prevent that textfield could be empty
+        preventEmptyTextfield();
+
+        //check if textfield values are >255
+        if (compareValueTo255(tfRedString) && compareValueTo255(tfGreenString) && compareValueTo255(tfBlueString)) {
+            RGBcolorPreview();                  //show preview of rgb color
+        } else {
+            labelAllowedValue.setVisible(true);
+            disableOtherItems(true);         //disable all other items
+
+            if (compareValueTo255(tfRedString) == false) {
+                textfieldRed.setStyle("-fx-border-color: red; -fx-border-width: 5; -fx-border-radius: 5;");
+                textfieldRed.setDisable(false);
+            }
+            if (compareValueTo255(tfGreenString) == false) {
+                textfieldGreen.setStyle("-fx-border-color: red; -fx-border-width: 5; -fx-border-radius: 5;");
+                textfieldGreen.setDisable(false);
+            }
+            if (compareValueTo255(tfBlueString) == false) {
+                textfieldBlue.setStyle("-fx-border-color: red; -fx-border-width: 5; -fx-border-radius: 5;");
+                textfieldBlue.setDisable(false);
+            }
+        }
+    }
+    public boolean compareValueTo255(String tfValue) {
+        int tfValueInt;
+        try {
+            tfValueInt = Integer.parseInt(tfValue);
+            if (tfValueInt > 255) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch(Exception e) {
+            System.out.println(e.getMessage() + " // something went wrong while converting values of textfields.");
+        }
+        return true;
+    }
+    public void removeWhitespaces() {
+        tfRedString = tfRedString.replaceAll("\\s", "");
+        textfieldRed.setText(tfRedString);
+        textfieldRed.positionCaret(tfRedString.length());
+
+        tfGreenString = tfGreenString.replaceAll("\\s", "");
+        textfieldGreen.setText(tfGreenString);
+        textfieldGreen.positionCaret(tfGreenString.length());
+
+        tfBlueString = tfBlueString.replaceAll("\\s", "");
+        textfieldBlue.setText(tfBlueString);
+        textfieldBlue.positionCaret(tfBlueString.length());
+    }
+    public void preventEmptyTextfield() {
+        if (tfRedString.isEmpty()) { tfRedString = "0"; }
+        if (tfGreenString.isEmpty()) { tfGreenString = "0"; }
+        if (tfBlueString.isEmpty()) { tfBlueString = "0"; }
+    }
+    public void removeforbiddenCharacters() {
+        tfRedString = tfRedString.replaceAll("\\W","");
+        tfRedString = tfRedString.replaceAll("[a-zA-Z]", "");
+        textfieldRed.setText(tfRedString);
+        textfieldRed.positionCaret(tfRedString.length());
+
+        tfGreenString = tfGreenString.replaceAll("\\W","");
+        tfGreenString = tfGreenString.replaceAll("[a-zA-Z]", "");
+        textfieldGreen.setText(tfGreenString);
+        textfieldGreen.positionCaret(tfGreenString.length());
+
+        tfBlueString = tfBlueString.replaceAll("\\W","");
+        tfBlueString = tfBlueString.replaceAll("[a-zA-Z]", "");
+        textfieldBlue.setText(tfBlueString);
+        textfieldBlue.positionCaret(tfBlueString.length());
+    }
+    public void removeNull() {
+        if (tfRedString.startsWith("0") && !tfRedString.equals("0")) {
+            tfRedString = tfRedString.substring(1);
+            textfieldRed.setText(tfRedString);
+            textfieldRed.positionCaret(tfRedString.length());
+        }
+        if (tfGreenString.startsWith("0") && !tfGreenString.equals("0")) {
+            tfGreenString = tfGreenString.substring(1);
+            textfieldGreen.setText(tfGreenString);
+            textfieldGreen.positionCaret(tfGreenString.length());
+        }
+        if (tfBlueString.startsWith("0") && !tfBlueString.equals("0")) {
+            tfBlueString = tfBlueString.substring(1);
+            textfieldBlue.setText(tfBlueString);
+            textfieldBlue.positionCaret(tfBlueString.length());
+        }
     }
 
     //show preview of RGB color
-    public void RGBcolorPreview(KeyEvent keyEvent) {
+    public void RGBcolorPreview() {
+        selectedLedItem = "rgbColor";
+        unselectAllLEDitems();
+        labelAllowedValue.setVisible(false);
+        disableOtherItems(false);         //enable all other items
+        textfieldRed.setStyle("-fx-background-color: white; -fx-border-color: lightgrey; -fx-border-radius: 5;");
+        textfieldGreen.setStyle("-fx-background-color: white; -fx-border-color: lightgrey; -fx-border-radius: 5;");
+        textfieldBlue.setStyle("-fx-background-color: white; -fx-border-color: lightgrey; -fx-border-radius: 5;");
+
         try {
-            labelAllowedValue.setVisible(false);
-            unselectAllLEDitems();
-            selectedLedItem = "rgbColor";
-
-            //check if textfield is null or value is higher than 255
-            if (textfieldRed.getText() == "") {
-                textfieldRed.setText("0");
-                valueRGBred = 0;
-            } else if (setVisibleAllowedValueLabel(valueRGBred) == true) {
-                valueRGBred = 255;
-                textfieldRed.setStyle("-fx-border-color: red; -fx-border-width: 5; -fx-border-radius: 5;");
-            }
-            else {
-                valueRGBred = Integer.parseInt(textfieldRed.getText());
-            }
-
-            if (textfieldGreen.getText() == null) {
-                textfieldGreen.setText("0");
-                valueRGBgreen = 0;
-            } else if (setVisibleAllowedValueLabel(valueRGBgreen) == true){
-                valueRGBgreen = 255;
-                textfieldGreen.setStyle("-fx-border-color: red; -fx-border-width: 5; -fx-border-radius: 5;");
-            }
-            else {
-                valueRGBgreen = Integer.parseInt(textfieldGreen.getText());
-            }
-
-            if (textfieldBlue.getText() == "") {
-                textfieldBlue.setText("0");
-                valueRGBblue = 0;
-            } else if (setVisibleAllowedValueLabel(valueRGBblue) == true){
-                valueRGBblue = 255;
-                textfieldBlue.setStyle("-fx-border-color: red; -fx-border-width: 5; -fx-border-radius: 5;");
-            }
-            else {
-                valueRGBblue = Integer.parseInt(textfieldBlue.getText());
-            }
-
-            //calculate rgb color code
-            hexRGBColor = String.format("#%02X%02X%02X", valueRGBred, valueRGBgreen, valueRGBblue);
-            buttonRGBpreview.setStyle("-fx-border-color: darkgrey; -fx-border-width: 5; -fx-background-color: " + hexRGBColor + ";");
-        } catch (Exception e) {
-            System.out.println(e.getMessage() + " // An Error occurred while converting RGB colors. Maybe the value of a textfield is null or the input contains illegal Arguments.");
+            valueRedInteger = Integer.parseInt(tfRedString);
+            valueGreenInteger = Integer.parseInt(tfGreenString);
+            valueBlueInteger = Integer.parseInt(tfBlueString);
+        } catch(Exception e) {
+            System.out.println(e.getMessage() + " // something went wrong while converting values of textfields.");
         }
-    }
 
-    //check if a textfields value is higher than 255
-    public boolean setVisibleAllowedValueLabel(int value) {
-        if (value > 255) {
-            labelAllowedValue.setVisible(true);
-            return true;
-        } else {
-            return false;
-        }
+        hexRGBColor = String.format("#%02X%02X%02X", valueRedInteger, valueGreenInteger, valueBlueInteger);
+        buttonRGBpreview.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: " + hexRGBColor + ";");
     }
 
 
