@@ -517,30 +517,30 @@
                            <Font name="System Bold" size="18.0" />
                        </font>
                    </Label>
-                   <Pane fx:id="paneTrackingConfig" prefHeight="512.0" prefWidth="406.0">
-                       <Label layoutX="78.0" layoutY="344.0" text="Target:" underline="true" />
-                      <RadioButton layoutX="59.0" layoutY="385.0" mnemonicParsing="false" selected="true" text="RedBall">
+                   <Pane fx:id="paneTrackingConfig" layoutY="310.0" prefHeight="205.0" prefWidth="437.0">
+                       <Label layoutX="78.0" layoutY="34.0" text="Target:" underline="true" />
+                      <RadioButton layoutX="59.0" layoutY="75.0" mnemonicParsing="false" selected="true" text="RedBall">
                          <toggleGroup>
                             <ToggleGroup fx:id="toggleGroupTrackTarget" />
                          </toggleGroup></RadioButton>
-                      <RadioButton layoutX="59.0" layoutY="410.0" mnemonicParsing="false" text="Face" toggleGroup="$toggleGroupTrackTarget" />
-                      <Label layoutX="40.0" layoutY="444.0" text=" Target size (cm):" />
-                      <Spinner fx:id="spinTrackTargetSize" editable="true" initialValue="10" layoutX="60.0" layoutY="464.0" max="100" min="0" prefHeight="26.0" prefWidth="70.0" />
-                       <Label layoutX="218.0" layoutY="344.0" text="Mode:" underline="true" />
-                       <RadioButton layoutX="199.0" layoutY="385.0" mnemonicParsing="false" selected="true" text="Head">
+                      <RadioButton layoutX="59.0" layoutY="100.0" mnemonicParsing="false" text="Face" toggleGroup="$toggleGroupTrackTarget" />
+                      <Label layoutX="40.0" layoutY="134.0" text=" Target size (cm):" />
+                      <Spinner fx:id="spinTrackTargetSize" editable="true" initialValue="10" layoutX="60.0" layoutY="154.0" max="100" min="0" prefHeight="26.0" prefWidth="70.0" />
+                       <Label layoutX="218.0" layoutY="34.0" text="Mode:" underline="true" />
+                       <RadioButton layoutX="199.0" layoutY="75.0" mnemonicParsing="false" selected="true" text="Head">
                          <toggleGroup>
                             <ToggleGroup fx:id="toggleGroupTrackMode" />
                          </toggleGroup></RadioButton>
-                       <RadioButton layoutX="199.0" layoutY="410.0" mnemonicParsing="false" text="WholeBody" toggleGroup="$toggleGroupTrackMode" />
-                       <RadioButton layoutX="199.0" layoutY="435.0" mnemonicParsing="false" text="Move" toggleGroup="$toggleGroupTrackMode" />
-                       <Label layoutX="358.0" layoutY="344.0" text="Effector:" underline="true" />
-                       <RadioButton layoutX="339.0" layoutY="385.0" mnemonicParsing="false" selected="true" text="None">
+                       <RadioButton layoutX="199.0" layoutY="100.0" mnemonicParsing="false" text="WholeBody" toggleGroup="$toggleGroupTrackMode" />
+                       <RadioButton layoutX="199.0" layoutY="125.0" mnemonicParsing="false" text="Move" toggleGroup="$toggleGroupTrackMode" />
+                       <Label layoutX="358.0" layoutY="34.0" text="Effector:" underline="true" />
+                       <RadioButton layoutX="339.0" layoutY="75.0" mnemonicParsing="false" selected="true" text="None">
                          <toggleGroup>
                             <ToggleGroup fx:id="toggleGroupTrackEffector" />
                          </toggleGroup></RadioButton>
-                       <RadioButton layoutX="339.0" layoutY="410.0" mnemonicParsing="false" text="Left Arm" toggleGroup="$toggleGroupTrackEffector" />
-                       <RadioButton layoutX="339.0" layoutY="435.0" mnemonicParsing="false" text="Right Arm" toggleGroup="$toggleGroupTrackEffector" />
-                       <RadioButton layoutX="339.0" layoutY="460.0" mnemonicParsing="false" text="Both Arms" toggleGroup="$toggleGroupTrackEffector" />
+                       <RadioButton layoutX="339.0" layoutY="100.0" mnemonicParsing="false" text="Left Arm" toggleGroup="$toggleGroupTrackEffector" />
+                       <RadioButton layoutX="339.0" layoutY="125.0" mnemonicParsing="false" text="Right Arm" toggleGroup="$toggleGroupTrackEffector" />
+                       <RadioButton layoutX="339.0" layoutY="150.0" mnemonicParsing="false" text="Both Arms" toggleGroup="$toggleGroupTrackEffector" />
                    </Pane>
                    <Button fx:id="btnStartTracking" layoutX="123.0" layoutY="526.0" mnemonicParsing="false" onAction="#startTracking" text="Start tracking" />
                    <Button fx:id="btnStopTracking" disable="true" layoutX="251.0" layoutY="526.0" mnemonicParsing="false" onAction="#stopTracking" text="Stop tracking" />
