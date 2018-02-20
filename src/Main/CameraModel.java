@@ -31,17 +31,19 @@ public class CameraModel {
     private MainMenuController mainController;
     private Session session;
     private Image disabledImg;
+    private Image currentImg;
 
     private ALVideoDevice camera;
     private String viewerId;
-    private final int resWidth = 320;
-    private final int resHeight = 240;
+    private static final int resWidth = 320;
+    private static final int resHeight = 240;
 
     private Timer timer;
     private CameraTriggerTask cameraTask;
     private CameraHandler cameraHandler;
     private boolean cameraTaskAborted;
-    private boolean isCameraError;
+    private boolean cameraError;
+    private boolean cameraErrorFixed;
 
 
     public CameraModel(MainMenuController main) {
@@ -66,6 +68,10 @@ public class CameraModel {
 
     public void setSession(Session session) {
         this.session = session;
+        // Buttons in Ausgangszustand versetzen
+        btnCameraOff.setDisable(true);
+        btnCameraOn.setDisable(false);
+        btnPhoto.setDisable(true);
     }
 
     public void enableCamera() {
@@ -112,7 +118,8 @@ public class CameraModel {
         btnCameraOn.setDisable(false);
         btnPhoto.setDisable(true);
         lblCameraLoading.setVisible(false);
-        isCameraError = false;
+        cameraError = false;
+        cameraErrorFixed = false;
 
         if ( (session == null) || (session.isConnected() == false) ) {
             mainController.handleConnectionClosed(true);
@@ -146,15 +153,6 @@ public class CameraModel {
         @Override
         public void run(){
             // Diese Methode wird ca. alle 33ms aufgerufen um optimalerweise 30FPS zu erzeugen (unrealistisch)
-            // Bild laden via runLater, da GUI nicht im Timer-Thread verändert werden darf
-            Platform.runLater(cameraHandler);
-        }
-    }
-
-    class CameraHandler implements Runnable {
-
-        @Override
-        public void run() {
             if ( cameraTaskAborted == false ) {
                 try {
                     // Alle Bildinfos des aktuellen Frames vom NAO abbholen
@@ -171,31 +169,53 @@ public class CameraModel {
                     buffImg.setData(raster);
 
                     // BufferedImage in JavaFX-Image konvertieren und in ImageView darstellen
-                    Image image = SwingFXUtils.toFXImage(buffImg, null);
-                    imgTarget.setImage(image);
-
+                    currentImg = SwingFXUtils.toFXImage(buffImg, null);
+                    if ( cameraError == true ) {
+                        // Wenn Fehler war und es jetzt wieder ging -> zuruecksetzen
+                        cameraErrorFixed = true;
+                    }
+                    // Bild laden via runLater, da GUI nicht im Timer-Thread verändert werden darf
+                    Platform.runLater(cameraHandler);
                     // Bild auf NAO-Seite freigeben
                     camera.releaseImage(viewerId);
-
-                    if( isCameraError ) {
-                        // Wenn Fehler war und jetzt alles gut ist
-                        lblCameraLoading.setVisible(false);
-                        btnPhoto.setDisable(false);
-                        isCameraError = false;
-                    }
 
                 } catch (Exception e) {
                     if ((session == null) || (session.isConnected() == false)) {
                         // Hier muessen wir komplett abbrechen
                         disableCamera();
                     }
-                    else if ( isCameraError == false )
+                    else if ( cameraError == false )
                     {
                         // Bei Fehler Hinweis anzeigen und Foto disablen
-                        lblCameraLoading.setVisible(true);
-                        btnPhoto.setDisable(true);
-                        isCameraError = true;
+                        cameraError = true;
+                        Platform.runLater(cameraHandler);
                     }
+                }
+            }
+        }
+    }
+
+    class CameraHandler implements Runnable {
+
+        @Override
+        public void run() {
+            if ( cameraTaskAborted == false ) {
+
+                if ( cameraErrorFixed ) {
+                    // Kamerafehler behoben
+                    cameraError = false;
+                    lblCameraLoading.setVisible(false);
+                    btnPhoto.setDisable(false);
+                }
+
+                if ( cameraError ) {
+                    // Fehler mit Kamera, Hinweis setzen und Photo disablen
+                    lblCameraLoading.setVisible(true);
+                    btnPhoto.setDisable(true);
+                }
+                else {
+                    // Aktuelles Bild in View setzen
+                    imgTarget.setImage(currentImg);
                 }
             }
         }
