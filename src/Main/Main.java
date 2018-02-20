@@ -1,6 +1,5 @@
 package Main;
 
-import com.aldebaran.qi.Session;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,6 +17,7 @@ public class Main extends Application {
         // View in Stage setzen
         stage.setTitle("NAO Dashboard");
         stage.setScene(new Scene(root));
+        stage.setResizable(false);
         stage.show();
     }
 

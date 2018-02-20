@@ -48,6 +48,10 @@ public class ConnectionModel {
         Timer timer = new Timer();
         connCheck = new ConnectionCheck(controller);
         timer.schedule( connCheck, 0, 10000 );
+
+        // Session erzeugen, damit die naoqi-Bibliothek schonmal geladen wird (Performance)
+        session = new Session();
+        session = null;
     }
 
     public void connect() {
