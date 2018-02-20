@@ -75,6 +75,9 @@ public class ConnectionModel {
             // Erfolgreich verbunden
             setInfoText("Connection established.", Color.GREEN);
             setConnectionState(naoUrl);
+            // Session an alle Nutzer propagieren
+            mainMenuController.setSession(session);
+            connCheck.setSession(session);
             mainMenuController.saySomething("Connected.");
             mainMenuController.enableTabs();
             // Verbindung in Datei merken
@@ -86,10 +89,10 @@ public class ConnectionModel {
             // session zurücksetzen
             session.close();
             session = null;
+            // Disconnect an alle Nutzer propagieren
+            mainMenuController.setSession(session);
+            connCheck.setSession(session);
         }
-        // Session an alle Nutzer propagieren (auch wenn session==null)
-        mainMenuController.setSession(session);
-        connCheck.setSession(session);
     }
 
     public void disconnect(){
