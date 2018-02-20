@@ -8,6 +8,7 @@ import javafx.scene.image.*;
 import javafx.scene.image.Image;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -27,6 +28,7 @@ public class CameraModel {
     private Button btnCameraOff;
     private Button btnPhoto;
     private Label lblCameraLoading;
+    private Label lblInfo;
 
     private MainMenuController mainController;
     private Session session;
@@ -49,11 +51,12 @@ public class CameraModel {
     public CameraModel(MainMenuController main) {
         this.mainController = main;
         // JavaFX Komponenten holen
-        this.imgTarget = main.imgCamera;
-        this.btnCameraOff = main.btnCameraOff;
-        this.btnCameraOn = main.btnCameraOn;
-        this.btnPhoto = main.btnPhoto;
-        this.lblCameraLoading = main.lblCameraLoading;
+        this.imgTarget          = main.imgCamera;
+        this.btnCameraOff       = main.btnCameraOff;
+        this.btnCameraOn        = main.btnCameraOn;
+        this.btnPhoto           = main.btnPhoto;
+        this.lblCameraLoading   = main.lblCameraLoading;
+        this.lblInfo            = main.lblCameraInfo;
         // Timer initialisieren
         timer = new Timer();
         cameraHandler = new CameraHandler();
@@ -96,6 +99,8 @@ public class CameraModel {
             }
             else {
                 System.out.println("Camera Problem:" + e.getMessage());
+                lblInfo.setTextFill(Color.RED);
+                mainController.displayTextTemporarily(lblInfo, "Couldn't enable camera...", 2000);
             }
         }
     }
@@ -142,9 +147,14 @@ public class CameraModel {
             // Bild konvertieren und in Datei schreiben
             BufferedImage buffImg = SwingFXUtils.fromFXImage(img, null);
             ImageIO.write( buffImg, "png", file);
+            // Hinweis zu Speicherort
+            lblInfo.setTextFill(Color.GREEN);
+            mainController.displayTextTemporarily(lblInfo, "Photo saved to ./nao_dashboard/photos/", 3000);
 
         } catch(Exception e) {
             System.out.println("Error taking Photo: " + e.getMessage());
+            lblInfo.setTextFill(Color.RED);
+            mainController.displayTextTemporarily(lblInfo, "Couldn't take photo...", 3000);
         }
     }
 
@@ -211,6 +221,8 @@ public class CameraModel {
                 if ( cameraError ) {
                     // Fehler mit Kamera, Hinweis setzen und Photo disablen
                     lblCameraLoading.setVisible(true);
+                    lblInfo.setTextFill(Color.RED);
+                    mainController.displayTextTemporarily(lblInfo, "Couldn't load current image.", 3000);
                     btnPhoto.setDisable(true);
                 }
                 else {

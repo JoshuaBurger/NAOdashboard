@@ -52,7 +52,7 @@
                       </Button>
                       <Label fx:id="lblConnectionInfo" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="460.0" prefHeight="31.0" prefWidth="879.0" textAlignment="CENTER" wrapText="true">
                           <font>
-                              <Font size="14.0" />
+                              <Font name="System Bold" size="18.0" />
                           </font></Label>
                       <Button fx:id="btnDisconnect" disable="true" layoutX="186.0" layoutY="364.0" mnemonicParsing="false" onAction="#disconnect" prefHeight="72.0" prefWidth="236.0" text="Disconnect" textAlignment="CENTER" textFill="RED">
                           <font>
@@ -660,6 +660,10 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
+                  <Label fx:id="lblCameraInfo" alignment="CENTER" layoutX="271.0" layoutY="582.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="21.0" prefWidth="347.0">
+                      <font>
+                          <Font name="System Bold" size="15.0" />
+                      </font></Label>
               </children>
           </AnchorPane>
       </content>

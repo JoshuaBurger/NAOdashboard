@@ -150,6 +150,8 @@ public class MainMenuController {
     @FXML
     protected Label lblHeadSensorInfo;
     @FXML
+    protected Label lblCameraInfo;
+    @FXML
     private Slider sliderVolume;
     @FXML
     private Slider sliderSpeechPitch;
@@ -197,6 +199,8 @@ public class MainMenuController {
     private int valueGreenInteger = 0;
     private int valueBlueInteger = 0;
     private float walkSpeedValue = 0.5F;
+    private long infoTimerId = 0;
+    private Label lblinfoTimerCurrent;
     private String language = "English";
     private String selectedLedItem;
     private String hexRGBColor = "#FF0000";
@@ -792,26 +796,39 @@ public class MainMenuController {
         connection.applyFavorite();
     }
 
+
     public void displayTextTemporarily(Label label, String text, long durationMs) {
         // Mit dieser Methode wird ein Text in ein Label gesetzt und nach
         // mitgegebener Zeit wieder geloescht
         Timer t = new Timer();
         label.setText(text);
-        t.schedule(new DeleteTextTask(label), durationMs);
+        // Wir merken uns das Label und eine Id, sodass der Timer bei Aktivierung
+        // pruefen kann, ob er der aktuelle Timer ist, um nicht einen neueren Text zu loeschen.
+        // Ausser es ist auch nicht das aktuelle Label, dann kann das alte vmtl. doch geloescht werden.
+        infoTimerId += 1;
+        lblinfoTimerCurrent = label;
+        t.schedule(new DeleteTextTask(label, infoTimerId), durationMs);
     }
 
     class DeleteTextTask extends TimerTask {
         private Label label;
+        private long id;
 
-        public DeleteTextTask(Label label) {
+        public DeleteTextTask(Label label, long id) {
             this.label = label;
+            this.id    = id;
         }
+
         @Override
         public void run() {
             Platform.runLater(new Runnable(){
                 public void run(){
-                    // Label leer setzen
-                    label.setText("");
+                    // Label leer setzen, nur wenn es sich um den aktuellsten Timer handelt.
+                    // Ansonsten wuerde evtl. ein Text direkt nach Anzeige geloescht.
+                    // Ausser auch nicht aktuellstes Label, dann doch loeschen
+                    if ( (id == infoTimerId) || (label != lblinfoTimerCurrent) ) {
+                        label.setText("");
+                    }
                 }
             });
         }

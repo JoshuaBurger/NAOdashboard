@@ -123,7 +123,7 @@ public class ConnectionModel {
 
     private void setInfoText(String text, Color color){
         lblConnectionInfo.setTextFill(color);
-        lblConnectionInfo.setText(text);
+        mainMenuController.displayTextTemporarily(lblConnectionInfo, text, 4000);
         System.out.println(text);
     }
 
