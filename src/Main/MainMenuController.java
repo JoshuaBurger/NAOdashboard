@@ -2,6 +2,7 @@ package Main;
 
 import com.aldebaran.qi.Session;
 import com.aldebaran.qi.helper.proxies.*;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,9 +12,17 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 public class MainMenuController {
+
+    // Die nachfolgenden FXML Komponenten sind teilweise nur protected,
+    // damit aus den verschiedenen Models darauf zugegriffen werden kann.
+
     @FXML
     private TabPane tabPane;
     @FXML
@@ -23,7 +32,7 @@ public class MainMenuController {
     @FXML
     private Tab tabSpeech;
     @FXML
-    private Tab tabPostures;
+    private Tab tabPosturesTracking;
     @FXML
     private Tab tabMoves;
     @FXML
@@ -62,6 +71,10 @@ public class MainMenuController {
     protected Button btnCameraOff;
     @FXML
     protected Button btnPhoto;
+    @FXML
+    protected Button btnStartTracking;
+    @FXML
+    protected Button btnStopTracking;
     @FXML
     private TextArea sayText;
     @FXML
@@ -133,6 +146,8 @@ public class MainMenuController {
     @FXML
     protected Label lblCameraLoading;
     @FXML
+    protected Label lblTrackingInfo;
+    @FXML
     private Slider sliderVolume;
     @FXML
     private Slider sliderSpeechPitch;
@@ -162,6 +177,16 @@ public class MainMenuController {
     protected GridPane gridPaneColorButtons;
     @FXML
     protected GridPane gridPaneLEDsOff;
+    @FXML
+    protected Pane paneTrackingConfig;
+    @FXML
+    protected ToggleGroup toggleGroupTrackTarget;
+    @FXML
+    protected ToggleGroup toggleGroupTrackMode;
+    @FXML
+    protected ToggleGroup toggleGroupTrackEffector;
+    @FXML
+    protected Spinner spinTrackTargetSize;
 
 
     private int pitchValue = 100;
@@ -179,7 +204,7 @@ public class MainMenuController {
     private ObservableList sounds;
 
     private Session session;
-    private ALMemory memory;
+    protected ALMemory memory;
     private ConnectionModel connection;
     private MovementModel movement;
     private LedModel ledModel;
@@ -187,6 +212,7 @@ public class MainMenuController {
     private HeadSensorModel headSensors;
     private TemperatureModel temperature;
     private CameraModel camera;
+    private TrackerModel tracker;
 
     @FXML
     public void initialize() {
@@ -199,6 +225,15 @@ public class MainMenuController {
         headSensors = new HeadSensorModel(this);
         temperature = new TemperatureModel(this);
         camera = new CameraModel(this);
+        tracker = new TrackerModel(this);
+    }
+
+    public void startTracking() {
+        tracker.startTracking();
+    }
+
+    public void stopTracking() {
+        tracker.stopTracking();
     }
 
     public void enableCamera() {
@@ -619,6 +654,9 @@ public class MainMenuController {
     public void standZero() {
         movement.goToPosture("StandZero");
     }
+    public void standInit() {
+        movement.goToPosture("StandInit");
+    }
 
     //Head
     public void headUp() {
@@ -686,6 +724,7 @@ public class MainMenuController {
         headSensors.setSession(session);
         temperature.setSession(session);
         camera.setSession(session);
+        tracker.setSession(session);
 
         // AudioFiles vom NAO holen
         setUpAudio();
@@ -726,7 +765,7 @@ public class MainMenuController {
             tabLeds.setDisable(true);
             tabMoves.setDisable(true);
             tabSpeech.setDisable(true);
-            tabPostures.setDisable(true);
+            tabPosturesTracking.setDisable(true);
             tabPane.getSelectionModel().select(tabConnection);
             connection.setDisconnected(lost);
         }
@@ -736,7 +775,7 @@ public class MainMenuController {
         tabLeds.setDisable(false);
         tabMoves.setDisable(false);
         tabSpeech.setDisable(false);
-        tabPostures.setDisable(false);
+        tabPosturesTracking.setDisable(false);
     }
 
     public void connect() {
@@ -749,5 +788,30 @@ public class MainMenuController {
 
     public void applyConnectionFavorite() {
         connection.applyFavorite();
+    }
+
+    public void displayTextTemporarily(Label label, String text, long durationMs) {
+        // Mit dieser Methode wird ein Text in ein Label gesetzt und nach
+        // mitgegebener Zeit wieder geloescht
+        Timer t = new Timer();
+        label.setText(text);
+        t.schedule(new DeleteTextTask(label), durationMs);
+    }
+
+    class DeleteTextTask extends TimerTask {
+        private Label label;
+
+        public DeleteTextTask(Label label) {
+            this.label = label;
+        }
+        @Override
+        public void run() {
+            Platform.runLater(new Runnable(){
+                public void run(){
+                    // Label leer setzen
+                    label.setText("");
+                }
+            });
+        }
     }
 }

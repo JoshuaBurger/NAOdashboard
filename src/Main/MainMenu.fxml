@@ -8,6 +8,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -19,8 +20,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="761.0" prefWidth="888.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.MainMenuController">
@@ -401,10 +402,15 @@
           </AnchorPane>
       </content>
     </Tab>
-    <Tab fx:id="tabPostures" disable="true" style="-fx-background-color: white;" text="Postures">
+    <Tab fx:id="tabPosturesTracking" disable="true" style="-fx-background-color: white;" text="Postures &amp; Tracking">
       <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
                <children>
+                   <Label layoutX="189.0" layoutY="20.0" text="Postures:" textOverrun="CLIP">
+                       <font>
+                           <Font name="System Bold" size="18.0" />
+                       </font>
+                   </Label>
                    <ImageView fx:id="imgBattery2" fitHeight="36.0" fitWidth="93.0" layoutX="704.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                        <image>
                            <Image url="@images/battery_icons/battery_unknown.bmp" />
@@ -474,11 +480,11 @@
                             <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button fx:id="buttonWakeUp" mnemonicParsing="false" onAction="#wakeUp" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: lightgrey;" text="wake up">
+                              <Button fx:id="buttonWakeUp" mnemonicParsing="false" onAction="#wakeUp" prefHeight="26.0" prefWidth="74.0" text="wake up">
                                  <cursor>
                                     <Cursor fx:constant="OPEN_HAND" />
                                  </cursor></Button>
-                              <Button fx:id="buttonRest" mnemonicParsing="false" onAction="#rest" prefHeight="26.0" prefWidth="82.0" style="-fx-background-color: lightgrey;" text="rest" GridPane.columnIndex="2">
+                              <Button fx:id="buttonRest" mnemonicParsing="false" onAction="#rest" prefHeight="26.0" prefWidth="82.0" text="rest" GridPane.columnIndex="2">
                                  <cursor>
                                     <Cursor fx:constant="OPEN_HAND" />
                                  </cursor></Button>
@@ -502,11 +508,47 @@
                    <Label fx:id="lblRArm3" alignment="CENTER" layoutX="642.0" layoutY="592.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
                    <Label fx:id="lblRLeg3" alignment="CENTER" layoutX="642.0" layoutY="661.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
                    <Label fx:id="lblHead3" alignment="CENTER" layoutX="738.0" layoutY="505.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
+                   <Label layoutX="190.0" layoutY="278.0" text="Tracking:">
+                       <font>
+                           <Font name="System Bold" size="18.0" />
+                       </font>
+                   </Label>
+                   <Pane fx:id="paneTrackingConfig" prefHeight="512.0" prefWidth="406.0">
+                       <Label layoutX="78.0" layoutY="344.0" text="Target:" underline="true" />
+                      <RadioButton layoutX="59.0" layoutY="385.0" mnemonicParsing="false" selected="true" text="RedBall">
+                         <toggleGroup>
+                            <ToggleGroup fx:id="toggleGroupTrackTarget" />
+                         </toggleGroup></RadioButton>
+                      <RadioButton layoutX="59.0" layoutY="410.0" mnemonicParsing="false" text="Face" toggleGroup="$toggleGroupTrackTarget" />
+                      <Label layoutX="40.0" layoutY="444.0" text=" Target size (cm):" />
+                      <Spinner fx:id="spinTrackTargetSize" editable="true" initialValue="10" layoutX="60.0" layoutY="464.0" max="100" min="0" prefHeight="26.0" prefWidth="70.0" />
+                       <Label layoutX="218.0" layoutY="344.0" text="Mode:" underline="true" />
+                       <RadioButton layoutX="199.0" layoutY="385.0" mnemonicParsing="false" selected="true" text="Head">
+                         <toggleGroup>
+                            <ToggleGroup fx:id="toggleGroupTrackMode" />
+                         </toggleGroup></RadioButton>
+                       <RadioButton layoutX="199.0" layoutY="410.0" mnemonicParsing="false" text="WholeBody" toggleGroup="$toggleGroupTrackMode" />
+                       <RadioButton layoutX="199.0" layoutY="435.0" mnemonicParsing="false" text="Move" toggleGroup="$toggleGroupTrackMode" />
+                       <Label layoutX="358.0" layoutY="344.0" text="Effector:" underline="true" />
+                       <RadioButton layoutX="339.0" layoutY="385.0" mnemonicParsing="false" selected="true" text="None">
+                         <toggleGroup>
+                            <ToggleGroup fx:id="toggleGroupTrackEffector" />
+                         </toggleGroup></RadioButton>
+                       <RadioButton layoutX="339.0" layoutY="410.0" mnemonicParsing="false" text="Left Arm" toggleGroup="$toggleGroupTrackEffector" />
+                       <RadioButton layoutX="339.0" layoutY="435.0" mnemonicParsing="false" text="Right Arm" toggleGroup="$toggleGroupTrackEffector" />
+                       <RadioButton layoutX="339.0" layoutY="460.0" mnemonicParsing="false" text="Both Arms" toggleGroup="$toggleGroupTrackEffector" />
+                   </Pane>
+                   <Button fx:id="btnStartTracking" layoutX="123.0" layoutY="526.0" mnemonicParsing="false" onAction="#startTracking" text="Start tracking" />
+                   <Button fx:id="btnStopTracking" disable="true" layoutX="251.0" layoutY="526.0" mnemonicParsing="false" onAction="#stopTracking" text="Stop tracking" />
+                  <Label fx:id="lblTrackingInfo" alignment="CENTER" layoutX="47.0" layoutY="582.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="21.0" prefWidth="382.0">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font></Label>
                </children>
           </AnchorPane>
       </content>
     </Tab>
-  <Tab fx:id="tabMoves" style="-fx-background-color: white;" text="Moves">
+  <Tab fx:id="tabMoves" disable="true" style="-fx-background-color: white;" text="Moves">
       <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" onKeyPressed="#walkKey" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
               <children>
