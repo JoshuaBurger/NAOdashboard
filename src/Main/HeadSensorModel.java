@@ -3,6 +3,8 @@ package Main;
 import com.aldebaran.qi.Session;
 import com.aldebaran.qi.helper.EventCallback;
 import com.aldebaran.qi.helper.proxies.ALMemory;
+import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 
 class TactilSpeechTask {
     public String text;
@@ -13,8 +15,11 @@ class TactilSpeechTask {
 
 public class HeadSensorModel {
 
+    private Label lblInfo;
+
     private MainMenuController controller;
     private Session session;
+    private boolean sensorsRegistered;
 
     private TactilSpeechTask front;
     private TactilSpeechTask middle;
@@ -26,10 +31,13 @@ public class HeadSensorModel {
         front = new TactilSpeechTask();
         middle = new TactilSpeechTask();
         rear = new TactilSpeechTask();
+
+        lblInfo = controller.lblHeadSensorInfo;
     }
 
     public void setSession(Session session) {
         this.session = session;
+        sensorsRegistered = false;
     }
 
     public void registerTactilEvents(ALMemory memory) {
@@ -62,6 +70,8 @@ public class HeadSensorModel {
                             }
                         }
                     });
+            sensorsRegistered = true;
+
         } catch(Exception e) {
             System.out.println("Couldn't register battery events");
         }
@@ -84,6 +94,8 @@ public class HeadSensorModel {
             default:
                 break;
         }
+        lblInfo.setTextFill(Color.BLACK);
+        controller.displayTextTemporarily(lblInfo, type + " tactil touched.", 2000);
         if ( (task != null) && (task.text != null) && (task.language != null) ) {
             // NAO den gespeicherten Text sagen lassen
             controller.saySomething(task.text, task.speed, task.pitch, task.language);
@@ -114,6 +126,15 @@ public class HeadSensorModel {
             task.speed = speed;
             task.pitch = pitch;
             task.language = language;
+        }
+
+        if ( sensorsRegistered ) {
+            lblInfo.setTextFill(Color.GREEN);
+            controller.displayTextTemporarily(lblInfo, "Speech config applied to sensor.", 2000);
+        }
+        else {
+            lblInfo.setTextFill(Color.RED);
+            controller.displayTextTemporarily(lblInfo, "Sensor is not available...", 2000);
         }
     }
 }

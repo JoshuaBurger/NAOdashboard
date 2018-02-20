@@ -148,6 +148,8 @@ public class MainMenuController {
     @FXML
     protected Label lblTrackingInfo;
     @FXML
+    protected Label lblHeadSensorInfo;
+    @FXML
     private Slider sliderVolume;
     @FXML
     private Slider sliderSpeechPitch;

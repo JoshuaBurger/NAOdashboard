@@ -398,6 +398,10 @@
                   <Label fx:id="lblRArm2" alignment="CENTER" layoutX="642.0" layoutY="592.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
                   <Label fx:id="lblRLeg2" alignment="CENTER" layoutX="642.0" layoutY="661.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
                   <Label fx:id="lblHead2" alignment="CENTER" layoutX="738.0" layoutY="505.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
+                  <Label fx:id="lblHeadSensorInfo" layoutX="534.0" layoutY="143.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="21.0" prefWidth="340.0">
+                      <font>
+                          <Font name="System Bold" size="18.0" />
+                      </font></Label>
               </children>
           </AnchorPane>
       </content>
