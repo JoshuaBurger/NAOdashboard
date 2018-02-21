@@ -39,29 +39,35 @@ public class MainMenuController {
     @FXML
     private Tab tabMoves;
     @FXML
-    private Button buttonFaceLedsRed;
+    protected Button buttonFaceLedsRed;
     @FXML
-    private Button buttonFaceLedsYellow;
+    protected Button buttonFaceLedsYellow;
     @FXML
-    private Button buttonFaceLedsBlue;
+    protected Button buttonFaceLedsBlue;
     @FXML
-    private Button buttonFaceLedMagenta;
+    protected Button buttonFaceLedMagenta;
     @FXML
-    private Button buttonFaceLedGreen;
+    protected Button buttonFaceLedGreen;
     @FXML
-    private Button buttonFaceLedCyan;
+    protected Button buttonFaceLedCyan;
     @FXML
-    private Button buttonFaceLedOrange;
+    protected Button buttonFaceLedOrange;
     @FXML
-    private Button buttonFaceLedWhite;
+    protected Button buttonFaceLedWhite;
     @FXML
-    private Button buttonRGBpreview;
+    protected Button buttonRGBpreview;
     @FXML
-    private Button btnRGBleftEye;
+    protected Button btnLeftEye;
     @FXML
-    private Button btnRGBrightEye;
+    protected Button btnRightEye;
     @FXML
-    private Button btnRGBbothEyes;
+    protected Button btnBothEyes;
+    @FXML
+    protected Button btnStepHeightLow;
+    @FXML
+    protected Button btnStepHeightNormal;
+    @FXML
+    protected Button btnStepHeightHigh;
     @FXML
     private Button btnPlayAudio;
     @FXML
@@ -81,11 +87,11 @@ public class MainMenuController {
     @FXML
     private TextArea sayText;
     @FXML
-    private TextField textfieldRed;
+    protected TextField textfieldRed;
     @FXML
-    private TextField textfieldGreen;
+    protected TextField textfieldGreen;
     @FXML
-    private TextField textfieldBlue;
+    protected TextField textfieldBlue;
     @FXML
     private Label lblSpeechSpeedValue;
     @FXML
@@ -93,7 +99,7 @@ public class MainMenuController {
     @FXML
     private Label lblVolumeValue;
     @FXML
-    private Label labelAllowedValue;
+    protected Label labelAllowedValue;
     @FXML
     protected Label lblHead1;
     @FXML
@@ -200,18 +206,11 @@ public class MainMenuController {
 
     private int pitchValue = 100;
     private int speedValue = 100;
-    private int valueRedInteger = 255;
-    private int valueGreenInteger = 0;
-    private int valueBlueInteger = 0;
     private float walkSpeedValue = 0.5F;
+    private float stepHeight = 0.020F;
     private long infoTimerId = 0;
     private Label lblinfoTimerCurrent;
     protected String language = "English";
-    private String selectedLedItem;
-    private String hexRGBColor = "#FF0000";
-    private String tfRedString = "255";
-    private String tfGreenString = "0";
-    private String tfBlueString = "0";
     private ObservableList sounds;
 
     private Session session;
@@ -262,276 +261,77 @@ public class MainMenuController {
     }
 
     //LEDs
-    public void allLEDsOff() {
-        ledModel.turnledsOff("FaceLeds");
-    }
 
-    public void rightEyeLEDsOff() {
-        ledModel.turnledsOff("LeftFaceLeds");
-    }
+    //leds on or off
+    public void brainLEDsOn() { ledModel.turnledsOn("BrainLeds"); }
+    public void brainLEDsOff() { ledModel.turnledsOff("BrainLeds"); }
+    public void eyesLEDon() { ledModel.turnledsOn("FaceLeds"); }
+    public void eyesLEDsOff() { ledModel.turnledsOff("FaceLeds"); }
+    public void rightEyeLEDsOff() { ledModel.turnledsOff("RightFaceLeds"); }
+    public void leftEyeLEDsOff() { ledModel.turnledsOff("LeftFaceLeds"); }
+    public void earLEDsOn() { ledModel.turnledsOn("EarLeds"); }
+    public void earLEDsOff() { ledModel.turnledsOff("EarLeds"); }
+    public void leftEarLEDsOff() { ledModel.turnledsOff("LeftEarLeds"); }
+    public void rightEarLEDsOff() { ledModel.turnledsOff("RightEarLeds"); }
+    public void feetLEDsOn() { ledModel.turnledsOn("FeetLeds"); }
+    public void feetLEDsOff() { ledModel.turnledsOff("FeetLeds"); }
+    public void leftFootLEDsOff() { ledModel.turnledsOff("LeftFootLeds"); }
+    public void rightFootLEDsOff() { ledModel.turnledsOff("RightFootLeds"); }
 
-    public void leftEyeLEDsOff() {
-        ledModel.turnledsOff("RightFaceLeds");
-    }
-
-    public void unselectAllLEDitems() {
-        buttonFaceLedsRed.setStyle("-fx-border-width: 0; -fx-background-color: red;");
-        buttonFaceLedsBlue.setStyle("-fx-border-width: 0; -fx-background-color: blue;");
-        buttonFaceLedGreen.setStyle("-fx-border-width: 0; -fx-background-color: green;");
-        buttonFaceLedsYellow.setStyle("-fx-border-width: 0; -fx-background-color: yellow;");
-        buttonFaceLedCyan.setStyle("-fx-border-width: 0; -fx-background-color: cyan;");
-        buttonFaceLedMagenta.setStyle("-fx-border-width: 0; -fx-background-color: magenta;");
-        buttonFaceLedWhite.setStyle("-fx-border-width: 0; -fx-background-color: #e4dcdc;");
-        buttonFaceLedOrange.setStyle("-fx-border-width: 0; -fx-background-color: #fe7200;");
-        textfieldRed.setStyle("-fx-border-color: lightgrey; -fx-border-width: 0; -fx-border-radius: 0;");
-        textfieldGreen.setStyle("-fx-border-color: lightgrey; -fx-border-width: 0; -fx-border-radius: 0;");
-        textfieldBlue.setStyle("-fx-border-color: lightgrey; -fx-border-width: 0; -fx-border-radius: 0;");
-        buttonRGBpreview.setStyle("-fx-border-width: 0; -fx-background-color: " + hexRGBColor + ";");
-    }
-
+    //change color
     public void changeFaceLEDs() {
-        setTextfieldText();
-        identifySelectedColor("FaceLeds");
+        ledModel.setTextfieldText();
+        ledModel.fadeLEDs("FaceLeds");
     }
     public void changeRightEyeLEDs() {
-        setTextfieldText();
-        identifySelectedColor("LeftFaceLeds");
+        ledModel.setTextfieldText();
+        ledModel.fadeLEDs("RightFaceLeds");
     }
     public void changeLeftEyeLEDs() {
-        setTextfieldText();
-        identifySelectedColor("RightFaceLeds");
+        ledModel.setTextfieldText();
+        ledModel.fadeLEDs("LeftFaceLeds");
     }
-    public void setTextfieldText() {
-        textfieldRed.setText(tfRedString);
-        textfieldGreen.setText(tfGreenString);
-        textfieldBlue.setText(tfBlueString);
-    }
-    public void identifySelectedColor(String ledsName) {             //identify which color is selected
-        if (selectedLedItem == "rgbColor") {
-        Float red = (Float.parseFloat(tfRedString)/100);
-        Float green = (Float.parseFloat(tfGreenString)/100);
-        Float blue = (Float.parseFloat(tfBlueString)/100);
-        ledModel.setledsRGBcolor(ledsName, red, green, blue);
-        } else if (selectedLedItem == "orange") {
-            ledModel.setledsRGBcolor(ledsName, 2.55F, 0.4F, 0F);
-        } else {
-            ledModel.colorFaceLeds(ledsName, selectedLedItem);
-        }
+    public void changeFeetLEDs() {
+        ledModel.setTextfieldText();
+        ledModel.fadeLEDs("FeetLeds");
     }
 
 
-    //change style of selected button
+    //ausgewählte Farbe bekommt schwarzen Rahmen
     public void buttonFaceLedsRed() {
-        unselectAllLEDitems();
-        buttonFaceLedsRed.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: red;");
-        selectedLedItem = "red";
+        ledModel.buttonFaceLedsRed();
     }
     public void buttonFaceLedsBlue() {
-        unselectAllLEDitems();
-        buttonFaceLedsBlue.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: blue;");
-        selectedLedItem = "blue";
+        ledModel.buttonFaceLedsBlue();
     }
     public void buttonFaceLedsGreen() {
-        unselectAllLEDitems();
-        buttonFaceLedGreen.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: green;");
-        selectedLedItem = "green";
+        ledModel.buttonFaceLedsGreen();
     }
     public void buttonFaceLedsYellow() {
-        unselectAllLEDitems();
-        buttonFaceLedsYellow.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: yellow;");
-        selectedLedItem = "yellow";
+        ledModel.buttonFaceLedsYellow();
     }
     public void buttonFaceLedsCyan() {
-        unselectAllLEDitems();
-        buttonFaceLedCyan.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: cyan;");
-        selectedLedItem = "cyan";
+        ledModel.buttonFaceLedsCyan();
     }
     public void buttonFaceLedsMagenta() {
-        unselectAllLEDitems();
-        buttonFaceLedMagenta.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: magenta;");
-        selectedLedItem = "magenta";
+        ledModel.buttonFaceLedsMagenta();
     }
     public void buttonFaceLedsWhite() {
-        unselectAllLEDitems();
-        buttonFaceLedWhite.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: #e4dcdc;");
-        selectedLedItem = "white";
+        ledModel.buttonFaceLedsWhite();
     }
     public void buttonFaceLedsOrange() {
-        unselectAllLEDitems();
-        buttonFaceLedOrange.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: #fe7200;");
-        selectedLedItem = "orange";
+        ledModel.buttonFaceLedsOrange();
     }
 
-    //disables apply buttons
-    public void disableOtherItems(boolean value) {
-        textfieldRed.setDisable(value);
-        textfieldGreen.setDisable(value);
-        textfieldBlue.setDisable(value);
-        buttonRGBpreview.setDisable(value);
-        btnRGBleftEye.setDisable(value);
-        btnRGBrightEye.setDisable(value);
-        btnRGBbothEyes.setDisable(value);
-        gridPaneColorButtons.setDisable(value);
-        gridPaneLEDsOff.setDisable(value);
-    }
-
+    //Benutzereingabe prüfen
     public void textfieldKeyReleased(KeyEvent keyEvent) {
-        tfRedString = textfieldRed.getText();
-        tfGreenString = textfieldGreen.getText();
-        tfBlueString = textfieldBlue.getText();
-
-        //remove whitespaces
-        if (keyEvent.getCode() == KeyCode.SPACE) {
-            removeWhitespaces();
-        }
-
-        if (keyEvent.getCode() == KeyCode.BACK_SPACE) {
-            //prevent that textfield could be empty
-            preventEmptyTextfield();
-
-            //check if textfield values are >255
-            if (compareValueTo255(tfRedString) && compareValueTo255(tfGreenString) && compareValueTo255(tfBlueString)) {
-                RGBcolorPreview();                  //show preview of rgb color
-            } else {
-                labelAllowedValue.setVisible(true);
-                disableOtherItems(true);         //disable everything else
-
-                if (compareValueTo255(tfRedString) == false) {
-                    textfieldRed.setStyle("-fx-border-color: red; -fx-border-width: 5; -fx-border-radius: 5;");
-                    textfieldRed.setDisable(false);
-                }
-                if (compareValueTo255(tfGreenString) == false) {
-                    textfieldGreen.setStyle("-fx-border-color: red; -fx-border-width: 5; -fx-border-radius: 5;");
-                    textfieldGreen.setDisable(false);
-                }
-                if (compareValueTo255(tfBlueString) == false) {
-                    textfieldBlue.setStyle("-fx-border-color: red; -fx-border-width: 5; -fx-border-radius: 5;");
-                    textfieldBlue.setDisable(false);
-                }
-            }
-        }
+        ledModel.textfieldKeyReleased(keyEvent);
     }
     public void textfieldKeyTyped() {
-        tfRedString = textfieldRed.getText();
-        tfGreenString = textfieldGreen.getText();
-        tfBlueString = textfieldBlue.getText();
-
-        //remove letters and punctuation
-        removeforbiddenCharacters();
-
-        //remove 0 to prevent errors while converting
-        removeNull();
-
-        //prevent that textfield could be empty
-        preventEmptyTextfield();
-
-        //check if textfield values are >255
-        if (compareValueTo255(tfRedString) && compareValueTo255(tfGreenString) && compareValueTo255(tfBlueString)) {
-            RGBcolorPreview();                  //show preview of rgb color
-        } else {
-            labelAllowedValue.setVisible(true);
-            disableOtherItems(true);         //disable all other items
-
-            if (compareValueTo255(tfRedString) == false) {
-                textfieldRed.setStyle("-fx-border-color: red; -fx-border-width: 5; -fx-border-radius: 5;");
-                textfieldRed.setDisable(false);
-            }
-            if (compareValueTo255(tfGreenString) == false) {
-                textfieldGreen.setStyle("-fx-border-color: red; -fx-border-width: 5; -fx-border-radius: 5;");
-                textfieldGreen.setDisable(false);
-            }
-            if (compareValueTo255(tfBlueString) == false) {
-                textfieldBlue.setStyle("-fx-border-color: red; -fx-border-width: 5; -fx-border-radius: 5;");
-                textfieldBlue.setDisable(false);
-            }
-        }
+        ledModel.textfieldKeyTyped();
     }
-    public boolean compareValueTo255(String tfValue) {
-        int tfValueInt;
-        try {
-            tfValueInt = Integer.parseInt(tfValue);
-            if (tfValueInt > 255) {
-                return false;
-            } else {
-                return true;
-            }
-        } catch(Exception e) {
-            System.out.println(e.getMessage() + " // something went wrong while converting values of textfields.");
-        }
-        return true;
-    }
-    public void removeWhitespaces() {
-        tfRedString = tfRedString.replaceAll("\\s", "");
-        textfieldRed.setText(tfRedString);
-        textfieldRed.positionCaret(tfRedString.length());
-
-        tfGreenString = tfGreenString.replaceAll("\\s", "");
-        textfieldGreen.setText(tfGreenString);
-        textfieldGreen.positionCaret(tfGreenString.length());
-
-        tfBlueString = tfBlueString.replaceAll("\\s", "");
-        textfieldBlue.setText(tfBlueString);
-        textfieldBlue.positionCaret(tfBlueString.length());
-    }
-    public void preventEmptyTextfield() {
-        if (tfRedString.isEmpty()) { tfRedString = "0"; }
-        if (tfGreenString.isEmpty()) { tfGreenString = "0"; }
-        if (tfBlueString.isEmpty()) { tfBlueString = "0"; }
-    }
-    public void removeforbiddenCharacters() {
-        tfRedString = tfRedString.replaceAll("\\W","");
-        tfRedString = tfRedString.replaceAll("[a-zA-Z]", "");
-        textfieldRed.setText(tfRedString);
-        textfieldRed.positionCaret(tfRedString.length());
-
-        tfGreenString = tfGreenString.replaceAll("\\W","");
-        tfGreenString = tfGreenString.replaceAll("[a-zA-Z]", "");
-        textfieldGreen.setText(tfGreenString);
-        textfieldGreen.positionCaret(tfGreenString.length());
-
-        tfBlueString = tfBlueString.replaceAll("\\W","");
-        tfBlueString = tfBlueString.replaceAll("[a-zA-Z]", "");
-        textfieldBlue.setText(tfBlueString);
-        textfieldBlue.positionCaret(tfBlueString.length());
-    }
-    public void removeNull() {
-        if (tfRedString.startsWith("0") && !tfRedString.equals("0")) {
-            tfRedString = tfRedString.substring(1);
-            textfieldRed.setText(tfRedString);
-            textfieldRed.positionCaret(tfRedString.length());
-        }
-        if (tfGreenString.startsWith("0") && !tfGreenString.equals("0")) {
-            tfGreenString = tfGreenString.substring(1);
-            textfieldGreen.setText(tfGreenString);
-            textfieldGreen.positionCaret(tfGreenString.length());
-        }
-        if (tfBlueString.startsWith("0") && !tfBlueString.equals("0")) {
-            tfBlueString = tfBlueString.substring(1);
-            textfieldBlue.setText(tfBlueString);
-            textfieldBlue.positionCaret(tfBlueString.length());
-        }
-    }
-
-    //show preview of RGB color
-    public void RGBcolorPreview() {
-        selectedLedItem = "rgbColor";
-        unselectAllLEDitems();
-        labelAllowedValue.setVisible(false);
-        disableOtherItems(false);         //enable all other items
-        textfieldRed.setStyle("-fx-background-color: white; -fx-border-color: lightgrey; -fx-border-radius: 5;");
-        textfieldGreen.setStyle("-fx-background-color: white; -fx-border-color: lightgrey; -fx-border-radius: 5;");
-        textfieldBlue.setStyle("-fx-background-color: white; -fx-border-color: lightgrey; -fx-border-radius: 5;");
-
-        try {
-            valueRedInteger = Integer.parseInt(tfRedString);
-            valueGreenInteger = Integer.parseInt(tfGreenString);
-            valueBlueInteger = Integer.parseInt(tfBlueString);
-        } catch(Exception e) {
-            System.out.println(e.getMessage() + " // something went wrong while converting values of textfields.");
-        }
-
-        hexRGBColor = String.format("#%02X%02X%02X", valueRedInteger, valueGreenInteger, valueBlueInteger);
-        buttonRGBpreview.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: " + hexRGBColor + ";");
+    public void textfieldMouseClicked() {
+        ledModel.textfieldMouseClicked();
     }
 
 
@@ -643,6 +443,7 @@ public class MainMenuController {
 
     public void listenToSpeech(){
         if(btnSpeechRecognition.getText().equals("Listen")){
+            speech.understand =false;
             btnSpeechRecognition.setText("Stop listening");
             speech.registerSpeechEvents(memory);
         }
@@ -657,82 +458,85 @@ public class MainMenuController {
 
     //Postures
     public void wakeUp() throws Exception{
-        movement.goToRest(false);
-    }
+        movement.goToRest(false); }
     public void rest()throws Exception {
-        movement.goToRest(true);
-    }
+        movement.goToRest(true); }
     public void standUp() {
-        movement.goToPosture("Stand");
-    }
+        movement.goToPosture("Stand"); }
     public void sitRelax() {
-        movement.goToPosture("SitRelax");
-    }
+        movement.goToPosture("SitRelax"); }
     public void crouch() {
-        movement.goToPosture("Crouch");
-    }
+        movement.goToPosture("Crouch"); }
     public void lyingBack() {
-        movement.goToPosture("LyingBack");
-    }
+        movement.goToPosture("LyingBack"); }
     public void lyingBelly() {
-        movement.goToPosture("LyingBelly");
-    }
+        movement.goToPosture("LyingBelly"); }
     public void standZero() {
-        movement.goToPosture("StandZero");
-    }
+        movement.goToPosture("StandZero"); }
     public void standInit() {
         movement.goToPosture("StandInit");
     }
 
     //Head
     public void headUp() {
-        movement.moveHead("up");
-    }
+        movement.moveHead("up"); }
     public void headLeft() {
-        movement.moveHead("left");
-    }
+        movement.moveHead("left"); }
     public void headDown() {
-        movement.moveHead("down");
-    }
+        movement.moveHead("down"); }
     public void headRight() {
-        movement.moveHead("right");
-    }
+        movement.moveHead("right"); }
 
     //Walk
-    public void walkForwards() {
-        movement.move(walkSpeedValue, 0F, 0F);
+    //Laufgeschwindigkeit speichern
+    public void getWalkSpeedSliderValue() {
+        walkSpeedValue = (float)(walkSpeedSlider.getValue()); }
+    //set step height
+    public void setStepHeightLow() {
+        stepHeight = 0.005F;
+        unselectStepHeightButtons();
+        btnStepHeightLow.setStyle("-fx-background-color: white; -fx-border-color: #8c8c8c; -fx-border-radius: 5px; -fx-border-width: 2px");
     }
-    public void walkLeft() {
-        movement.move(0F, walkSpeedValue, 0F);
+    public void setStepHeightNormal() {
+        stepHeight = 0.020F;
+        unselectStepHeightButtons();
+        btnStepHeightNormal.setStyle("-fx-background-color: white; -fx-border-color: #8c8c8c; -fx-border-radius: 5px; -fx-border-width: 2px");
     }
-    public void walkBackwards() {
-        movement.move(-walkSpeedValue, 0F, 0F);
+    public void setStepHeightHigh() {
+        stepHeight = 0.040F;
+        unselectStepHeightButtons();
+        btnStepHeightHigh.setStyle("-fx-background-color: white; -fx-border-color: #8c8c8c; -fx-border-radius: 5px; -fx-border-width: 2px");
     }
-    public void walkRight() {
-        movement.move(0F, -walkSpeedValue, 0F);
-    }
-    public void stopWalking() {
-        movement.stopWalking();
+    public void unselectStepHeightButtons() {
+        btnStepHeightLow.setStyle("-fx-background-color: white; -fx-border-color: lightgrey; -fx-border-radius: 5px;");
+        btnStepHeightNormal.setStyle("-fx-background-color: white; -fx-border-color: lightgrey; -fx-border-radius: 5px;");
+        btnStepHeightHigh.setStyle("-fx-background-color: white; -fx-border-color: lightgrey; -fx-border-radius: 5px;");
     }
 
-    public void walkKey(KeyEvent keyEvent) {
+    //loslaufen
+    public void walkForwards() {
+        movement.move(walkSpeedValue, 0F, 0F); }
+    public void walkLeft() {
+        movement.move(0F, walkSpeedValue, 0F); }
+    public void walkBackwards() {
+        movement.move(-walkSpeedValue, 0F, 0F); }
+    public void walkRight() {
+        movement.move(0F, -walkSpeedValue, 0F); }
+    //loslaufen durch W/A/S/D Tasten
+    public void startWalkingKeyPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.W) {
-            walkForwards();
+            movement.move(walkSpeedValue, 0F, 0F);
         } else if (keyEvent.getCode() == KeyCode.A) {
-            walkLeft();
+            movement.move(0F, walkSpeedValue, 0F);
         } else if (keyEvent.getCode() == KeyCode.S) {
-            walkBackwards();
+            movement.move(-walkSpeedValue, 0F, 0F);
         } else if (keyEvent.getCode() == KeyCode.D) {
-            walkRight();
+            movement.move(0F, -walkSpeedValue, 0F);
         }
     }
+    //laufen stoppen
+    public void stopWalking() { movement.stopWalking(); }
 
-    public void getWalkSpeedSliderValue() {
-        double currentValue = walkSpeedSlider.getValue();
-        //set walking speed
-        walkSpeedValue = (float)(currentValue/100);
-        System.out.println(walkSpeedValue);
-    }
 
     //TurnAround
     public void turnLeft() {

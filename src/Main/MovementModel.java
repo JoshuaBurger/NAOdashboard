@@ -4,6 +4,7 @@ import com.aldebaran.qi.Session;
 import com.aldebaran.qi.helper.proxies.ALMotion;
 import com.aldebaran.qi.helper.proxies.ALRobotPosture;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovementModel {
@@ -149,10 +150,13 @@ public class MovementModel {
     }
     public void stopWalking() {
         try {
+            System.out.println("stop walking");
             motion.stopMove();
             goToPosture("Stand");
+            System.out.println("stop walking worked");
         }
         catch (Exception e) {
+            System.out.println(e.getMessage() + ", stop walking failed");
             // Keinen Fehler ausgeben, da direkt nach move ausgefuehrt wird
         }
     }
