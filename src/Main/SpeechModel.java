@@ -26,6 +26,8 @@ public class SpeechModel {
     public int dialogueCounter = 0;
     public int squatCounter = 0;
     public boolean squatEnabled = true;
+    public boolean isSubscribed = false;
+    public boolean understand = false;
 
     public SpeechModel(MainMenuController mainController){
         this.mainController = mainController;
@@ -158,6 +160,7 @@ public class SpeechModel {
         }
 
         if (word.equals("Stopp") && confidence > 0.5) {
+            understand = true;
             unregisterSpeechEvents(mainController.memory);
             squatEnabled = false;
             if (squatCounter == 1) {
@@ -190,6 +193,7 @@ public class SpeechModel {
 
         //Dialog Level 1
         if (word.equals("Gut") && confidence > 0.5) {
+            understand = true;
             unregisterSpeechEvents(mainController.memory);
             System.out.println("Gut");
             mainController.saySomething("Oh, das freut mich");
@@ -197,6 +201,7 @@ public class SpeechModel {
         }
 
         if (word.equals("Schlecht") && confidence > 0.5) {
+            understand = true;
             unregisterSpeechEvents(mainController.memory);
             System.out.println("Schlecht");
             mainController.saySomething("Oh nein, hoffentlich geht es dir bald besser");
@@ -204,6 +209,7 @@ public class SpeechModel {
         }
 
         if (word.equals("Naja") && confidence > 0.5) {
+            understand = true;
             unregisterSpeechEvents(mainController.memory);
             System.out.println("Naja");
             mainController.saySomething("Oh, soll dir einen Witz erzählen?");
@@ -219,6 +225,7 @@ public class SpeechModel {
 
         //Dialog Level 2
         if (word.equals("Nein") && confidence > 0.5) {
+            understand = true;
             unregisterSpeechEvents(mainController.memory);
             System.out.println("Nein");
             mainController.saySomething("Na gut, dann nicht");
@@ -226,6 +233,7 @@ public class SpeechModel {
             dialogueCounter = 0;
         }
         if (word.equals("Ja") && confidence > 0.5) {
+            understand = true;
             unregisterSpeechEvents(mainController.memory);
             System.out.println("Ja");
             mainController.saySomething("Die Leute sagen immer Roboter haben keine Gefühle, dass macht mich immer so traurig");
@@ -236,6 +244,7 @@ public class SpeechModel {
 
         //Englische Befehle
         if (word.equals("Squat") && confidence > 0.5) {
+            understand = true;
             unregisterSpeechEvents(mainController.memory);
             mainController.standZero();
             mainController.crouch();
@@ -243,12 +252,14 @@ public class SpeechModel {
         }
 
         if (word.equals("Sit") && confidence > 0.5) {
+            understand = true;
             unregisterSpeechEvents(mainController.memory);
             mainController.standZero();
             mainController.sitRelax();
         }
 
         if (word.equals("Hello") && confidence > 0.5) {
+            understand = true;
             unregisterSpeechEvents(mainController.memory);
             System.out.println("Hello");
             mainController.saySomething("Hi, nice to meet you");
@@ -256,7 +267,8 @@ public class SpeechModel {
         }
 
         //Wenn das verstandene Wort nicht aus dem Vokabular ist.
-        else {
+        else if (understand == false){
+            understand = true;
             unregisterSpeechEvents(mainController.memory);
             dialogueCounter = 0;
             squatEnabled = false;

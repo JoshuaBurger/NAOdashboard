@@ -210,7 +210,7 @@ public class MainMenuController {
     private float stepHeight = 0.020F;
     private long infoTimerId = 0;
     private Label lblinfoTimerCurrent;
-    private String language = "English";
+    protected String language = "English";
     private ObservableList sounds;
 
     private Session session;
@@ -443,6 +443,7 @@ public class MainMenuController {
 
     public void listenToSpeech(){
         if(btnSpeechRecognition.getText().equals("Listen")){
+            speech.understand =false;
             btnSpeechRecognition.setText("Stop listening");
             speech.registerSpeechEvents(memory);
         }
