@@ -84,10 +84,10 @@ public class CameraModel {
             // Als Viewer registrieren, mit folgenden Parametern:
             // Beliebige id, Aufloesung(kQVGA=320x240), Kameraindex(obere), Farbraum(RGB), minimale FPS
             viewerId = camera.subscribeCamera("camera",0,1, 11, 15);
-            // Alle 33ms Bild von Kamera laden (Optimalfall ca. 30FPS, aber eher weniger...)
+            // Alle 200ms Bild von Kamera holen (relativ optimal nach Tests)
             cameraTaskAborted = false;
             cameraTask = new CameraTriggerTask();
-            timer.schedule(cameraTask, 0, 33);
+            timer.schedule(cameraTask, 0, 200);
             // Buttons umschalten
             btnCameraOn.setDisable(true);
             btnCameraOff.setDisable(false);
@@ -162,7 +162,7 @@ public class CameraModel {
 
         @Override
         public void run(){
-            // Diese Methode wird ca. alle 33ms aufgerufen um optimalerweise 30FPS zu erzeugen (unrealistisch)
+            // Diese Methode wird ca. alle 200ms aufgerufen
             if ( cameraTaskAborted == false ) {
                 try {
                     // Alle Bildinfos des aktuellen Frames vom NAO abbholen
