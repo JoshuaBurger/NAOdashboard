@@ -64,7 +64,7 @@
                               <Font size="18.0" />
                           </font>
                       </Label>
-                  <ComboBox fx:id="cbxConnectionFavorites" layoutX="633.0" layoutY="239.0" onAction="#applyConnectionFavorite" prefHeight="40.0" prefWidth="205.0" promptText="Latest connections..." />
+                  <ComboBox fx:id="cbxConnectionHistory" layoutX="633.0" layoutY="239.0" onAction="#applyConnectionHistory" prefHeight="40.0" prefWidth="205.0" promptText="Latest connections..." />
                   <Label layoutX="625.0" layoutY="206.0" text="Select previous connection:">
                      <font>
                         <Font size="16.0" />

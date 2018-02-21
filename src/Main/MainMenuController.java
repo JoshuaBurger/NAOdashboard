@@ -176,7 +176,7 @@ public class MainMenuController {
     @FXML
     private ComboBox cbxAudio;
     @FXML
-    protected ComboBox cbxConnectionFavorites;
+    protected ComboBox cbxConnectionHistory;
     @FXML
     protected GridPane gridPaneColorButtons;
     @FXML
@@ -792,8 +792,8 @@ public class MainMenuController {
         connection.disconnect();
     }
 
-    public void applyConnectionFavorite() {
-        connection.applyFavorite();
+    public void applyConnectionHistory() {
+        connection.applySelectedHistoryConn();
     }
 
 

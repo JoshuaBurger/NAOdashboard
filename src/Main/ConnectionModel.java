@@ -23,11 +23,11 @@ public class ConnectionModel {
     private Button btnDisconnect;
     private TextField txtIP;
     private TextField txtPort;
-    private ComboBox cbxFavorites;
+    private ComboBox cbxConnHistory;
 
     private MainMenuController mainMenuController;
     private Session session;
-    private ObservableList<String> favorites;
+    private ObservableList<String> connHistory;
     private ConnectionCheck connCheck;
 
     public ConnectionModel(MainMenuController controller)
@@ -40,9 +40,9 @@ public class ConnectionModel {
         btnDisconnect       = mainMenuController.btnDisconnect;
         txtIP               = mainMenuController.txtConnectionIP;
         txtPort             = mainMenuController.txtConnectionPort;
-        cbxFavorites        = mainMenuController.cbxConnectionFavorites;
-        // Gespeicherte Verbindungen (Favoriten) laden
-        favorites = FXCollections.observableArrayList();
+        cbxConnHistory      = mainMenuController.cbxConnectionHistory;
+        // Gespeicherte Verbindungen (History) laden
+        connHistory = FXCollections.observableArrayList();
         loadFavoritesFromFile();
         // Verbindung alle 10 Sekunden ueberpruefen
         Timer timer = new Timer();
@@ -85,7 +85,7 @@ public class ConnectionModel {
             mainMenuController.saySomething("Connected.");
             mainMenuController.enableTabs();
             // Verbindung in Datei merken
-            addConnectionToFavorites(naoUrl);
+            addConnectionToHistory(naoUrl);
         }
         else{
             setInfoText("Couldn't connect to NAO.", Color.RED);
@@ -146,44 +146,48 @@ public class ConnectionModel {
         }
     }
 
-    private void addConnectionToFavorites(String url) {
-        // Pruefen, ob nicht bereits in Favoriten
-        if ( favorites.contains(url) == false ) {
-            File file = new File("favorites.dat");
+    private void addConnectionToHistory(String url) {
+        // Nur wenn aktuelle Verbindung nicht schon an erster Stelle in History
+        if ( (connHistory.isEmpty()) || (connHistory.get(0).equals(url) == false) ) {
+            File file = new File("nao_dashboard/connHistory.dat");
             try {
-                // Datei erstellen falls nicht schon vorhanden
+                // Pfad + Datei erstellen falls nicht schon vorhanden
+                file.getParentFile().mkdirs();
                 file.createNewFile();
-                if ( file.canWrite() == false ) {
-                    System.out.println("Error saving favorites: Can't write to file.");
-                }
                 // Datei zum Schreiben oeffnen (wirft Exception bei Fehler)
                 PrintWriter p = new PrintWriter(file);
 
-                // Dann Verbindung erstmal in Liste und diese ggf. auf 5 Verbindungen reduzieren
-                favorites.add(0,url);
-                for (int i = favorites.size(); i > 5; i--) {
-                    if( cbxFavorites.getSelectionModel().getSelectedIndex() == (i-1) ) {
-                        // Dann loeschen wir den gerade ausgewaehlten
-                        // Gerade hinzugefuegten in Auswahl setzen, um Fehlern vorzubeugen
-                        cbxFavorites.getSelectionModel().selectFirst();
+                if ( connHistory.contains(url) ) {
+                    // Wenn Verbindung schon in History(nicht an 1. Stelle), erstmal loeschen
+                    for (int i = 0; i < connHistory.size(); i++) {
+                        if ( connHistory.get(i).equals(url) ) {
+                            connHistory.remove(i);
+                            break;
+                        }
                     }
-                    favorites.remove(i-1);
+                }
+                // Verbindung zu Liste hinzufuegen (bzw. an erste Stelle setzen) und auswaehlen
+                connHistory.add(0,url);
+                cbxConnHistory.getSelectionModel().selectFirst();
+                // Nach 5 Verbindungen abschneiden
+                for (int i = connHistory.size(); i > 5; i--) {
+                    connHistory.remove(i-1);
                 }
                 // Favoriten in Datei merken
-                for ( String conn : favorites ) {
+                for ( String conn : connHistory ) {
                     p.println(conn);
                 }
                 p.flush();
                 p.close();
             } catch(Exception e) {
-                System.out.println("Error saving favorites: " + e.toString());
+                System.out.println("Error saving connection history: " + e.toString());
             }
         }
     }
 
     private void loadFavoritesFromFile() {
         // Gespeicherte Verbindungen laden (1x pro Laufzeit)
-        File file = new File("favorites.dat");
+        File file = new File("nao_dashboard/connHistory.dat");
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
 
@@ -191,19 +195,30 @@ public class ConnectionModel {
             while ( reader.ready() ) {
                 String line = reader.readLine();
                 if ( (line != null) && (line != "") ) {
-                    favorites.add(line);
+                    connHistory.add(line);
                 }
             }
+            // Erste Verbindung (zuletzt aktive) in Auswahl setzen
+            String firstUrl = connHistory.get(0);
+            if ( firstUrl != null ) {
+                cbxConnHistory.getSelectionModel().selectFirst();
+                applyHistoryConnection(firstUrl);
+            }
+
         } catch(Exception e) {
-            System.out.println("Loading connection favorites failed: " + e.toString());
+            System.out.println("Loading connection history failed: " + e.toString());
         }
         // Liste mit Combobox verknuepfen (Auch wenn sie noch leer sein sollte)
-        cbxFavorites.setItems(favorites);
+        cbxConnHistory.setItems(connHistory);
     }
 
-    public void applyFavorite() {
+    public void applySelectedHistoryConn() {
         // Ausgewaehlte URL aus Combobox holen
-        String url = cbxFavorites.getSelectionModel().getSelectedItem().toString();
+        String url = cbxConnHistory.getSelectionModel().getSelectedItem().toString();
+        applyHistoryConnection(url);
+    }
+
+    public void applyHistoryConnection(String url) {
         if ( (url != null) && (url.length() > 0) ) {
             // URL in IP und Port splitten und in Textfelder setzen
             int index = url.indexOf(':');
