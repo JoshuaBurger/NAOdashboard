@@ -1,6 +1,7 @@
 package Main;
 
 import com.aldebaran.qi.Session;
+import com.aldebaran.qi.helper.EventCallback;
 import com.aldebaran.qi.helper.proxies.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -17,6 +18,8 @@ import java.util.TimerTask;
 
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.input.MouseEvent;
+import com.aldebaran.qi.helper.proxies.ALSpeechRecognition;
 
 public class MainMenuController {
 
@@ -197,6 +200,8 @@ public class MainMenuController {
     protected ToggleGroup toggleGroupTrackEffector;
     @FXML
     protected Spinner spinTrackTargetSize;
+    @FXML
+    protected Button btnSpeechRecognition;
 
 
     private int pitchValue = 100;
@@ -218,6 +223,7 @@ public class MainMenuController {
     private TemperatureModel temperature;
     private CameraModel camera;
     private TrackerModel tracker;
+    private SpeechModel speech;
 
     @FXML
     public void initialize() {
@@ -230,6 +236,7 @@ public class MainMenuController {
         headSensors = new HeadSensorModel(this);
         temperature = new TemperatureModel(this);
         camera = new CameraModel(this);
+        speech = new SpeechModel(this);
         tracker = new TrackerModel(this);
     }
 
@@ -434,6 +441,19 @@ public class MainMenuController {
         }
     }
 
+    public void listenToSpeech(){
+        if(btnSpeechRecognition.getText().equals("Listen")){
+            btnSpeechRecognition.setText("Stop listening");
+            speech.registerSpeechEvents(memory);
+        }
+        else{
+
+
+            speech.unregisterSpeechEvents(memory);
+            btnSpeechRecognition.setText("Listen");
+
+            }
+        }
 
     //Postures
     public void wakeUp() throws Exception{
@@ -533,6 +553,7 @@ public class MainMenuController {
         headSensors.setSession(session);
         temperature.setSession(session);
         camera.setSession(session);
+        speech.setSession(session);
         tracker.setSession(session);
 
         // AudioFiles vom NAO holen
