@@ -13,6 +13,8 @@ public class MovementModel {
     private Session session = null;
     private ALMotion motion = null;
 
+    private boolean isWalking = false;
+
     public MovementModel(MainMenuController main) {
         this.mainController = main;
     }
@@ -136,28 +138,29 @@ public class MovementModel {
     }
 
     public void move(float xAxis, float yAxis, float zAxis) {
-        try {
-            goToPosture("Stand");
-            motion.move(xAxis, yAxis, zAxis);
-        } catch (Exception e) {
-            if ( (session == null) || (session.isConnected() == false) ) {
-                mainController.handleConnectionClosed(true);
-            }
-            else {
-                System.out.println("Error while moving: " + e.getMessage());
+        // Verhindern, dass move vielfach aufgerufen wird, da NAO sonst im Laufen hängenbleibt
+        if ( isWalking == false ) {
+            isWalking = true;
+            try {
+                goToPosture("Stand");
+                motion.move(xAxis, yAxis, zAxis);
+            } catch (Exception e) {
+                if ((session == null) || (session.isConnected() == false)) {
+                    mainController.handleConnectionClosed(true);
+                } else {
+                    System.out.println("Error while moving: " + e.getMessage());
+                }
             }
         }
     }
     public void stopWalking() {
+        isWalking = false;
         try {
-            System.out.println("stop walking");
             motion.stopMove();
             goToPosture("Stand");
-            System.out.println("stop walking worked");
         }
         catch (Exception e) {
             System.out.println(e.getMessage() + ", stop walking failed");
-            // Keinen Fehler ausgeben, da direkt nach move ausgefuehrt wird
         }
     }
 }
