@@ -491,27 +491,6 @@ public class MainMenuController {
     //Laufgeschwindigkeit speichern
     public void getWalkSpeedSliderValue() {
         walkSpeedValue = (float)(walkSpeedSlider.getValue()); }
-    //set step height
-    public void setStepHeightLow() {
-        stepHeight = 0.005F;
-        unselectStepHeightButtons();
-        btnStepHeightLow.setStyle("-fx-background-color: white; -fx-border-color: #8c8c8c; -fx-border-radius: 5px; -fx-border-width: 2px");
-    }
-    public void setStepHeightNormal() {
-        stepHeight = 0.020F;
-        unselectStepHeightButtons();
-        btnStepHeightNormal.setStyle("-fx-background-color: white; -fx-border-color: #8c8c8c; -fx-border-radius: 5px; -fx-border-width: 2px");
-    }
-    public void setStepHeightHigh() {
-        stepHeight = 0.040F;
-        unselectStepHeightButtons();
-        btnStepHeightHigh.setStyle("-fx-background-color: white; -fx-border-color: #8c8c8c; -fx-border-radius: 5px; -fx-border-width: 2px");
-    }
-    public void unselectStepHeightButtons() {
-        btnStepHeightLow.setStyle("-fx-background-color: white; -fx-border-color: lightgrey; -fx-border-radius: 5px;");
-        btnStepHeightNormal.setStyle("-fx-background-color: white; -fx-border-color: lightgrey; -fx-border-radius: 5px;");
-        btnStepHeightHigh.setStyle("-fx-background-color: white; -fx-border-color: lightgrey; -fx-border-radius: 5px;");
-    }
 
     //loslaufen
     public void walkForwards() {
@@ -522,6 +501,7 @@ public class MainMenuController {
         movement.move(-walkSpeedValue, 0F, 0F); }
     public void walkRight() {
         movement.move(0F, -walkSpeedValue, 0F); }
+
     //loslaufen durch W/A/S/D Tasten
     public void startWalkingKeyPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.W) {
@@ -535,7 +515,11 @@ public class MainMenuController {
         }
     }
     //laufen stoppen
-    public void stopWalking() { movement.stopWalking(); }
+    public void stopWalking(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.W || keyEvent.getCode() == KeyCode.A || keyEvent.getCode() == KeyCode.S ||keyEvent.getCode() == KeyCode.D) {
+            movement.stopWalking();
+        }
+    }
 
 
     //TurnAround
