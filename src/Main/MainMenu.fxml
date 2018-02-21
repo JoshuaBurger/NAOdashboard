@@ -24,7 +24,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="761.0" prefWidth="888.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.MainMenuController">
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="761.0" prefWidth="888.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.MainMenuController">
   <tabs>
       <Tab fx:id="tabConnection" style="-fx-background-color: white;" text="Connection">
           <content>
@@ -331,7 +331,7 @@
                         <Image url="@images/battery_icons/battery_unknown.bmp" />
                      </image></ImageView>
                   <Label fx:id="lblBattery3" layoutX="736.0" layoutY="50.0" prefHeight="27.0" prefWidth="44.0" text="100%" textAlignment="CENTER" />
-                  <Button fx:id="buttonSay" layoutX="53.0" layoutY="37.0" mnemonicParsing="false" onAction="#sayText" text="say">
+                  <Button fx:id="buttonSay" layoutX="47.0" layoutY="128.0" mnemonicParsing="false" onAction="#sayText" prefHeight="30.0" prefWidth="90.0" text="say">
                      <cursor>
                         <Cursor fx:constant="OPEN_HAND" />
                      </cursor></Button>
@@ -368,19 +368,19 @@
                   <Label fx:id="lblSpeechSpeedValue" layoutX="292.0" layoutY="364.0" text="100%" />
                   <Label fx:id="lblPitchValue" layoutX="292.0" layoutY="421.0" text="100%" />
                   <Label fx:id="lblVolumeValue" layoutX="295.0" layoutY="295.0" text="50%" />
-                  <Button fx:id="headFrontSensor" layoutX="398.0" layoutY="104.0" mnemonicParsing="false" onAction="#setHeadFrontSensor" prefHeight="26.0" prefWidth="115.0" text="Head - Front">
+                  <Button fx:id="headFrontSensor" layoutX="398.0" layoutY="78.0" mnemonicParsing="false" onAction="#setHeadFrontSensor" prefHeight="26.0" prefWidth="115.0" text="Head - Front">
                      <cursor>
                         <Cursor fx:constant="OPEN_HAND" />
                      </cursor></Button>
-                  <Button fx:id="headMiddleSensor" layoutX="398.0" layoutY="140.0" mnemonicParsing="false" onAction="#setHeadMiddleSensor" prefHeight="26.0" prefWidth="115.0" text="Head - Middle">
+                  <Button fx:id="headMiddleSensor" layoutX="398.0" layoutY="115.0" mnemonicParsing="false" onAction="#setHeadMiddleSensor" prefHeight="26.0" prefWidth="115.0" text="Head - Middle">
                      <cursor>
                         <Cursor fx:constant="OPEN_HAND" />
                      </cursor></Button>
-                  <Button fx:id="headRearSensor" layoutX="398.0" layoutY="176.0" mnemonicParsing="false" onAction="#setHeadRearSensor" prefHeight="26.0" prefWidth="115.0" text="Head - Rear">
+                  <Button fx:id="headRearSensor" layoutX="398.0" layoutY="152.0" mnemonicParsing="false" onAction="#setHeadRearSensor" prefHeight="26.0" prefWidth="115.0" text="Head - Rear">
                      <cursor>
                         <Cursor fx:constant="OPEN_HAND" />
                      </cursor></Button>
-                  <Label alignment="CENTER" layoutX="380.0" layoutY="57.0" prefHeight="41.0" prefWidth="152.0" text="Apply Speech Settings to a Sensor:" textAlignment="CENTER" wrapText="true" />
+                  <Label alignment="CENTER" layoutX="379.0" layoutY="34.0" prefHeight="41.0" prefWidth="152.0" text="Apply Speech Settings to a Sensor:" textAlignment="CENTER" wrapText="true" />
                   <ComboBox fx:id="cbxAudio" layoutX="398.0" layoutY="290.0" prefHeight="27.0" prefWidth="206.0" promptText="Audio" />
                   <Button fx:id="btnPlayAudio" layoutX="398.0" layoutY="328.0" mnemonicParsing="false" onAction="#playAudio" prefHeight="27.0" prefWidth="113.0" text="Play" />
                   <ImageView fitHeight="193.0" fitWidth="148.0" layoutX="691.0" layoutY="521.0" pickOnBounds="true" preserveRatio="true">
@@ -402,6 +402,7 @@
                       <font>
                           <Font name="System Bold" size="18.0" />
                       </font></Label>
+                  <Button fx:id="btnSpeechRecognition" layoutX="398.0" layoutY="216.0" mnemonicParsing="false" onAction="#listenToSpeech" prefHeight="30.0" prefWidth="90.0" text="Listen" />
               </children>
           </AnchorPane>
       </content>
