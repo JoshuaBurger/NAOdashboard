@@ -1,11 +1,13 @@
 package Main;
 
+import com.aldebaran.qi.CallError;
 import com.aldebaran.qi.Session;
 import com.aldebaran.qi.helper.EventCallback;
 import com.aldebaran.qi.helper.proxies.ALFaceDetection;
 import com.aldebaran.qi.helper.proxies.ALMotion;
 import com.aldebaran.qi.helper.proxies.ALRedBallDetection;
 import com.aldebaran.qi.helper.proxies.ALTracker;
+import javafx.application.Platform;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -142,7 +144,6 @@ public class TrackerModel {
             // Evtl. alte Tracker-Konfiguration zuruecksetzen
             tracker.removeAllTargets();
             // Neue Konfiguration setzen
-            tracker.toggleSearch(true);
             tracker.registerTarget(target, targetSize);
             tracker.setMaximumDistanceDetection(3.0f);
             tracker.setMode(mode);
@@ -150,7 +151,12 @@ public class TrackerModel {
             // Tracking starten
             tracker.track(target);
 
-            lblInfo.setText("Tracking target now...");
+            // Label kann nicht aus naoqi messaging thread gesetzt werden
+            Platform.runLater(new Runnable(){
+                public void run() {
+                    lblInfo.setText("Tracking target now...");
+                }
+            });
 
         } catch(Exception e) {
             if ( (session == null) || (session.isConnected() == false) ) {
@@ -169,12 +175,30 @@ public class TrackerModel {
             // Event unsubscriben
             mainController.memory.unsubscribeToEvent(eventId);
             // Suchen stoppen
-            ALRedBallDetection detect = new ALRedBallDetection(session);
-            detect.unsubscribe("redBallDetected");
+            if ( target.equals("RedBall") ) {
+                ALRedBallDetection detect = new ALRedBallDetection(session);
+                detect.unsubscribe("redBallDetected");
+            }
+            else {
+                ALFaceDetection detect = new ALFaceDetection(session);
+                detect.unsubscribe("FaceDetected");
+            }
             // Tracking stoppen und Ausgangsposition annehmen
             ALTracker tracker = new ALTracker(session);
             tracker.stopTracker();
-            mainController.standInit();
+
+            // Wieder in Grundzustand versetzen
+            mainController.standUp();
+            ALMotion motion= new ALMotion(session);
+            motion.setStiffnesses("Head", 0.0);
+            if ( effector.equals("None") == false ) {
+                if (effector.equals("Arms)")) {
+                    motion.setStiffnesses("LArm", 0.0);
+                    motion.setStiffnesses("RArm", 0.0);
+                } else {
+                    motion.setStiffnesses(effector, 0.0);
+                }
+            }
 
         } catch(Exception e) {
             if ( (session == null) || (session.isConnected() == false) ) {

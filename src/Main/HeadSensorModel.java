@@ -3,6 +3,7 @@ package Main;
 import com.aldebaran.qi.Session;
 import com.aldebaran.qi.helper.EventCallback;
 import com.aldebaran.qi.helper.proxies.ALMemory;
+import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 
@@ -94,8 +95,14 @@ public class HeadSensorModel {
             default:
                 break;
         }
-        lblInfo.setTextFill(Color.BLACK);
-        controller.displayTextTemporarily(lblInfo, type + " tactil touched.", 2000);
+        // GUI kann nicht aus dem naoqi-messaging thread veraendert werden, daher runLater
+        Platform.runLater(new Runnable() {
+            public void run() {
+                lblInfo.setTextFill(Color.BLACK);
+                controller.displayTextTemporarily(lblInfo, type + " tactil touched.", 2000);
+            }
+        });
+
         if ( (task != null) && (task.text != null) && (task.language != null) ) {
             // NAO den gespeicherten Text sagen lassen
             controller.saySomething(task.text, task.speed, task.pitch, task.language);
