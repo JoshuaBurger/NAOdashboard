@@ -21,6 +21,12 @@ public class Main extends Application {
         stage.show();
     }
 
+    @Override
+    public void stop() {
+        // Wir muessen explizit terminieren, da sonst Threads offenbleiben (NAO-Verbindung? Timer? Wer weiß...)
+        System.exit(0);
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
