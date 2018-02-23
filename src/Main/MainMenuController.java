@@ -101,45 +101,45 @@ public class MainMenuController {
     @FXML
     protected Label labelAllowedValue;
     @FXML
-    protected Label lblHead1;
+    protected Label lblHeatHead1;
     @FXML
-    protected Label lblHead2;
+    protected Label lblHeatHead2;
     @FXML
-    protected Label lblHead3;
+    protected Label lblHeatHead3;
     @FXML
-    protected Label lblHead4;
+    protected Label lblHeatHead4;
     @FXML
-    protected Label lblLArm1;
+    protected Label lblHeatLArm1;
     @FXML
-    protected Label lblLArm2;
+    protected Label lblHeatLArm2;
     @FXML
-    protected Label lblLArm3;
+    protected Label lblHeatLArm3;
     @FXML
-    protected Label lblLArm4;
+    protected Label lblHeatLArm4;
     @FXML
-    protected Label lblRArm1;
+    protected Label lblHeatRArm1;
     @FXML
-    protected Label lblRArm2;
+    protected Label lblHeatRArm2;
     @FXML
-    protected Label lblRArm3;
+    protected Label lblHeatRArm3;
     @FXML
-    protected Label lblRArm4;
+    protected Label lblHeatRArm4;
     @FXML
-    protected Label lblLLeg1;
+    protected Label lblHeatLLeg1;
     @FXML
-    protected Label lblLLeg2;
+    protected Label lblHeatLLeg2;
     @FXML
-    protected Label lblLLeg3;
+    protected Label lblHeatLLeg3;
     @FXML
-    protected Label lblLLeg4;
+    protected Label lblHeatLLeg4;
     @FXML
-    protected Label lblRLeg1;
+    protected Label lblHeatRLeg1;
     @FXML
-    protected Label lblRLeg2;
+    protected Label lblHeatRLeg2;
     @FXML
-    protected Label lblRLeg3;
+    protected Label lblHeatRLeg3;
     @FXML
-    protected Label lblRLeg4;
+    protected Label lblHeatRLeg4;
     @FXML
     protected Label lblBattery1;
     @FXML

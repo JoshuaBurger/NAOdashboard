@@ -10,37 +10,38 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 
 public class TemperatureModel {
-    private MainMenuController mainController;
+
     private TemperatureGUIrefresher tempGUIrefresher;
 
     public TemperatureModel(MainMenuController mainController ) {
-        this.mainController = mainController;
-        // Alle Label holen...
+        // Alle Label holen, ueber die wir die Temperaturen anzeigen (auf allen Tabs)...
         ArrayList<Label> headLabels = new ArrayList<>();
         ArrayList<Label> lArmLabels = new ArrayList<>();
         ArrayList<Label> rArmLabels = new ArrayList<>();
         ArrayList<Label> lLegLabels = new ArrayList<>();
         ArrayList<Label> rLegLabels = new ArrayList<>();
-        headLabels.add(mainController.lblHead1);
-        headLabels.add(mainController.lblHead2);
-        headLabels.add(mainController.lblHead3);
-        headLabels.add(mainController.lblHead4);
-        lArmLabels.add(mainController.lblLArm1);
-        lArmLabels.add(mainController.lblLArm2);
-        lArmLabels.add(mainController.lblLArm3);
-        lArmLabels.add(mainController.lblLArm4);
-        rArmLabels.add(mainController.lblRArm1);
-        rArmLabels.add(mainController.lblRArm2);
-        rArmLabels.add(mainController.lblRArm3);
-        rArmLabels.add(mainController.lblRArm4);
-        lLegLabels.add(mainController.lblLLeg1);
-        lLegLabels.add(mainController.lblLLeg2);
-        lLegLabels.add(mainController.lblLLeg3);
-        lLegLabels.add(mainController.lblLLeg4);
-        rLegLabels.add(mainController.lblRLeg1);
-        rLegLabels.add(mainController.lblRLeg2);
-        rLegLabels.add(mainController.lblRLeg3);
-        rLegLabels.add(mainController.lblRLeg4);
+        headLabels.add(mainController.lblHeatHead1);
+        headLabels.add(mainController.lblHeatHead2);
+        headLabels.add(mainController.lblHeatHead3);
+        headLabels.add(mainController.lblHeatHead4);
+        lArmLabels.add(mainController.lblHeatLArm1);
+        lArmLabels.add(mainController.lblHeatLArm2);
+        lArmLabels.add(mainController.lblHeatLArm3);
+        lArmLabels.add(mainController.lblHeatLArm4);
+        rArmLabels.add(mainController.lblHeatRArm1);
+        rArmLabels.add(mainController.lblHeatRArm2);
+        rArmLabels.add(mainController.lblHeatRArm3);
+        rArmLabels.add(mainController.lblHeatRArm4);
+        lLegLabels.add(mainController.lblHeatLLeg1);
+        lLegLabels.add(mainController.lblHeatLLeg2);
+        lLegLabels.add(mainController.lblHeatLLeg3);
+        lLegLabels.add(mainController.lblHeatLLeg4);
+        rLegLabels.add(mainController.lblHeatRLeg1);
+        rLegLabels.add(mainController.lblHeatRLeg2);
+        rLegLabels.add(mainController.lblHeatRLeg3);
+        rLegLabels.add(mainController.lblHeatRLeg4);
+        // Label in Klasse speichern
+        // Diese Klasse wird benoetigt, um spaeter die Temperaturlabel im JavaFX-Thread zu aktualisieren
         tempGUIrefresher = new TemperatureGUIrefresher(headLabels, lArmLabels, rArmLabels, lLegLabels, rLegLabels);
     }
 
@@ -67,14 +68,6 @@ public class TemperatureModel {
     public void registerTemperatureEvents(ALMemory memory) {
         try {
             memory.subscribeToEvent("TemperatureDiagnosisErrorChanged",
-                    new EventCallback<Object>() {
-                        @Override
-                        public void onEvent(Object obj) {
-                            // Momentane Temperaturdiagnose auswerten
-                            evaluateTemperatureDiagnosis(obj,false);
-                        }
-                    });
-            memory.subscribeToEvent("TemperatureStatusChanged",
                     new EventCallback<Object>() {
                         @Override
                         public void onEvent(Object obj) {
@@ -155,6 +148,8 @@ public class TemperatureModel {
         }
 
         @Override public void run() {
+            // Temperaturlabel aktualisieren
+            // Dafuer gehen wir alle von der Aenderung betroffenen chains durch
             for ( String chain : chains ) {
                 ArrayList<Label> currentLabels = null;
 
@@ -179,6 +174,7 @@ public class TemperatureModel {
                         break;
                 }
                 if ( currentLabels != null ) {
+                    // Fuer jede betroffene chain aktualisieren wir die Label auf jedem Tab
                     for ( Label label : currentLabels ) {
                         switch (tempState) {
                             case 0:

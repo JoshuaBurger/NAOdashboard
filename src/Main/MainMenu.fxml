@@ -22,6 +22,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane onKeyPressed="#startWalkingKeyPressed" onKeyReleased="#stopWalking" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.MainMenuController">
@@ -84,11 +85,11 @@
                                <Font name="System Bold" size="18.0" />
                            </font>
                        </Label>
-                       <ImageView fx:id="imgBattery1" fitHeight="36.0" fitWidth="93.0" layoutX="704.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                       <ImageView fx:id="imgBattery1" fitHeight="36.0" fitWidth="93.0" layoutX="779.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                          <image>
                             <Image url="@images/battery_icons/battery_unknown.bmp" />
                          </image></ImageView>
-                       <Label fx:id="lblBattery1" layoutX="736.0" layoutY="50.0" prefHeight="27.0" prefWidth="44.0" text="100%" textAlignment="CENTER" />
+                       <Label fx:id="lblBattery1" layoutX="810" layoutY="50.0" prefHeight="27.0" prefWidth="44.0" text="100%" textAlignment="CENTER" />
                       <GridPane fx:id="gridpaneLeds" layoutX="66.0" layoutY="113.0" prefHeight="553.0" prefWidth="299.0">
                         <columnConstraints>
                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -320,16 +321,37 @@
                                <Image url="@images/nao.jpg" />
                            </image>
                        </ImageView>
-                       <Label layoutX="709.0" layoutY="468.0" text="Temperatures:" underline="true">
+                       <Label layoutX="705.0" layoutY="468.0" text="Temperatures:" textFill="RED" underline="true">
                            <font>
-                               <Font size="14.0" />
+                               <Font name="System Bold" size="14.0" />
                            </font>
                        </Label>
-                       <Label fx:id="lblLArm1" alignment="CENTER" layoutX="825.0" layoutY="592.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
-                       <Label fx:id="lblLLeg1" alignment="CENTER" layoutX="825.0" layoutY="661.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
-                       <Label fx:id="lblRArm1" alignment="CENTER" layoutX="642.0" layoutY="592.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
-                       <Label fx:id="lblRLeg1" alignment="CENTER" layoutX="642.0" layoutY="661.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
-                       <Label fx:id="lblHead1" alignment="CENTER" layoutX="738.0" layoutY="505.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
+                       <Label fx:id="lblHeatLArm1" alignment="CENTER" layoutX="830.0" layoutY="584.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="52.0" text="N/A" textAlignment="CENTER" />
+                       <Label fx:id="lblHeatLLeg1" alignment="CENTER" layoutX="830.0" layoutY="654.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="52.0" text="N/A" textAlignment="CENTER" />
+                       <Label fx:id="lblHeatRArm1" alignment="CENTER" layoutX="638.0" layoutY="584.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="52.0" text="N/A" textAlignment="CENTER" />
+                       <Label fx:id="lblHeatRLeg1" alignment="CENTER" layoutX="638.0" layoutY="654.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="52.0" text="N/A" textAlignment="CENTER" />
+                       <Label fx:id="lblHeatHead1" alignment="CENTER" layoutX="737.0" layoutY="499.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="52.0" text="N/A" textAlignment="CENTER" />
+                       <Line endY="28.0" fill="BLACK" layoutX="700.0" layoutY="592.0" startY="-28.0" />
+                       <Line endX="00.0" layoutX="700.0" layoutY="592.0" startX="-05.0" />
+                       <Line endX="10.0" layoutX="700.0" layoutY="564.0" />
+                       <Line endX="10.0" layoutX="700.0" layoutY="620.0" />
+                       <Line endY="30.0" layoutX="700.0" layoutY="662.0" startY="-30.0" />
+                       <Line endX="00.0" layoutX="700.0" layoutY="662.0" startX="-05.0" />
+                       <Line endX="10.0" layoutX="700.0" layoutY="632.0" />
+                       <Line endX="10.0" layoutX="700.0" layoutY="692.0" />
+                       <Line endY="28.0" layoutX="820.0" layoutY="592.0" startY="-28.0" />
+                       <Line endX="05.0" layoutX="820.0" layoutY="592.0" />
+                       <Line endX="00.0" layoutX="820.0" layoutY="564.0" startX="-10.0" />
+                       <Line endX="00.0" layoutX="820.0" layoutY="620.0" startX="-10.0" />
+                       <Line endY="30.0" layoutX="820.0" layoutY="662.0" startY="-30.0" />
+                       <Line endX="05.0" layoutX="820.0" layoutY="662.0" />
+                       <Line endX="00.0" layoutX="820.0" layoutY="632.0" startX="-10.0" />
+                       <Line endX="00.0" layoutX="820.0" layoutY="692.0" startX="-10.0" />
+                       <Line endX="20.0" layoutX="763.0" layoutY="527.0" startX="-20.0" />
+                       <Line endY="00.0" layoutX="763.0" layoutY="527.0" startY="-05.0" />
+                       <Line endY="10.0" layoutX="743.0" layoutY="527.0" />
+                       <Line endY="10.0" layoutX="783.0" layoutY="527.0" />
+
                       <Button fx:id="btnEarsOff" layoutX="675.0" layoutY="247.0" mnemonicParsing="false" onAction="#earLEDsOff" prefHeight="26.0" prefWidth="167.0" text="ears off" />
                       <Button fx:id="btnEarsOn" layoutX="459.0" layoutY="87.0" mnemonicParsing="false" onAction="#earLEDsOn" text="ears on" />
                       <Button fx:id="btnBrainOn" layoutX="457.0" layoutY="128.0" mnemonicParsing="false" onAction="#brainLEDsOn" text="brain on" />
@@ -354,11 +376,11 @@
               <content>
                   <AnchorPane disable="true" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
                       <children>
-                          <ImageView fx:id="imgBattery3" fitHeight="36.0" fitWidth="93.0" layoutX="704.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                          <ImageView fx:id="imgBattery2" fitHeight="36.0" fitWidth="93.0" layoutX="779.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                               <image>
                                   <Image url="@images/battery_icons/battery_unknown.bmp" />
                               </image></ImageView>
-                          <Label fx:id="lblBattery3" layoutX="736.0" layoutY="50.0" prefHeight="27.0" prefWidth="44.0" text="100%" textAlignment="CENTER" />
+                          <Label fx:id="lblBattery2" layoutX="810" layoutY="50.0" prefHeight="27.0" prefWidth="44.0" text="100%" textAlignment="CENTER" />
                           <Button fx:id="buttonSay" layoutX="53.0" layoutY="37.0" mnemonicParsing="false" onAction="#sayText" text="say">
                               <cursor>
                                   <Cursor fx:constant="OPEN_HAND" />
@@ -416,16 +438,36 @@
                                   <Image url="@images/nao.jpg" />
                               </image>
                           </ImageView>
-                          <Label layoutX="709.0" layoutY="468.0" text="Temperatures:" underline="true">
+                          <Label layoutX="705.0" layoutY="468.0" text="Temperatures:" textFill="RED" underline="true">
                               <font>
-                                  <Font size="14.0" />
+                                  <Font name="System Bold" size="14.0" />
                               </font>
                           </Label>
-                          <Label fx:id="lblLArm2" alignment="CENTER" layoutX="825.0" layoutY="592.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
-                          <Label fx:id="lblLLeg2" alignment="CENTER" layoutX="825.0" layoutY="661.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
-                          <Label fx:id="lblRArm2" alignment="CENTER" layoutX="642.0" layoutY="592.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
-                          <Label fx:id="lblRLeg2" alignment="CENTER" layoutX="642.0" layoutY="661.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
-                          <Label fx:id="lblHead2" alignment="CENTER" layoutX="738.0" layoutY="505.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
+                          <Label fx:id="lblHeatLArm2" alignment="CENTER" layoutX="830.0" layoutY="584.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="52.0" text="N/A" textAlignment="CENTER" />
+                          <Label fx:id="lblHeatLLeg2" alignment="CENTER" layoutX="830.0" layoutY="654.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="52.0" text="N/A" textAlignment="CENTER" />
+                          <Label fx:id="lblHeatRArm2" alignment="CENTER" layoutX="638.0" layoutY="584.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="52.0" text="N/A" textAlignment="CENTER" />
+                          <Label fx:id="lblHeatRLeg2" alignment="CENTER" layoutX="638.0" layoutY="654.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="52.0" text="N/A" textAlignment="CENTER" />
+                          <Label fx:id="lblHeatHead2" alignment="CENTER" layoutX="737.0" layoutY="499.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="52.0" text="N/A" textAlignment="CENTER" />
+                          <Line endY="28.0" fill="BLACK" layoutX="700.0" layoutY="592.0" startY="-28.0" />
+                          <Line endX="00.0" layoutX="700.0" layoutY="592.0" startX="-05.0" />
+                          <Line endX="10.0" layoutX="700.0" layoutY="564.0" />
+                          <Line endX="10.0" layoutX="700.0" layoutY="620.0" />
+                          <Line endY="30.0" layoutX="700.0" layoutY="662.0" startY="-30.0" />
+                          <Line endX="00.0" layoutX="700.0" layoutY="662.0" startX="-05.0" />
+                          <Line endX="10.0" layoutX="700.0" layoutY="632.0" />
+                          <Line endX="10.0" layoutX="700.0" layoutY="692.0" />
+                          <Line endY="28.0" layoutX="820.0" layoutY="592.0" startY="-28.0" />
+                          <Line endX="05.0" layoutX="820.0" layoutY="592.0" />
+                          <Line endX="00.0" layoutX="820.0" layoutY="564.0" startX="-10.0" />
+                          <Line endX="00.0" layoutX="820.0" layoutY="620.0" startX="-10.0" />
+                          <Line endY="30.0" layoutX="820.0" layoutY="662.0" startY="-30.0" />
+                          <Line endX="05.0" layoutX="820.0" layoutY="662.0" />
+                          <Line endX="00.0" layoutX="820.0" layoutY="632.0" startX="-10.0" />
+                          <Line endX="00.0" layoutX="820.0" layoutY="692.0" startX="-10.0" />
+                          <Line endX="20.0" layoutX="763.0" layoutY="527.0" startX="-20.0" />
+                          <Line endY="00.0" layoutX="763.0" layoutY="527.0" startY="-05.0" />
+                          <Line endY="10.0" layoutX="743.0" layoutY="527.0" />
+                          <Line endY="10.0" layoutX="783.0" layoutY="527.0" />
                           <Label fx:id="lblHeadSensorInfo" layoutX="534.0" layoutY="143.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="21.0" prefWidth="340.0">
                               <font>
                                   <Font name="System Bold" size="18.0" />
@@ -444,11 +486,11 @@
                                   <Font name="System Bold" size="18.0" />
                               </font>
                           </Label>
-                          <ImageView fx:id="imgBattery2" fitHeight="36.0" fitWidth="93.0" layoutX="704.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                          <ImageView fx:id="imgBattery3" fitHeight="36.0" fitWidth="93.0" layoutX="779.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                               <image>
                                   <Image url="@images/battery_icons/battery_unknown.bmp" />
                               </image></ImageView>
-                          <Label fx:id="lblBattery2" layoutX="736.0" layoutY="50.0" prefHeight="27.0" prefWidth="44.0" text="100%" textAlignment="CENTER" />
+                          <Label fx:id="lblBattery3" layoutX="810" layoutY="50.0" prefHeight="27.0" prefWidth="44.0" text="100%" textAlignment="CENTER" />
                           <SplitPane layoutX="48.0" layoutY="64.0" orientation="VERTICAL" prefHeight="280.0" prefWidth="90.0" style="-fx-background-color: white;">
                               <items>
 
@@ -530,16 +572,36 @@
                                   <Image url="@images/nao.jpg" />
                               </image>
                           </ImageView>
-                          <Label layoutX="709.0" layoutY="468.0" text="Temperatures:" underline="true">
+                          <Label layoutX="705.0" layoutY="468.0" text="Temperatures:" textFill="RED" underline="true">
                               <font>
-                                  <Font size="14.0" />
+                                  <Font name="System Bold" size="14.0" />
                               </font>
                           </Label>
-                          <Label fx:id="lblLArm3" alignment="CENTER" layoutX="825.0" layoutY="592.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
-                          <Label fx:id="lblLLeg3" alignment="CENTER" layoutX="825.0" layoutY="661.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
-                          <Label fx:id="lblRArm3" alignment="CENTER" layoutX="642.0" layoutY="592.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
-                          <Label fx:id="lblRLeg3" alignment="CENTER" layoutX="642.0" layoutY="661.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
-                          <Label fx:id="lblHead3" alignment="CENTER" layoutX="738.0" layoutY="505.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
+                          <Label fx:id="lblHeatLArm3" alignment="CENTER" layoutX="830.0" layoutY="584.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="52.0" text="N/A" textAlignment="CENTER" />
+                          <Label fx:id="lblHeatLLeg3" alignment="CENTER" layoutX="830.0" layoutY="654.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="52.0" text="N/A" textAlignment="CENTER" />
+                          <Label fx:id="lblHeatRArm3" alignment="CENTER" layoutX="638.0" layoutY="584.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="52.0" text="N/A" textAlignment="CENTER" />
+                          <Label fx:id="lblHeatRLeg3" alignment="CENTER" layoutX="638.0" layoutY="654.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="52.0" text="N/A" textAlignment="CENTER" />
+                          <Label fx:id="lblHeatHead3" alignment="CENTER" layoutX="737.0" layoutY="499.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="52.0" text="N/A" textAlignment="CENTER" />
+                          <Line endY="28.0" fill="BLACK" layoutX="700.0" layoutY="592.0" startY="-28.0" />
+                          <Line endX="00.0" layoutX="700.0" layoutY="592.0" startX="-05.0" />
+                          <Line endX="10.0" layoutX="700.0" layoutY="564.0" />
+                          <Line endX="10.0" layoutX="700.0" layoutY="620.0" />
+                          <Line endY="30.0" layoutX="700.0" layoutY="662.0" startY="-30.0" />
+                          <Line endX="00.0" layoutX="700.0" layoutY="662.0" startX="-05.0" />
+                          <Line endX="10.0" layoutX="700.0" layoutY="632.0" />
+                          <Line endX="10.0" layoutX="700.0" layoutY="692.0" />
+                          <Line endY="28.0" layoutX="820.0" layoutY="592.0" startY="-28.0" />
+                          <Line endX="05.0" layoutX="820.0" layoutY="592.0" />
+                          <Line endX="00.0" layoutX="820.0" layoutY="564.0" startX="-10.0" />
+                          <Line endX="00.0" layoutX="820.0" layoutY="620.0" startX="-10.0" />
+                          <Line endY="30.0" layoutX="820.0" layoutY="662.0" startY="-30.0" />
+                          <Line endX="05.0" layoutX="820.0" layoutY="662.0" />
+                          <Line endX="00.0" layoutX="820.0" layoutY="632.0" startX="-10.0" />
+                          <Line endX="00.0" layoutX="820.0" layoutY="692.0" startX="-10.0" />
+                          <Line endX="20.0" layoutX="763.0" layoutY="527.0" startX="-20.0" />
+                          <Line endY="00.0" layoutX="763.0" layoutY="527.0" startY="-05.0" />
+                          <Line endY="10.0" layoutX="743.0" layoutY="527.0" />
+                          <Line endY="10.0" layoutX="783.0" layoutY="527.0" />
                           <Label layoutX="190.0" layoutY="278.0" text="Tracking:">
                               <font>
                                   <Font name="System Bold" size="18.0" />
@@ -584,11 +646,11 @@
       <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: white;">
               <children>
-                  <ImageView fx:id="imgBattery4" fitHeight="36.0" fitWidth="93.0" layoutX="704.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgBattery4" fitHeight="36.0" fitWidth="93.0" layoutX="779.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                       <image>
                           <Image url="@images/battery_icons/battery_unknown.bmp" />
                       </image></ImageView>
-                  <Label fx:id="lblBattery4" layoutX="736.0" layoutY="50.0" prefHeight="27.0" prefWidth="44.0" text="100%" textAlignment="CENTER" />
+                  <Label fx:id="lblBattery4" layoutX="810" layoutY="50.0" prefHeight="27.0" prefWidth="44.0" text="100%" textAlignment="CENTER" />
                   <Label fx:id="labelWalk" layoutX="103.5" layoutY="25.0" text="walk">
                      <font>
                         <Font name="System Bold" size="18.0" />
@@ -651,16 +713,36 @@
                           <Image url="@images/nao.jpg" />
                       </image>
                   </ImageView>
-                  <Label layoutX="709.0" layoutY="468.0" text="Temperatures:" underline="true">
+                  <Label layoutX="705.0" layoutY="468.0" text="Temperatures:" textFill="RED" underline="true">
                       <font>
-                          <Font size="14.0" />
+                          <Font name="System Bold" size="14.0" />
                       </font>
                   </Label>
-                  <Label fx:id="lblLArm4" alignment="CENTER" layoutX="825.0" layoutY="592.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
-                  <Label fx:id="lblLLeg4" alignment="CENTER" layoutX="825.0" layoutY="661.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
-                  <Label fx:id="lblRArm4" alignment="CENTER" layoutX="642.0" layoutY="592.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
-                  <Label fx:id="lblRLeg4" alignment="CENTER" layoutX="642.0" layoutY="661.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
-                  <Label fx:id="lblHead4" alignment="CENTER" layoutX="738.0" layoutY="505.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="46.0" text="N/A" textAlignment="CENTER" />
+                  <Label fx:id="lblHeatLArm4" alignment="CENTER" layoutX="830.0" layoutY="584.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="52.0" text="N/A" textAlignment="CENTER" />
+                  <Label fx:id="lblHeatLLeg4" alignment="CENTER" layoutX="830.0" layoutY="654.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="52.0" text="N/A" textAlignment="CENTER" />
+                  <Label fx:id="lblHeatRArm4" alignment="CENTER" layoutX="638.0" layoutY="584.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="52.0" text="N/A" textAlignment="CENTER" />
+                  <Label fx:id="lblHeatRLeg4" alignment="CENTER" layoutX="638.0" layoutY="654.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="52.0" text="N/A" textAlignment="CENTER" />
+                  <Label fx:id="lblHeatHead4" alignment="CENTER" layoutX="737.0" layoutY="499.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="52.0" text="N/A" textAlignment="CENTER" />
+                  <Line endY="28.0" fill="BLACK" layoutX="700.0" layoutY="592.0" startY="-28.0" />
+                  <Line endX="00.0" layoutX="700.0" layoutY="592.0" startX="-05.0" />
+                  <Line endX="10.0" layoutX="700.0" layoutY="564.0" />
+                  <Line endX="10.0" layoutX="700.0" layoutY="620.0" />
+                  <Line endY="30.0" layoutX="700.0" layoutY="662.0" startY="-30.0" />
+                  <Line endX="00.0" layoutX="700.0" layoutY="662.0" startX="-05.0" />
+                  <Line endX="10.0" layoutX="700.0" layoutY="632.0" />
+                  <Line endX="10.0" layoutX="700.0" layoutY="692.0" />
+                  <Line endY="28.0" layoutX="820.0" layoutY="592.0" startY="-28.0" />
+                  <Line endX="05.0" layoutX="820.0" layoutY="592.0" />
+                  <Line endX="00.0" layoutX="820.0" layoutY="564.0" startX="-10.0" />
+                  <Line endX="00.0" layoutX="820.0" layoutY="620.0" startX="-10.0" />
+                  <Line endY="30.0" layoutX="820.0" layoutY="662.0" startY="-30.0" />
+                  <Line endX="05.0" layoutX="820.0" layoutY="662.0" />
+                  <Line endX="00.0" layoutX="820.0" layoutY="632.0" startX="-10.0" />
+                  <Line endX="00.0" layoutX="820.0" layoutY="692.0" startX="-10.0" />
+                  <Line endX="20.0" layoutX="763.0" layoutY="527.0" startX="-20.0" />
+                  <Line endY="00.0" layoutX="763.0" layoutY="527.0" startY="-05.0" />
+                  <Line endY="10.0" layoutX="743.0" layoutY="527.0" />
+                  <Line endY="10.0" layoutX="783.0" layoutY="527.0" />
                   <ImageView fx:id="imgCamera" fitHeight="240.0" fitWidth="320.0" layoutX="284.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/camera_disabled.png" />
