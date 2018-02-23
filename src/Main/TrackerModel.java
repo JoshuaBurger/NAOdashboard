@@ -1,6 +1,5 @@
 package Main;
 
-import com.aldebaran.qi.CallError;
 import com.aldebaran.qi.Session;
 import com.aldebaran.qi.helper.EventCallback;
 import com.aldebaran.qi.helper.proxies.ALFaceDetection;
@@ -8,9 +7,11 @@ import com.aldebaran.qi.helper.proxies.ALMotion;
 import com.aldebaran.qi.helper.proxies.ALRedBallDetection;
 import com.aldebaran.qi.helper.proxies.ALTracker;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 
 public class TrackerModel {
 
@@ -28,7 +29,7 @@ public class TrackerModel {
     private long eventId;
     private boolean targetDetected;
 
-    private String target; // RedBall, Face, LandMark
+    private String target; // RedBall, Face
     private String mode; // Head, WholeBody, Move
     private String effector; // None LArm, RArm, Arms
     private float targetSize; // in meters
@@ -43,17 +44,23 @@ public class TrackerModel {
         btnStopTracking     = main.btnStopTracking;
         configPane          = main.paneTrackingConfig;
         lblInfo             = main.lblTrackingInfo;
+
+        // Listener hinzufuegen, um auf Modus-Aenderung zu reagieren
+        toggleGroupMode.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+            public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
+                modusChanged();
+            }
+        });
     }
 
     public void setSession(Session session) {
+        // Neue Verbindung (oder keine), daher alles initialiseren/zuruecksetzen
         this.session = session;
         targetDetected = false;
         eventId = -1;
         target = "";
         mode = "";
         effector = "";
-
-        // Buttons etc. in Ausgangszustand versetzen
         lblInfo.setText("");
         configPane.setDisable(false);
         btnStopTracking.setDisable(true);
@@ -237,6 +244,29 @@ public class TrackerModel {
                 break;
             default:
                 break;
+        }
+    }
+
+    private void modusChanged() {
+        // Den ausgewaehlten Modus holen
+        String mode = ((RadioButton)toggleGroupMode.getSelectedToggle()).getText();
+        if ( mode.equals("Move") ) {
+            // Wenn 'Move' ausgewaehlt ist, duerfen keine Effektoren ausgewaehlt werden, da NAO
+            // beim Laufen sonst hinfliegt
+            mainController.displayTextTemporarily(lblInfo,"Effectors not allowed for mode 'Move'.",3000);
+            // Toggles holen, ersten auswaehlen ("None"), alle anderen disablen
+            ObservableList<Toggle> toggles = toggleGroupEffector.getToggles();
+            toggleGroupEffector.selectToggle(toggles.get(0));
+            ((RadioButton)toggles.get(1)).setDisable(true);
+            ((RadioButton)toggles.get(2)).setDisable(true);
+            ((RadioButton)toggles.get(3)).setDisable(true);
+        }
+        else {
+            // Bei den anderen Modi sind Effektoren erlaubt
+            ObservableList<Toggle> toggles = toggleGroupEffector.getToggles();
+            ((RadioButton)toggles.get(1)).setDisable(false);
+            ((RadioButton)toggles.get(2)).setDisable(false);
+            ((RadioButton)toggles.get(3)).setDisable(false);
         }
     }
 }
