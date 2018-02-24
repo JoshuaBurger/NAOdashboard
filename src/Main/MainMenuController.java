@@ -502,8 +502,13 @@ public class MainMenuController {
     public void walkRight() {
         movement.move(0F, -walkSpeedValue, 0F); }
 
+    //laufen stoppen
+    public void stopWalking() {
+        movement.stopWalking();
+    }
+
     //loslaufen durch W/A/S/D Tasten
-    public void startWalkingKeyPressed(KeyEvent keyEvent) {
+    public void keyPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.W) {
             movement.move(walkSpeedValue, 0F, 0F);
         } else if (keyEvent.getCode() == KeyCode.A) {
@@ -514,8 +519,8 @@ public class MainMenuController {
             movement.move(0F, -walkSpeedValue, 0F);
         }
     }
-    //laufen stoppen
-    public void stopWalking(KeyEvent keyEvent) {
+    //laufen stoppen durch W/A/S/D Taste loslassen
+    public void keyReleased(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.W || keyEvent.getCode() == KeyCode.A || keyEvent.getCode() == KeyCode.S ||keyEvent.getCode() == KeyCode.D) {
             movement.stopWalking();
         }
