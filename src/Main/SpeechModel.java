@@ -26,7 +26,6 @@ public class SpeechModel {
     public int dialogueCounter = 0;
     public int squatCounter = 0;
     public boolean squatEnabled = true;
-    public boolean isSubscribed = false;
     public boolean understand = false;
 
     public SpeechModel(MainMenuController mainController){
@@ -132,6 +131,7 @@ public class SpeechModel {
         if (word.equals("Kniebeuge") && confidence > 0.5) {
             try {
                 while (squatEnabled && squatCounter < 15) {
+                    understand = true;
                     unregisterSpeechEvents(mainController.memory);
                     mainController.standZero();
                     mainController.crouch();
@@ -244,7 +244,7 @@ public class SpeechModel {
 
         //Englische Befehle
         if (word.equals("Squat") && confidence > 0.5) {
-            understand = true;
+            //understand = true;
             unregisterSpeechEvents(mainController.memory);
             mainController.standZero();
             mainController.crouch();
@@ -252,14 +252,14 @@ public class SpeechModel {
         }
 
         if (word.equals("Sit") && confidence > 0.5) {
-            understand = true;
+            //understand = true;
             unregisterSpeechEvents(mainController.memory);
             mainController.standZero();
             mainController.sitRelax();
         }
 
         if (word.equals("Hello") && confidence > 0.5) {
-            understand = true;
+            //understand = true;
             unregisterSpeechEvents(mainController.memory);
             System.out.println("Hello");
             mainController.saySomething("Hi, nice to meet you");
@@ -296,12 +296,12 @@ public class SpeechModel {
         }
 
             //Falls man sich nicht in einem Dialog befindet wird der Button nach der Reaktion wieder auf "Listen" gesetzt.
-            if (dialogueCounter == 0 && squatCounter == 0) {
-                squatEnabled = true;
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        btnSpeechRecognition.setText("Listen");
+        if (dialogueCounter == 0 && squatCounter == 0) {
+            squatEnabled = true;
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    btnSpeechRecognition.setText("Listen");
                     }
                 });
             }
