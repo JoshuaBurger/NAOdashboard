@@ -201,8 +201,12 @@ public class LedModel {
 
     //reagiert auf Backspace
     public void textfieldKeyReleased(KeyEvent keyEvent) {
+        tfRedString = textfieldRed.getText();
+        tfGreenString = textfieldGreen.getText();
+        tfBlueString = textfieldBlue.getText();
 
         if (keyEvent.getCode() == KeyCode.BACK_SPACE) {
+            System.out.println("key released");
             //leeres Textfeld mit Wert 0 belegen
             preventEmptyTextfield();
 
@@ -239,6 +243,7 @@ public class LedModel {
     public void textfieldMouseClicked() {
         checkValueHigher255();
     }
+
     private void checkValueHigher255() {
         if (compareValueTo255(tfRedString) && compareValueTo255(tfGreenString) && compareValueTo255(tfBlueString)) {
             RGBcolorPreview();                  //Vorschau der rgb-Farbe anzeigen

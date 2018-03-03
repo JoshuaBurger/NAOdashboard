@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -76,246 +75,58 @@
                   </AnchorPane>
               </content>
           </Tab>
-        <Tab fx:id="tabLeds" closable="false" disable="true" style="-fx-background-color: white;" text="LEDs">
+        <Tab fx:id="tabLeds" closable="false" style="-fx-background-color: white;" text="LEDs">
           <content>
             <AnchorPane fx:id="anchorPaneLEDs" minHeight="0.0" minWidth="0.0" prefHeight="677.0" prefWidth="889.0" style="-fx-background-color: white;">
                    <children>
-                       <Label fx:id="labelEyes" layoutX="66.0" layoutY="20.0" text="Eyes">
-                           <font>
-                               <Font name="System Bold" size="18.0" />
-                           </font>
-                       </Label>
                        <ImageView fx:id="imgBattery1" fitHeight="36.0" fitWidth="93.0" layoutX="779.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                          <image>
                             <Image url="@images/battery_icons/battery_unknown.bmp" />
                          </image></ImageView>
                        <Label fx:id="lblBattery1" layoutX="810" layoutY="50.0" prefHeight="27.0" prefWidth="44.0" text="100%" textAlignment="CENTER" />
-                      <GridPane fx:id="gridpaneLeds" layoutX="66.0" layoutY="113.0" prefHeight="553.0" prefWidth="299.0">
-                        <columnConstraints>
-                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        </columnConstraints>
-                        <rowConstraints>
-                          <RowConstraints maxHeight="297.0" minHeight="10.0" prefHeight="297.0" vgrow="SOMETIMES" />
-                          <RowConstraints maxHeight="158.0" minHeight="0.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                          <RowConstraints maxHeight="336.0" minHeight="10.0" prefHeight="234.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="336.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                        </rowConstraints>
-                         <children>
-                            <GridPane fx:id="gridPaneColorButtons" alignment="CENTER" prefHeight="244.0" prefWidth="340.0">
-                              <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              </columnConstraints>
-                              <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              </rowConstraints>
-                               <children>
-                                  <Button fx:id="buttonFaceLedsRed" mnemonicParsing="false" onAction="#buttonFaceLedsRed" prefHeight="50.0" prefWidth="86.0" style="-fx-background-color: red;" text="Red" textFill="WHITE">
-                                     <cursor>
-                                        <Cursor fx:constant="OPEN_HAND" />
-                                     </cursor></Button>
-                                  <Button fx:id="buttonFaceLedsYellow" mnemonicParsing="false" onAction="#buttonFaceLedsYellow" prefHeight="50.0" prefWidth="86.0" style="-fx-background-color: yellow;" text="Yellow" GridPane.columnIndex="1">
-                                     <cursor>
-                                        <Cursor fx:constant="OPEN_HAND" />
-                                     </cursor></Button>
-                                  <Button fx:id="buttonFaceLedsBlue" mnemonicParsing="false" onAction="#buttonFaceLedsBlue" prefHeight="50.0" prefWidth="86.0" style="-fx-background-color: blue;" text="Blue" textFill="WHITE" GridPane.rowIndex="1">
-                                     <cursor>
-                                        <Cursor fx:constant="OPEN_HAND" />
-                                     </cursor></Button>
-                                  <Button fx:id="buttonFaceLedMagenta" mnemonicParsing="false" onAction="#buttonFaceLedsMagenta" prefHeight="50.0" prefWidth="86.0" style="-fx-background-color: magenta;" text="Magenta" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                     <cursor>
-                                        <Cursor fx:constant="OPEN_HAND" />
-                                     </cursor></Button>
-                                  <Button fx:id="buttonFaceLedGreen" mnemonicParsing="false" onAction="#buttonFaceLedsGreen" prefHeight="50.0" prefWidth="86.0" style="-fx-background-color: green;" text="Green" textFill="WHITE" GridPane.rowIndex="2">
-                                     <cursor>
-                                        <Cursor fx:constant="OPEN_HAND" />
-                                     </cursor></Button>
-                                  <Button fx:id="buttonFaceLedCyan" mnemonicParsing="false" onAction="#buttonFaceLedsCyan" prefHeight="50.0" prefWidth="86.0" style="-fx-background-color: cyan;" text="Cyan" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                     <cursor>
-                                        <Cursor fx:constant="OPEN_HAND" />
-                                     </cursor></Button>
-                                  <Button fx:id="buttonFaceLedOrange" mnemonicParsing="false" onAction="#buttonFaceLedsOrange" prefHeight="50.0" prefWidth="86.0" style="-fx-background-color: #fe7200;" text="Orange" textFill="WHITE" GridPane.rowIndex="3">
-                                     <cursor>
-                                        <Cursor fx:constant="OPEN_HAND" />
-                                     </cursor></Button>
-                                  <Button fx:id="buttonFaceLedWhite" mnemonicParsing="false" onAction="#buttonFaceLedsWhite" prefHeight="50.0" prefWidth="86.0" style="-fx-background-color: #e4dcdc;" text="White" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                     <cursor>
-                                        <Cursor fx:constant="OPEN_HAND" />
-                                     </cursor></Button>
-                               </children>
-                               <GridPane.margin>
-                                  <Insets bottom="40.0" />
-                               </GridPane.margin>
-                            </GridPane>
-                            <GridPane prefWidth="349.0" GridPane.rowIndex="2">
-                              <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              </columnConstraints>
-                              <rowConstraints>
-                                <RowConstraints maxHeight="204.0" minHeight="10.0" prefHeight="204.0" vgrow="SOMETIMES" />
-                              </rowConstraints>
-                               <children>
-                                  <GridPane>
-                                    <columnConstraints>
-                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="76.0" minWidth="10.0" prefWidth="60.0" />
-                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="72.0" minWidth="13.0" prefWidth="59.0" />
-                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="74.0" minWidth="10.0" prefWidth="36.0" />
-                                    </columnConstraints>
-                                    <rowConstraints>
-                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                    </rowConstraints>
-                                     <children>
-                                        <Label fx:id="labelRed" text="red:" />
-                                        <Label fx:id="labelGreen" text="green:" GridPane.rowIndex="1" />
-                                        <Label fx:id="labelBlue" text="blue:" GridPane.rowIndex="2" />
-                                        <TextField fx:id="textfieldRed" onKeyReleased="#textfieldKeyReleased" onKeyTyped="#textfieldKeyTyped" onMouseClicked="#textfieldMouseClicked" style="-fx-background-color: white; -fx-border-color: lightgrey; -fx-border-radius: 5;" text="255" GridPane.columnIndex="1">
-                                           <cursor>
-                                              <Cursor fx:constant="TEXT" />
-                                           </cursor></TextField>
-                                        <TextField fx:id="textfieldGreen" onKeyReleased="#textfieldKeyReleased" onKeyTyped="#textfieldKeyTyped" onMouseClicked="#textfieldMouseClicked" style="-fx-background-color: white; -fx-border-color: lightgrey; -fx-border-radius: 5;" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                           <cursor>
-                                              <Cursor fx:constant="TEXT" />
-                                           </cursor></TextField>
-                                        <TextField fx:id="textfieldBlue" onKeyReleased="#textfieldKeyReleased" onKeyTyped="#textfieldKeyTyped" onMouseClicked="#textfieldMouseClicked" style="-fx-background-color: white; -fx-border-color: lightgrey; -fx-border-radius: 5;" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                           <cursor>
-                                              <Cursor fx:constant="TEXT" />
-                                           </cursor></TextField>
-                                     </children>
-                                  </GridPane>
-                                  <GridPane alignment="BOTTOM_RIGHT" prefHeight="227.0" prefWidth="159.0" GridPane.columnIndex="1">
-                                    <columnConstraints>
-                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    </columnConstraints>
-                                    <rowConstraints>
-                                        <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
-                                      <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="105.0" vgrow="SOMETIMES" />
-                                    </rowConstraints>
-                                     <children>
-                                        <Button fx:id="buttonRGBpreview" mnemonicParsing="false" onMouseClicked="#textfieldKeyTyped" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: red;" GridPane.rowIndex="1">
-                                           <GridPane.margin>
-                                              <Insets />
-                                           </GridPane.margin>
-                                           <cursor>
-                                              <Cursor fx:constant="OPEN_HAND" />
-                                           </cursor>
-                                        </Button>
-                                        <Label fx:id="lblRGBcolorPreview" text="RGB color preview:">
-                                           <GridPane.margin>
-                                              <Insets top="30.0" />
-                                           </GridPane.margin></Label>
-                                     </children>
-                                     <GridPane.margin>
-                                        <Insets />
-                                     </GridPane.margin>
-                                  </GridPane>
-                               </children>
-                            </GridPane>
-                            <Label fx:id="lblRGBcolor" prefHeight="16.0" prefWidth="247.0" text="Select your own created RGB color:" GridPane.rowIndex="1" />
-                            <Label fx:id="labelAllowedValue" prefHeight="36.0" prefWidth="299.0" text="Values higher than 255 are not allowed." textFill="#e80b0b" visible="false" GridPane.rowIndex="3">
-                               <font>
-                                  <Font name="System Bold" size="13.0" />
-                               </font>
-                            </Label>
-                         </children>
-                      </GridPane>
-                      <Label fx:id="lblPredefinedColor" layoutX="66.0" layoutY="82.0" text="Select a predefined color:" />
-                      <Label fx:id="lblLEDsOff" layoutX="679.0" layoutY="80.0" text="Turn LEDs off">
+                      <Label fx:id="lblPredefinedColor" layoutX="34.0" layoutY="317.0" text="Select a predefined color:" />
+                      <Label fx:id="lblLedsOff" layoutX="29.0" layoutY="21.0" text="Turn LEDs off">
                          <font>
                             <Font name="System Bold" size="16.0" />
                          </font>
                       </Label>
-                       <GridPane fx:id="gridPaneApplyColor" layoutX="418.0" layoutY="364.0" prefHeight="192.0" prefWidth="174.0">
+
+
+
+                       <GridPane fx:id="gridPaneApplyColor" layoutX="39.0" layoutY="646.0" prefHeight="48.0" prefWidth="404.0">
                        <columnConstraints>
-                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
+                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
                        </columnConstraints>
                        <rowConstraints>
                            <RowConstraints />
                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                        </rowConstraints>
                        <children>
-                           <GridPane GridPane.rowIndex="1">
-                               <columnConstraints>
-                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                               </columnConstraints>
-                               <rowConstraints>
-                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                               </rowConstraints>
-                               <children>
-                                   <Button fx:id="btnLeftEye" mnemonicParsing="false" onAction="#changeLeftEyeLEDs" prefHeight="26.0" prefWidth="77.0" text="Left eye">
-                                     <cursor>
-                                        <Cursor fx:constant="OPEN_HAND" />
-                                     </cursor></Button>
-                                   <Button fx:id="btnRightEye" mnemonicParsing="false" onAction="#changeRightEyeLEDs" prefHeight="26.0" prefWidth="77.0" text="Right eye" GridPane.columnIndex="1">
-                                     <cursor>
-                                        <Cursor fx:constant="OPEN_HAND" />
-                                     </cursor></Button>
-                               </children>
-                           </GridPane>
-                           <Button fx:id="btnBothEyes" mnemonicParsing="false" onAction="#changeFaceLEDs" prefHeight="26.0" prefWidth="168.0" text="Both eyes" GridPane.rowIndex="2">
+                           <Button fx:id="btnBothEyes" minWidth="90.0" mnemonicParsing="false" onAction="#changeFaceLEDs" prefHeight="26.0" prefWidth="90.0" text="Both eyes" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                <cursor>
                                   <Cursor fx:constant="OPEN_HAND" />
                                </cursor></Button>
-                            <GridPane GridPane.rowIndex="3">
-                              <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              </columnConstraints>
-                              <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              </rowConstraints>
-                            </GridPane>
-                            <Button fx:id="btnFeet" mnemonicParsing="false" onAction="#changeFeetLEDs" text="Feet" GridPane.rowIndex="4" />
+
+                           <Button fx:id="btnFeet" minWidth="90.0" mnemonicParsing="false" onAction="#changeFeetLEDs" prefHeight="26.0" prefWidth="90.0" text="Feet" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                               <cursor>
+                                   <Cursor fx:constant="OPEN_HAND" />
+                               </cursor></Button>
+                             <Button fx:id="btnRightEye" minWidth="90.0" mnemonicParsing="false" onAction="#changeRightEyeLEDs" prefHeight="26.0" prefWidth="85.0" text="Right eye" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                               <cursor>
+                                  <Cursor fx:constant="OPEN_HAND" />
+                               </cursor>
+                           </Button>
+                             <Button fx:id="btnLeftEye" minWidth="90.0" mnemonicParsing="false" onAction="#changeLeftEyeLEDs" prefHeight="26.0" prefWidth="90.0" text="Left eye" GridPane.rowIndex="1">
+                               <cursor>
+                                  <Cursor fx:constant="OPEN_HAND" />
+                               </cursor>
+                           </Button>
                        </children>
                        </GridPane>
-                       <GridPane fx:id="gridPaneLEDsOff" layoutX="668.0" layoutY="113.0" prefHeight="81.0" prefWidth="174.0">
-                        <columnConstraints>
-                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        </columnConstraints>
-                        <rowConstraints>
-                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        </rowConstraints>
-                         <children>
-                            <GridPane>
-                              <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              </columnConstraints>
-                              <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              </rowConstraints>
-                               <children>
-                                  <Button fx:id="btnLeftEyeOff" mnemonicParsing="false" onAction="#leftEyeLEDsOff" prefHeight="26.0" prefWidth="77.0" text="Left eye">
-                                     <cursor>
-                                        <Cursor fx:constant="OPEN_HAND" />
-                                     </cursor></Button>
-                                  <Button fx:id="btnRightEyeOff" mnemonicParsing="false" onAction="#rightEyeLEDsOff" prefHeight="26.0" prefWidth="77.0" text="Right eye" GridPane.columnIndex="1">
-                                     <cursor>
-                                        <Cursor fx:constant="OPEN_HAND" />
-                                     </cursor></Button>
-                               </children>
-                            </GridPane>
-                            <Button fx:id="btnEyesOff" mnemonicParsing="false" onAction="#eyesLEDsOff" prefHeight="26.0" prefWidth="168.0" text="Both eyes" GridPane.rowIndex="1">
-                               <cursor>
-                                  <Cursor fx:constant="OPEN_HAND" />
-                               </cursor></Button>
-                         </children>
-                      </GridPane>
-                      <Separator layoutX="634.0" layoutY="65.0" maxWidth="29.0" orientation="VERTICAL" prefHeight="601.0" prefWidth="3.0" />
-                      <Label fx:id="lblSelectLEDcolor" layoutX="395.0" layoutY="309.0" text="Apply selected color for:">
-                         <font>
-                            <Font name="System Bold" size="16.0" />
-                         </font>
-                      </Label>
+                      <Label fx:id="lblSelectLEDcolor" layoutX="39.0" layoutY="625.0" text="Apply selected color for:" />
                        <ImageView fitHeight="193.0" fitWidth="148.0" layoutX="691.0" layoutY="521.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                                <Image url="@images/nao.jpg" />
@@ -351,23 +162,203 @@
                        <Line endY="00.0" layoutX="763.0" layoutY="527.0" startY="-05.0" />
                        <Line endY="10.0" layoutX="743.0" layoutY="527.0" />
                        <Line endY="10.0" layoutX="783.0" layoutY="527.0" />
-
-                      <Button fx:id="btnEarsOff" layoutX="675.0" layoutY="247.0" mnemonicParsing="false" onAction="#earLEDsOff" prefHeight="26.0" prefWidth="167.0" text="Ears off" />
-                      <Button fx:id="btnEarsOn" layoutX="459.0" layoutY="87.0" mnemonicParsing="false" onAction="#earLEDsOn" text="Ears on" />
-                      <Button fx:id="btnBrainOn" layoutX="457.0" layoutY="128.0" mnemonicParsing="false" onAction="#brainLEDsOn" text="Brain on" />
-                      <Button fx:id="btnBrainOff" layoutX="669.0" layoutY="390.0" mnemonicParsing="false" onAction="#brainLEDsOff" prefHeight="26.0" prefWidth="182.0" text="Brain off" />
-                      <Button fx:id="btnFeetOff" layoutX="677.0" layoutY="329.0" mnemonicParsing="false" onAction="#feetLEDsOff" prefHeight="26.0" prefWidth="164.0" text="Feet off" />
-                      <Button fx:id="btnFeetOn" layoutX="461.0" layoutY="168.0" mnemonicParsing="false" onAction="#feetLEDsOn" text="Feet on" />
-                      <Label layoutX="459.0" layoutY="33.0" text="Turn LEDs on">
+                      <Label fx:id="lblLedsOn" layoutX="30.0" layoutY="172.0" text="Turn LEDs on">
                          <font>
                             <Font name="System Bold" size="16.0" />
                          </font>
                       </Label>
-                      <Button fx:id="btnLeftEarOff" layoutX="673.0" layoutY="207.0" mnemonicParsing="false" onAction="#leftEarLEDsOff" text="Left ear" />
-                      <Button fx:id="btnRightEarOff" layoutX="762.0" layoutY="207.0" mnemonicParsing="false" onAction="#rightEarLEDsOff" text="Right ear" />
-                      <Button fx:id="btnLeftFootOff" layoutX="673.0" layoutY="296.0" mnemonicParsing="false" onAction="#leftFootLEDsOff" text="Left foot" />
-                      <Button fx:id="btnRightFootOff" layoutX="759.0" layoutY="296.0" mnemonicParsing="false" onAction="#rightFootLEDsOff" text="Right foot" />
-                      <Button fx:id="btnEyesOn" layoutX="462.0" layoutY="207.0" mnemonicParsing="false" onAction="#eyesLEDon" text="Eyes on" />
+                     <Label fx:id="lblChangeLedColor" layoutX="30.0" layoutY="277.0" text="Change color of naos leds:">
+                        <font>
+                           <Font name="System Bold" size="16.0" />
+                        </font>
+                     </Label>
+                     <Label fx:id="lblRGBcolor" layoutX="318.0" layoutY="318.0" text="Select your own created RGB color:" />
+                      <GridPane fx:id="gridPaneColorButtons" alignment="CENTER" layoutX="34.0" layoutY="347.0" prefHeight="242.0" prefWidth="213.0">
+                        <columnConstraints>
+                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="100.0" prefWidth="95.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="100.0" prefWidth="95.0" />
+                        </columnConstraints>
+                        <rowConstraints>
+                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        </rowConstraints>
+                         <children>
+                            <Button fx:id="buttonFaceLedsRed" mnemonicParsing="false" onAction="#buttonFaceLedsRed" prefHeight="50.0" prefWidth="86.0" style="-fx-background-color: red;" text="Red" textFill="WHITE" GridPane.columnIndex="1">
+                               <cursor>
+                                  <Cursor fx:constant="OPEN_HAND" />
+                               </cursor>
+                           </Button>
+                            <Button fx:id="buttonFaceLedsYellow" mnemonicParsing="false" onAction="#buttonFaceLedsYellow" prefHeight="50.0" prefWidth="86.0" style="-fx-background-color: yellow;" text="Yellow" GridPane.rowIndex="1">
+                               <cursor>
+                                  <Cursor fx:constant="OPEN_HAND" />
+                               </cursor>
+                           </Button>
+                            <Button fx:id="buttonFaceLedsBlue" mnemonicParsing="false" onAction="#buttonFaceLedsBlue" prefHeight="50.0" prefWidth="86.0" style="-fx-background-color: blue;" text="Blue" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                               <cursor>
+                                  <Cursor fx:constant="OPEN_HAND" />
+                               </cursor>
+                           </Button>
+                            <Button fx:id="buttonFaceLedMagenta" mnemonicParsing="false" onAction="#buttonFaceLedsMagenta" prefHeight="50.0" prefWidth="86.0" style="-fx-background-color: magenta;" text="Magenta">
+                               <cursor>
+                                  <Cursor fx:constant="OPEN_HAND" />
+                               </cursor>
+                           </Button>
+                            <Button fx:id="buttonFaceLedGreen" mnemonicParsing="false" onAction="#buttonFaceLedsGreen" prefHeight="50.0" prefWidth="86.0" style="-fx-background-color: green;" text="Green" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                               <cursor>
+                                  <Cursor fx:constant="OPEN_HAND" />
+                               </cursor>
+                           </Button>
+                            <Button fx:id="buttonFaceLedCyan" mnemonicParsing="false" onAction="#buttonFaceLedsCyan" prefHeight="50.0" prefWidth="86.0" style="-fx-background-color: cyan;" text="Cyan" GridPane.rowIndex="2">
+                               <cursor>
+                                  <Cursor fx:constant="OPEN_HAND" />
+                               </cursor>
+                           </Button>
+                            <Button fx:id="buttonFaceLedOrange" mnemonicParsing="false" onAction="#buttonFaceLedsOrange" prefHeight="50.0" prefWidth="86.0" style="-fx-background-color: #fe7200;" text="Orange" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                               <cursor>
+                                  <Cursor fx:constant="OPEN_HAND" />
+                               </cursor>
+                           </Button>
+                            <Button fx:id="buttonFaceLedWhite" mnemonicParsing="false" onAction="#buttonFaceLedsWhite" prefHeight="50.0" prefWidth="86.0" style="-fx-background-color: #e4dcdc;" text="White" GridPane.rowIndex="3">
+                               <cursor>
+                                  <Cursor fx:constant="OPEN_HAND" />
+                               </cursor>
+                           </Button>
+                         </children>
+                      </GridPane>
+
+
+                      <GridPane fx:id="gridpaneLedsOff" layoutX="34.0" layoutY="41.0" prefHeight="100.0" prefWidth="603.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="190.0" minWidth="200.0" prefWidth="190.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="200.0" prefWidth="175.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                            <children>
+                                <!--- Column 0 - Eyes -->
+                                <GridPane fx:id="innerGPeyes" prefWidth="250.0" GridPane.columnIndex="0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                      <children>
+                                          <Button fx:id="btnLeftEyeOff" minWidth="90.0" mnemonicParsing="false" onAction="#leftEyeLEDsOff" prefHeight="26.0" prefWidth="90.0" text="Left eye">
+                                             <cursor>
+                                                <Cursor fx:constant="OPEN_HAND" />
+                                             </cursor>
+                                         </Button>
+                                          <Button fx:id="btnRightEyeOff" minWidth="90.0" mnemonicParsing="false" onAction="#rightEyeLEDsOff" prefHeight="28.0" prefWidth="90.0" text="Right eye" GridPane.columnIndex="1">
+                                             <cursor>
+                                                <Cursor fx:constant="OPEN_HAND" />
+                                             </cursor>
+                                         </Button>
+                                      </children>
+                                </GridPane>
+                                <Button fx:id="btnEyesOff" minWidth="190.0" mnemonicParsing="false" onAction="#eyesLEDsOff" prefHeight="26.0" prefWidth="168.0" text="Both eyes" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                    <cursor>
+                                        <Cursor fx:constant="OPEN_HAND" />
+                                    </cursor>
+                                </Button>
+                                <Button fx:id="btnEarsOff" minWidth="190.0" mnemonicParsing="false" onAction="#earLEDsOff" prefHeight="26.0" prefWidth="168.0" text="Ears" GridPane.columnIndex="2">
+                                    <cursor>
+                                        <Cursor fx:constant="OPEN_HAND" />
+                                    </cursor>
+                                </Button>
+
+                                <!--- Column 2 - Feet -->
+                                <GridPane fx:id="innerGPfeet" GridPane.columnIndex="1">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" />
+                                 <ColumnConstraints maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <Button fx:id="btnLeftFootOff" layoutX="673.0" layoutY="296.0" minWidth="90.0" mnemonicParsing="false" onAction="#leftFootLEDsOff" prefWidth="80.0" text="Left foot" />
+                                        <Button fx:id="btnRightFootOff" layoutX="759.0" layoutY="296.0" minWidth="90.0" mnemonicParsing="false" onAction="#rightFootLEDsOff" prefWidth="80.0" text="Right foot" GridPane.columnIndex="1" />
+                                    </children>
+                                </GridPane>
+                                <Button fx:id="btnFeetOff" layoutX="677.0" layoutY="329.0" minWidth="190.0" mnemonicParsing="false" onAction="#feetLEDsOff" prefHeight="26.0" prefWidth="164.0" text="Both Feet" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                <cursor>
+                                    <Cursor fx:constant="OPEN_HAND" />
+                                </cursor>
+                                </Button>
+
+                                <!--- Column 3 - Head -->
+                                <Button fx:id="btnBrainOff" minWidth="190.0" mnemonicParsing="false" onAction="#brainLEDsOff" prefHeight="26.0" prefWidth="190.0" text="Head" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                            </children>
+                      </GridPane>
+                     <GridPane layoutX="34.0" layoutY="203.0">
+                       <columnConstraints>
+                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                       </columnConstraints>
+                       <rowConstraints>
+                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                       </rowConstraints>
+                        <children>
+                            <Button fx:id="btnBrainOn" minWidth="90.0" mnemonicParsing="false" onAction="#brainLEDsOn" text="Brain" />
+                            <Button fx:id="btnEyesOn" minWidth="90.0" mnemonicParsing="false" onAction="#eyesLEDon" text="Eyes" GridPane.columnIndex="1" />
+      
+                            <Button fx:id="btnEarsOn" minWidth="90.0" mnemonicParsing="false" onAction="#earLEDsOn" text="Ears" GridPane.columnIndex="2" />
+                            <Button fx:id="btnFeetOn" minWidth="90.0" mnemonicParsing="false" onAction="#feetLEDsOn" text="Feet" GridPane.columnIndex="3" />
+                        </children>
+                     </GridPane>
+                      <Label fx:id="lblRGBcolorPreview" layoutX="496.0" layoutY="364.0" prefHeight="16.0" prefWidth="61.0" text="preview:" />
+                      <Button fx:id="buttonRGBpreview" alignment="CENTER" layoutX="488.0" layoutY="390.0" mnemonicParsing="false" onMouseClicked="#textfieldKeyTyped" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: red;">
+                         <cursor>
+                            <Cursor fx:constant="OPEN_HAND" />
+                         </cursor>
+                      </Button>
+                      <Label fx:id="labelAllowedValue" layoutX="318.0" layoutY="509.0" prefHeight="20.0" prefWidth="299.0" text="Values higher than 255 are not allowed." textFill="#e80b0b" visible="false">
+                         <font>
+                            <Font name="System Bold" size="13.0" />
+                         </font>
+                      </Label>
+                      <GridPane layoutX="318.0" layoutY="356.0" prefHeight="138.0" prefWidth="150.0">
+                        <columnConstraints>
+                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="76.0" minWidth="10.0" prefWidth="60.0" />
+                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="72.0" minWidth="13.0" prefWidth="59.0" />
+                        </columnConstraints>
+                        <rowConstraints>
+                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        </rowConstraints>
+                         <children>
+                            <Label fx:id="labelRed" text="red:" />
+                            <Label fx:id="labelGreen" text="green:" GridPane.rowIndex="1" />
+                            <Label fx:id="labelBlue" text="blue:" GridPane.rowIndex="2" />
+                            <TextField fx:id="textfieldRed" maxWidth="10.0" minWidth="50.0" onKeyReleased="#textfieldKeyReleased" onKeyTyped="#textfieldKeyTyped" onMouseClicked="#textfieldMouseClicked" prefWidth="10.0" style="-fx-background-color: white; -fx-border-color: lightgrey; -fx-border-radius: 5;" text="255" GridPane.columnIndex="1">
+                               <cursor>
+                                  <Cursor fx:constant="TEXT" />
+                               </cursor>
+                           </TextField>
+                            <TextField fx:id="textfieldGreen" maxWidth="50.0" minWidth="50.0" onKeyReleased="#textfieldKeyReleased" onKeyTyped="#textfieldKeyTyped" onMouseClicked="#textfieldMouseClicked" style="-fx-background-color: white; -fx-border-color: lightgrey; -fx-border-radius: 5;" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                               <cursor>
+                                  <Cursor fx:constant="TEXT" />
+                               </cursor>
+                           </TextField>
+                            <TextField fx:id="textfieldBlue" maxWidth="50.0" minWidth="50.0" onKeyReleased="#textfieldKeyReleased" onKeyTyped="#textfieldKeyTyped" onMouseClicked="#textfieldMouseClicked" style="-fx-background-color: white; -fx-border-color: lightgrey; -fx-border-radius: 5;" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                               <cursor>
+                                  <Cursor fx:constant="TEXT" />
+                               </cursor>
+                           </TextField>
+                         </children>
+                      </GridPane>
+
+
                    </children>
             </AnchorPane>
           </content>
