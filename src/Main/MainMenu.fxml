@@ -50,6 +50,9 @@
                               <font>
                                   <Font size="33.0" />
                               </font>
+                        <cursor>
+                           <Cursor fx:constant="OPEN_HAND" />
+                        </cursor>
                           </Button>
                           <Label fx:id="lblConnectionInfo" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="460.0" prefHeight="31.0" prefWidth="879.0" textAlignment="CENTER" wrapText="true">
                               <font>
@@ -59,6 +62,9 @@
                               <font>
                                   <Font size="33.0" />
                               </font>
+                        <cursor>
+                           <Cursor fx:constant="OPEN_HAND" />
+                        </cursor>
                           </Button>
                           <Label fx:id="lblConnectionState" alignment="CENTER" layoutX="3.0" layoutY="516.0" prefHeight="21.0" prefWidth="882.0" text="Disconnected" textAlignment="CENTER" textFill="RED">
                               <font>
@@ -283,8 +289,14 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     </rowConstraints>
                                     <children>
-                                        <Button fx:id="btnLeftFootOff" layoutX="673.0" layoutY="296.0" minWidth="90.0" mnemonicParsing="false" onAction="#leftFootLEDsOff" prefWidth="80.0" text="Left foot" />
-                                        <Button fx:id="btnRightFootOff" layoutX="759.0" layoutY="296.0" minWidth="90.0" mnemonicParsing="false" onAction="#rightFootLEDsOff" prefWidth="80.0" text="Right foot" GridPane.columnIndex="1" />
+                                        <Button fx:id="btnLeftFootOff" layoutX="673.0" layoutY="296.0" minWidth="90.0" mnemonicParsing="false" onAction="#leftFootLEDsOff" prefWidth="80.0" text="Left foot">
+                                    <cursor>
+                                       <Cursor fx:constant="OPEN_HAND" />
+                                    </cursor></Button>
+                                        <Button fx:id="btnRightFootOff" layoutX="759.0" layoutY="296.0" minWidth="90.0" mnemonicParsing="false" onAction="#rightFootLEDsOff" prefWidth="80.0" text="Right foot" GridPane.columnIndex="1">
+                                    <cursor>
+                                       <Cursor fx:constant="OPEN_HAND" />
+                                    </cursor></Button>
                                     </children>
                                 </GridPane>
                                 <Button fx:id="btnFeetOff" layoutX="677.0" layoutY="329.0" minWidth="190.0" mnemonicParsing="false" onAction="#feetLEDsOff" prefHeight="26.0" prefWidth="164.0" text="Both Feet" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -308,11 +320,23 @@
                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                        </rowConstraints>
                         <children>
-                            <Button fx:id="btnBrainOn" minWidth="90.0" mnemonicParsing="false" onAction="#brainLEDsOn" text="Brain" />
-                            <Button fx:id="btnEyesOn" minWidth="90.0" mnemonicParsing="false" onAction="#eyesLEDon" text="Eyes" GridPane.columnIndex="1" />
+                            <Button fx:id="btnBrainOn" minWidth="90.0" mnemonicParsing="false" onAction="#brainLEDsOn" text="Brain">
+                              <cursor>
+                                 <Cursor fx:constant="OPEN_HAND" />
+                              </cursor></Button>
+                            <Button fx:id="btnEyesOn" minWidth="90.0" mnemonicParsing="false" onAction="#eyesLEDon" text="Eyes" GridPane.columnIndex="1">
+                              <cursor>
+                                 <Cursor fx:constant="OPEN_HAND" />
+                              </cursor></Button>
       
-                            <Button fx:id="btnEarsOn" minWidth="90.0" mnemonicParsing="false" onAction="#earLEDsOn" text="Ears" GridPane.columnIndex="2" />
-                            <Button fx:id="btnFeetOn" minWidth="90.0" mnemonicParsing="false" onAction="#feetLEDsOn" text="Feet" GridPane.columnIndex="3" />
+                            <Button fx:id="btnEarsOn" minWidth="90.0" mnemonicParsing="false" onAction="#earLEDsOn" text="Ears" GridPane.columnIndex="2">
+                              <cursor>
+                                 <Cursor fx:constant="OPEN_HAND" />
+                              </cursor></Button>
+                            <Button fx:id="btnFeetOn" minWidth="90.0" mnemonicParsing="false" onAction="#feetLEDsOn" text="Feet" GridPane.columnIndex="3">
+                              <cursor>
+                                 <Cursor fx:constant="OPEN_HAND" />
+                              </cursor></Button>
                         </children>
                      </GridPane>
                       <Label fx:id="lblRGBcolorPreview" layoutX="492.0" layoutY="381.0" prefHeight="16.0" prefWidth="61.0" text="preview:" />
@@ -425,7 +449,10 @@
                               </cursor></Button>
                           <Label alignment="CENTER" layoutX="314.0" layoutY="84.0" prefHeight="41.0" prefWidth="228.0" text="Apply Speech Settings to a Sensor (NAO says it when touched):" textAlignment="CENTER" wrapText="true" />
                           <ComboBox fx:id="cbxAudio" layoutX="354.0" layoutY="550.0" prefHeight="27.0" prefWidth="206.0" promptText="Audio" />
-                          <Button fx:id="btnPlayAudio" layoutX="400.0" layoutY="586.0" mnemonicParsing="false" onAction="#playAudio" prefHeight="27.0" prefWidth="113.0" text="Play" />
+                          <Button fx:id="btnPlayAudio" layoutX="400.0" layoutY="586.0" mnemonicParsing="false" onAction="#playAudio" prefHeight="27.0" prefWidth="113.0" text="Play">
+                        <cursor>
+                           <Cursor fx:constant="OPEN_HAND" />
+                        </cursor></Button>
                           <ImageView fitHeight="193.0" fitWidth="148.0" layoutX="691.0" layoutY="521.0" pickOnBounds="true" preserveRatio="true">
                               <image>
                                   <Image url="@images/nao.jpg" />
@@ -465,7 +492,10 @@
                               <font>
                                   <Font name="System Bold" size="18.0" />
                               </font></Label>
-                     <Button fx:id="btnSpeechRecognition" layoutX="399.0" layoutY="463.0" mnemonicParsing="false" onAction="#listenToSpeech" prefHeight="27.0" prefWidth="116.0" text="Listen" />
+                     <Button fx:id="btnSpeechRecognition" layoutX="399.0" layoutY="463.0" mnemonicParsing="false" onAction="#listenToSpeech" prefHeight="27.0" prefWidth="116.0" text="Listen">
+                        <cursor>
+                           <Cursor fx:constant="OPEN_HAND" />
+                        </cursor></Button>
                      <Label layoutX="190.0" layoutY="38.0" text="Speech settings:">
                         <font>
                            <Font name="System Bold" size="18.0" />
@@ -638,8 +668,14 @@
                               <RadioButton layoutX="339.0" layoutY="125.0" mnemonicParsing="false" text="Right Arm" toggleGroup="$toggleGroupTrackEffector" />
                               <RadioButton layoutX="339.0" layoutY="150.0" mnemonicParsing="false" text="Both Arms" toggleGroup="$toggleGroupTrackEffector" />
                           </Pane>
-                          <Button fx:id="btnStartTracking" layoutX="123.0" layoutY="526.0" mnemonicParsing="false" onAction="#startTracking" text="Start tracking" />
-                          <Button fx:id="btnStopTracking" disable="true" layoutX="251.0" layoutY="526.0" mnemonicParsing="false" onAction="#stopTracking" text="Stop tracking" />
+                          <Button fx:id="btnStartTracking" layoutX="123.0" layoutY="526.0" mnemonicParsing="false" onAction="#startTracking" text="Start tracking">
+                        <cursor>
+                           <Cursor fx:constant="OPEN_HAND" />
+                        </cursor></Button>
+                          <Button fx:id="btnStopTracking" disable="true" layoutX="251.0" layoutY="526.0" mnemonicParsing="false" onAction="#stopTracking" text="Stop tracking">
+                        <cursor>
+                           <Cursor fx:constant="OPEN_HAND" />
+                        </cursor></Button>
                           <Label fx:id="lblTrackingInfo" alignment="CENTER" layoutX="40.0" layoutY="582.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="21.0" prefWidth="396.0">
                               <font>
                                   <Font name="System Bold" size="18.0" />
