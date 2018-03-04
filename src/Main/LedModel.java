@@ -2,7 +2,6 @@ package Main;
 
 import com.aldebaran.qi.Session;
 import com.aldebaran.qi.helper.proxies.ALLeds;
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -13,20 +12,22 @@ import javafx.scene.layout.GridPane;
 public class LedModel {
     private Session session;
     private MainMenuController mainController;
-    private Button buttonFaceLedsRed;
-    private Button buttonFaceLedsBlue;
-    private Button buttonFaceLedGreen;
-    private Button buttonFaceLedsYellow;
-    private Button buttonFaceLedCyan;
-    private Button buttonFaceLedMagenta;
-    private Button buttonFaceLedWhite;
-    private Button buttonFaceLedOrange;
+    private Button btnRed;
+    private Button btnBlue;
+    private Button btnGreen;
+    private Button btnYellow;
+    private Button btnCyan;
+    private Button btnMagenta;
+    private Button btnWhite;
+    private Button btnOrange;
     private Button buttonRGBpreview;
     private Button btnLeftEye;
     private Button btnRightEye;
     private Button btnBothEyes;
     private GridPane gridPaneColorButtons;
-    private GridPane gridPaneLEDsOff;
+    private GridPane gridPaneLedsOff;
+    private GridPane gridPaneLedsOn;
+    private GridPane gridPaneApplyColor;
     private TextField textfieldRed;
     private TextField textfieldGreen;
     private TextField textfieldBlue;
@@ -45,14 +46,14 @@ public class LedModel {
     public LedModel(MainMenuController main) {
         this.mainController = main;
         // JavaFX Komponenten holen
-        this.buttonFaceLedsRed = main.buttonFaceLedsRed;
-        this.buttonFaceLedsBlue = main.buttonFaceLedsBlue;
-        this.buttonFaceLedGreen = main.buttonFaceLedGreen;
-        this.buttonFaceLedsYellow = main.buttonFaceLedsYellow;
-        this.buttonFaceLedCyan = main.buttonFaceLedCyan;
-        this.buttonFaceLedMagenta = main.buttonFaceLedMagenta;
-        this.buttonFaceLedWhite = main.buttonFaceLedWhite;
-        this.buttonFaceLedOrange = main.buttonFaceLedOrange;
+        this.btnRed = main.btnRed;
+        this.btnBlue = main.btnBlue;
+        this.btnGreen = main.btnGreen;
+        this.btnYellow = main.btnYellow;
+        this.btnCyan = main.btnCyan;
+        this.btnMagenta = main.btnMagenta;
+        this.btnWhite = main.btnWhite;
+        this.btnOrange = main.btnOrange;
         this.textfieldRed = main.textfieldRed;
         this.textfieldGreen = main.textfieldGreen;
         this.textfieldBlue = main.textfieldBlue;
@@ -61,7 +62,9 @@ public class LedModel {
         this.btnRightEye = main.btnRightEye;
         this.btnBothEyes = main.btnBothEyes;
         this.gridPaneColorButtons = main.gridPaneColorButtons;
-        this.gridPaneLEDsOff = main.gridPaneLEDsOff;
+        this.gridPaneLedsOff = main.gridPaneLedsOff;
+        this.gridPaneLedsOn = main.gridPaneLedsOn;
+        this.gridPaneApplyColor = main.gridPaneApplyColor;
         this.labelAllowedValue = main.labelAllowedValue;
     }
 
@@ -93,7 +96,7 @@ public class LedModel {
         }
     }
 
-    //Wert in Textfeldern ohne 0 an erster Stelle ausgeben, in leeres Textfeld 0 schreiben
+    //in leeres Textfeld 0 schreiben
     public void setTextfieldText() {
         textfieldRed.setText(tfRedString);
         textfieldGreen.setText(tfGreenString);
@@ -121,99 +124,6 @@ public class LedModel {
         }
     }
 
-    //keine Komponente ist mehr ausgewählt (kein schwarzer Rahmen mehr)
-    private void unselectAllLEDitems() {
-        buttonFaceLedsRed.setStyle("-fx-border-width: 0; -fx-background-color: red;");
-        buttonFaceLedsBlue.setStyle("-fx-border-width: 0; -fx-background-color: blue;");
-        buttonFaceLedGreen.setStyle("-fx-border-width: 0; -fx-background-color: green;");
-        buttonFaceLedsYellow.setStyle("-fx-border-width: 0; -fx-background-color: yellow;");
-        buttonFaceLedCyan.setStyle("-fx-border-width: 0; -fx-background-color: cyan;");
-        buttonFaceLedMagenta.setStyle("-fx-border-width: 0; -fx-background-color: magenta;");
-        buttonFaceLedWhite.setStyle("-fx-border-width: 0; -fx-background-color: #e4dcdc;");
-        buttonFaceLedOrange.setStyle("-fx-border-width: 0; -fx-background-color: #fe7200;");
-        textfieldRed.setStyle("-fx-border-color: lightgrey; -fx-border-width: 0; -fx-border-radius: 0;");
-        textfieldGreen.setStyle("-fx-border-color: lightgrey; -fx-border-width: 0; -fx-border-radius: 0;");
-        textfieldBlue.setStyle("-fx-border-color: lightgrey; -fx-border-width: 0; -fx-border-radius: 0;");
-        buttonRGBpreview.setStyle("-fx-border-width: 0; -fx-background-color: " + hexRGBColor + ";");
-    }
-
-    //change style of selected button
-    public void buttonFaceLedsRed() {
-        unselectAllLEDitems();
-        buttonFaceLedsRed.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: red;");
-        selectedLedItem = "red";
-    }
-
-    public void buttonFaceLedsBlue() {
-        unselectAllLEDitems();
-        buttonFaceLedsBlue.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: blue;");
-        selectedLedItem = "blue";
-    }
-
-    public void buttonFaceLedsGreen() {
-        unselectAllLEDitems();
-        buttonFaceLedGreen.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: green;");
-        selectedLedItem = "green";
-    }
-
-    public void buttonFaceLedsYellow() {
-        unselectAllLEDitems();
-        buttonFaceLedsYellow.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: yellow;");
-        selectedLedItem = "yellow";
-    }
-
-    public void buttonFaceLedsCyan() {
-        unselectAllLEDitems();
-        buttonFaceLedCyan.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: cyan;");
-        selectedLedItem = "cyan";
-    }
-
-    public void buttonFaceLedsMagenta() {
-        unselectAllLEDitems();
-        buttonFaceLedMagenta.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: magenta;");
-        selectedLedItem = "magenta";
-    }
-
-    public void buttonFaceLedsWhite() {
-        unselectAllLEDitems();
-        buttonFaceLedWhite.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: #e4dcdc;");
-        selectedLedItem = "white";
-    }
-
-    public void buttonFaceLedsOrange() {
-        unselectAllLEDitems();
-        buttonFaceLedOrange.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: #fe7200;");
-        selectedLedItem = "orange";
-    }
-
-    //alle Komponenten werden deaktivieren
-    private void disableOtherItems(boolean value) {
-        textfieldRed.setDisable(value);
-        textfieldGreen.setDisable(value);
-        textfieldBlue.setDisable(value);
-        buttonRGBpreview.setDisable(value);
-        btnLeftEye.setDisable(value);
-        btnRightEye.setDisable(value);
-        btnBothEyes.setDisable(value);
-        gridPaneColorButtons.setDisable(value);
-        gridPaneLEDsOff.setDisable(value);
-    }
-
-    //reagiert auf Backspace
-    public void textfieldKeyReleased(KeyEvent keyEvent) {
-        tfRedString = textfieldRed.getText();
-        tfGreenString = textfieldGreen.getText();
-        tfBlueString = textfieldBlue.getText();
-
-        if (keyEvent.getCode() == KeyCode.BACK_SPACE) {
-            System.out.println("key released");
-            //leeres Textfeld mit Wert 0 belegen
-            preventEmptyTextfield();
-
-            //prüfen ob eingegebene Zahl >255
-            checkValueHigher255();
-        }
-    }
 
     //reagiert auf Eingabe von Buchstaben, Zahlen, Sonderzeichen und Leerzeichen
     public void textfieldKeyTyped() {
@@ -252,15 +162,15 @@ public class LedModel {
             disableOtherItems(true);         //disable everything else
 
             if (!compareValueTo255(tfRedString)) {
-                textfieldRed.setStyle("-fx-border-color: red; -fx-border-width: 5; -fx-border-radius: 5;");
+                textfieldRed.setStyle("-fx-border-color: red; -fx-border-width: 3; -fx-border-radius: 5;");
                 textfieldRed.setDisable(false);
             }
             if (!compareValueTo255(tfGreenString)) {
-                textfieldGreen.setStyle("-fx-border-color: red; -fx-border-width: 5; -fx-border-radius: 5;");
+                textfieldGreen.setStyle("-fx-border-color: red; -fx-border-width: 3; -fx-border-radius: 5;");
                 textfieldGreen.setDisable(false);
             }
             if (!compareValueTo255(tfBlueString)) {
-                textfieldBlue.setStyle("-fx-border-color: red; -fx-border-width: 5; -fx-border-radius: 5;");
+                textfieldBlue.setStyle("-fx-border-color: red; -fx-border-width: 3; -fx-border-radius: 5;");
                 textfieldBlue.setDisable(false);
             }
         }
@@ -329,7 +239,103 @@ public class LedModel {
         if (tfBlueString.isEmpty()) { tfBlueString = "0"; }
     }
 
-    //show preview of RGB color
+
+    //keine Komponente ist mehr ausgewählt (kein schwarzer Rahmen mehr)
+    private void unselectAllLEDitems() {
+        btnRed.setStyle("-fx-border-width: 0; -fx-background-color: red;");
+        btnBlue.setStyle("-fx-border-width: 0; -fx-background-color: blue;");
+        btnGreen.setStyle("-fx-border-width: 0; -fx-background-color: green;");
+        btnYellow.setStyle("-fx-border-width: 0; -fx-background-color: yellow;");
+        btnCyan.setStyle("-fx-border-width: 0; -fx-background-color: cyan;");
+        btnMagenta.setStyle("-fx-border-width: 0; -fx-background-color: magenta;");
+        btnWhite.setStyle("-fx-border-width: 0; -fx-background-color: #e4dcdc;");
+        btnOrange.setStyle("-fx-border-width: 0; -fx-background-color: #fe7200;");
+        textfieldRed.setStyle("-fx-border-color: lightgrey; -fx-border-width: 0; -fx-border-radius: 0;");
+        textfieldGreen.setStyle("-fx-border-color: lightgrey; -fx-border-width: 0; -fx-border-radius: 0;");
+        textfieldBlue.setStyle("-fx-border-color: lightgrey; -fx-border-width: 0; -fx-border-radius: 0;");
+        buttonRGBpreview.setStyle("-fx-border-width: 0; -fx-background-color: " + hexRGBColor + ";");
+    }
+
+    //schwarzer Rahmen um ausgewählte Komponente
+    public void buttonFaceLedsRed() {
+        unselectAllLEDitems();
+        btnRed.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: red;");
+        selectedLedItem = "red";
+    }
+
+    public void buttonFaceLedsBlue() {
+        unselectAllLEDitems();
+        btnBlue.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: blue;");
+        selectedLedItem = "blue";
+    }
+
+    public void buttonFaceLedsGreen() {
+        unselectAllLEDitems();
+        btnGreen.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: green;");
+        selectedLedItem = "green";
+    }
+
+    public void buttonFaceLedsYellow() {
+        unselectAllLEDitems();
+        btnYellow.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: yellow;");
+        selectedLedItem = "yellow";
+    }
+
+    public void buttonFaceLedsCyan() {
+        unselectAllLEDitems();
+        btnCyan.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: cyan;");
+        selectedLedItem = "cyan";
+    }
+
+    public void buttonFaceLedsMagenta() {
+        unselectAllLEDitems();
+        btnMagenta.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: magenta;");
+        selectedLedItem = "magenta";
+    }
+
+    public void buttonFaceLedsWhite() {
+        unselectAllLEDitems();
+        btnWhite.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: #e4dcdc;");
+        selectedLedItem = "white";
+    }
+
+    public void buttonFaceLedsOrange() {
+        unselectAllLEDitems();
+        btnOrange.setStyle("-fx-border-color: black; -fx-border-width: 3; -fx-background-color: #fe7200;");
+        selectedLedItem = "orange";
+    }
+
+    //alle Komponenten werden deaktivieren
+    private void disableOtherItems(boolean value) {
+        textfieldRed.setDisable(value);
+        textfieldGreen.setDisable(value);
+        textfieldBlue.setDisable(value);
+        buttonRGBpreview.setDisable(value);
+        btnLeftEye.setDisable(value);
+        btnRightEye.setDisable(value);
+        btnBothEyes.setDisable(value);
+        gridPaneColorButtons.setDisable(value);
+        gridPaneLedsOff.setDisable(value);
+        gridPaneLedsOn.setDisable(value);
+        gridPaneApplyColor.setDisable(value);
+    }
+
+    //reagiert auf Backspace
+    public void textfieldKeyReleased(KeyEvent keyEvent) {
+        tfRedString = textfieldRed.getText();
+        tfGreenString = textfieldGreen.getText();
+        tfBlueString = textfieldBlue.getText();
+
+        if (keyEvent.getCode() == KeyCode.BACK_SPACE) {
+            //leeres Textfeld mit Wert 0 belegen
+            preventEmptyTextfield();
+
+            //prüfen ob eingegebene Zahl >255
+            checkValueHigher255();
+        }
+    }
+
+    //aktuelle RGB anzeigen
     private void RGBcolorPreview() {
         selectedLedItem = "rgbColor";
         unselectAllLEDitems();

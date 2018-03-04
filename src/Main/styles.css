@@ -12,3 +12,52 @@
     -fx-background-insets: 0;
 }
 
+.tab {
+    -fx-background-color: white;
+}
+
+.tabPane {
+    -fx-background-color: white;
+}
+
+#textfieldRed, #textfieldBlue, #textfieldGreen {
+    -fx-background-color: white;
+    -fx-border-color: lightgrey;
+    -fx-border-radius: 5;
+}
+
+#btnRed, #buttonRGBpreview{
+    -fx-background-color: red;
+    -fx-border-color: red;
+}
+#btnGreen {
+    -fx-background-color: green;
+    -fx-border-color: green;
+}
+#btnBlue {
+    -fx-background-color: blue;
+    -fx-border-color: blue;
+}
+#btnWhite {
+    -fx-background-color: #e4dcdc;
+    -fx-border-color: #e4dcdc;
+}
+#btnCyan {
+    -fx-background-color: cyan;
+    -fx-border-color: cyan;
+}
+#btnOrange {
+    -fx-background-color: #fe7200;
+    -fx-border-color: #fe7200;
+}
+#btnYellow {
+    -fx-background-color: yellow;
+    -fx-border-color: yellow;
+}
+#btnMagenta {
+    -fx-background-color: magenta;
+    -fx-border-color: magenta;
+}
+#buttonWakeUp, #buttonRest {
+    -fx-border-color: blue;
+}

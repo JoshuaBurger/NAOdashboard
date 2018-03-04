@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.input.MouseEvent;
@@ -39,21 +40,21 @@ public class MainMenuController {
     @FXML
     private Tab tabMoves;
     @FXML
-    protected Button buttonFaceLedsRed;
+    protected Button btnRed;
     @FXML
-    protected Button buttonFaceLedsYellow;
+    protected Button btnGreen;
     @FXML
-    protected Button buttonFaceLedsBlue;
+    protected Button btnBlue;
     @FXML
-    protected Button buttonFaceLedMagenta;
+    protected Button btnMagenta;
     @FXML
-    protected Button buttonFaceLedGreen;
+    protected Button btnYellow;
     @FXML
-    protected Button buttonFaceLedCyan;
+    protected Button btnCyan;
     @FXML
-    protected Button buttonFaceLedOrange;
+    protected Button btnOrange;
     @FXML
-    protected Button buttonFaceLedWhite;
+    protected Button btnWhite;
     @FXML
     protected Button buttonRGBpreview;
     @FXML
@@ -62,12 +63,6 @@ public class MainMenuController {
     protected Button btnRightEye;
     @FXML
     protected Button btnBothEyes;
-    @FXML
-    protected Button btnStepHeightLow;
-    @FXML
-    protected Button btnStepHeightNormal;
-    @FXML
-    protected Button btnStepHeightHigh;
     @FXML
     private Button btnPlayAudio;
     @FXML
@@ -189,7 +184,11 @@ public class MainMenuController {
     @FXML
     protected GridPane gridPaneColorButtons;
     @FXML
-    protected GridPane gridPaneLEDsOff;
+    protected GridPane gridPaneLedsOff;
+    @FXML
+    protected GridPane gridPaneLedsOn;
+    @FXML
+    protected GridPane gridPaneApplyColor;
     @FXML
     protected Pane paneTrackingConfig;
     @FXML
@@ -202,7 +201,6 @@ public class MainMenuController {
     protected Spinner spinTrackTargetSize;
     @FXML
     protected Button btnSpeechRecognition;
-
 
     private int pitchValue = 100;
     private int speedValue = 100;
@@ -262,7 +260,7 @@ public class MainMenuController {
 
     //LEDs
 
-    //leds on or off
+    //LEDs on oder off
     public void brainLEDsOn() { ledModel.turnledsOn("BrainLeds"); }
     public void brainLEDsOff() { ledModel.turnledsOff("BrainLeds"); }
     public void eyesLEDon() { ledModel.turnledsOn("FaceLeds"); }
@@ -278,7 +276,7 @@ public class MainMenuController {
     public void leftFootLEDsOff() { ledModel.turnledsOff("LeftFootLeds"); }
     public void rightFootLEDsOff() { ledModel.turnledsOff("RightFootLeds"); }
 
-    //change color
+    //ändere Farbe
     public void changeFaceLEDs() {
         ledModel.setTextfieldText();
         ledModel.fadeLEDs("FaceLeds");
@@ -477,7 +475,7 @@ public class MainMenuController {
         movement.goToPosture("StandInit");
     }
 
-    //Head
+    //Kopf
     public void headUp() {
         movement.moveHead("up"); }
     public void headLeft() {
